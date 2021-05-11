@@ -54,6 +54,7 @@ function showMain(){
                     default: showSub();
                 }
             });
+    
          };   
          if (arguments[0] == 3){
             menu.question('Plesase select a number: ', function(input) {
@@ -66,6 +67,7 @@ function showMain(){
                     default: showSub();
                 }
             });
+    
          }; 
          if (arguments[0] == 4){
             menu.question('Plesase select a number: ', function(input) {
@@ -84,18 +86,10 @@ function showMain(){
 function showSub() {
     title();
     console.log('Select component you want to perform actions with:'+'\n'+
-<<<<<<< HEAD
         '1 = Container'+'\n'+
         '2 = Server'+'\n'+
         '3 = Database'+'\n'+
         '4 = Name placer'+'\n'
-=======
-        '1. Container'+'\n'+
-        '2. Server'+'\n'+
-        '3. Database'+'\n'+
-        '4. Name placer'+'\n'+
-        '5. Go back to main'
->>>>>>> 12eef80acdc7e0d4aa2f2898643d3508d3eb52ef
         );
     // Check if there is already a menu active. If true, close it.
     if(menu) menu.close();
@@ -111,6 +105,7 @@ function showSub() {
     switch(input){
         case '1':
             showMain(1);
+
             break;
         case '2':
             showMain(2);
@@ -213,6 +208,7 @@ function showSub() {
                 console.log('You are inside Delete Name'
                 );
             }
-        }       
+        }
+          
 showSub();
 
