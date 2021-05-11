@@ -21,7 +21,8 @@ function showMain(){
         '2. Stop Component' + '\n' + 
         '3. Restart Component' + '\n' + 
         '4. New Component' + '\n' + 
-        '5. Delete Component' + '\n' 
+        '5. Delete Component' + '\n' +
+        '6 = Go back to main'
         );
         if(menu) menu.close();
 
@@ -88,8 +89,7 @@ function showSub() {
         '1 = Container'+'\n'+
         '2 = Server'+'\n'+
         '3 = Database'+'\n'+
-        '4 = Name placer'+'\n'+
-        '5 = Go back to main'
+        '4 = Name placer'+'\n'
         );
     // Check if there is already a menu active. If true, close it.
     if(menu) menu.close();
