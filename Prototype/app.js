@@ -7,13 +7,14 @@ const readline = require('readline').createInterface({
     output: process.stdout
 });
 
-clear();
-
-console.log(
-    chalk.yellow(
-        figlet.textSync('autoMNS', { horizontalLayout: 'full' })
-    )
-);
+function title(){
+    clear();
+    console.log(
+        chalk.yellow(
+            figlet.textSync('autoMNS', { horizontalLayout: 'full' })
+        )
+    );
+    }
 
 console.log(
     readline.question('1. Start Component\n2. Stop Component\n3. Restart Component\n4. New Component\n5. Delete Component\nPlease select a number', answer => {
@@ -87,4 +88,16 @@ console.log(
         }
     })
 );
+
+
+function showMain(){
+    console.log('1. Start Componen' + '\n' + 
+    '2. Stop Component' + '\n' + 
+    '3. Restart Component' + '\n' + 
+    '4. New Component' + '\n' + 
+    '5. Delete Component' + '\n' + 
+    'Please select a number');
+
+
+}
 
