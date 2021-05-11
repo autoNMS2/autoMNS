@@ -1,5 +1,5 @@
 ### Hi there 👋
-We are making a AI
+We are making an AI
 
 Hello
 <!--
