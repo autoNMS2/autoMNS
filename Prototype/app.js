@@ -37,11 +37,9 @@ function showMainText() {   // also refreshes menu which should be its own funct
    menu = refreshMenu();
 }
 
+    //Creates a readline Interface instance
 function refreshMenu() {
     if (menu) menu.close();
-
-    //Creates a readline Interface instance
-    //  menu = 
     return readline.createInterface({
         input: process.stdin,
         output: process.stdout
@@ -49,24 +47,6 @@ function refreshMenu() {
 }
 
 function showMain() {
-    //  This is all moved to showMainText()
-    //  some options might not need this, ie exiting
-    //  title();    
-    //  console.log('1. Start Component' + '\n' +
-    //      '2. Stop Component' + '\n' +
-    //      '3. Restart Component' + '\n' +
-    //      '4. New Component' + '\n' +
-    //      '5. Delete Component' + '\n' +
-    //      '6. Main Menu' + '\n'
-    //  );
-    //  if (menu) menu.close();
-    //  
-    //  //Creates a readline Interface instance
-    //  menu = readline.createInterface({
-    //      input: process.stdin,
-    //      output: process.stdout
-    //  });
-
     if (arguments[0] == 0) {
         menu.question('Goodbye! press any key to exit...', function (input) {
             process.exit(); // show goodbye message then wait for input
@@ -139,22 +119,24 @@ function showMain() {
         runCommand('', '', '\nPress Any Key To Continue...', showSub);
     }
     else if (arguments[0] == 9) {
-        let com = 'docker-compose -f ' + __dirname +
-            '\\docker-compose_default.yaml up -d'
-            
+        //let com = 'docker-compose -f ' + __dirname + '\\docker-compose_default.yaml up -d'
+
+        let com = 'docker run -it ubuntu -d';
         runCommand(com,
-            'Building Environment', '\nPress Any Key To Continue...', showSub);
+            'Building Environment (this may take some time...)', '\nPress Any Key To Continue...', showSub);
     }
     else showSub(); // if not a valid argument return to main menu
 }
 
 //  runs the command in cmd, returns to returnfunction
+//  titleMessage and returnMessage can be null
 function runCommand(command, titleMessage, returnMessage, returnFunction) {
     title();
     if (titleMessage) console.log(titleMessage);
+
     console.log(command);
     if (returnMessage);
-    else returnMessage = 'Press Any Key to Continue';
+    else returnMessage = 'Press Any Key to Continue...';
 
     menu = refreshMenu();
 
