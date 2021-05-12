@@ -125,15 +125,39 @@ function showMain() {
             }
         });
     }
-    else if (arguments[0] == 5) {
-        runCommand('docker images', '[Images Returned Successfully] \nPress Any Key To Continue...', showSub);
+    else if (arguments[0] == 5) {   //[Images Returned Successfully] 
+        runCommand('docker images', 'Listing Docker Images', '\nPress Any Key To Continue...', showSub);
+    }
+    else if (arguments[0] == 6) {
+        runCommand('docker container ls -a', 'Listing Docker Containers', '\nPress Any Key To Continue...', showSub);
+    }
+    else if (arguments[0] == 7) {
+        runCommand('docker container prune -f', 'Remove Stopped Containers', '\nPress Any Key To Continue...', showSub);
+        //  runCommand('y', '\nPress Any Key To Continue...', showSub);
+    }
+    else if (arguments[0] == 8) {
+        runCommand('', '', '\nPress Any Key To Continue...', showSub);
+    }
+    else if (arguments[0] == 9) {
+        let com = 'docker-compose -f ' + __dirname +
+            '\\docker-compose_default.yaml up -d'
+            
+        runCommand(com,
+            'Building Environment', '\nPress Any Key To Continue...', showSub);
     }
     else showSub(); // if not a valid argument return to main menu
 }
 
 //  runs the command in cmd, returns to returnfunction
-function runCommand(command, returnMessage, returnFunction) {
+function runCommand(command, titleMessage, returnMessage, returnFunction) {
     title();
+    if (titleMessage) console.log(titleMessage);
+    console.log(command);
+    if (returnMessage);
+    else returnMessage = 'Press Any Key to Continue';
+
+    menu = refreshMenu();
+
     //  return function is the function to return to after performinig the command
     //  ie running a command in the main menu should return you to the main menu
     var commandArray = command.split(' ');
@@ -147,13 +171,18 @@ function runCommand(command, returnMessage, returnFunction) {
     ls.stdout.on('data', function (data) {      // output return data
         console.log('' + data);
     });
+
+    //  Show errors somehow
     
     ls.on('close', function (code, signal) {
-        // use question to wait for input before returning, this is wrapped in the close function so 
-        // it will wait for the data to print before continuing
-        menu.question(returnMessage, function (input) {
-            returnFunction();   // display return message and wait for any input then go to return function                  
-        });
+        if (returnFunction) {
+            // use question to wait for input before returning, this is wrapped in the close function so
+            // it will wait for the data to print before continuing
+            menu.question(returnMessage, function (input) {
+
+                returnFunction();   // display return message and wait for any input then go to return function }               
+            });
+        }
     });
 }
 
@@ -164,18 +193,15 @@ function showSub() {
         '2. Server' + '\n' +
         '3. Database' + '\n' +
         '4. Name placer' + '\n' +
-        '5. Show Running Containers' + '\n' +
+        '5. List Docker Images' + '\n' +
+        '6. List Running Containers' + '\n' +
+        '7. Prune Stopped Containers' + '\n' +
+        '8. NA' + '\n' +
+        '9. Build Environment' + '\n' +
         '0. Exit Application' + '\n'
     );
-    
-    // Check if there is already a menu active. If true, close it.
-    if (menu) menu.close();
 
-    // Creates a readline Interface instance
-    menu = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
-    });
+    menu = refreshMenu();
 
     // Ask question
     menu.question('Enter the number: ', function (input) {
@@ -184,5 +210,7 @@ function showSub() {
         //  don't really understand js classes
     });
 }
+
+// do some initialisation, make sure docker daemon is open etc
 
 showSub();
