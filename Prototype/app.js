@@ -20,7 +20,7 @@ function title() {
     clear();
     console.log(
         chalk.yellow(
-            figlet.textSync('autoMNS', { horizontalLayout: 'full' })
+            figlet.textSync('AutoMnS', { horizontalLayout: 'full' })
         )
     );
 }
@@ -34,10 +34,15 @@ function showMainText() {   // also refreshes menu which should be its own funct
         '5. Delete Component' + '\n' +
         '6. Main Menu' + '\n'
     );
+   menu = refreshMenu();
+}
+
+function refreshMenu() {
     if (menu) menu.close();
 
     //Creates a readline Interface instance
-    menu = readline.createInterface({
+    //  menu = 
+    return readline.createInterface({
         input: process.stdin,
         output: process.stdout
     });
@@ -128,6 +133,7 @@ function showMain() {
 
 //  runs the command in cmd, returns to returnfunction
 function runCommand(command, returnMessage, returnFunction) {
+    title();
     //  return function is the function to return to after performinig the command
     //  ie running a command in the main menu should return you to the main menu
     var commandArray = command.split(' ');
