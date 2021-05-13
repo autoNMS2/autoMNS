@@ -9,7 +9,7 @@ class Commands{
         MenuOptions.title();
         if (titleMessage) console.log(titleMessage);
     
-        console.log('Command: ' + command);
+        //console.log('Command: ' + command);
         if (returnMessage);
         else returnMessage = 'Press Any Key to Continue...';
     
@@ -21,7 +21,7 @@ class Commands{
         var command = commandArray[0];  // first substring is the command
         commandArray.shift();           // first substring removed, remaining substrings are options
     
-        console.log('');    // linebreak
+        //console.log('');    // linebreak
         
         var ls = cp.spawn(command, commandArray);   // run the command and options in console
 
@@ -44,6 +44,7 @@ class Commands{
                     returnFunction();   // display return message and wait for any input then go to return function }               
                 });
             }
+            else console.log(returnMessage);
         });
     }
 

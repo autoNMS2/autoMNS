@@ -41,11 +41,11 @@ class AppMenus {
             '2. Server' + '\n' +
             '3. Database' + '\n' +
             '4. Name placer' + '\n' +
-            '5. Docker Commands' + '\n' +
-            '6. List Running Containers' + '\n' +
-            '7. Prune Stopped Containers' + '\n' +
+            '5. Swarm Commands' + '\n' +
+            '6. Swarm Information' + '\n' +
+            '7. NA' + '\n' +
             '8. NA' + '\n' +
-            '9. Build Environment' + '\n' +
+            '9. NA' + '\n' +
             '0. Exit Application' + '\n'
         );
     
@@ -130,25 +130,57 @@ class AppMenus {
         }
         else if (arguments[0] == 5) {
             MenuOptions.title();
-            console.log(
-                '1. ' + '' + '\n' +
-                '2. ' + 'Join Worker To Swarm' + '\n' +
-                '3. ' + '' + '\n' +
-                '4. ' + '' + '\n' +
-                '5. ' + '' + '\n' +
-                '0. Main Menu' + '\n'
-            );
 
-            menu.question('Please select a number: ', (input) => {
+            var textEnd = '1. ' + 'Initialise Swarm' + '\n' +
+                '2. ' + 'Join Worker To Swarm' + '\n' +
+                '3. ' + 'Promote Worker to Manager' + '\n' +
+                '4. ' + 'Demote Manager to Worker' + '\n' +
+                '5. ' + 'Remove Node' + '\n' +
+                //Build Environment [LOCALLY]
+                '0. Main Menu' + '\n' +
+                'Please select a number:';
+
+            commands.runCommand('docker node ls',
+                'List of Nodes:',
+                textEnd, null, menu);
+
+            //  console.log(
+            //      '1. ' + 'Initialise Swarm' + '\n' +
+            //      '2. ' + 'Join Worker To Swarm' + '\n' +
+            //      '3. ' + 'Build Environment [LOCALLY]' + '\n' +
+            //      '4. ' + 'Start Service' + '\n' +
+            //      '5. ' + '' + '\n' +
+            //      '0. Main Menu' + '\n'
+            //  );
+
+            menu.question('', (input) => {
                 //  input, backFunction, repeateFunction, arg
                 //  need to pass functions and argument for return/repeat
                 
                 swarm.command(input, this.showSub.bind(this), this.showMain.bind(this), arguments[0], menu);
             });
         }
-        //  else if (arguments[0] == 6) {
-        //      
-        //  }
+        else if (arguments[0] == 6) {
+            MenuOptions.title();
+
+            var textEnd = '1. ' + 'Inspect Node' + '\n' +
+                '2. ' + 'View Node Tasks' + '\n' +
+                '3. ' + '' + '\n' +
+                '4. ' + '' + '\n' +
+                '5. ' + '' + '\n' +
+                '0. Main Menu' + '\n' +
+                'Please select a number:';
+
+            commands.runCommand('docker node ls',
+                'List of Nodes:',
+                textEnd, null, menu);
+
+            menu.question('', (input) => {
+                //  input, backFunction, repeateFunction, arg
+                //  need to pass functions and argument for return/repeat
+                swarm.information(input, this.showSub.bind(this), this.showMain.bind(this), arguments[0], menu);
+            });
+        }
         //  else if (arguments[0] == 7) {
         //      
         //  }
