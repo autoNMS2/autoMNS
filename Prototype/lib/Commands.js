@@ -9,7 +9,7 @@ class Commands{
         MenuOptions.title();
         if (titleMessage) console.log(titleMessage);
     
-        console.log(command);
+        console.log('Command: ' + command);
         if (returnMessage);
         else returnMessage = 'Press Any Key to Continue...';
     
@@ -47,6 +47,43 @@ class Commands{
         });
     }
 
+    returnCommand(command) {
+        // returns the text from the command
+        var commandArray = command.split(' ');
+        var command = commandArray[0];  // first substring is the command
+        commandArray.shift();           // first substring removed, remaining substrings are options
+
+        return cp.spawn(command, commandArray);   // run the command and options in console
+    }
+
+    //  getTextFromCommand(command) {
+    //      // returns the text from the command
+    //      var commandArray = command.split(' ');
+    //      var command = commandArray[0];  // first substring is the command
+    //      commandArray.shift();           // first substring removed, remaining substrings are options
+    //  
+    //      var ls = cp.spawn(command, commandArray);   // run the command and options in console
+    //  
+    //      ls.stdout.on('data', (data) => {      // output return data
+    //          var datastring = '' + data;
+    //          var lines = datastring.split('\n');
+    //  
+    //          for (var i = 0; i < lines.length; i++) {
+    //              console.log('length ' + i + ': ' +  lines[i].length);
+    //          }
+    //  
+    //          console.log('length: ' + lines.length);
+    //          this.runCommand('' + data, titleMessage, returnMessage, returnFunction, menu);
+    //      });
+    //  
+    //      //  Show errors somehow
+    //  
+    //      ls.on('close', (code, signal) => {
+    //          return datastring;
+    //          //  this.runCommand(data, titleMessage, returnMessage, returnFunction, menu);
+    //      });
+    //  }
+
     runReturnCommand(command, titleMessage, returnMessage, returnFunction, menu) {
         // returns the text from the command
         var commandArray = command.split(' ');
@@ -63,12 +100,6 @@ class Commands{
             //  we only want one line of the return text, should be a better way to find it
             datastring = '' + data;
             lines = datastring.split('\n');
-            for (var i = 0; i < lines.length; i++) {
-                console.log('length ' + i + ': ' + lines[i].length);
-                if (i == lines.length - 1) {
-                    this.runCommand(lines[2], titleMessage, returnMessage, returnFunction, menu);
-                }
-            }
             console.log('length: ' + lines.length);
         });
 
@@ -77,47 +108,15 @@ class Commands{
         });
 
         ls.on('close', (code, signal) => {
+            for (var i = 0; i < lines.length; i++) {
+                console.log('length ' + i + ': ' + lines[i].length);
+                if (i == lines.length - 1) {
+                    //  console.log('lines[2]: ' + lines[2]);
+                    this.runCommand(lines[2].trim(), titleMessage, returnMessage, returnFunction, menu);
+                }
+            }
         });
     }
 }
 
 module.exports = Commands;
-
-
-
-
-    //  returnCommand(command) {
-    //      // returns the text from the command
-    //      var commandArray = command.split(' ');
-    //      var command = commandArray[0];  // first substring is the command
-    //      commandArray.shift();           // first substring removed, remaining substrings are options
-    //  
-    //      return cp.spawn(command, commandArray);   // run the command and options in console
-    //  }
-
-    //  getTextFromCommand(command) {
-    //      // returns the text from the command
-    //      var commandArray = command.split(' ');
-    //      var command = commandArray[0];  // first substring is the command
-    //      commandArray.shift();           // first substring removed, remaining substrings are options
-    //  
-    //      var ls = cp.spawn(command, commandArray);   // run the command and options in console
-    //  
-    //      ls.stdout.on('data', (data) => {      // output return data
-    //          var datastring = '' + data;
-    //          var lines = datastring.split('\n');
-    //  
-    //          for (var i = 0; i < lines.length; i++) {
-    //              console.log('length ' + i + ': ' +  lines[i].length);           }
-    //  
-    //          console.log('length: ' + lines.length);
-    //          //  this.runCommand('' + data, titleMessage, returnMessage, returnFunction, menu);
-    //      });
-    //  
-    //      //  Show errors somehow
-    //  
-    //      ls.on('close', (code, signal) => {
-    //          return datastring;
-    //          //  this.runCommand(data, titleMessage, returnMessage, returnFunction, menu);
-    //      });
-    //  }

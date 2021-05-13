@@ -132,7 +132,7 @@ class AppMenus {
             MenuOptions.title();
             console.log(
                 '1. ' + '' + '\n' +
-                '2. ' + '' + '\n' +
+                '2. ' + 'Join Worker To Swarm' + '\n' +
                 '3. ' + '' + '\n' +
                 '4. ' + '' + '\n' +
                 '5. ' + '' + '\n' +
@@ -140,10 +140,10 @@ class AppMenus {
             );
 
             menu.question('Please select a number: ', (input) => {
-
                 //  input, backFunction, repeateFunction, arg
                 //  need to pass functions and argument for return/repeat
-                swarm.command(input, this.showSub.bind(this), this.showMain.bind(this), arguments[0]);
+                
+                swarm.command(input, this.showSub.bind(this), this.showMain.bind(this), arguments[0], menu);
             });
         }
         //  else if (arguments[0] == 6) {
