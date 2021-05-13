@@ -1,32 +1,22 @@
-const chalk = require('chalk');
-const clear = require('clear');
-const figlet = require('figlet');
-const http = require('http');
 const Container = require('./lib/Container');
 const Server = require('./lib/Server');
 const Database = require('./lib/Database');
 const Name = require('./lib/Name');
 const cp = require('child_process');
+const menuOptions = require('./lib/menuOptions');
+var readline = require('readline');
 
+const MenuOptions = new menuOptions();
 const container = new Container();
 const server = new Server();
 const database = new Database();
 const name = new Name();
-var readline = require('readline');
+
 var menu;
 
-// Initialize
-function title() {
-    clear();
-    console.log(
-        chalk.yellow(
-            figlet.textSync('AutoMnS', { horizontalLayout: 'full' })
-        )
-    );
-}
 
 function showMainText() {   // also refreshes menu which should be its own function really
-    title();
+    MenuOptions.title();
     console.log('1. Start Component' + '\n' +
         '2. Stop Component' + '\n' +
         '3. Restart Component' + '\n' +
@@ -34,27 +24,19 @@ function showMainText() {   // also refreshes menu which should be its own funct
         '5. Delete Component' + '\n' +
         '6. Main Menu' + '\n'
     );
-   menu = refreshMenu();
+    menu = MenuOptions.refreshMenu(menu);
 }
 
-    //Creates a readline Interface instance
-function refreshMenu() {
-    if (menu) menu.close();
-    return readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
-    });
-}
 
 function showMain() {
     if (arguments[0] == 0) {
-        menu.question('Goodbye! press any key to exit...', function (input) {
+        menu.question('Goodbye! press any key to exit...', (input) => {
             process.exit(); // show goodbye message then wait for input
         });
     }
     else if (arguments[0] == 1) {
         showMainText();
-        menu.question('Please select a number: ', function (input) {
+        menu.question('Please select a number: ', (input) => {
             switch (input) {
                 case '1': container.Start(); break;
                 case '2': container.Stop(); break;
@@ -131,14 +113,14 @@ function showMain() {
 //  runs the command in cmd, returns to returnfunction
 //  titleMessage and returnMessage can be null
 function runCommand(command, titleMessage, returnMessage, returnFunction) {
-    title();
+    MenuOptions.title();
     if (titleMessage) console.log(titleMessage);
 
     console.log(command);
     if (returnMessage);
     else returnMessage = 'Press Any Key to Continue...';
 
-    menu = refreshMenu();
+    menu = MenuOptions.refreshMenu(menu);
 
     //  return function is the function to return to after performinig the command
     //  ie running a command in the main menu should return you to the main menu
@@ -169,7 +151,7 @@ function runCommand(command, titleMessage, returnMessage, returnFunction) {
 }
 
 function showSub() {
-    title();
+    MenuOptions.title();
     console.log('Select component you want to perform actions with:' + '\n' +
         '1. Container' + '\n' +
         '2. Server' + '\n' +
@@ -183,7 +165,7 @@ function showSub() {
         '0. Exit Application' + '\n'
     );
 
-    menu = refreshMenu();
+    menu = MenuOptions.refreshMenu(menu);
 
     // Ask question
     menu.question('Enter the number: ', function (input) {
@@ -194,5 +176,5 @@ function showSub() {
 }
 
 // do some initialisation, make sure docker daemon is open etc
-
+module.exports.menu = menu;
 showSub();
