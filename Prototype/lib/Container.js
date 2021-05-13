@@ -1,5 +1,17 @@
+const main = require('../app')
 
 class Container {
+    Menu(input){
+        switch (input) {
+            case '1': this.Start(); break;
+            case '2': this.Stop(); break;
+            case '3': this.Restart(); break;
+            case '4': this.New(); break;
+            case '5': this.Delete(); break;
+            default: main.showSub();
+        }
+    }
+
     Start(){
         console.log('You are inside Start Container');
     }
