@@ -3,7 +3,10 @@ const Commands = require('./Commands');
 const Container = require('./Container');
 const Server = require('./Server');
 const Database = require('./Database');
+const Swarm = require('./Swarm');
 const Name = require('./Name');
+
+const swarm = new Swarm();
 
 const commands = new Commands();
 const MenuOptions = new menuOptions();
@@ -27,7 +30,7 @@ class AppMenus {
             '3. Restart Component' + '\n' +
             '4. New Component' + '\n' +
             '5. Delete Component' + '\n' +
-            '6. Main Menu' + '\n'
+            '0. Main Menu' + '\n'
         );
     }
 
@@ -38,7 +41,7 @@ class AppMenus {
             '2. Server' + '\n' +
             '3. Database' + '\n' +
             '4. Name placer' + '\n' +
-            '5. List Docker Images' + '\n' +
+            '5. Docker Commands' + '\n' +
             '6. List Running Containers' + '\n' +
             '7. Prune Stopped Containers' + '\n' +
             '8. NA' + '\n' +
@@ -58,6 +61,8 @@ class AppMenus {
     showMain() {
         var returnFunction = this.showSub.bind(this);
 
+        // this could be a case statement
+
         if (arguments[0] === '0') { // instead of == 0 , == will compare different types and it considers an empty string == 0, === compares the value and the type are the same
             menu.question('Goodbye! press any key to exit...', (input) => {
                 process.exit(); // show goodbye message then wait for input
@@ -73,9 +78,9 @@ class AppMenus {
                     case '3': container.Restart(); break;
                     case '4': container.New(); break;
                     case '5': container.Delete(); break;
-                    default: this.showSub();
-                }
-    
+                    case '0': this.showSub(); break;
+                    default: this.showMain(arguments[0]); break;
+                }    
             });
         }
         else if (arguments[0] == 2) {
@@ -88,7 +93,8 @@ class AppMenus {
                     case '3': server.Restart(); break;
                     case '4': server.New(); break;
                     case '5': server.Delete(); break;
-                    default: this.showSub();
+                    case '0': this.showSub(); break;
+                    default: this.showMain(arguments[0]); break;
                 }
             });
         }
@@ -102,7 +108,8 @@ class AppMenus {
                     case '3': database.Restart(); break;
                     case '4': database.New(); break;
                     case '5': database.Delete(); break;
-                    default: this.showSub();
+                    case '0': this.showSub(); break;
+                    default: this.showMain(arguments[0]); break;
                 }
             });
         }
@@ -116,32 +123,41 @@ class AppMenus {
                     case '3': name.Restart(); break;
                     case '4': name.New(); break;
                     case '5': name.Delete(); break;
-                    default: this.showSub();
+                    case '0': this.showSub(); break;
+                    default: this.showMain(arguments[0]); break;
                 }
             });
         }
-        else if (arguments[0] == 5) {   //[Images Returned Successfully] 
-            //  returnfunction.bind(this);
-            // this.shoSub.bind(this)
-            commands.runCommand('docker images', 'Listing Docker Images', '\nPress Any Key To Continue...', returnFunction, menu);
+        else if (arguments[0] == 5) {
+            MenuOptions.title();
+            console.log(
+                '1. ' + '' + '\n' +
+                '2. ' + '' + '\n' +
+                '3. ' + '' + '\n' +
+                '4. ' + '' + '\n' +
+                '5. ' + '' + '\n' +
+                '0. Main Menu' + '\n'
+            );
+
+            menu.question('Please select a number: ', (input) => {
+
+                //  input, backFunction, repeateFunction, arg
+                //  need to pass functions and argument for return/repeat
+                swarm.command(input, this.showSub.bind(this), this.showMain.bind(this), arguments[0]);
+            });
         }
-        else if (arguments[0] == 6) {
-            commands.runCommand('docker container ls -a', 'Listing Docker Containers', '\nPress Any Key To Continue...', returnFunction, menu);
-        }
-        else if (arguments[0] == 7) {
-            commands.runCommand('docker container prune -f', 'Remove Stopped Containers', '\nPress Any Key To Continue...', returnFunction, menu);
-            //  runCommand('y', '\nPress Any Key To Continue...', showSub);
-        }
-        else if (arguments[0] == 8) {
-            commands.runCommand('', '', '\nPress Any Key To Continue...', returnFunction, menu);
-        }
-        else if (arguments[0] == 9) {
-            //let com = 'docker-compose -f ' + __dirname + '\\docker-compose_default.yaml up -d'
-    
-            let com = 'docker run -it ubuntu -d';
-            commands.runCommand(com,
-                'Building Environment (this may take some time...)', '\nPress Any Key To Continue...', returnFunction, menu);
-        }
+        //  else if (arguments[0] == 6) {
+        //      
+        //  }
+        //  else if (arguments[0] == 7) {
+        //      
+        //  }
+        //  else if (arguments[0] == 8) {
+        //     
+        //  }
+        //  else if (arguments[0] == 9) {
+        //      
+        //  }
         else returnFunction(); // if not a valid argument return to main menu
     }
 
@@ -149,3 +165,27 @@ class AppMenus {
 
 module.exports.menu = menu;
 module.exports = AppMenus;
+
+//  var ls = commands.returnCommand('docker swarm join-token worker');
+            //  
+            //  var returnText = '';
+            //  var lines;
+            //  
+            //  ls.stdout.on('data', (data) => {
+            //      returnText += data;
+            //  
+            //      lines = returnText.split('\n');
+            //  
+            //      for (var i = 0; i < lines.length; i++) {
+            //          console.log('length ' + i + ': ' + lines[i].length);
+            //      }
+            //  
+            //      console.log('length: ' + lines.length);
+            //  
+            //      console.log(returnText);
+            //  });
+            //  
+            //  ls.on('close', (code, signal) => {
+            //      console.log('lines[2]: ' + lines[2]);
+            //      commands.runCommand(lines[2], 'Adding Worker', '\nPress Any Key To Continue...', returnFunction, menu);
+            //  });
