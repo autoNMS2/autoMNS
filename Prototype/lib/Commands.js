@@ -13,7 +13,7 @@ class Commands{
         if (returnMessage);
         else returnMessage = 'Press Any Key to Continue...';
     
-        menu = MenuOptions.refreshMenu(menu);
+       //    menu = MenuOptions.refreshMenu(menu);
     
         //  return function is the function to return to after performinig the command
         //  ie running a command in the main menu should return you to the main menu

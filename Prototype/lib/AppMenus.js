@@ -12,7 +12,12 @@ const server = new Server();
 const database = new Database();
 const name = new Name();
 
-var menu;
+var readline = require('readline');
+const menu = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+//  var menu;
 
 class AppMenus {
     showMainText() {   // displays the menu for the first 4 main menu options
@@ -41,22 +46,26 @@ class AppMenus {
             '0. Exit Application' + '\n'
         );
     
-        menu = MenuOptions.refreshMenu(menu);
+        //  menu = MenuOptions.refreshMenu(menu);
         // Ask question
+        console.log(this);
         menu.question('Enter the number: ', (input) => {
+            console.log(input);
             this.showMain(input);    // little neater
         });
     }
 
     showMain() {
-        if (arguments[0] == 0) {
+        var returnFunction = this.showSub.bind(this);
+
+        if (arguments[0] === '0') { // instead of == 0 , == will compare different types and it considers an empty string == 0, === compares the value and the type are the same
             menu.question('Goodbye! press any key to exit...', (input) => {
                 process.exit(); // show goodbye message then wait for input
             });
         }
         else if (arguments[0] == 1) {
             this.showMainText();
-            menu = MenuOptions.refreshMenu(menu);
+            //  menu = MenuOptions.refreshMenu(menu);
             menu.question('Please select a number: ', (input) => {
                 switch (input) {
                     case '1': container.Start(); break;
@@ -71,7 +80,7 @@ class AppMenus {
         }
         else if (arguments[0] == 2) {
             this.showMainText();
-            menu = MenuOptions.refreshMenu(menu);
+            //  menu = MenuOptions.refreshMenu(menu);
             menu.question('Please select a number: ', (input) => {
                 switch (input) {
                     case '1': server.Start(); break;
@@ -85,7 +94,7 @@ class AppMenus {
         }
         else if (arguments[0] == 3) {
             this.showMainText();
-            menu = MenuOptions.refreshMenu(menu);
+            //  menu = MenuOptions.refreshMenu(menu);
             menu.question('Please select a number: ', (input) => {
                 switch (input) {
                     case '1': database.Start(); break;
@@ -99,7 +108,7 @@ class AppMenus {
         }
         else if (arguments[0] == 4) {
             this.showMainText();
-            menu = MenuOptions.refreshMenu(menu);
+            //  menu = MenuOptions.refreshMenu(menu);
             menu.question('Please select a number: ', (input) => {
                 switch (input) {
                     case '1': name.Start(); break;
@@ -112,26 +121,28 @@ class AppMenus {
             });
         }
         else if (arguments[0] == 5) {   //[Images Returned Successfully] 
-            commands.runCommand('docker images', 'Listing Docker Images', '\nPress Any Key To Continue...', this.showSub, menu);
+            //  returnfunction.bind(this);
+            // this.shoSub.bind(this)
+            commands.runCommand('docker images', 'Listing Docker Images', '\nPress Any Key To Continue...', returnFunction, menu);
         }
         else if (arguments[0] == 6) {
-            commands.runCommand('docker container ls -a', 'Listing Docker Containers', '\nPress Any Key To Continue...', this.showSub, menu);
+            commands.runCommand('docker container ls -a', 'Listing Docker Containers', '\nPress Any Key To Continue...', returnFunction, menu);
         }
         else if (arguments[0] == 7) {
-            commands.runCommand('docker container prune -f', 'Remove Stopped Containers', '\nPress Any Key To Continue...', this.showSub, menu);
+            commands.runCommand('docker container prune -f', 'Remove Stopped Containers', '\nPress Any Key To Continue...', returnFunction, menu);
             //  runCommand('y', '\nPress Any Key To Continue...', showSub);
         }
         else if (arguments[0] == 8) {
-            commands.runCommand('', '', '\nPress Any Key To Continue...', this.showSub, menu);
+            commands.runCommand('', '', '\nPress Any Key To Continue...', returnFunction, menu);
         }
         else if (arguments[0] == 9) {
             //let com = 'docker-compose -f ' + __dirname + '\\docker-compose_default.yaml up -d'
     
             let com = 'docker run -it ubuntu -d';
             commands.runCommand(com,
-                'Building Environment (this may take some time...)', '\nPress Any Key To Continue...', showSub);
+                'Building Environment (this may take some time...)', '\nPress Any Key To Continue...', returnFunction, menu);
         }
-        else this.showSub(); // if not a valid argument return to main menu
+        else returnFunction(); // if not a valid argument return to main menu
     }
 
 }
