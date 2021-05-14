@@ -9,8 +9,7 @@ const serviceName = 'TeaStore';
 //      commands.runCommand('docker node rm ' + input + ' --pretty',
 //          'Removing Node: ' + input,
 //          '\nPress Any Key To Continue...', backFunction, menu);
-//  });  
-
+//  });
 
 class Swarm {
     //  input, backFunction, repeateFunction, arg
@@ -44,7 +43,7 @@ class Swarm {
                     commands.runCommand('docker node rm ' + input,  // add -f
                         'Removing Node: ' + input,
                         '\nPress Any Key To Continue...', backFunction, menu);
-                }); 
+                });
                 break;
             case '6':   // docker remove service
                 commands.runCommand('docker service ls',
@@ -57,14 +56,19 @@ class Swarm {
                         '\nPress Any Key To Continue... (If this didnt return an error the command was successful)', backFunction, menu);
                 });
                 break;
-            case '9': //  Build Environment LOCALLY
-
-                //  docker stack deploy --compose-file docker-compose.yml stackdemo
-                //docker service create --name registry--publish published = 5000, target = 5000 registry: 2
-                let comText = 'docker stack deploy --compose-file ' + __dirname + '\\docker-compose_default.yaml ' + serviceName; 
-                //  let comText = 'docker run -i alpine';   //  can't run environment on my laptop :(
-                //  also this will hijack the app 
+            case '7': //  Build Environment Swarm
+                let comText = 'docker stack deploy --compose-file ' + __dirname + '\\docker-compose_default.yaml ' + serviceName;
                 commands.runCommand(comText,
+                    'Building Environment (this may take some time...)', '\nPress Any Key To Continue...', backFunction, menu);
+                break;
+            case '8': //  Nuke Swarm
+                let comText2 = 'docker stack rm ' + serviceName;
+                commands.runCommand(comText2,
+                    'Building Environment (this may take some time...)', '\nPress Any Key To Continue...', backFunction, menu);
+                break;
+            case '9': //  Nuke Environment
+                let comText3 = 'docker stack rm ' + serviceName;
+                commands.runCommand(comText3,
                     'Building Environment (this may take some time...)', '\nPress Any Key To Continue...', backFunction, menu);
                 break;
             case '0': backFunction(); break;
@@ -82,8 +86,6 @@ class Swarm {
                 break;
             case '2'://  inspect Node
                 menu.question('Select a node to inspect: ', (input) => {
-                    //  input, backFunction, repeateFunction, arg
-                    //  need to pass functions and argument for return/repeat
                     commands.runCommand('docker node inspect ' + input + ' --pretty',
                         'Inspecting Node: ' + input,
                         '\nPress Any Key To Continue...', backFunction, menu);
@@ -91,15 +93,12 @@ class Swarm {
                 break;
             case '3':   //  List Node Tasks
                 menu.question('Select a node to view its tasks: ', (input) => {
-                    //  input, backFunction, repeateFunction, arg
-                    //  need to pass functions and argument for return/repeat
                     commands.runCommand('docker node ps ' + input,// + ' --format',
                         'Viewing Node Tasks: ' + input,
                         '\nPress Any Key To Continue...', backFunction, menu);
                 });                  
                 break;
-            case '4':   
-                //
+            case '4':   //  search specific service
                 //  commands.runCommand('docker service ps ' + serviceName,
                 //      'Showing All Tasks: ' + input,
                 //      '\nPress Any Key To Continue...', backFunction, menu); 

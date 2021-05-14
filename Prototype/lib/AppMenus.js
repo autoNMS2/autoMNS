@@ -5,6 +5,7 @@ const Server = require('./Server');
 const Database = require('./Database');
 const Swarm = require('./Swarm');
 const Name = require('./Name');
+const open = require('open');
 
 const swarm = new Swarm();
 
@@ -37,12 +38,13 @@ class AppMenus {
     showSub() {
         MenuOptions.title();
         console.log('Select component you want to perform actions with:' + '\n' +
-            '1. Container' + '\n' +
-            '2. Server' + '\n' +
-            '3. Database' + '\n' +
-            '4. Name placer' + '\n' +
+            '1. ' + '\n' +
+            '2. ' + '\n' +
+            '3. ' + '\n' +
+            '4. ' + '\n' +
             '5. Swarm Commands' + '\n' +
             '6. Swarm Information' + '\n' +
+            '6. Open Application' + '\n' +
             '7. NA' + '\n' +
             '8. NA' + '\n' +
             '9. NA' + '\n' +
@@ -136,37 +138,25 @@ class AppMenus {
                 '3. ' + 'Promote Worker to Manager' + '\n' +
                 '4. ' + 'Demote Manager to Worker' + '\n' +
                 '5. ' + 'Remove Node' + '\n' +
+                '5. ' + 'Remove Service' + '\n' +
                 '9. ' + 'Build Environment' + '\n' +
-                //Build Environment [LOCALLY]
+                '99. ' + 'Nuke Environment' + '\n' +
+                '999. ' + 'Nuke Swarm' + '\n' +
                 '0. Main Menu' + '\n' +
                 'Please select a number:';
 
             commands.runCommand('docker node ls',
                 'List of Nodes:',
                 textEnd, null, menu);
-
-            //  console.log(
-            //      '1. ' + 'Initialise Swarm' + '\n' +
-            //      '2. ' + 'Join Worker To Swarm' + '\n' +
-            //      '3. ' + 'Build Environment [LOCALLY]' + '\n' +
-            //      '4. ' + 'Start Service' + '\n' +
-            //      '5. ' + '' + '\n' +
-            //      '0. Main Menu' + '\n'
-            //  );
-
             menu.question('', (input) => {
-                //  input, backFunction, repeateFunction, arg
-                //  need to pass functions and argument for return/repeat
-                
                 swarm.command(input, this.showSub.bind(this), this.showMain.bind(this), arguments[0], menu);
             });
         }
         else if (arguments[0] == 6) {
             MenuOptions.title();
-
-            var textEnd = '1. ' + 'Inspect Node' + '\n' +
-                '2. ' + 'View Node Tasks' + '\n' +
-                '3. ' + '' + '\n' +
+            var textEnd = '1. ' + 'View All Tasks' + '\n' +
+                '2. ' + 'Inspect Node' + '\n' +
+                '3. ' + 'View Node Tasks' + '\n' +
                 '4. ' + '' + '\n' +
                 '5. ' + '' + '\n' +
                 '0. Main Menu' + '\n' +
@@ -182,9 +172,10 @@ class AppMenus {
                 swarm.information(input, this.showSub.bind(this), this.showMain.bind(this), arguments[0], menu);
             });
         }
-        //  else if (arguments[0] == 7) {
-        //      
-        //  }
+        else if (arguments[0] == 7) {
+            open('http://localhost:8080');
+            returnFunction();
+        }
         //  else if (arguments[0] == 8) {
         //     
         //  }
@@ -193,7 +184,6 @@ class AppMenus {
         //  }
         else returnFunction(); // if not a valid argument return to main menu
     }
-
 }
 
 module.exports.menu = menu;
