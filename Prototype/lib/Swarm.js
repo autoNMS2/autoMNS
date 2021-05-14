@@ -1,12 +1,11 @@
 const main = require('../app')
 const Commands = require('./Commands');
 const commands = new Commands();
+const serviceName = 'TeaStore';
 
 //  Wrap a runCommand in a menu.question to add some user input
 
 //  menu.question('Select a node to remove: ', (input) => {
-//      //  input, backFunction, repeateFunction, arg
-//      //  need to pass functions and argument for return/repeat
 //      commands.runCommand('docker node rm ' + input + ' --pretty',
 //          'Removing Node: ' + input,
 //          '\nPress Any Key To Continue...', backFunction, menu);
@@ -47,9 +46,21 @@ class Swarm {
                         '\nPress Any Key To Continue...', backFunction, menu);
                 }); 
                 break;
+            case '6':   //  Remove Node
+                menu.question('Select a node to remove: ', (input) => {
+                    commands.runCommand('docker node rm ' + input,  // add -f
+                        'Removing Node: ' + input,
+                        '\nPress Any Key To Continue...', backFunction, menu);
+                });
+                break;
             case '9': //  Build Environment LOCALLY
-                //  let comText = 'docker-compose -f ' + __dirname + '\\docker-compose_default.yaml up -d';
-                let comText = 'docker run -i alpine';   //  can't run environment on my laptop :(
+
+                //  docker stack deploy --compose-file docker-compose.yml stackdemo
+                //docker service create --name registry--publish published = 5000, target = 5000 registry: 2
+
+
+                let comText = 'docker stack deploy --compose-file ' + __dirname + '\\docker-compose_default.yaml ' + serviceName;    //up -d';
+                //  let comText = 'docker run -i alpine';   //  can't run environment on my laptop :(
                 //  also this will hijack the app 
                 commands.runCommand(comText,
                     'Building Environment (this may take some time...)', '\nPress Any Key To Continue...', backFunction, menu);
@@ -59,11 +70,15 @@ class Swarm {
         }
     }
 
-
     information(input, backFunction, repeateFunction, arg, menu) {
         //  List Nodes
         switch (input) {
-            case '1'://  inspect Node
+            case '1'://  View all tasks
+                commands.runCommand('docker service ps ' + serviceName,
+                    'Showing All Tasks: ' + input,
+                    '\nPress Any Key To Continue...', backFunction, menu);                
+                break;
+            case '2'://  inspect Node
                 menu.question('Select a node to inspect: ', (input) => {
                     //  input, backFunction, repeateFunction, arg
                     //  need to pass functions and argument for return/repeat
@@ -72,21 +87,20 @@ class Swarm {
                         '\nPress Any Key To Continue...', backFunction, menu);
                 });  
                 break;
-            case '2':   //  Lis Node Tasks
+            case '3':   //  List Node Tasks
                 menu.question('Select a node to view its tasks: ', (input) => {
                     //  input, backFunction, repeateFunction, arg
                     //  need to pass functions and argument for return/repeat
                     commands.runCommand('docker node ps ' + input,// + ' --format',
                         'Viewing Node Tasks: ' + input,
                         '\nPress Any Key To Continue...', backFunction, menu);
-                });  
-                
-                break;
-            case '3':
+                });                  
                 break;
             case '4':
                 break;
             case '5':
+                break;
+            case '6':
                 break;
             case '0': backFunction(); break;
             default: repeateFunction(arg); break;

@@ -132,10 +132,11 @@ class AppMenus {
             MenuOptions.title();
 
             var textEnd = '1. ' + 'Initialise Swarm' + '\n' +
-                '2. ' + 'Join Worker To Swarm' + '\n' +
+                '2. ' + 'Add Worker To Swarm' + '\n' +
                 '3. ' + 'Promote Worker to Manager' + '\n' +
                 '4. ' + 'Demote Manager to Worker' + '\n' +
                 '5. ' + 'Remove Node' + '\n' +
+                '9. ' + 'Build Environment' + '\n' +
                 //Build Environment [LOCALLY]
                 '0. Main Menu' + '\n' +
                 'Please select a number:';
