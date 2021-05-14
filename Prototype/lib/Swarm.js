@@ -46,20 +46,22 @@ class Swarm {
                         '\nPress Any Key To Continue...', backFunction, menu);
                 }); 
                 break;
-            case '6':   //  Remove Node
-                menu.question('Select a node to remove: ', (input) => {
-                    commands.runCommand('docker node rm ' + input,  // add -f
-                        'Removing Node: ' + input,
-                        '\nPress Any Key To Continue...', backFunction, menu);
+            case '6':   // docker remove service
+                commands.runCommand('docker service ls',
+                    'Showing All Tasks: ',
+                    '\nSelect a service to remove: ', null, menu);   
+
+                menu.question('', (input) => {
+                    commands.runCommand('docker service rm ' + input,  // add -f
+                        'Removing Service: ' + input,
+                        '\nPress Any Key To Continue... (If this didnt return an error the command was successful)', backFunction, menu);
                 });
                 break;
             case '9': //  Build Environment LOCALLY
 
                 //  docker stack deploy --compose-file docker-compose.yml stackdemo
                 //docker service create --name registry--publish published = 5000, target = 5000 registry: 2
-
-
-                let comText = 'docker stack deploy --compose-file ' + __dirname + '\\docker-compose_default.yaml ' + serviceName;    //up -d';
+                let comText = 'docker stack deploy --compose-file ' + __dirname + '\\docker-compose_default.yaml ' + serviceName; 
                 //  let comText = 'docker run -i alpine';   //  can't run environment on my laptop :(
                 //  also this will hijack the app 
                 commands.runCommand(comText,
@@ -74,8 +76,8 @@ class Swarm {
         //  List Nodes
         switch (input) {
             case '1'://  View all tasks
-                commands.runCommand('docker service ps ' + serviceName,
-                    'Showing All Tasks: ' + input,
+                commands.runCommand('docker service ls',
+                    'Showing All Tasks: ',
                     '\nPress Any Key To Continue...', backFunction, menu);                
                 break;
             case '2'://  inspect Node
@@ -96,7 +98,11 @@ class Swarm {
                         '\nPress Any Key To Continue...', backFunction, menu);
                 });                  
                 break;
-            case '4':
+            case '4':   
+                //
+                //  commands.runCommand('docker service ps ' + serviceName,
+                //      'Showing All Tasks: ' + input,
+                //      '\nPress Any Key To Continue...', backFunction, menu); 
                 break;
             case '5':
                 break;
