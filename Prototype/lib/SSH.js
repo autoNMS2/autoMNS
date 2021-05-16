@@ -1,6 +1,7 @@
 var Client = require('ssh2').Client;
 var conn = new Client();
 
+
 class SSSH{
  SSH(){
 conn.on('ready', function() {
@@ -22,6 +23,8 @@ conn.on('ready', function() {
   privateKey: require('fs').readFileSync('C:\Users\User\Downloads')
 });
 }
+
+
 }
 
 module.exports = SSSH;
