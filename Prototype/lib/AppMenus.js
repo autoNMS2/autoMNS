@@ -5,7 +5,7 @@ const Server = require('./Server');
 const Database = require('./Database');
 const Swarm = require('./Swarm');
 const Name = require('./Name');
-const open = require('open');
+//const open = require('open');
 
 const swarm = new Swarm();
 
@@ -38,16 +38,9 @@ class AppMenus {
     showSub() {
         MenuOptions.title();
         console.log('Select component you want to perform actions with:' + '\n' +
-            '1. ' + '\n' +
-            '2. ' + '\n' +
-            '3. ' + '\n' +
-            '4. ' + '\n' +
-            '5. Swarm Commands' + '\n' +
-            '6. Swarm Information' + '\n' +
-            '6. Open Application' + '\n' +
-            '7. NA' + '\n' +
-            '8. NA' + '\n' +
-            '9. NA' + '\n' +
+            '1. Swarm Commands' + '\n' +
+            '2. Swarm Information' + '\n' +
+            '3. Open Application' + '\n' +
             '0. Exit Application' + '\n'
         );
     
@@ -70,7 +63,7 @@ class AppMenus {
                 process.exit(); // show goodbye message then wait for input
             });
         }
-        else if (arguments[0] == 1) {
+        /*else if (arguments[0] == 1) {
             this.showMainText();
             //  menu = MenuOptions.refreshMenu(menu);
             menu.question('Please select a number: ', (input) => {
@@ -129,8 +122,8 @@ class AppMenus {
                     default: this.showMain(arguments[0]); break;
                 }
             });
-        }
-        else if (arguments[0] == 5) {
+        }*/
+        else if (arguments[0] == 1) {
             MenuOptions.title();
 
             var textEnd = '1. ' + 'Initialise Swarm' + '\n' +
@@ -152,13 +145,11 @@ class AppMenus {
                 swarm.command(input, this.showSub.bind(this), this.showMain.bind(this), arguments[0], menu);
             });
         }
-        else if (arguments[0] == 6) {
+        else if (arguments[0] == 2) {
             MenuOptions.title();
             var textEnd = '1. ' + 'View All Tasks' + '\n' +
                 '2. ' + 'Inspect Node' + '\n' +
                 '3. ' + 'View Node Tasks' + '\n' +
-                '4. ' + '' + '\n' +
-                '5. ' + '' + '\n' +
                 '0. Main Menu' + '\n' +
                 'Please select a number:';
 
@@ -172,7 +163,7 @@ class AppMenus {
                 swarm.information(input, this.showSub.bind(this), this.showMain.bind(this), arguments[0], menu);
             });
         }
-        else if (arguments[0] == 7) {
+        else if (arguments[0] == 3) {
             open('http://localhost:8080');
             returnFunction();
         }
