@@ -18,14 +18,12 @@ class SSSH {
             });
           });
         }).connect({
-            host: '13.239.147.136',
+            host: '13.54.199.112',
             port: 22,
             username: 'ubuntu',
             privateKey: require('fs').readFileSync('C:/Users/James/Downloads/automns.pem')
         });
     }
-
-
 }
 
 module.exports = SSSH;

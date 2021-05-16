@@ -5,7 +5,7 @@ const Server = require('./Server');
 const Database = require('./Database');
 const Swarm = require('./Swarm');
 const Name = require('./Name');
-//const open = require('open');
+const open = require('open');
 
 const swarm = new Swarm();
 
