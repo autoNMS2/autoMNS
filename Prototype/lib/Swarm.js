@@ -1,7 +1,10 @@
 const main = require('../app')
 const Commands = require('./Commands');
+const SSSH = require('./SSH');
 const commands = new Commands();
 const serviceName = 'TeaStore';
+
+const sssh = new SSSH();
 
 //  Wrap a runCommand in a menu.question to add some user input
 
@@ -98,7 +101,7 @@ class Swarm {
                         '\nPress Any Key To Continue...', backFunction, menu);
                 });                  
                 break;
-            case '4':   //  search specific service
+            case '4':  sssh.SSH(); //  search specific service
                 //  commands.runCommand('docker service ps ' + serviceName,
                 //      'Showing All Tasks: ' + input,
                 //      '\nPress Any Key To Continue...', backFunction, menu); 

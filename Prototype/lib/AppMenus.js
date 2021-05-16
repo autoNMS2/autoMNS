@@ -150,6 +150,7 @@ class AppMenus {
             var textEnd = '1. ' + 'View All Tasks' + '\n' +
                 '2. ' + 'Inspect Node' + '\n' +
                 '3. ' + 'View Node Tasks' + '\n' +
+                '4. ' + 'SSH' + '\n' +
                 '0. Main Menu' + '\n' +
                 'Please select a number:';
             commands.runCommand('docker node ls',
