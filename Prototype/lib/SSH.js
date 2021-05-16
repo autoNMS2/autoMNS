@@ -16,10 +16,10 @@ conn.on('ready', function() {
     stream.end('ls -l\nexit\n');
   });
 }).connect({
-  host: '192.168.100.100',
+  host: '13.239.147.136',
   port: 22,
-  username: 'frylock',
-  privateKey: require('fs').readFileSync('/here/is/my/key')
+  username: 'ubuntu',
+  privateKey: require('fs').readFileSync('C:\Users\User\Downloads')
 });
 }
 }
