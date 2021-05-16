@@ -131,10 +131,10 @@ class AppMenus {
                 '3. ' + 'Promote Worker to Manager' + '\n' +
                 '4. ' + 'Demote Manager to Worker' + '\n' +
                 '5. ' + 'Remove Node' + '\n' +
-                '5. ' + 'Remove Service' + '\n' +
-                '9. ' + 'Build Environment' + '\n' +
-                '99. ' + 'Nuke Environment' + '\n' +
-                '999. ' + 'Nuke Swarm' + '\n' +
+                '6. ' + 'Remove Service' + '\n' +
+                '7. ' + 'Build Environment' + '\n' +
+                '8. ' + 'Nuke Environment' + '\n' +
+                '9. ' + 'Nuke Swarm' + '\n' +
                 '0. Main Menu' + '\n' +
                 'Please select a number:';
 
@@ -152,7 +152,6 @@ class AppMenus {
                 '3. ' + 'View Node Tasks' + '\n' +
                 '0. Main Menu' + '\n' +
                 'Please select a number:';
-
             commands.runCommand('docker node ls',
                 'List of Nodes:',
                 textEnd, null, menu);
