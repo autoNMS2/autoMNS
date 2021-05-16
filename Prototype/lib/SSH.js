@@ -1,6 +1,5 @@
 var Client = require('ssh2').Client;
 var conn = new Client();
-var session 
 
 class SSSH {
     SSH() {
