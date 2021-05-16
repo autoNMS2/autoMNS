@@ -1,28 +1,30 @@
 var Client = require('ssh2').Client;
 var conn = new Client();
+var session 
 
-
-class SSSH{
- SSH(){
-conn.on('ready', function() {
-  console.log('Client :: ready');
-  conn.shell(function(err, stream) {
-    if (err) throw err;
-    stream.on('close', function() {
-      console.log('Stream :: close');
-      conn.end();
-    }).on('data', function(data) {
-      console.log('OUTPUT: ' + data);
-    });
-    stream.end('ls -l\nexit\n');
-  });
-}).connect({
-  host: '13.239.147.136',
-  port: 22,
-  username: 'ubuntu',
-  privateKey: require('fs').readFileSync('C:\Users\User\Downloads')
-});
-}
+class SSSH {
+    SSH() {
+        conn.on('ready', () => {
+          console.log('Client :: ready');
+          
+          conn.exec('docker -v\n whoami', (err, stream) => {
+            if (err) throw err;
+            stream.on('close', (code, signal) => {
+              console.log('Stream :: close :: code: ' + code + ', signal: ' + signal);
+              conn.end();
+            }).on('data', (data) => {
+              console.log('STDOUT: ' + data);
+            }).stderr.on('data', (data) => {
+              console.log('STDERR: ' + data);
+            });
+          });
+        }).connect({
+            host: '13.239.147.136',
+            port: 22,
+            username: 'ubuntu',
+            privateKey: require('fs').readFileSync('C:/Users/James/Downloads/automns.pem')
+        });
+    }
 
 
 }
