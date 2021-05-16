@@ -37,7 +37,7 @@ class AppMenus {
 
     showSub() {
         MenuOptions.title();
-        console.log('Select component you want to perform actions with:' + '\n' +
+        console.log('Select the action you wish to take:' + '\n' +
             '1. Swarm Commands' + '\n' +
             '2. Swarm Information' + '\n' +
             '3. Open Application' + '\n' +
@@ -46,7 +46,7 @@ class AppMenus {
     
         //  menu = MenuOptions.refreshMenu(menu);
         // Ask question
-        console.log(this);
+        //console.log(this);
         menu.question('Enter the number: ', (input) => {
             console.log(input);
             this.showMain(input);    // little neater
