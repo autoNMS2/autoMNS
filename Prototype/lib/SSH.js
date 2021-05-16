@@ -1,27 +1,29 @@
 var Client = require('ssh2').Client;
 var conn = new Client();
 
-class SSSH{
- SSH(){
-conn.on('ready', function() {
-  console.log('Client :: ready');
-  conn.shell(function(err, stream) {
-    if (err) throw err;
-    stream.on('close', function() {
-      console.log('Stream :: close');
-      conn.end();
-    }).on('data', function(data) {
-      console.log('OUTPUT: ' + data);
-    });
-    stream.end('ls -l\nexit\n');
-  });
-}).connect({
-  host: '192.168.100.100',
-  port: 22,
-  username: 'frylock',
-  privateKey: require('fs').readFileSync('/here/is/my/key')
-});
-}
+class SSSH {
+
+    SSH() {
+        conn.on('ready', () => {
+            console.log('Client :: ready');
+            conn.shell((err, stream) => {
+                if (err) throw err;
+                stream.on('close', () => {
+                    console.log('Stream :: close');
+                    conn.end();
+                }).on('data', (data) => {
+                    console.log('OUTPUT: ' + data);
+                });
+                stream.end('ls -l\nexit\n');
+            });
+
+        }).connect({
+            host: '192.168.100.100',
+            port: 22,
+            username: 'frylock',
+            privateKey: require('fs').readFileSync('/here/is/my/key')
+        });
+    }
 }
 
 module.exports = SSSH;
