@@ -1,13 +1,39 @@
 const Commands = require('./Commands');
 const SSSH = require('./SSH');
+const sssh = new SSSH();
 const commands = new Commands();
 const serviceName = 'TeaStore';
+const AppMenus = require('./AppMenus');
+var ipAddress = new Array();
+var key;
+var instances;
+var i = 0;
 
-const sssh = new SSSH();
 
 class VirtualMachine {
-    Initialise(){
-        console.log('Installing Docker on Virtual Machines\nThis may take some time...');
+    Initialise() {
+
+        AppMenus.menu.question('How many VMs would you like to initialise: ', (input) => {
+            instances = input;
+            AppMenus.menu.question('Enter the RSA key path of the VMs:\n', (input) => {
+                key = input;
+                this.recursiveIPLoop();
+
+            });
+
+        });
+    }
+    recursiveIPLoop(){
+        AppMenus.menu.question('Enter the IP address of VM ' + i+1 + ': ', (input) => {
+            ipAddress[i] = input; 
+            if (i == instances - 1){
+                sssh.recursiveSSHLoop('whoami', ipAddress, key);
+            }
+            else {
+                i++;
+                this.recursiveIPLoop();
+            }
+        });
         
     }
 }

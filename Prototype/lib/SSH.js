@@ -1,30 +1,45 @@
 var Client = require('ssh2').Client;
 var conn = new Client();
-
+var i = 0;
+var ipArray = new Array();
 class SSSH {
-    SSH() {
-        conn.on('ready', () => {
-          console.log('Client :: ready');
-          
-          conn.exec('docker -v\n whoami', (err, stream) => {
-            if (err) throw err;
-            stream.on('close', (code, signal) => {
-              console.log('Stream :: close :: code: ' + code + ', signal: ' + signal);
-              conn.end();
-            }).on('data', (data) => {
-              console.log('STDOUT: ' + data);
-            }).stderr.on('data', (data) => {
-              console.log('STDERR: ' + data);
-            });
-          });
-        }).connect({
-            host: '13.54.199.112',
-            port: 22,
-            username: 'ubuntu',
-            privateKey: require('fs').readFileSync('C:/Users/James/Downloads/automns.pem')
+  SSH(command, ipAddress, key) {
+    console.log(command);
+    console.log(ipAddress);
+    conn.on('ready', () => {
+      console.log('Client :: ready');
+      conn.exec(command, (err, stream) => {
+        if (err) throw err;
+        stream.on('close', (code, signal) => {
+          console.log('Stream :: close :: code: ' + code + ', signal: ' + signal);
+          conn.end();
+        }).on('data', (data) => {
+          console.log('STDOUT: ' + data);
+        }).stderr.on('data', (data) => {
+          console.log('STDERR: ' + data);
         });
+      });
+    }).connect({
+      host: ipAddress,
+      port: 22,
+      username: 'ubuntu',
+      privateKey: require('fs').readFileSync(key)
+    });
+  }
+
+  recursiveSSHLoop(command, ipAddress, key) {
+    ipArray = ipAddress;
+      if (i == (ipArray[i] - 1)) {
+        this.SSH(command, ipAddress[i], key);
+      }
+      else {
+        this.SSH(command, ipAddress[i], key);
+        i++;
+        this.recursiveSSHLoop();
+      }
     }
 }
+
 
 module.exports = SSSH;
 
