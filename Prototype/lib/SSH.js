@@ -1,11 +1,12 @@
 var Client = require('ssh2').Client;
 var conn = new Client();
-var i = 0;
-var ipArray = new Array();
-class SSSH {
+var i;
+
+class SSSH {  
   SSH(command, ipAddress, key) {
+    for (i = 0; i < ipAddress.length; i++){
     console.log(command);
-    console.log(ipAddress);
+    console.log(ipAddress[i]);
     conn.on('ready', () => {
       console.log('Client :: ready');
       conn.exec(command, (err, stream) => {
@@ -20,14 +21,15 @@ class SSSH {
         });
       });
     }).connect({
-      host: ipAddress,
+      host: ipAddress[i],
       port: 22,
       username: 'ubuntu',
       privateKey: require('fs').readFileSync(key)
     });
   }
+  }
 
-  recursiveSSHLoop(command, ipAddress, key) {
+  /*recursiveSSHLoop(command, ipAddress, key) {
     ipArray = ipAddress;
       if (i == (ipArray[i] - 1)) {
         this.SSH(command, ipAddress[i], key);
@@ -38,6 +40,7 @@ class SSSH {
         this.recursiveSSHLoop();
       }
     }
+    */
 }
 
 

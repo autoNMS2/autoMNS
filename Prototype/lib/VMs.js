@@ -27,7 +27,7 @@ class VirtualMachine {
         AppMenus.menu.question('Enter the IP address of VM ' + i+1 + ': ', (input) => {
             ipAddress[i] = input; 
             if (i == instances - 1){
-                sssh.recursiveSSHLoop('whoami', ipAddress, key);
+                sssh.SSH('whoami', ipAddress, key);
             }
             else {
                 i++;
