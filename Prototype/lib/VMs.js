@@ -24,7 +24,7 @@ class VirtualMachine {
         });
     }
     recursiveIPLoop(){
-        AppMenus.menu.question('Enter the IP address of VM ' + i+1 + ': ', (input) => {
+        AppMenus.menu.question('Enter the IP address of VM ' + (i + 1) + ': ', (input) => {
             ipAddress[i] = input; 
             if (i == instances - 1){
                 sssh.SSH('whoami', ipAddress, key);
