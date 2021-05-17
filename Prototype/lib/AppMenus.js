@@ -1,20 +1,22 @@
 const menuOptions = require('./menuOptions');
 const Commands = require('./Commands');
-const Container = require('./Container');
-const Server = require('./Server');
-const Database = require('./Database');
+//const Container = require('./Container');
+//const Server = require('./Server');
+//const Database = require('./Database');
 const Swarm = require('./Swarm');
-const Name = require('./Name');
+//const Name = require('./Name');
+const VMs = require('./VMs');
 const open = require('open');
 
 const swarm = new Swarm();
 
+const vms = new VMs();
 const commands = new Commands();
 const MenuOptions = new menuOptions();
-const container = new Container();
-const server = new Server();
-const database = new Database();
-const name = new Name();
+//const container = new Container();
+//const server = new Server();
+//const database = new Database();
+//const name = new Name();
 
 var readline = require('readline');
 const menu = readline.createInterface({
@@ -38,9 +40,10 @@ class AppMenus {
     showSub() {
         MenuOptions.title();
         console.log('Select the action you wish to take:' + '\n' +
-            '1. Swarm Commands' + '\n' +
-            '2. Swarm Information' + '\n' +
-            '3. Open Application' + '\n' +
+            '1. Initialise Virtual Machines' + '\n' +
+            '2. Swarm Commands' + '\n' +
+            '3. Swarm Information' + '\n' +
+            '4. Open Application' + '\n' +
             '0. Exit Application' + '\n'
         );
     
@@ -63,7 +66,93 @@ class AppMenus {
                 process.exit(); // show goodbye message then wait for input
             });
         }
-        /*else if (arguments[0] == 1) {
+        else if (arguments[0] == 1) {
+            //initialise virtual machines
+            MenuOptions.title();
+            vms.Initialise();
+        }
+        else if (arguments[0] == 2) {
+            MenuOptions.title();
+
+            var textEnd = '1. ' + 'Initialise Swarm' + '\n' +
+                '2. ' + 'Add Worker To Swarm' + '\n' +
+                '3. ' + 'Promote Worker to Manager' + '\n' +
+                '4. ' + 'Demote Manager to Worker' + '\n' +
+                '5. ' + 'Remove Node' + '\n' +
+                '6. ' + 'Remove Service' + '\n' +
+                '7. ' + 'Build Environment' + '\n' +
+                '8. ' + 'Nuke Environment' + '\n' +
+                '9. ' + 'Nuke Swarm' + '\n' +
+                '0. Main Menu' + '\n' +
+                'Please select a number:';
+
+            commands.runCommand('docker node ls',
+                'List of Nodes:',
+                textEnd, null, menu);
+            menu.question('', (input) => {
+                swarm.command(input, this.showSub.bind(this), this.showMain.bind(this), arguments[0], menu);
+            });
+        }
+        else if (arguments[0] == 3) {
+            MenuOptions.title();
+            var textEnd = '1. ' + 'View All Tasks' + '\n' +
+                '2. ' + 'Inspect Node' + '\n' +
+                '3. ' + 'View Node Tasks' + '\n' +
+                '4. ' + 'SSH' + '\n' +
+                '0. Main Menu' + '\n' +
+                'Please select a number:';
+            commands.runCommand('docker node ls',
+                'List of Nodes:',
+                textEnd, null, menu);
+
+            menu.question('', (input) => {
+                //  input, backFunction, repeateFunction, arg
+                //  need to pass functions and argument for return/repeat
+                swarm.information(input, this.showSub.bind(this), this.showMain.bind(this), arguments[0], menu);
+            });
+        }
+        else if (arguments[0] == 4) {
+            open('http://localhost:8080');
+            returnFunction();
+        }
+
+        //  else if (arguments[0] == 8) {
+        //     
+        //  }
+        //  else if (arguments[0] == 9) {
+        //      
+        //  }
+        else returnFunction(); // if not a valid argument return to main menu
+    }
+}
+
+module.exports.menu = menu;
+module.exports = AppMenus;
+
+//  var ls = commands.returnCommand('docker swarm join-token worker');
+            //  
+            //  var returnText = '';
+            //  var lines;
+            //  
+            //  ls.stdout.on('data', (data) => {
+            //      returnText += data;
+            //  
+            //      lines = returnText.split('\n');
+            //  
+            //      for (var i = 0; i < lines.length; i++) {
+            //          console.log('length ' + i + ': ' + lines[i].length);
+            //      }
+            //  
+            //      console.log('length: ' + lines.length);
+            //  
+            //      console.log(returnText);
+            //  });
+            //  
+            //  ls.on('close', (code, signal) => {
+            //      console.log('lines[2]: ' + lines[2]);
+            //      commands.runCommand(lines[2], 'Adding Worker', '\nPress Any Key To Continue...', returnFunction, menu);
+            //  });
+            /*else if (arguments[0] == 1) {
             this.showMainText();
             //  menu = MenuOptions.refreshMenu(menu);
             menu.question('Please select a number: ', (input) => {
@@ -123,83 +212,3 @@ class AppMenus {
                 }
             });
         }*/
-        else if (arguments[0] == 1) {
-            MenuOptions.title();
-
-            var textEnd = '1. ' + 'Initialise Swarm' + '\n' +
-                '2. ' + 'Add Worker To Swarm' + '\n' +
-                '3. ' + 'Promote Worker to Manager' + '\n' +
-                '4. ' + 'Demote Manager to Worker' + '\n' +
-                '5. ' + 'Remove Node' + '\n' +
-                '6. ' + 'Remove Service' + '\n' +
-                '7. ' + 'Build Environment' + '\n' +
-                '8. ' + 'Nuke Environment' + '\n' +
-                '9. ' + 'Nuke Swarm' + '\n' +
-                '0. Main Menu' + '\n' +
-                'Please select a number:';
-
-            commands.runCommand('docker node ls',
-                'List of Nodes:',
-                textEnd, null, menu);
-            menu.question('', (input) => {
-                swarm.command(input, this.showSub.bind(this), this.showMain.bind(this), arguments[0], menu);
-            });
-        }
-        else if (arguments[0] == 2) {
-            MenuOptions.title();
-            var textEnd = '1. ' + 'View All Tasks' + '\n' +
-                '2. ' + 'Inspect Node' + '\n' +
-                '3. ' + 'View Node Tasks' + '\n' +
-                '4. ' + 'SSH' + '\n' +
-                '0. Main Menu' + '\n' +
-                'Please select a number:';
-            commands.runCommand('docker node ls',
-                'List of Nodes:',
-                textEnd, null, menu);
-
-            menu.question('', (input) => {
-                //  input, backFunction, repeateFunction, arg
-                //  need to pass functions and argument for return/repeat
-                swarm.information(input, this.showSub.bind(this), this.showMain.bind(this), arguments[0], menu);
-            });
-        }
-        else if (arguments[0] == 3) {
-            open('http://localhost:8080');
-            returnFunction();
-        }
-        //  else if (arguments[0] == 8) {
-        //     
-        //  }
-        //  else if (arguments[0] == 9) {
-        //      
-        //  }
-        else returnFunction(); // if not a valid argument return to main menu
-    }
-}
-
-module.exports.menu = menu;
-module.exports = AppMenus;
-
-//  var ls = commands.returnCommand('docker swarm join-token worker');
-            //  
-            //  var returnText = '';
-            //  var lines;
-            //  
-            //  ls.stdout.on('data', (data) => {
-            //      returnText += data;
-            //  
-            //      lines = returnText.split('\n');
-            //  
-            //      for (var i = 0; i < lines.length; i++) {
-            //          console.log('length ' + i + ': ' + lines[i].length);
-            //      }
-            //  
-            //      console.log('length: ' + lines.length);
-            //  
-            //      console.log(returnText);
-            //  });
-            //  
-            //  ls.on('close', (code, signal) => {
-            //      console.log('lines[2]: ' + lines[2]);
-            //      commands.runCommand(lines[2], 'Adding Worker', '\nPress Any Key To Continue...', returnFunction, menu);
-            //  });
