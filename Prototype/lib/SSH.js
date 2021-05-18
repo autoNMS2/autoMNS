@@ -1,7 +1,10 @@
 var Client = require('ssh2').Client;
 var conn = new Client();
 var i;
+var x = 0;
 var Data = new Array();
+var Prompts = new Array();
+Prompts.push()
 
 class SSSH {
   SSH(command, ipAddress, key, returnFunction, menu) {
@@ -10,7 +13,9 @@ class SSSH {
       //console.log(ipAddress[i]);
       conn.on('ready', () => {
         conn.exec(command, (err, stream) => {
-          if (err) throw err;
+          if (err) {
+            console.log(err)
+          };
           stream.on('close', (code, signal) => {
             conn.end();
           }).on('data', (data) => {
@@ -24,16 +29,17 @@ class SSSH {
         host: ipAddress[i],
         port: 22,
         username: 'ubuntu',
+        tryKeyboard: true,
         privateKey: require('fs').readFileSync(key)
       });
 
       function checkData(){
         if(Data.length !== ipAddress.length){
-          console.log('Please wait...')
-          setTimeout(checkData, 500);
+          console.log('Please wait...');
+          setTimeout(checkData, 1000);
         }
         else{
-          menu.question("Press any key to continue...", (input) => {
+          menu.question("Virtual machines successfully initialised.\nPress any key to continue...", (input) => {
             returnFunction();   // display return message and wait for any input then go to return function }               
           });
         }

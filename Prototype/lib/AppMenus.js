@@ -73,7 +73,12 @@ class AppMenus {
         else if (arguments[0] == 1) {
             //initialise virtual machines
             MenuOptions.title();
-            vms.Initialise(returnFunction, menu);
+            var textEnd = '1. Install Docker on Virtual Machines' + '\n' +
+                '2. Initialise Swarm on Virtual Machines' + '\n' +
+                'Please select a number:';
+                menu.question(textEnd, (input) => {
+                    vms.Initialise(returnFunction, menu, input);
+                });
         }
         else if (arguments[0] == 2) {
             MenuOptions.title();
