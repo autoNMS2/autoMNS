@@ -1,20 +1,20 @@
 var Client = require('ssh2').Client;
 var conn = new Client();
 var i;
+var Data = new Array();
 
 class SSSH {
-  SSH(command, ipAddress, key, returnFunction) {
+  SSH(command, ipAddress, key, returnFunction, menu) {
     for (i = 0; i < ipAddress.length; i++) {
       //console.log(command);
       //console.log(ipAddress[i]);
       conn.on('ready', () => {
-        console.log('Client :: ready');
         conn.exec(command, (err, stream) => {
           if (err) throw err;
           stream.on('close', (code, signal) => {
-            console.log('Stream :: close :: code: ' + code + ', signal: ' + signal);
             conn.end();
           }).on('data', (data) => {
+            Data.push(data);
             console.log('STDOUT: ' + data);
           }).stderr.on('data', (data) => {
             console.log('STDERR: ' + data);
@@ -26,33 +26,45 @@ class SSSH {
         username: 'ubuntu',
         privateKey: require('fs').readFileSync(key)
       });
-    }
-    if (returnFunction) {
-      // use question to wait for input before returning, this is wrapped in the close function so
-      // it will wait for the data to print before continuing
-      menu.question(returnMessage, (input) => {
+
+      function checkData(){
+        if(Data.length !== ipAddress.length){
+          console.log('Please wait...')
+          setTimeout(checkData, 500);
+        }
+        else{
+          menu.question("Press any key to continue...", (input) => {
+            returnFunction();   // display return message and wait for any input then go to return function }               
+          });
+        }
+      }
+      checkData();
+      /*if (returnFunction) {
+        menu.question("Press any key to continue...", (input) => {
           returnFunction();   // display return message and wait for any input then go to return function }               
-      });
-  }
-    else {
-      console.log('not working');
+        });
+      }*/
     }
   }
 }
 
+//  set your counter to 1
+
+
+
 module.exports = SSSH;
   /*recursiveSSHLoop(command, ipAddress, key) {
-    ipArray = ipAddress;
-      if (i == (ipArray[i] - 1)) {
-        this.SSH(command, ipAddress[i], key);
-      }
-      else {
-        this.SSH(command, ipAddress[i], key);
-        i++;
-        this.recursiveSSHLoop();
-      }
-    }
-    */
+ipArray = ipAddress;
+if (i == (ipArray[i] - 1)) {
+  this.SSH(command, ipAddress[i], key);
+}
+else {
+  this.SSH(command, ipAddress[i], key);
+  i++;
+  this.recursiveSSHLoop();
+}
+}
+*/
 // example output:
 // Client :: ready
 // STDOUT: Last login: Sun Jun 15 09:37:21 2014 from 192.168.100.100
