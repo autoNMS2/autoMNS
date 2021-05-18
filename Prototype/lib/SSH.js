@@ -3,7 +3,7 @@ var conn = new Client();
 var i;
 
 class SSSH {
-  SSH(command, ipAddress, key) {
+  SSH(command, ipAddress, key, returnFunction) {
     for (i = 0; i < ipAddress.length; i++) {
       //console.log(command);
       //console.log(ipAddress[i]);
@@ -26,6 +26,16 @@ class SSSH {
         username: 'ubuntu',
         privateKey: require('fs').readFileSync(key)
       });
+    }
+    if (returnFunction) {
+      // use question to wait for input before returning, this is wrapped in the close function so
+      // it will wait for the data to print before continuing
+      menu.question(returnMessage, (input) => {
+          returnFunction();   // display return message and wait for any input then go to return function }               
+      });
+  }
+    else {
+      console.log('not working');
     }
   }
 }
