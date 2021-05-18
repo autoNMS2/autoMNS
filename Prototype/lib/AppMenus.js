@@ -18,6 +18,9 @@ const MenuOptions = new menuOptions();
 //const database = new Database();
 //const name = new Name();
 
+
+const serviceName = 'TeaStore';
+
 var readline = require('readline');
 const menu = readline.createInterface({
     input: process.stdin,
@@ -44,6 +47,7 @@ class AppMenus {
             '2. Swarm Commands' + '\n' +
             '3. Swarm Information' + '\n' +
             '4. Open Application' + '\n' +
+            '5. ' + 'Run Services' + '\n' +
             '0. Exit Application' + '\n'
         );
     
@@ -114,6 +118,26 @@ class AppMenus {
         else if (arguments[0] == 4) {
             open('http://localhost:8080');
             returnFunction();
+        }
+        else if (arguments[0] == 5) {
+            MenuOptions.title();
+            var textEnd = '1. ' + 'Run Service Name' + '\n' +
+                '2. ' + 'Run Image' + '\n' +
+                '3. ' + '' + '\n' +
+                '4. ' + '' + '\n' +
+                '5. ' + '' + '\n' +
+                '6. ' + '' + '\n' +
+                '7. ' + '' + '\n' +
+                '8. ' + '' + '\n' +
+                '0. Main Menu' + '\n' +
+                'Please select a number:';
+            commands.runCommand('docker service ls',
+                'List of Services:',
+                textEnd, null, menu);
+
+            menu.question('', (input) => {
+                swarm.services(input, this.showSub.bind(this), this.showMain.bind(this), arguments[0], menu);
+            });
         }
 
         //  else if (arguments[0] == 8) {
