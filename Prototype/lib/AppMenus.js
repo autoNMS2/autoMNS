@@ -73,7 +73,7 @@ class AppMenus {
         else if (arguments[0] == 1) {
             //initialise virtual machines
             MenuOptions.title();
-            vms.Initialise();
+            vms.Initialise(returnFunction);
         }
         else if (arguments[0] == 2) {
             MenuOptions.title();
