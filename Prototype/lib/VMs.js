@@ -11,23 +11,26 @@ var i = 0;
 
 
 class VirtualMachine {
-    Initialise(returnFunction) {
+
+    Initialise() {
 
         AppMenus.menu.question('How many VMs would you like to initialise: ', (input) => {
             instances = input;
             AppMenus.menu.question('Enter the RSA key path of the VMs:\n', (input) => {
                 key = input;
-                this.recursiveIPLoop(returnFunction);
-
+                this.recursiveIPLoop();
             });
-
         });
     }
     recursiveIPLoop(returnFunction){
         AppMenus.menu.question('Enter the IP address of VM ' + (i + 1) + ': ', (input) => {
             ipAddress[i] = input; 
-            if (i == instances - 1){
-                sssh.SSH('whoami', ipAddress, key, returnFunction);
+            if (i == instances - 1) {
+
+                commands.runReturnCommand('docker swarm join-token worker',
+                    'Adding Worker', '\nPress Any Key To Continue...', backFunction, menu);
+
+                sssh.SSH('whoami', ipAddress, key);
             }
             else {
                 i++;

@@ -16,7 +16,6 @@ class Commands{
         var commandArray = command.split(' ');
         var command = commandArray[0];  // first substring is the command
         commandArray.shift();           // first substring removed, remaining substrings are options
-  
         
         var ls = cp.spawn(command, commandArray);   // run the command and options in console
 

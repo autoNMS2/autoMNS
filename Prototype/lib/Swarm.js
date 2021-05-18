@@ -114,6 +114,43 @@ class Swarm {
             default: repeateFunction(arg); break;
         }
     }
+
+
+    services(input, backFunction, repeateFunction, arg, menu) {
+        //  List Nodes
+        switch (input) {
+            case '1'://  Run a Service
+                menu.question('Enter a service name to run: ', (input) => {
+                    let comText = 'docker stack deploy --compose-file ' + __dirname + '\\Services\\' + input + '.yaml ' + serviceName;
+                    commands.runCommand(comText,
+                        'Adding Image (this may take some time...)', '\nPress Any Key To Continue...', backFunction, menu);
+                });
+                break;
+            case '2'://  Run Image
+                let comText = 'docker stack deploy --compose-file ' + __dirname + '\\Services\\image.yaml ' + serviceName;
+                commands.runCommand(comText,
+                    'Adding Image (this may take some time...)', '\nPress Any Key To Continue...', backFunction, menu);
+                break;
+            case '3':   //  List Node Tasks
+                menu.question('Select a node to view its tasks: ', (input) => {
+                    commands.runCommand('docker node ps ' + input,// + ' --format',
+                        'Viewing Node Tasks: ' + input,
+                        '\nPress Any Key To Continue...', backFunction, menu);
+                });
+                break;
+            case '4': sssh.SSH(); //  search specific service
+                //  commands.runCommand('docker service ps ' + serviceName,
+                //      'Showing All Tasks: ' + input,
+                //      '\nPress Any Key To Continue...', backFunction, menu); 
+                break;
+            case '5':
+                break;
+            case '6':
+                break;
+            case '0': backFunction(); break;
+            default: repeateFunction(arg); break;
+        }
+    }
 }
 
 module.exports = Swarm;

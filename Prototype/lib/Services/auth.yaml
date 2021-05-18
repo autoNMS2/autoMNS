@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  auth:
+    image: descartesresearch/teastore-auth
+    expose:
+      - "8080"
+    environment:
+      HOST_NAME: "auth"
+      REGISTRY_HOST: "registry"
