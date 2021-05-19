@@ -1,10 +1,8 @@
 var Client = require('ssh2').Client;
 var conn = new Client();
 var i;
-var x = 0;
 var Data = new Array();
-var Prompts = new Array();
-Prompts.push()
+var joinSwarmCommand;
 
 class SSSH {
   SSH(command, ipAddress, key, returnFunction, menu) {
@@ -20,7 +18,15 @@ class SSSH {
             conn.end();
           }).on('data', (data) => {
             Data.push(data);
-            console.log('STDOUT: ' + data);
+            console.log('Data: ' + Data[Data.length - 1]);
+            if (command == 'sudo docker swarm init'){
+              if (Data.length > 1){
+                joinSwarmCommand = Data[1];
+                joinSwarmCommand = joinSwarmCommand.toString().replace("To add a worker to this swarm, run the following command:","");
+                joinSwarmCommand.trim();
+                console.log('Final command: ' + joinSwarmCommand);
+              }
+            }
           }).stderr.on('data', (data) => {
             console.log('STDERR: ' + data);
           });

@@ -75,7 +75,8 @@ class AppMenus {
             MenuOptions.title();
             var textEnd = '1. Install Docker on Virtual Machines' + '\n' +
                 '2. Initialise Swarm on Virtual Machines' + '\n' +
-                'Please select a number:';
+                '3. Remove virtual machines from Swarm' + '\n' +
+                'Please select a number: ';
                 menu.question(textEnd, (input) => {
                     vms.Initialise(returnFunction, menu, input);
                 });
