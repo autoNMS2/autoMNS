@@ -7,29 +7,78 @@ const sssh = new SSSH();
 const VMs = require('./VMs');
 const vms = new VMs();
 const open = require('open');
+const menuOptions = require('./menuOptions');
+const MenuOptions = new menuOptions();
+var ipAddress = new Array();
+var key;
+var instances;
+var i = 0;
+var command;
+var Question;
+var input1;
 
 class MenuDisplay {   //  Change Class name to Options?
     //  input, backFunction, repeateFunction, arg
     //  need to pass functions and argument for return/repeat    
 
-    machines(input, backFunction, repeateFunction, arg, menu) {
-        switch (input) {
-            case '1':   //  Initialise Virtual Machines And Install Docker
-                vms.Initialise(repeateFunction, menu, '1');
+    machinesOne(input1, backFunction, repeateFunction, arg, menu) {
+        
+        switch (input1) {
+            case '1':
+                MenuOptions.title();
+                Question = 'How many Virtual Machines would you like to initialise: ';
+                menu.question(Question, (input) => {
+                    instances = input;
+                    menu.question('Enter the RSA key path of the VM(s):\n', (input) => {
+                        key = input;
+        
+                        this.recursiveIPLoop(backFunction, menu, repeateFunction, arg);
+                        
+                    });
+                });
 
                 break;
-            case '2':   //  Initialise Virtual Machines WITHOUT Installing Docker
-                vms.Initialise(repeateFunction, menu, '2');
-
-                break;
-            case '3':   //  Initialise Virtual Machines WITHOUT Installing Docker
-                vms.Initialise(repeateFunction, menu, '3');
-
+            case '2':  
+                console.log('this is the other one')
                 break;
             case '0': backFunction(); break;
             default: repeateFunction(arg); break;
         }
     }
+
+    
+    recursiveIPLoop(backFunction, menu, repeateFunction, arg){
+        menu.question('Enter the IP address of VM ' + (i + 1) + ': ', (input) => {
+            ipAddress[i] = input; 
+            if (i == instances - 1) {
+
+                //commands.runReturnCommand('docker swarm join-token worker',
+                //    'Adding Worker', '\nPress Any Key To Continue...', returnFunction, menu);
+                this.machinesTwo(ipAddress, key, backFunction, menu);
+                //sssh.SSH(command, ipAddress, key, returnFunction, menu);
+            }
+            else {
+                i++;
+                this.recursiveIPLoop(backFunction, menu, repeateFunction, arg);
+            }
+        });
+    }
+
+    machinesTwo(ipAddress, key, backFunction, menu) {
+
+                MenuOptions.title();
+                var textEnd = '1. ' + 'Install Docker on Virtual Machines' + '\n' +
+                    '2. ' + 'Initialise Swarm on Virtual Machines' + '\n' +
+                    '3. ' + 'Remove Virtual Machines from Swarm' + '\n' +
+                    '0. Main Menu' + '\n' +
+                    'Please select a number:';  
+                console.log(textEnd);
+
+                menu.question('', (input) => {
+                    vms.Initialise(backFunction, menu, input, ipAddress, key)
+                });
+        }
+    
 
     application(input, backFunction, repeateFunction, arg, menu) {
         switch (input) {

@@ -4,8 +4,6 @@ const sssh = new SSSH();
 const commands = new Commands();
 const serviceName = 'TeaStore';
 const MainMenu = require('./MainMenu');
-var ipAddress = new Array();
-var key;
 var instances;
 var i = 0;
 var command;
@@ -14,7 +12,7 @@ var Question;
 
 class VirtualMachine {
 
-    Initialise(returnFunction, menu, input) {
+    Initialise(returnFunction, menu, input, ipAddress, key) {
         switch (input){
             //case '1': command = 'sudo apt-get update\nsudo apt-get install docker-ce docker-ce-cli containerd.io\nsudo docker run hello-world'; break;
             case '1': command = 'sudo apt-get update -y\n sudo apt-get install -y\
@@ -25,41 +23,14 @@ class VirtualMachine {
                 lsb-release -y\n sudo apt-get install docker.io -y\nsudo docker -v';
                 Question = 'How many VMs would you like to install Docker on: ';
                 break;
-            case '2': command = 'sudo docker swarm init --advertise-addr'+ipAddress[0]; 
+            case '2': command = 'sudo docker swarm init --advertise-addr ' + ipAddress[0]; 
                 Question = 'How many VMs would you like to add to the Swarm: ';
                 break;
             case '3': command = 'sudo docker swarm leave --force';
                 Question = 'How many VMs would you like to remove from the Swarm: ';
                 break;
         }
-
-        MainMenu.menu.question(Question, (input) => {
-            instances = input;
-            MainMenu.menu.question('Enter the RSA key path of the VM(s):\n', (input) => {
-                key = input;
-
-                this.recursiveIPLoop(returnFunction, menu);
-                
-            });
-        });
-    }
-
-
-    recursiveIPLoop(returnFunction, menu){
-        MainMenu.menu.question('Enter the IP address of VM ' + (i + 1) + ': ', (input) => {
-            ipAddress[i] = input; 
-            if (i == instances - 1) {
-
-                //commands.runReturnCommand('docker swarm join-token worker',
-                //    'Adding Worker', '\nPress Any Key To Continue...', returnFunction, menu);
-                
-                sssh.SSH(command, ipAddress, key, returnFunction, menu);
-            }
-            else {
-                i++;
-                this.recursiveIPLoop(returnFunction, menu);
-            }
-        });
+        sssh.SSH(command, ipAddress, key, returnFunction, menu);
     }
 }
 

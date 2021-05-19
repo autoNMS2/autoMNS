@@ -10,7 +10,7 @@ var SwarmArray = new Array();
 class SSSH {
   SSH(command, ipAddress, key, returnFunction, menu) {
     var varLength = ipAddress.length;
-    if (command == 'sudo docker swarm init' && ipAddress.length > 1){
+    if (command == 'sudo docker swarm init --advertise-addr ' + ipAddress[0] && ipAddress.length > 1){
        for (let x = 1; x < varLength ; x++){
          SwarmArray[x - 1] = ipAddress[x]; 
       }
@@ -31,7 +31,7 @@ class SSSH {
           }).on('data', (data) => {
             Data.push(data);
             console.log('Data: ' + Data[Data.length - 1]);
-            if (command == 'sudo docker swarm init'){
+            if (command == 'sudo docker swarm init --advertise-addr ' + ipAddress[0]){
               if (Data.length > 1){
                 joinSwarmCommand = Data[1];
                 joinSwarmCommand = joinSwarmCommand.toString().replace("To add a worker to this swarm, run the following command:","");

@@ -46,14 +46,13 @@ class MainMenu {
         }
         else if (arguments[0] == 1) {
             MenuOptions.title();
-            var textEnd = '1. ' + 'Install Docker on Virtual Machines' + '\n' +
-                '2. ' + 'Initialise Swarm on Virtual Machines' + '\n' +
-                '3. ' + 'Remove virtual machines from Swarm' + '\n' +
+            var textEnd = '1. ' + 'Add new Virtual Machines' + '\n' +
+                '2. ' + 'Use Existing Virtual Machines' + '\n' +
                 '0. Main Menu' + '\n' +
                 'Please select a number:';
             console.log(textEnd);
             menu.question('', (input) => {
-                display.machines(input, this.showSub.bind(this), this.showMain.bind(this), arguments[0], menu);
+                display.machinesOne(input, this.showSub.bind(this), this.showMain.bind(this), arguments[0], menu);
             });
         }
         else if (arguments[0] == 2) {
