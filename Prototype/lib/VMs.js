@@ -1,14 +1,7 @@
-const Commands = require('./Commands');
 const SSSH = require('./SSH');
 const sssh = new SSSH();
-const commands = new Commands();
-const serviceName = 'TeaStore';
-const MainMenu = require('./MainMenu');
-var instances;
-var i = 0;
 var command;
 var Question;
-
 
 class VirtualMachine {
 
@@ -21,13 +14,13 @@ class VirtualMachine {
                 curl -y\
                 gnupg -y\
                 lsb-release -y\n sudo apt-get install docker.io -y\nsudo docker -v';
-                Question = 'How many VMs would you like to install Docker on: ';
+                //Question = 'How many VMs would you like to install Docker on: ';
                 break;
             case '2': command = 'sudo docker swarm init --advertise-addr ' + ipAddress[0]; 
-                Question = 'How many VMs would you like to add to the Swarm: ';
+                //Question = 'How many VMs would you like to add to the Swarm: ';
                 break;
             case '3': command = 'sudo docker swarm leave --force';
-                Question = 'How many VMs would you like to remove from the Swarm: ';
+                //Question = 'How many VMs would you like to remove from the Swarm: ';
                 break;
         }
         sssh.SSH(command, ipAddress, key, returnFunction, menu);
