@@ -22,6 +22,10 @@ class MenuDisplay {   //  Change Class name to Options?
                 vms.Initialise(repeateFunction, menu, '2');
 
                 break;
+            case '3':   //  Initialise Virtual Machines WITHOUT Installing Docker
+                vms.Initialise(repeateFunction, menu, '3');
+
+                break;
             case '0': backFunction(); break;
             default: repeateFunction(arg); break;
         }

@@ -6,7 +6,8 @@ var joinSwarmCommand;
 
 class SwarmSSSH {
   SSH(command, ipAddress, key, returnFunction, menu) {
-
+    console.log('you made it to here');
+    console.log(ipAddress);
     for (i = 0; i < ipAddress.length; i++) {
       //console.log(command);
       //console.log(ipAddress[i]);
