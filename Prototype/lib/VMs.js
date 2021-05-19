@@ -33,9 +33,9 @@ class VirtualMachine {
                 break;
         }
 
-        AppMenus.menu.question(Question, (input) => {
+        MainMenu.menu.question(Question, (input) => {
             instances = input;
-            AppMenus.menu.question('Enter the RSA key path of the VM(s):\n', (input) => {
+            MainMenu.menu.question('Enter the RSA key path of the VM(s):\n', (input) => {
                 key = input;
                 if (command == 'sudo docker swarm init' && instances > 1){
                     
@@ -55,7 +55,7 @@ class VirtualMachine {
 
                 //commands.runReturnCommand('docker swarm join-token worker',
                 //    'Adding Worker', '\nPress Any Key To Continue...', returnFunction, menu);
-
+                
                 sssh.SSH(command, ipAddress, key, returnFunction, menu);
             }
             else {

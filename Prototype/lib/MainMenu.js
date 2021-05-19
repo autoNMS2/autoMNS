@@ -48,6 +48,7 @@ class MainMenu {
             MenuOptions.title();
             var textEnd = '1. ' + 'Install Docker on Virtual Machines' + '\n' +
                 '2. ' + 'Initialise Swarm on Virtual Machines' + '\n' +
+                '3. ' + 'Remove virtual machines from Swarm' + '\n' +
                 '0. Main Menu' + '\n' +
                 'Please select a number:';
             console.log(textEnd);
