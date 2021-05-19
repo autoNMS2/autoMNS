@@ -1,6 +1,6 @@
-const AppMenus = require('./lib/AppMenus');
+const MainMenu = require('./lib/MainMenu');
 
-const appMenus = new AppMenus();
+const mainMenu = new MainMenu();
 // do some initialisation, make sure docker daemon is open etc
-appMenus.showSub();
+mainMenu.showSub();
 

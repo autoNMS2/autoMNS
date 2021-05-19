@@ -3,7 +3,7 @@ const SSSH = require('./SSH');
 const sssh = new SSSH();
 const commands = new Commands();
 const serviceName = 'TeaStore';
-const AppMenus = require('./AppMenus');
+const MainMenu = require('./MainMenu');
 var ipAddress = new Array();
 var key;
 var instances;
@@ -25,16 +25,16 @@ class VirtualMachine {
             case '2': command = ''; break;
         }
 
-        AppMenus.menu.question('How many VMs would you like to initialise: ', (input) => {
+        MainMenu.menu.question('How many VMs would you like to initialise: ', (input) => {
             instances = input;
-            AppMenus.menu.question('Enter the RSA key path of the VMs:\n', (input) => {
+            MainMenu.menu.question('Enter the RSA key path of the VMs:\n', (input) => {
                 key = input;
                 this.recursiveIPLoop(returnFunction, menu);
             });
         });
     }
     recursiveIPLoop(returnFunction, menu){
-        AppMenus.menu.question('Enter the IP address of VM ' + (i + 1) + ': ', (input) => {
+        MainMenu.menu.question('Enter the IP address of VM ' + (i + 1) + ': ', (input) => {
             ipAddress[i] = input; 
             if (i == instances - 1) {
 
