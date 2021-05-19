@@ -37,10 +37,17 @@ class VirtualMachine {
             instances = input;
             AppMenus.menu.question('Enter the RSA key path of the VM(s):\n', (input) => {
                 key = input;
+                if (command == 'sudo docker swarm init' && instances > 1){
+                    
+                }
+                else {
                 this.recursiveIPLoop(returnFunction, menu);
+                }
             });
         });
     }
+
+
     recursiveIPLoop(returnFunction, menu){
         MainMenu.menu.question('Enter the IP address of VM ' + (i + 1) + ': ', (input) => {
             ipAddress[i] = input; 

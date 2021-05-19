@@ -25,6 +25,7 @@ class SSSH {
                 joinSwarmCommand = joinSwarmCommand.toString().replace("To add a worker to this swarm, run the following command:","");
                 joinSwarmCommand.trim();
                 console.log('Final command: ' + joinSwarmCommand);
+                
               }
             }
           }).stderr.on('data', (data) => {
