@@ -3,7 +3,7 @@ const SSSH = require('./SSH');
 const sssh = new SSSH();
 const commands = new Commands();
 const serviceName = 'TeaStore';
-const AppMenus = require('./AppMenus');
+const MainMenu = require('./MainMenu');
 var ipAddress = new Array();
 var key;
 var instances;
@@ -42,7 +42,7 @@ class VirtualMachine {
         });
     }
     recursiveIPLoop(returnFunction, menu){
-        AppMenus.menu.question('Enter the IP address of VM ' + (i + 1) + ': ', (input) => {
+        MainMenu.menu.question('Enter the IP address of VM ' + (i + 1) + ': ', (input) => {
             ipAddress[i] = input; 
             if (i == instances - 1) {
 
