@@ -19,8 +19,8 @@ class SSSH {
     }
     for (i = 0; i < ipAddress.length; i++) {
       var Data = new Array();
-      console.log(command);
-      console.log(ipAddress[i]);
+      //    console.log(command);
+      //    console.log(ipAddress[i]);
       conn.on('ready', () => {
         conn.exec(command, (err, stream) => {
           if (err) {

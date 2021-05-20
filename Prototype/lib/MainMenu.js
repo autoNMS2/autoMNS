@@ -18,10 +18,10 @@ class MainMenu {
     showSub() {
         MenuOptions.title();
         console.log('Select the action you wish to take:' + '\n' +
-            '1. Virtual Machines' + '\n' +   //Initialise Virtual Machines
+            '1. Initialise Virtual Machines' + '\n' +   //Initialise Virtual Machines
             '2. Docker Swarm Management' + '\n' +
             '3. Service Options' + '\n' +
-            '4. Application Menu' + '\n' +
+            '4. Open Application' + '\n' +
             '0. Exit' + '\n'
         );
     
@@ -45,19 +45,21 @@ class MainMenu {
             });
         }
         else if (arguments[0] == 1) {
-            MenuOptions.title();
-            var textEnd = '1. ' + 'Add new Virtual Machines' + '\n' +
-                //'2. ' + 'Use Existing Virtual Machines' + '\n' +
-                '0. Main Menu' + '\n' +
-                'Please select a number:';
-            console.log(textEnd);
-            menu.question('', (input) => {
-                display.machinesOne(input, this.showSub.bind(this), this.showMain.bind(this), arguments[0], menu);
-            });
+            //  MenuOptions.title();
+            //  var textEnd = 'Virtual Machines\n' +
+            //      '1. ' + 'Add new Virtual Machines' + '\n' +
+            //      //'2. ' + 'Use Existing Virtual Machines' + '\n' +
+            //      '0. Main Menu' + '\n' +
+            //      'Please select a number:';
+            //  console.log(textEnd);
+            //menu.question('', (input) => {
+                display.machinesOne('1', this.showSub.bind(this), this.showMain.bind(this), arguments[0], menu);
+            //});
         }
         else if (arguments[0] == 2) {
             MenuOptions.title();
-            var textEnd = '1. ' + 'Initialise Swarm' + '\n' +
+            var textEnd = 'Docker Swarm Management\n' +
+                '1. ' + 'Initialise Swarm' + '\n' +
                 '2. ' + 'Add Worker To Swarm' + '\n' +
                 '3. ' + 'Promote Worker to Manager' + '\n' +
                 '4. ' + 'Demote Manager to Worker' + '\n' +
@@ -68,16 +70,19 @@ class MainMenu {
                 '0. Main Menu' + '\n' +
                 'Please select a number:';
 
-            commands.runCommand('docker node ls',
-                'List of Nodes:',
-                textEnd, null, menu);
+            //  commands.runCommand('docker node ls',
+            //      'List of Nodes:',
+            //      textEnd, null, menu);
+            console.log(textEnd);
+
             menu.question('', (input) => {
                 display.command(input, this.showSub.bind(this), this.showMain.bind(this), arguments[0], menu);
             });
         }
         else if (arguments[0] == 3) {
             MenuOptions.title();
-            var textEnd = '1. ' + 'Create Service' + '\n' +
+            var textEnd = 'Service Options\n' +
+                '1. ' + 'Create Service' + '\n' +
                 '2. ' + 'Scale Service' + '\n' +     //  duplicate
                 '3. ' + 'Inspect Service' + '\n' +
                 '4. ' + 'Remove Service' + '\n' +
@@ -90,26 +95,27 @@ class MainMenu {
                 '0. Main Menu' + '\n' +
                 'Please select a number:';
 
-            commands.runCommand('docker service ls',
-                'List of Services:',
-                textEnd, null, menu);
+            //  commands.runCommand('docker service ls',
+            //      'List of Services:',
+            //      textEnd, null, menu);
+            console.log(textEnd);
 
             menu.question('', (input) => {
                 display.services(input, this.showSub.bind(this), this.showMain.bind(this), arguments[0], menu);
             });
         }
         else if (arguments[0] == 4) {   //  Application Menu
-            MenuOptions.title();
-            var textEnd = '1. ' + 'Open Application' + '\n' +
-                '2. ' + '' + '\n' +
-                '0. Main Menu' + '\n' +
-                'Please select a number:';
-
-            console.log(textEnd);
-
-            menu.question('', (input) => {
-                display.application(input, this.showSub.bind(this), this.showMain.bind(this), arguments[0], menu);   
-            });         
+            //  MenuOptions.title();
+            //  var textEnd = '1. ' + 'Open Application' + '\n' +
+            //      '2. ' + '' + '\n' +
+            //      '0. Main Menu' + '\n' +
+            //      'Please select a number:';
+            //  
+            //  console.log(textEnd);
+            //  
+            //  menu.question('', (input) => {
+                display.application('1', this.showSub.bind(this), this.showMain.bind(this), arguments[0], menu);   
+            //  });         
         }
         else returnFunction(); // if not a valid argument return to main menu
     }

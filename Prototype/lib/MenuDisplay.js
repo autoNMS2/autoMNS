@@ -91,8 +91,8 @@ class MenuDisplay {   //  Change Class name to Options?
         textEnd += '1. ' + 'Install Docker on Virtual Machines' + '\n' +
             '2. ' + 'Initialise Swarm on Virtual Machines' + '\n' +
             '3. ' + 'Remove Virtual Machines from Swarm' + '\n' +
-            '4. ' + 'Test' + '\n' +
-            '5. ' + 'Install repository on Virtual Machines' + '\n' +
+            '4. ' + 'Install repository on Virtual Machines' + '\n' +
+            '5. ' + 'Test' + '\n' +
             '0. Main Menu' + '\n' +
             'Please select a number:';
         console.log(textEnd);

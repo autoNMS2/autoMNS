@@ -27,10 +27,12 @@ class VirtualMachine {
                 sssh.SSH(command, ipAddress, key, returnFunction, menu);
                 //Question = 'How many VMs would you like to remove from the Swarm: ';
                 break;
-            case '4': command = 'sudo docker -v'; 
+            case '4': command = 'sudo apt-get install git -y\nsudo git clone https://github.com/autoNMS2/autoMNS.git';
                 sssh.SSH(command, ipAddress, key, returnFunction, menu);
                 break;
-            case '5': command = 'sudo apt-get install git -y\nsudo git clone https://github.com/autoNMS2/autoMNS.git'; 
+            case '5':
+                //  command = 'sudo docker -v'; 
+                command = 'sudo docker node ls';
                 sssh.SSH(command, ipAddress, key, returnFunction, menu);
                 break;
             case '0': returnFunction(); break;

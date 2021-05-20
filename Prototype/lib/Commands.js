@@ -9,7 +9,7 @@ class Commands{
         MenuOptions.title();
         if (titleMessage) console.log(titleMessage);
     
-        console.log('Command: ' + command);
+        //  console.log('Command: ' + command);
         if (returnMessage);
         else returnMessage = 'Press Any Key to Continue...';
    
