@@ -102,11 +102,12 @@ class MenuDisplay {   //  Change Class name to Options?
         });
     }
 
-
     application(input, backFunction, repeateFunction, arg, menu) {
         switch (input) {
             case '1':
-                open('http://localhost:8080');
+                menu.question('Enter the IP address of the Swarm leader : ', (input) => {
+                    open('http://' + input + ':8080');
+                });
                 repeateFunction();
                 break;
             case '2':
