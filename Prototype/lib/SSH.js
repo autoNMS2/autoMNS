@@ -30,7 +30,7 @@ class SSSH {
             conn.end();
           }).on('data', (data) => {
             Data.push(data);
-            console.log('Data: ' + Data);
+            console.log('Data: ' + data);
             if (command == 'sudo docker swarm init --advertise-addr ' + ipAddress[0]) {
               if (Data.length > 1) {
                 joinSwarmCommand = Data[1];

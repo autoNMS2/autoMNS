@@ -24,7 +24,7 @@ class MenuDisplay {   //  Change Class name to Options?
     //  need to pass functions and argument for return/repeat    
 
     machinesOne(input1, backFunction, repeateFunction, arg, menu) {
-        
+
         switch (input1) {
             case '1':
                 MenuOptions.title();
@@ -35,7 +35,7 @@ class MenuDisplay {   //  Change Class name to Options?
                         key = input;
                         existingKey = key;
                         this.recursiveIPLoop(backFunction, menu, repeateFunction, arg);
-                        
+
                     });
                 });
                 break;
@@ -54,16 +54,16 @@ class MenuDisplay {   //  Change Class name to Options?
         }
     }
 
-    
-    recursiveIPLoop(backFunction, menu, repeateFunction, arg){
+
+    recursiveIPLoop(backFunction, menu, repeateFunction, arg) {
         menu.question('Enter the IP address of VM ' + (i + 1) + ': ', (input) => {
             ipAddress[i] = input;
-            if (existingIpAddress.includes(input)){
+            if (existingIpAddress.includes(input)) {
                 console.log("Virtual Machine already initialised")
             }
             else {
-            existingIpAddress[i] = input;
-            } 
+                existingIpAddress[i] = input;
+            }
             if (i == instances - 1) {
 
                 //commands.runReturnCommand('docker swarm join-token worker',
@@ -79,29 +79,29 @@ class MenuDisplay {   //  Change Class name to Options?
     }
 
     machinesTwo(ipAddress, key, backFunction, menu) {
-                var textEnd = "";
-                MenuOptions.title();
-                if (existingIpAddress[0] != null && existingKey != null){
-                    textEnd += 'Existing Virtual Machine IPs: ' + '\n';
-                    for (let x = 0; x < existingIpAddress.length; x++){
-                        textEnd += existingIpAddress[x] + '\n';
-                    }
-                    textEnd += '\n';
-                }
-                textEnd += '1. ' + 'Install Docker on Virtual Machines' + '\n' +
-                    '2. ' + 'Initialise Swarm on Virtual Machines' + '\n' +
-                    '3. ' + 'Remove Virtual Machines from Swarm' + '\n' +
-                    '4. ' + 'Test' + '\n' +
-                    '5. ' + 'Install repository on Virtual Machines' + '\n' +
-                    '0. Main Menu' + '\n' +
-                    'Please select a number:';  
-                console.log(textEnd);
-
-                menu.question('', (input) => {
-                    vms.Initialise(backFunction, menu, input, ipAddress, key)
-                });
+        var textEnd = "";
+        MenuOptions.title();
+        if (existingIpAddress[0] != null && existingKey != null) {
+            textEnd += 'Existing Virtual Machine IPs: ' + '\n';
+            for (let x = 0; x < existingIpAddress.length; x++) {
+                textEnd += existingIpAddress[x] + '\n';
+            }
+            textEnd += '\n';
         }
-    
+        textEnd += '1. ' + 'Install Docker on Virtual Machines' + '\n' +
+            '2. ' + 'Initialise Swarm on Virtual Machines' + '\n' +
+            '3. ' + 'Remove Virtual Machines from Swarm' + '\n' +
+            '4. ' + 'Test' + '\n' +
+            '5. ' + 'Install repository on Virtual Machines' + '\n' +
+            '0. Main Menu' + '\n' +
+            'Please select a number:';
+        console.log(textEnd);
+
+        menu.question('', (input) => {
+            vms.Initialise(backFunction, menu, input, ipAddress, key)
+        });
+    }
+
 
     application(input, backFunction, repeateFunction, arg, menu) {
         switch (input) {
@@ -109,7 +109,7 @@ class MenuDisplay {   //  Change Class name to Options?
                 open('http://localhost:8080');
                 repeateFunction();
                 break;
-            case '2':  
+            case '2':
                 break;
             case '0': backFunction(); break;
             default: repeateFunction(arg); break;
@@ -131,14 +131,14 @@ class MenuDisplay {   //  Change Class name to Options?
                     commands.runCommand('docker node promote ' + input,  // add -f
                         'Promoting Node: ' + input,
                         '\nPress Any Key To Continue...', backFunction, menu);
-                }); 
+                });
                 break;
             case '4':   // Demote
                 menu.question('Select a node to demote: ', (input) => {
                     commands.runCommand('docker node demote ' + input,  // add -f
                         'Demoting Node: ' + input,
                         '\nPress Any Key To Continue...', backFunction, menu);
-                }); 
+                });
                 break;
             case '5':   //  Remove Node
                 menu.question('Select a node to remove: ', (input) => {
@@ -152,14 +152,14 @@ class MenuDisplay {   //  Change Class name to Options?
                     commands.runCommand('docker node inspect ' + input + ' --pretty',
                         'Inspecting Node: ' + input,
                         '\nPress Any Key To Continue...', backFunction, menu);
-                });  
+                });
                 break;
             case '7':   //  View Node Tasks
                 menu.question('Select a node to view its tasks: ', (input) => {
-                commands.runCommand('docker node ps ' + input,// + ' --format',
-                    'Viewing Node Tasks: ' + input,
-                    '\nPress Any Key To Continue...', backFunction, menu);
-            });
+                    commands.runCommand('docker node ps ' + input,// + ' --format',
+                        'Viewing Node Tasks: ' + input,
+                        '\nPress Any Key To Continue...', backFunction, menu);
+                });
                 break;
             case '8': //  Nuke Swarm
                 //  leave 
@@ -178,7 +178,7 @@ class MenuDisplay {   //  Change Class name to Options?
         //autoMNS/Prototype/lib/Services
         switch (input) {
             case '1'://  Run a Service
-            MenuOptions.title();
+                MenuOptions.title();
                 menu.question('Enter the number of a service to run: ' + '\n' +
                     '1. All ' + '\n' +
                     '2. Auth ' + '\n' +
@@ -188,84 +188,238 @@ class MenuDisplay {   //  Change Class name to Options?
                     '6. Recommender ' + '\n' +
                     '7. Registry ' + '\n' +
                     '8. Web UI ' + '\n', (input) => {
-                    var choice;
-                    switch (input){
-                        case '1': 
-                            choice = "all";
-                        break;
-                        case '2': 
-                            choice = "auth";
-                        break;
-                        case '3': 
-                            choice = "db";
-                        break;
-                        case '4': 
-                            choice = "image";
-                        break;
-                        case '5': 
-                            choice = "persistence";
-                        break;
-                        case '6': 
-                            choice = "recommender";
-                        break;
-                        case '7': 
-                            choice = "registry";
-                        break;
-                        case '8': 
-                            choice = "webui";
-                        break;
-                    }
-                    let comText = 'sudo docker stack deploy --compose-file ' + 'autoMNS/Prototype/lib/Services/' + choice + '.yaml ' + serviceName;
-                    this.servicesSSH(comText, backFunction, menu);
-                    //commands.runCommand(comText,
-                    //    'Adding Image (this may take some time...)', '\nPress Any Key To Continue...', backFunction, menu);
+                        var choice;
+                        switch (input) {
+                            case '1':
+                                choice = "all";
+                                break;
+                            case '2':
+                                choice = "auth";
+                                break;
+                            case '3':
+                                choice = "db";
+                                break;
+                            case '4':
+                                choice = "image";
+                                break;
+                            case '5':
+                                choice = "persistence";
+                                break;
+                            case '6':
+                                choice = "recommender";
+                                break;
+                            case '7':
+                                choice = "registry";
+                                break;
+                            case '8':
+                                choice = "webui";
+                                break;
+                        }
+                        let comText = 'sudo docker stack deploy --compose-file ' + 'autoMNS/Prototype/lib/Services/' + choice + '.yaml ' + serviceName;
+                        this.servicesSSH(comText, backFunction, menu);
+                        //commands.runCommand(comText,
+                        //    'Adding Image (this may take some time...)', '\nPress Any Key To Continue...', backFunction, menu);
 
-                });
+                    });
                 break;
             case '2':   //  Scale Service
-            MenuOptions.title();
+                MenuOptions.title();
                 menu.question('Enter the number of a service to Scale: ' + '\n' +
-                '1. Auth ' + '\n' +
-                '2. Database ' + '\n' +
-                '3. Image ' + '\n' +
-                '4. Persistence ' + '\n' +
-                '5. Recommender ' + '\n' +
-                '6. Registry ' + '\n' +
-                '7. Web UI ' + '\n', (input) => {
-                    var choice;
-                    switch (input){
-                        case '1': 
-                            choice = "TeaStore_auth";
-                        break;
-                        case '2': 
-                            choice = "TeaStore_db";
-                        break;
-                        case '3': 
-                            choice = "TeaStore_image";
-                        break;
-                        case '4': 
-                            choice = "TeaStore_persistence";
-                        break;
-                        case '5': 
-                            choice = "TeaStore_recommender";
-                        break;
-                        case '6': 
-                            choice = "TeaStore_registry";
-                        break;
-                        case '7': 
-                            choice = "TeaStore_webui";
-                        break;
-                    }
-                    menu.question('Enter the number of replicas of ' + choice + ' you want to run: ', (number) => {
-                        //serviceName
-                        let comText = 'sudo docker service scale ' + choice + '=' + number;
-                        this.servicesSSH(comText, backFunction, menu);
+                    '1. Auth ' + '\n' +
+                    '2. Database ' + '\n' +
+                    '3. Image ' + '\n' +
+                    '4. Persistence ' + '\n' +
+                    '5. Recommender ' + '\n' +
+                    '6. Registry ' + '\n' +
+                    '7. Web UI ' + '\n', (input) => {
+                        var choice;
+                        switch (input) {
+                            case '1':
+                                choice = "TeaStore_auth";
+                                break;
+                            case '2':
+                                choice = "TeaStore_db";
+                                break;
+                            case '3':
+                                choice = "TeaStore_image";
+                                break;
+                            case '4':
+                                choice = "TeaStore_persistence";
+                                break;
+                            case '5':
+                                choice = "TeaStore_recommender";
+                                break;
+                            case '6':
+                                choice = "TeaStore_registry";
+                                break;
+                            case '7':
+                                choice = "TeaStore_webui";
+                                break;
+                        }
+                        menu.question('Enter the number of replicas of ' + choice + ' you want to run: ', (number) => {
+                            //serviceName
+                            let comText = 'sudo docker service scale ' + choice + '=' + number;
+                            this.servicesSSH(comText, backFunction, menu);
+                        });
                     });
-                });
                 break;
             case '3':   //  Inspect Service
-            MenuOptions.title();
+                MenuOptions.title();
                 menu.question('Enter the number of a service to inspect: ' + '\n' +
+                    '1. Auth ' + '\n' +
+                    '2. Database ' + '\n' +
+                    '3. Image ' + '\n' +
+                    '4. Persistence ' + '\n' +
+                    '5. Recommender ' + '\n' +
+                    '6. Registry ' + '\n' +
+                    '7. Web UI ' + '\n', (input) => {
+                        var choice;
+                        switch (input) {
+                            case '1':
+                                choice = "TeaStore_auth";
+                                break;
+                            case '2':
+                                choice = "TeaStore_db";
+                                break;
+                            case '3':
+                                choice = "TeaStore_image";
+                                break;
+                            case '4':
+                                choice = "TeaStore_persistence";
+                                break;
+                            case '5':
+                                choice = "TeaStore_recommender";
+                                break;
+                            case '6':
+                                choice = "TeaStore_registry";
+                                break;
+                            case '7':
+                                choice = "TeaStore_webui";
+                                break;
+                        }
+                        let comText = 'sudo docker service inspect ' + choice + ' --pretty'
+                        this.servicesSSH(comText, backFunction, menu);
+                    });
+                break;
+            case '4':   //  Remove Service
+                MenuOptions.title();
+                menu.question('Enter the number of a service to remove: ' + '\n' +
+                    '1. Auth ' + '\n' +
+                    '2. Database ' + '\n' +
+                    '3. Image ' + '\n' +
+                    '4. Persistence ' + '\n' +
+                    '5. Recommender ' + '\n' +
+                    '6. Registry ' + '\n' +
+                    '7. Web UI ' + '\n', (input) => {
+                        var choice;
+                        switch (input) {
+                            case '1':
+                                choice = "TeaStore_auth";
+                                break;
+                            case '2':
+                                choice = "TeaStore_db";
+                                break;
+                            case '3':
+                                choice = "TeaStore_image";
+                                break;
+                            case '4':
+                                choice = "TeaStore_persistence";
+                                break;
+                            case '5':
+                                choice = "TeaStore_recommender";
+                                break;
+                            case '6':
+                                choice = "TeaStore_registry";
+                                break;
+                            case '7':
+                                choice = "TeaStore_webui";
+                                break;
+                        }
+                        let comText = 'sudo docker service rm ' + choice;
+                        this.servicesSSH(comText, backFunction, menu);
+                    });
+                break;
+            case '5':   //  Get Logs Service    (Make this print to file)
+                MenuOptions.title();
+                menu.question('Enter the number of a service to get logs: ' + '\n' +
+                    '1. Auth ' + '\n' +
+                    '2. Database ' + '\n' +
+                    '3. Image ' + '\n' +
+                    '4. Persistence ' + '\n' +
+                    '5. Recommender ' + '\n' +
+                    '6. Registry ' + '\n' +
+                    '7. Web UI ' + '\n', (input) => {
+                        var choice;
+                        switch (input) {
+                            case '1':
+                                choice = "TeaStore_auth";
+                                break;
+                            case '2':
+                                choice = "TeaStore_db";
+                                break;
+                            case '3':
+                                choice = "TeaStore_image";
+                                break;
+                            case '4':
+                                choice = "TeaStore_persistence";
+                                break;
+                            case '5':
+                                choice = "TeaStore_recommender";
+                                break;
+                            case '6':
+                                choice = "TeaStore_registry";
+                                break;
+                            case '7':
+                                choice = "TeaStore_webui";
+                                break;
+                        }
+                        let comText = 'sudo docker service logs ' + choice;
+                        this.servicesSSH(comText, backFunction, menu);
+                        //  (If this didnt return an error the command was successful)
+                    });
+                break;
+            case '6':   //  List Service Tasks
+            MenuOptions.title();
+                menu.question('Enter the number of a service to see tasks: ' + '\n' +
+                    '1. Auth ' + '\n' +
+                    '2. Database ' + '\n' +
+                    '3. Image ' + '\n' +
+                    '4. Persistence ' + '\n' +
+                    '5. Recommender ' + '\n' +
+                    '6. Registry ' + '\n' +
+                    '7. Web UI ' + '\n', (input) => {
+                        var choice;
+                        switch (input) {
+                            case '1':
+                                choice = "TeaStore_auth";
+                                break;
+                            case '2':
+                                choice = "TeaStore_db";
+                                break;
+                            case '3':
+                                choice = "TeaStore_image";
+                                break;
+                            case '4':
+                                choice = "TeaStore_persistence";
+                                break;
+                            case '5':
+                                choice = "TeaStore_recommender";
+                                break;
+                            case '6':
+                                choice = "TeaStore_registry";
+                                break;
+                            case '7':
+                                choice = "TeaStore_webui";
+                                break;
+                        }
+                        let comText = 'sudo docker service ps ' + choice + '--format';
+                        this.servicesSSH(comText, backFunction, menu);
+                        //  (If this didnt return an error the command was successful)
+                    });
+                break;
+            case '7':   //  Rollback Service
+            MenuOptions.title();
+                menu.question('Enter the number of a service to see Rollback: ' + '\n' +
                 '1. Auth ' + '\n' +
                 '2. Database ' + '\n' +
                 '3. Image ' + '\n' +
@@ -274,101 +428,102 @@ class MenuDisplay {   //  Change Class name to Options?
                 '6. Registry ' + '\n' +
                 '7. Web UI ' + '\n', (input) => {
                     var choice;
-                    switch (input){
-                        case '1': 
-                            choice = "TeaStore_auth";
-                        break;
-                        case '2': 
-                            choice = "TeaStore_db";
-                        break;
-                        case '3': 
-                            choice = "TeaStore_image";
-                        break;
-                        case '4': 
-                            choice = "TeaStore_persistence";
-                        break;
-                        case '5': 
-                            choice = "TeaStore_recommender";
-                        break;
-                        case '6': 
-                            choice = "TeaStore_registry";
-                        break;
-                        case '7': 
-                            choice = "TeaStore_webui";
-                        break;
-                    }
-                    let comText = 'sudo docker service inspect ' + choice + ' --pretty'
-                    this.servicesSSH(comText, backFunction, menu);
-                });
-                break;
-            case '4':   //  Remove Service
-                menu.question('Select a service to remove: ', (input) => {
-                    commands.runCommand('docker service rm ' + input,  // add -f
-                        'Removing Service: ' + input,
-                        '\nPress Any Key To Continue... (If this didnt return an error the command was successful)', backFunction, menu);
-                });
-                break;
-            case '5':   //  Get Logs Service    (Make this print to file)
-                menu.question('Select a service to get logs: ', (input) => {
-                    commands.runCommand('docker service logs ' + input, 
-                        'Getting Service Logs: ' + input,
-                        '\nPress Any Key To Continue...', backFunction, menu);
-                        //  (If this didnt return an error the command was successful)
-                });
-                break;
-            case '6':   //  List Service Tasks
-                menu.question('Select a service to see tasks: ', (input) => {
-                    commands.runCommand('docker service ps ' + input,
-                        'Getting Service Tasks: ' + input,
-                        '\nPress Any Key To Continue...', backFunction, menu);
-                    //  (If this didnt return an error the command was successful)
-                });
-                break;
-            case '7':   //  Rollback Service
-                menu.question('Select a service to rollback: ', (input) => {
-                    commands.runCommand('docker service rollback ' + input,
-                        'Rolling Back Service: ' + input,
-                        '\nPress Any Key To Continue...', backFunction, menu);
+                        switch (input) {
+                            case '1':
+                                choice = "TeaStore_auth";
+                                break;
+                            case '2':
+                                choice = "TeaStore_db";
+                                break;
+                            case '3':
+                                choice = "TeaStore_image";
+                                break;
+                            case '4':
+                                choice = "TeaStore_persistence";
+                                break;
+                            case '5':
+                                choice = "TeaStore_recommender";
+                                break;
+                            case '6':
+                                choice = "TeaStore_registry";
+                                break;
+                            case '7':
+                                choice = "TeaStore_webui";
+                                break;
+                        }
+                        let comText = 'sudo docker service rollback ' + choice;
+                        this.servicesSSH(comText, backFunction, menu);
                     //  (If this didnt return an error the command was successful)
                 });
                 break;
             case '8':   //  Update Service
-                menu.question('Select a service to update: ', (input) => {
-                    commands.runCommand('docker service update ' + input,
-                        'Updating Service: ' + input,
-                        '\nPress Any Key To Continue...', backFunction, menu);
+            MenuOptions.title();
+                menu.question('Enter the number of a service to see Update: ' + '\n' +
+                '1. Auth ' + '\n' +
+                '2. Database ' + '\n' +
+                '3. Image ' + '\n' +
+                '4. Persistence ' + '\n' +
+                '5. Recommender ' + '\n' +
+                '6. Registry ' + '\n' +
+                '7. Web UI ' + '\n', (input) => {
+                    var choice;
+                        switch (input) {
+                            case '1':
+                                choice = "TeaStore_auth";
+                                break;
+                            case '2':
+                                choice = "TeaStore_db";
+                                break;
+                            case '3':
+                                choice = "TeaStore_image";
+                                break;
+                            case '4':
+                                choice = "TeaStore_persistence";
+                                break;
+                            case '5':
+                                choice = "TeaStore_recommender";
+                                break;
+                            case '6':
+                                choice = "TeaStore_registry";
+                                break;
+                            case '7':
+                                choice = "TeaStore_webui";
+                                break;
+                        }
+                        let comText = 'sudo docker service update ' + choice;
+                        this.servicesSSH(comText, backFunction, menu);
                     //  (If this didnt return an error the command was successful)
                 });
                 break;
             case '9':   //  Build Environment
-                let comText = 'docker stack deploy --compose-file ' + __dirname + '\\docker-compose_default.yaml ' + serviceName;
-                commands.runCommand(comText,
-                    'Building Environment (this may take some time...)', '\nPress Any Key To Continue...', backFunction, menu);
+            MenuOptions.title();
+                let comText = 'sudo docker stack deploy --compose-file ' + 'autoMNS/Prototype/lib/Services/all.yaml ' + serviceName;
+                this.servicesSSH(comText, backFunction, menu);
                 break;
             case '10':  //  Nuke Environment
-                let comText3 = 'docker stack rm ' + serviceName;
-                commands.runCommand(comText3,
-                    'Building Environment (this may take some time...)', '\nPress Any Key To Continue...', backFunction, menu);
+            MenuOptions.title();
+                let comText2 = 'sudo docker stack rm ' + serviceName;
+                this.servicesSSH(comText2, backFunction, menu);
                 break;
             case '0': backFunction(); break;
             default: repeateFunction(arg); break;
         }
     }
-    servicesSSH(command, backFunction, menu){
+    servicesSSH(command, backFunction, menu) {
         MenuOptions.title();
         Question = 'How many Virtual Machines would you like to initialise: ';
-            menu.question('Enter the RSA key path of the VM(s):\n', (input) => {
-                key = input;
-                this.servicesGetIp(command, key, backFunction, menu);
-                
-            });
+        menu.question('Enter the RSA key path of the VM(s):\n', (input) => {
+            key = input;
+            this.servicesGetIp(command, key, backFunction, menu);
+
+        });
     }
 
-    servicesGetIp(command, key, backFunction, menu){
+    servicesGetIp(command, key, backFunction, menu) {
         menu.question('Enter the IP address of the VM : ', (input) => {
             servicesipAddress[0] = input;
             sssh.SSH(command, servicesipAddress, key, backFunction, menu);
-            }
+        }
         );
     }
 }
