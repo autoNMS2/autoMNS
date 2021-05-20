@@ -10,11 +10,11 @@ var SwarmArray = new Array();
 class SSSH {
   SSH(command, ipAddress, key, returnFunction, menu) {
     var varLength = ipAddress.length;
-    if (command == 'sudo docker swarm init --advertise-addr ' + ipAddress[0] && ipAddress.length > 1){
-       for (let x = 1; x < varLength ; x++){
-         SwarmArray[x - 1] = ipAddress[x]; 
+    if (command == 'sudo docker swarm init --advertise-addr ' + ipAddress[0] && ipAddress.length > 1) {
+      for (let x = 1; x < varLength; x++) {
+        SwarmArray[x - 1] = ipAddress[x];
       }
-      for (let y = 1; y < varLength; y++){
+      for (let y = 1; y < varLength; y++) {
         ipAddress.pop();
       }
     }
@@ -31,14 +31,13 @@ class SSSH {
           }).on('data', (data) => {
             Data.push(data);
             console.log('Data: ' + Data[Data.length - 1]);
-            if (command == 'sudo docker swarm init --advertise-addr ' + ipAddress[0]){
-              if (Data.length > 1){
+            if (command == 'sudo docker swarm init --advertise-addr ' + ipAddress[0]) {
+              if (Data.length > 1) {
                 joinSwarmCommand = Data[1];
-                joinSwarmCommand = joinSwarmCommand.toString().replace("To add a worker to this swarm, run the following command:","");
+                joinSwarmCommand = joinSwarmCommand.toString().replace("To add a worker to this swarm, run the following command:", "");
                 joinSwarmCommand = joinSwarmCommand.replace(/(\r\n|\n|\r)/gm, "");
                 joinSwarmCommand.trim();
                 joinSwarmCommand = 'sudo ' + joinSwarmCommand;
-                console.log('Final command: ' + joinSwarmCommand);
                 swarmSSH.SSH(joinSwarmCommand, SwarmArray, key, returnFunction, menu);
               }
             }
@@ -54,18 +53,19 @@ class SSSH {
         privateKey: require('fs').readFileSync(key)
       });
 
-      function checkData(){
-        if(Data.length !== ipAddress.length){
-          console.log('Please wait...');
-          setTimeout(checkData, 1000);
-        }
-        else{
+      function checkData() {
+        console.log('Please wait...');
+        setTimeout(function () {
           menu.question("Virtual machines successfully initialised.\nPress any key to continue...", (input) => {
             returnFunction();   // display return message and wait for any input then go to return function }               
           });
-        }
+        }, 5000);
       }
+      if(command == 'sudo docker swarm init --advertise-addr ' + ipAddress[0]){
+
+      } else {
       checkData();
+      }
     }
   }
 }

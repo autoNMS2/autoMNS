@@ -10,12 +10,14 @@ const open = require('open');
 const menuOptions = require('./menuOptions');
 const MenuOptions = new menuOptions();
 var ipAddress = new Array();
+var existingIpAddress = new Array();
 var key;
 var instances;
 var i = 0;
 var command;
 var Question;
 var input1;
+var existingKey;
 
 class MenuDisplay {   //  Change Class name to Options?
     //  input, backFunction, repeateFunction, arg
@@ -31,15 +33,15 @@ class MenuDisplay {   //  Change Class name to Options?
                     instances = input;
                     menu.question('Enter the RSA key path of the VM(s):\n', (input) => {
                         key = input;
-        
+                        existingKey = key;
                         this.recursiveIPLoop(backFunction, menu, repeateFunction, arg);
                         
                     });
                 });
 
                 break;
-            case '2':  
-                console.log('this is the other one')
+            case '2': 
+                this.machinesTwo(existingIpAddress, existingKey, backFunction, menu)
                 break;
             case '0': backFunction(); break;
             default: repeateFunction(arg); break;
@@ -49,7 +51,13 @@ class MenuDisplay {   //  Change Class name to Options?
     
     recursiveIPLoop(backFunction, menu, repeateFunction, arg){
         menu.question('Enter the IP address of VM ' + (i + 1) + ': ', (input) => {
-            ipAddress[i] = input; 
+            ipAddress[i] = input;
+            if (existingIpAddress.includes(input)){
+                console.log("Virtual Machine already initialised")
+            }
+            else {
+            existingIpAddress[i] = input;
+            } 
             if (i == instances - 1) {
 
                 //commands.runReturnCommand('docker swarm join-token worker',
@@ -65,7 +73,7 @@ class MenuDisplay {   //  Change Class name to Options?
     }
 
     machinesTwo(ipAddress, key, backFunction, menu) {
-
+                
                 MenuOptions.title();
                 var textEnd = '1. ' + 'Install Docker on Virtual Machines' + '\n' +
                     '2. ' + 'Initialise Swarm on Virtual Machines' + '\n' +

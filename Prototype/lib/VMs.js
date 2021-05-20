@@ -14,16 +14,20 @@ class VirtualMachine {
                 curl -y\
                 gnupg -y\
                 lsb-release -y\n sudo apt-get install docker.io -y\nsudo docker -v';
+                sssh.SSH(command, ipAddress, key, returnFunction, menu);
                 //Question = 'How many VMs would you like to install Docker on: ';
                 break;
             case '2': command = 'sudo docker swarm init --advertise-addr ' + ipAddress[0]; 
+                sssh.SSH(command, ipAddress, key, returnFunction, menu);
                 //Question = 'How many VMs would you like to add to the Swarm: ';
                 break;
             case '3': command = 'sudo docker swarm leave --force';
+                sssh.SSH(command, ipAddress, key, returnFunction, menu);
                 //Question = 'How many VMs would you like to remove from the Swarm: ';
                 break;
+            case '0': returnFunction(); break;
+            default: returnFunction(); break;
         }
-        sssh.SSH(command, ipAddress, key, returnFunction, menu);
     }
 }
 

@@ -6,8 +6,6 @@ var joinSwarmCommand;
 
 class SwarmSSSH {
   SSH(command, ipAddress, key, returnFunction, menu) {
-    console.log('you made it to here');
-    console.log(ipAddress);
     for (i = 0; i < ipAddress.length; i++) {
       //console.log(command);
       //console.log(ipAddress[i]);
@@ -33,16 +31,13 @@ class SwarmSSSH {
         privateKey: require('fs').readFileSync(key)
       });
 
-      function checkData(){
-        if(Data.length !== ipAddress.length){
-          console.log('Please wait...');
-          setTimeout(checkData, 1000);
-        }
-        else{
+      function checkData() {
+        console.log('Please wait...');
+        setTimeout(function () {
           menu.question("Swarm successfully initialised.\nPress any key to continue...", (input) => {
             returnFunction();   // display return message and wait for any input then go to return function }               
           });
-        }
+        }, 5000);
       }
       checkData();
     }
