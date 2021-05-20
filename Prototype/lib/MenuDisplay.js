@@ -17,6 +17,7 @@ var i = 0;
 var command;
 var Question;
 var existingKey;
+var servicesipAddress = new Array();
 
 class MenuDisplay {   //  Change Class name to Options?
     //  input, backFunction, repeateFunction, arg
@@ -37,9 +38,8 @@ class MenuDisplay {   //  Change Class name to Options?
                         
                     });
                 });
-
                 break;
-            case '2': 
+            /*case '2': 
                 if (existingIpAddress[0] != null && existingKey != null){
                 this.machinesTwo(existingIpAddress, existingKey, backFunction, menu)
                 }
@@ -48,7 +48,7 @@ class MenuDisplay {   //  Change Class name to Options?
                         backFunction();
                     });
                 }
-                break;
+                break;*/
             case '0': backFunction(); break;
             default: repeateFunction(arg); break;
         }
@@ -92,6 +92,7 @@ class MenuDisplay {   //  Change Class name to Options?
                     '2. ' + 'Initialise Swarm on Virtual Machines' + '\n' +
                     '3. ' + 'Remove Virtual Machines from Swarm' + '\n' +
                     '4. ' + 'Test' + '\n' +
+                    '5. ' + 'Install repository on Virtual Machines' + '\n' +
                     '0. Main Menu' + '\n' +
                     'Please select a number:';  
                 console.log(textEnd);
@@ -171,31 +172,133 @@ class MenuDisplay {   //  Change Class name to Options?
         }
     }
 
+
     services(input, backFunction, repeateFunction, arg, menu) {
         //  List Services
+        //autoMNS/Prototype/lib/Services
         switch (input) {
             case '1'://  Run a Service
-                menu.question('Enter a service name to run: ', (input) => {
-                    let comText = 'docker stack deploy --compose-file ' + __dirname + '\\Services\\' + input + '.yaml ' + serviceName;
-                    commands.runCommand(comText,
-                        'Adding Image (this may take some time...)', '\nPress Any Key To Continue...', backFunction, menu);
+            MenuOptions.title();
+                menu.question('Enter the number of a service to run: ' + '\n' +
+                    '1. All ' + '\n' +
+                    '2. Auth ' + '\n' +
+                    '3. Database ' + '\n' +
+                    '4. Image ' + '\n' +
+                    '5. Persistence ' + '\n' +
+                    '6. Recommender ' + '\n' +
+                    '7. Registry ' + '\n' +
+                    '8. Web UI ' + '\n', (input) => {
+                    var choice;
+                    switch (input){
+                        case '1': 
+                            choice = "all";
+                        break;
+                        case '2': 
+                            choice = "auth";
+                        break;
+                        case '3': 
+                            choice = "db";
+                        break;
+                        case '4': 
+                            choice = "image";
+                        break;
+                        case '5': 
+                            choice = "persistence";
+                        break;
+                        case '6': 
+                            choice = "recommender";
+                        break;
+                        case '7': 
+                            choice = "registry";
+                        break;
+                        case '8': 
+                            choice = "webui";
+                        break;
+                    }
+                    let comText = 'sudo docker stack deploy --compose-file ' + 'autoMNS/Prototype/lib/Services/' + choice + '.yaml ' + serviceName;
+                    this.servicesSSH(comText, backFunction, menu);
+                    //commands.runCommand(comText,
+                    //    'Adding Image (this may take some time...)', '\nPress Any Key To Continue...', backFunction, menu);
+
                 });
                 break;
             case '2':   //  Scale Service
-                menu.question('Enter a service name to scale: ', (service) => {
-                    menu.question('Enter the number of replicas of ' + service + ' you want to run: ', (number) => {
+            MenuOptions.title();
+                menu.question('Enter the number of a service to Scale: ' + '\n' +
+                '1. Auth ' + '\n' +
+                '2. Database ' + '\n' +
+                '3. Image ' + '\n' +
+                '4. Persistence ' + '\n' +
+                '5. Recommender ' + '\n' +
+                '6. Registry ' + '\n' +
+                '7. Web UI ' + '\n', (input) => {
+                    var choice;
+                    switch (input){
+                        case '1': 
+                            choice = "TeaStore_auth";
+                        break;
+                        case '2': 
+                            choice = "TeaStore_db";
+                        break;
+                        case '3': 
+                            choice = "TeaStore_image";
+                        break;
+                        case '4': 
+                            choice = "TeaStore_persistence";
+                        break;
+                        case '5': 
+                            choice = "TeaStore_recommender";
+                        break;
+                        case '6': 
+                            choice = "TeaStore_registry";
+                        break;
+                        case '7': 
+                            choice = "TeaStore_webui";
+                        break;
+                    }
+                    menu.question('Enter the number of replicas of ' + choice + ' you want to run: ', (number) => {
                         //serviceName
-                        commands.runCommand('docker service scale ' + service + '=' + number,  // add -f
-                            'Removing Service: ' + input,
-                            '\nPress Any Key To Continue...', backFunction, menu);
+                        let comText = 'sudo docker service scale ' + choice + '=' + number;
+                        this.servicesSSH(comText, backFunction, menu);
                     });
                 });
                 break;
             case '3':   //  Inspect Service
-                menu.question('Select a service to inspect: ', (input) => {
-                    commands.runCommand('docker service inspect ' + input + ' --pretty',  // add -f
-                        'Inspecting Service: ' + input,
-                        '\nPress Any Key To Continue...', backFunction, menu);
+            MenuOptions.title();
+                menu.question('Enter the number of a service to inspect: ' + '\n' +
+                '1. Auth ' + '\n' +
+                '2. Database ' + '\n' +
+                '3. Image ' + '\n' +
+                '4. Persistence ' + '\n' +
+                '5. Recommender ' + '\n' +
+                '6. Registry ' + '\n' +
+                '7. Web UI ' + '\n', (input) => {
+                    var choice;
+                    switch (input){
+                        case '1': 
+                            choice = "TeaStore_auth";
+                        break;
+                        case '2': 
+                            choice = "TeaStore_db";
+                        break;
+                        case '3': 
+                            choice = "TeaStore_image";
+                        break;
+                        case '4': 
+                            choice = "TeaStore_persistence";
+                        break;
+                        case '5': 
+                            choice = "TeaStore_recommender";
+                        break;
+                        case '6': 
+                            choice = "TeaStore_registry";
+                        break;
+                        case '7': 
+                            choice = "TeaStore_webui";
+                        break;
+                    }
+                    let comText = 'sudo docker service inspect ' + choice + ' --pretty'
+                    this.servicesSSH(comText, backFunction, menu);
                 });
                 break;
             case '4':   //  Remove Service
@@ -250,6 +353,23 @@ class MenuDisplay {   //  Change Class name to Options?
             case '0': backFunction(); break;
             default: repeateFunction(arg); break;
         }
+    }
+    servicesSSH(command, backFunction, menu){
+        MenuOptions.title();
+        Question = 'How many Virtual Machines would you like to initialise: ';
+            menu.question('Enter the RSA key path of the VM(s):\n', (input) => {
+                key = input;
+                this.servicesGetIp(command, key, backFunction, menu);
+                
+            });
+    }
+
+    servicesGetIp(command, key, backFunction, menu){
+        menu.question('Enter the IP address of the VM : ', (input) => {
+            servicesipAddress[0] = input;
+            sssh.SSH(command, servicesipAddress, key, backFunction, menu);
+            }
+        );
     }
 }
 

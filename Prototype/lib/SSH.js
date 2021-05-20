@@ -8,7 +8,6 @@ var SwarmArray = new Array();
 
 class SSSH {
   SSH(command, ipAddress, key, returnFunction, menu) {
-    var Data = new Array();
     var varLength = ipAddress.length;
     if (command == 'sudo docker swarm init --advertise-addr ' + ipAddress[0] && ipAddress.length > 1) {
       for (let x = 1; x < varLength; x++) {
@@ -19,6 +18,7 @@ class SSSH {
       }
     }
     for (i = 0; i < ipAddress.length; i++) {
+      var Data = new Array();
       console.log(command);
       console.log(ipAddress[i]);
       conn.on('ready', () => {
@@ -30,7 +30,7 @@ class SSSH {
             conn.end();
           }).on('data', (data) => {
             Data.push(data);
-            console.log('Data: ' + Data[Data.length - 1]);
+            console.log('Data: ' + Data);
             if (command == 'sudo docker swarm init --advertise-addr ' + ipAddress[0]) {
               if (Data.length > 1) {
                 joinSwarmCommand = Data[1];
@@ -43,6 +43,7 @@ class SSSH {
               }
             }
           }).stderr.on('data', (data) => {
+            console.log(command);
             console.log('STDERR: ' + data);
           });
         });
@@ -55,7 +56,6 @@ class SSSH {
       });
     }
     function checkData() {
-      console.log(Data);
       console.log('Please wait...');
       setTimeout(function () {
         menu.question("Virtual machines successfully initialised.\nPress any key to continue...", (input) => {
@@ -67,7 +67,5 @@ class SSSH {
     
   }
 }
-
-
 
 module.exports = SSSH;

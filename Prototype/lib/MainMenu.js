@@ -47,7 +47,7 @@ class MainMenu {
         else if (arguments[0] == 1) {
             MenuOptions.title();
             var textEnd = '1. ' + 'Add new Virtual Machines' + '\n' +
-                '2. ' + 'Use Existing Virtual Machines' + '\n' +
+                //'2. ' + 'Use Existing Virtual Machines' + '\n' +
                 '0. Main Menu' + '\n' +
                 'Please select a number:';
             console.log(textEnd);
