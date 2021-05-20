@@ -19,6 +19,7 @@ class SSSH {
     }
     for (i = 0; i < ipAddress.length; i++) {
       var Data = new Array();
+      var DataString = '';
       //    console.log(command);
       //    console.log(ipAddress[i]);
       conn.on('ready', () => {
@@ -29,8 +30,9 @@ class SSSH {
           stream.on('close', (code, signal) => {
             conn.end();
           }).on('data', (data) => {
+            DataString += data;
             Data.push(data);
-            console.log('Data: ' + data);
+            //console.log('' + data);
             if (command == 'sudo docker swarm init --advertise-addr ' + ipAddress[0]) {
               if (Data.length > 1) {
                 joinSwarmCommand = Data[1];
@@ -58,10 +60,11 @@ class SSSH {
     function checkData() {
       console.log('Please wait...');
       setTimeout(function () {
+        console.log(DataString);
         menu.question("Virtual machines successfully initialised.\nPress any key to continue...", (input) => {
           returnFunction();   // display return message and wait for any input then go to return function }               
         });
-      }, 5000);
+      }, 1000);
     }
       checkData();
     

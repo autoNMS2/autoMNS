@@ -380,7 +380,7 @@ class MenuDisplay {   //  Change Class name to Options?
                     });
                 break;
             case '6':   //  List Service Tasks
-            MenuOptions.title();
+                MenuOptions.title();
                 menu.question('Enter the number of a service to see tasks: ' + '\n' +
                     '1. Auth ' + '\n' +
                     '2. Database ' + '\n' +
@@ -419,16 +419,16 @@ class MenuDisplay {   //  Change Class name to Options?
                     });
                 break;
             case '7':   //  Rollback Service
-            MenuOptions.title();
+                MenuOptions.title();
                 menu.question('Enter the number of a service to see Rollback: ' + '\n' +
-                '1. Auth ' + '\n' +
-                '2. Database ' + '\n' +
-                '3. Image ' + '\n' +
-                '4. Persistence ' + '\n' +
-                '5. Recommender ' + '\n' +
-                '6. Registry ' + '\n' +
-                '7. Web UI ' + '\n', (input) => {
-                    var choice;
+                    '1. Auth ' + '\n' +
+                    '2. Database ' + '\n' +
+                    '3. Image ' + '\n' +
+                    '4. Persistence ' + '\n' +
+                    '5. Recommender ' + '\n' +
+                    '6. Registry ' + '\n' +
+                    '7. Web UI ' + '\n', (input) => {
+                        var choice;
                         switch (input) {
                             case '1':
                                 choice = "TeaStore_auth";
@@ -454,20 +454,20 @@ class MenuDisplay {   //  Change Class name to Options?
                         }
                         let comText = 'sudo docker service rollback ' + choice;
                         this.servicesSSH(comText, backFunction, menu);
-                    //  (If this didnt return an error the command was successful)
-                });
+                        //  (If this didnt return an error the command was successful)
+                    });
                 break;
             case '8':   //  Update Service
-            MenuOptions.title();
+                MenuOptions.title();
                 menu.question('Enter the number of a service to see Update: ' + '\n' +
-                '1. Auth ' + '\n' +
-                '2. Database ' + '\n' +
-                '3. Image ' + '\n' +
-                '4. Persistence ' + '\n' +
-                '5. Recommender ' + '\n' +
-                '6. Registry ' + '\n' +
-                '7. Web UI ' + '\n', (input) => {
-                    var choice;
+                    '1. Auth ' + '\n' +
+                    '2. Database ' + '\n' +
+                    '3. Image ' + '\n' +
+                    '4. Persistence ' + '\n' +
+                    '5. Recommender ' + '\n' +
+                    '6. Registry ' + '\n' +
+                    '7. Web UI ' + '\n', (input) => {
+                        var choice;
                         switch (input) {
                             case '1':
                                 choice = "TeaStore_auth";
@@ -493,18 +493,23 @@ class MenuDisplay {   //  Change Class name to Options?
                         }
                         let comText = 'sudo docker service update ' + choice;
                         this.servicesSSH(comText, backFunction, menu);
-                    //  (If this didnt return an error the command was successful)
-                });
+                        //  (If this didnt return an error the command was successful)
+                    });
                 break;
             case '9':   //  Build Environment
-            MenuOptions.title();
+                MenuOptions.title();
                 let comText = 'sudo docker stack deploy --compose-file ' + 'autoMNS/Prototype/lib/Services/all.yaml ' + serviceName;
                 this.servicesSSH(comText, backFunction, menu);
                 break;
             case '10':  //  Nuke Environment
-            MenuOptions.title();
+                MenuOptions.title();
                 let comText2 = 'sudo docker stack rm ' + serviceName;
                 this.servicesSSH(comText2, backFunction, menu);
+                break;
+            case '11':  //  Nuke Environment
+                MenuOptions.title();
+                let comText3 = 'sudo docker service ls';
+                this.servicesSSH(comText3, backFunction, menu);
                 break;
             case '0': backFunction(); break;
             default: repeateFunction(arg); break;

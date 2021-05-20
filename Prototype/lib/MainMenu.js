@@ -92,6 +92,7 @@ class MainMenu {
                 '8. ' + 'Update Service' + '\n' +
                 '9. ' + 'Build Environment' + '\n' +
                 '10. ' + 'Nuke Environment' + '\n' +
+                '11. ' + 'List services' + '\n' +
                 '0. Main Menu' + '\n' +
                 'Please select a number:';
 
