@@ -16,7 +16,6 @@ var instances;
 var i = 0;
 var command;
 var Question;
-var input1;
 var existingKey;
 
 class MenuDisplay {   //  Change Class name to Options?
@@ -41,7 +40,14 @@ class MenuDisplay {   //  Change Class name to Options?
 
                 break;
             case '2': 
+                if (existingIpAddress[0] != null && existingKey != null){
                 this.machinesTwo(existingIpAddress, existingKey, backFunction, menu)
+                }
+                else {
+                    menu.question('No existing Virtual Machines, Please initialise first...', (input) => {
+                        backFunction();
+                    });
+                }
                 break;
             case '0': backFunction(); break;
             default: repeateFunction(arg); break;
@@ -73,11 +79,19 @@ class MenuDisplay {   //  Change Class name to Options?
     }
 
     machinesTwo(ipAddress, key, backFunction, menu) {
-                
+                var textEnd = "";
                 MenuOptions.title();
-                var textEnd = '1. ' + 'Install Docker on Virtual Machines' + '\n' +
+                if (existingIpAddress[0] != null && existingKey != null){
+                    textEnd += 'Existing Virtual Machine IPs: ' + '\n';
+                    for (let x = 0; x < existingIpAddress.length; x++){
+                        textEnd += existingIpAddress[x] + '\n';
+                    }
+                    textEnd += '\n';
+                }
+                textEnd += '1. ' + 'Install Docker on Virtual Machines' + '\n' +
                     '2. ' + 'Initialise Swarm on Virtual Machines' + '\n' +
                     '3. ' + 'Remove Virtual Machines from Swarm' + '\n' +
+                    '4. ' + 'Test' + '\n' +
                     '0. Main Menu' + '\n' +
                     'Please select a number:';  
                 console.log(textEnd);

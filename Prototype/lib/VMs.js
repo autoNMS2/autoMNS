@@ -25,6 +25,9 @@ class VirtualMachine {
                 sssh.SSH(command, ipAddress, key, returnFunction, menu);
                 //Question = 'How many VMs would you like to remove from the Swarm: ';
                 break;
+            case '4': command = 'sudo docker -v'; 
+                sssh.SSH(command, ipAddress, key, returnFunction, menu);
+                break;
             case '0': returnFunction(); break;
             default: returnFunction(); break;
         }

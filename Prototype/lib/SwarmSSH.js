@@ -7,8 +7,8 @@ var joinSwarmCommand;
 class SwarmSSSH {
   SSH(command, ipAddress, key, returnFunction, menu) {
     for (i = 0; i < ipAddress.length; i++) {
-      //console.log(command);
-      //console.log(ipAddress[i]);
+      console.log(command);
+      console.log(ipAddress[i]);
       conn.on('ready', () => {
         conn.exec(command, (err, stream) => {
           if (err) {

@@ -3,12 +3,12 @@ const SwarmSSH = require('./SwarmSSH');
 const swarmSSH = new SwarmSSH();
 var conn = new Client();
 var i;
-var Data = new Array();
 var joinSwarmCommand;
 var SwarmArray = new Array();
 
 class SSSH {
   SSH(command, ipAddress, key, returnFunction, menu) {
+    var Data = new Array();
     var varLength = ipAddress.length;
     if (command == 'sudo docker swarm init --advertise-addr ' + ipAddress[0] && ipAddress.length > 1) {
       for (let x = 1; x < varLength; x++) {
@@ -19,8 +19,8 @@ class SSSH {
       }
     }
     for (i = 0; i < ipAddress.length; i++) {
-      //console.log(command);
-      //console.log(ipAddress[i]);
+      console.log(command);
+      console.log(ipAddress[i]);
       conn.on('ready', () => {
         conn.exec(command, (err, stream) => {
           if (err) {
@@ -38,6 +38,7 @@ class SSSH {
                 joinSwarmCommand = joinSwarmCommand.replace(/(\r\n|\n|\r)/gm, "");
                 joinSwarmCommand.trim();
                 joinSwarmCommand = 'sudo ' + joinSwarmCommand;
+                console.log(joinSwarmCommand);
                 swarmSSH.SSH(joinSwarmCommand, SwarmArray, key, returnFunction, menu);
               }
             }
@@ -52,21 +53,18 @@ class SSSH {
         tryKeyboard: true,
         privateKey: require('fs').readFileSync(key)
       });
-
-      function checkData() {
-        console.log('Please wait...');
-        setTimeout(function () {
-          menu.question("Virtual machines successfully initialised.\nPress any key to continue...", (input) => {
-            returnFunction();   // display return message and wait for any input then go to return function }               
-          });
-        }, 5000);
-      }
-      if(command == 'sudo docker swarm init --advertise-addr ' + ipAddress[0]){
-
-      } else {
-      checkData();
-      }
     }
+    function checkData() {
+      console.log(Data);
+      console.log('Please wait...');
+      setTimeout(function () {
+        menu.question("Virtual machines successfully initialised.\nPress any key to continue...", (input) => {
+          returnFunction();   // display return message and wait for any input then go to return function }               
+        });
+      }, 5000);
+    }
+      checkData();
+    
   }
 }
 
