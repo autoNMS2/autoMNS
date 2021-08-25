@@ -10,4 +10,3 @@ public class AgentTry extends Agent {
     }
 
 }
-//agent1:firstagent.AgentTry
