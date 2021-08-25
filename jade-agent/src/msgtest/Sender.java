@@ -7,25 +7,23 @@ import jade.lang.acl.*;
 
 public class Sender extends Agent {
     protected void setup() {
-
+        //read and output the reply
         addBehaviour(new CyclicBehaviour(this) {
-            //read and output the reply
             public void action() {
                 ACLMessage msg = receive();
                 if (msg != null)
-                    System.out.println("a1 replied: "+msg.getContent());
-                //+ " ( " + msg.getSender().getName()+ " )");
+                    System.out.println("Message"+msg.getContent()
+                            + " ( " + msg.getSender().getName()+ " )");
                 block();
             }
         });
-        // creates a msg and send to a specified agent
+        // creates a msg and send to a specified agent (a1)
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-        msg.setContent("install docker");
-        //this is used to find the agent inside a local platform
-        //msg.addReceiver(new AID("a1", AID.ISLOCALNAME));
+        msg.setContent(" Hi from Sender ");
+        msg.addReceiver(new AID("a1", AID.ISLOCALNAME));
         //this is used to find the agent on the network
-        //issue here is i have to define the agent ip
-        msg.addReceiver(new AID("a1@172.31-93.198:1099/JADE", AID.ISGUID));
+        //must define the agent ip
+        //msg.addReceiver(new AID("a1@172.31-93.198:1099/JADE", AID.ISGUID));
         send(msg);
     }
 }
