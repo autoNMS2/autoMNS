@@ -64,7 +64,7 @@ class SSSH {
         menu.question("Virtual machines successfully initialised.\nPress any key to continue...", (input) => {
           returnFunction();   // display return message and wait for any input then go to return function }               
         });
-      }, 1000);
+      }, 3000);
     }
       checkData();
     
