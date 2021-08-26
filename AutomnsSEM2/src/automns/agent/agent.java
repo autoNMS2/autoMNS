@@ -13,12 +13,8 @@ import jadex.quickstart.cleanerworld.environment.*;
 import jadex.quickstart.cleanerworld.gui.*;
 import java.io.InputStream;
 
-import com.jcraft.jsch.Channel;
-import com.jcraft.jsch.ChannelExec;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.JSchException;
-import com.jcraft.jsch.Session;
 
+@Description("This agent will initalise the system and then message another agent once complete")
 @Agent(type = "bdi")
 public class agent {
 
@@ -64,7 +60,8 @@ public class agent {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
+		//The following code can be used to ssh into a VM and run a command
+		//You will need the VM username, IP address, and a private key file 
 		/**
 		 * String username = "ubuntu"; String host = "203.101.228.168";
 		 * 

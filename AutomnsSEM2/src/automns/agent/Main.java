@@ -31,6 +31,9 @@ public class Main {
 
 		//adding the automns agent
 		conf.addComponent("automns/agent/agent.class");
+		conf.addComponent("automns/agent/SystemMonitorAgent.class");
+		conf.addComponent("automns/agent/SystemMonitorAgent.class");
+		conf.addComponent("automns/agent/SystemMonitorAgent.class");
 		
 		// Start a Jadex platform (asynchronously in background).
 		IFuture<IExternalAccess>	fut	= Starter.createPlatform(conf);

@@ -62,15 +62,15 @@
 	<classpathentry kind="lib" path="C:/jadex-4.0.248/lib/hk2-utils-3.0.2.jar"/>
 	<classpathentry kind="lib" path="C:/jadex-4.0.248/lib/istack-commons-runtime-3.0.8.jar"/>
 	<classpathentry kind="lib" path="C:/jadex-4.0.248/lib/jadex-applications-applib-bdi-4.0.248.jar"/>
-	<classpathentry kind="lib" path="C:/jadex-4.0.248/lib/jadex-applications-bdi-4.0.248.jar"/>
+	<classpathentry kind="lib" path="C:/jadex-4.0.248/lib/jadex-applications-bdi-4.0.248.jar" sourcepath="C:/jadex-4.0.248/sources.zip"/>
 	<classpathentry kind="lib" path="C:/jadex-4.0.248/lib/jadex-applications-bdiv3-4.0.248.jar"/>
 	<classpathentry kind="lib" path="C:/jadex-4.0.248/lib/jadex-applications-bpmn-4.0.248.jar"/>
-	<classpathentry kind="lib" path="C:/jadex-4.0.248/lib/jadex-applications-micro-4.0.248.jar"/>
+	<classpathentry kind="lib" path="C:/jadex-4.0.248/lib/jadex-applications-micro-4.0.248.jar" sourcepath="C:/jadex-4.0.248/sources.zip"/>
 	<classpathentry kind="lib" path="C:/jadex-4.0.248/lib/jadex-applications-mixed-4.0.248.jar"/>
 	<classpathentry kind="lib" path="C:/jadex-4.0.248/lib/jadex-applications-quickstart-4.0.248.jar"/>
 	<classpathentry kind="lib" path="C:/jadex-4.0.248/lib/jadex-distribution-minimal-4.0.248.jar"/>
 	<classpathentry kind="lib" path="C:/jadex-4.0.248/lib/jadex-distribution-standard-4.0.248.jar"/>
-	<classpathentry kind="lib" path="C:/jadex-4.0.248/lib/jadex-editor-bpmn-4.0.248.jar"/>
+	<classpathentry kind="lib" path="C:/jadex-4.0.248/lib/jadex-editor-bpmn-4.0.248.jar" sourcepath="C:/jadex-4.0.248/sources.zip"/>
 	<classpathentry kind="lib" path="C:/jadex-4.0.248/lib/jadex-environment-agr-4.0.248.jar"/>
 	<classpathentry kind="lib" path="C:/jadex-4.0.248/lib/jadex-environment-envsupport-4.0.248.jar"/>
 	<classpathentry kind="lib" path="C:/jadex-4.0.248/lib/jadex-kernel-application-4.0.248.jar"/>
