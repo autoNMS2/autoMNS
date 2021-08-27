@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<applicationtype xmlns="http://www.activecomponents.org/jadex-application"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.activecomponents.org/jadex-application
+						http://www.activecomponents.org/jadex-application-${jadex_build_version}.xsd"
+	name="MsgScenario" package="msgs">
+	<!-- associate the java files -->
+	<componenttypes>
+		<componenttype name="Agent2" filename="msgs/Agent2.class"/>
+		<componenttype name="Agent1" filename="msgs/Agent1.class"/>
+	</componenttypes>
+	
+	<configurations>
+	
+		<configuration name="Messaging">
+			<components>
+				<component type="Agent2" name="Agent2" />
+				<component type="Agent1" name="Agent1" />
+			</components>
+		</configuration>
+		
+	</configurations>
+	
+</applicationtype>

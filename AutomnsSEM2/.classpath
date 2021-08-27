@@ -63,7 +63,7 @@
 	<classpathentry kind="lib" path="C:/jadex-4.0.248/lib/istack-commons-runtime-3.0.8.jar"/>
 	<classpathentry kind="lib" path="C:/jadex-4.0.248/lib/jadex-applications-applib-bdi-4.0.248.jar"/>
 	<classpathentry kind="lib" path="C:/jadex-4.0.248/lib/jadex-applications-bdi-4.0.248.jar" sourcepath="C:/jadex-4.0.248/sources.zip"/>
-	<classpathentry kind="lib" path="C:/jadex-4.0.248/lib/jadex-applications-bdiv3-4.0.248.jar"/>
+	<classpathentry kind="lib" path="C:/jadex-4.0.248/lib/jadex-applications-bdiv3-4.0.248.jar" sourcepath="C:/jadex-4.0.248/sources.zip"/>
 	<classpathentry kind="lib" path="C:/jadex-4.0.248/lib/jadex-applications-bpmn-4.0.248.jar"/>
 	<classpathentry kind="lib" path="C:/jadex-4.0.248/lib/jadex-applications-micro-4.0.248.jar" sourcepath="C:/jadex-4.0.248/sources.zip"/>
 	<classpathentry kind="lib" path="C:/jadex-4.0.248/lib/jadex-applications-mixed-4.0.248.jar"/>
