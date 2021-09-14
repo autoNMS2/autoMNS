@@ -1,13 +1,13 @@
-package msgtest;
+package test0;
 
 import jade.core.Agent;
 import jade.core.AID;
 import jade.core.behaviours.*;
 import jade.lang.acl.*;
 
-public class Sender extends Agent {
+public class send0 extends Agent {
     protected void setup() {
-        //read and output the reply
+        //receives and output the reply from a1
         addBehaviour(new CyclicBehaviour(this) {
             public void action() {
                 ACLMessage msg = receive();
@@ -21,9 +21,6 @@ public class Sender extends Agent {
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
         msg.setContent(" Hi from Sender ");
         msg.addReceiver(new AID("a1", AID.ISLOCALNAME));
-        //this is used to find the agent on the network
-        //must define the agent ip
-        //msg.addReceiver(new AID("a1@172.31-93.198:1099/JADE", AID.ISGUID));
         send(msg);
     }
 }

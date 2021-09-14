@@ -1,10 +1,10 @@
-package msgtest;
+package test3;
 
 import jade.core.Agent;
-import jade.core.behaviours.*;
-import jade.lang.acl.*;
+import jade.core.behaviours.CyclicBehaviour;
+import jade.lang.acl.ACLMessage;
 
-public class Receiver extends Agent {
+public class receive3 extends Agent {
     protected void setup() {
         // create behaviour for receive and send message to Sender
         addBehaviour(new CyclicBehaviour(this) {
