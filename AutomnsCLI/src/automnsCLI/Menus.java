@@ -1,10 +1,11 @@
 package automnsCLI;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Menus {
 	
-	public static void MainMenu() {
+	public static void MainMenu() throws IOException {
 		clearScreen();
 		Scanner input = new Scanner(System.in);
 		
@@ -35,7 +36,7 @@ public class Menus {
 		}
 	}
 	
-	public static void VMOptions() {
+	public static void VMOptions() throws IOException {
 		clearScreen();
 		Scanner input = new Scanner(System.in);
 		
@@ -49,11 +50,10 @@ public class Menus {
 		
 		switch(i) {
 		case 1:
-			System.out.println("Adding VMs...");
+			VMFunctions.addVMs();
 			break;
 		case 2:
 			System.out.println("Initilising, please wait...");
-
 			break;
 		case 3:
 			System.out.println("VMs:");
@@ -62,7 +62,8 @@ public class Menus {
 			MainMenu();
 		}
 	}
-	public static void DockerOptions() {
+	
+	public static void DockerOptions() throws IOException {
 		clearScreen();
 		Scanner input = new Scanner(System.in);
 		
@@ -93,7 +94,8 @@ public class Menus {
 			MainMenu();
 		}
 	}
-	public static void UserOptions() {
+	
+	public static void UserOptions() throws IOException {
 		clearScreen();
 		Scanner input = new Scanner(System.in);
 		
@@ -136,6 +138,7 @@ public class Menus {
 			MainMenu();
 		}
 	}
+	
 	public static void LaunchApp() {
 		clearScreen();
 		System.out.println("Launching App");
