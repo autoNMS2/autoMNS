@@ -40,7 +40,10 @@ public class VMFunctions {
 				+ "            ca-certificates -y\r\n"
 				+ "            curl -y\r\n"
 				+ "            gnupg -y\r\n"
-				+ "            lsb-release -y\n sudo apt-get install docker.io -y\nsudo docker -v", "sudo docker swarm init --advertise-addr " + vms.get(0)
+				+ "            lsb-release -y\n sudo apt-get install docker.io -y\nsudo docker -v", 
+				"sudo docker swarm init --advertise-addr " + vms.get(0), 
+				"sudo apt-get install git -y\n sudo git clone https://github.com/autoNMS2/autoMNS.git",
+				"sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/all.yaml TeaStore"
 				};
 		
 		for (int j = 0; j < vms.size(); j++) {
@@ -58,7 +61,13 @@ public class VMFunctions {
 		for (int j = 1; j < vms.size(); j++) {
 			SSH(vms.get(j), privateKey, joinToken);
 		}
-		
+		//install git and pull repository on vms
+		for (int j = 0; j < vms.size(); j++) {
+			SSH(vms.get(j), privateKey, commands[2]);
+		}
+		//deploy the application on the swarm
+		SSH(vms.get(0), privateKey, commands[3]);
+		System.out.println("Application container stack deployed");
 	}
 	
 	public static String SSH(String ip, String filePath, String Command) throws IOException {
@@ -126,7 +135,7 @@ public class VMFunctions {
 			}
 			String output = outputBuffer.toString();
 			System.out.println("output: " + output);
-			//System.out.println("error: " + errorBuffer.toString());
+			System.out.println("error: " + errorBuffer.toString());
 
 			channel.disconnect();
 			session.disconnect();
