@@ -10,7 +10,7 @@ import jade.wrapper.StaleProxyException;
 class Main2 {
 
     public static void main(String[] args) {
-        String host = "100.91.52.21"; // Platform IP
+        String host = "172.31.29.138"; // Platform IP
         String port = "1099"; // default-port 1099
 
         Runtime runtime = Runtime.instance();
@@ -33,8 +33,8 @@ public class send3 extends Agent {
     protected void setup() {
 
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-        AID dest = new AID("a1@100.91.52.21:1099/JADE", AID.ISGUID);
-        dest.addAddresses("http://100.91.52.21:7778/acc");
+        AID dest = new AID("a1@172.31.29.138:1099/JADE", AID.ISGUID);
+        dest.addAddresses("http://172.31.29.138:7778/acc");
         msg.addReceiver(dest);
         msg.setContent("Hello!");
         send(msg);
