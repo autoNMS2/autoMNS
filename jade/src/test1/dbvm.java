@@ -19,7 +19,7 @@ package remote;
 	                    //sends a reply to the sender
 	                    ACLMessage reply = msg.createReply();
 	                    reply.setPerformative(ACLMessage.INFORM);
-	                    reply.setContent(" Hello reply from Receiver");
+	                    reply.setContent(" Yes boss");
 	                    send(reply);
 	                }
 	                block();

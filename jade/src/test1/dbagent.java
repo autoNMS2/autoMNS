@@ -18,7 +18,7 @@ public class dbagent extends Agent {
                     //sends a reply to the sender
                     ACLMessage reply = msg.createReply();
                     reply.setPerformative(ACLMessage.INFORM);
-                    reply.setContent(" Hello reply from Receiver");
+                    reply.setContent(" Yes master");
                     send(reply);
                 }
                 block();
