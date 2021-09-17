@@ -18,7 +18,7 @@ public class coordinator extends Agent {
             }
         });
         // creates a msg and send to a specified agent (a1)
-        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+        ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
         //uses GUID with a1 name,platform name, and default port
         AID dest = new AID("a1@172.31.29.138:1098/JADE", AID.ISGUID);
         AID dest1 = new AID("a2@172.31.29.138:1099/JADE", AID.ISGUID);
@@ -27,7 +27,7 @@ public class coordinator extends Agent {
         dest1.addAddresses("http://172.31.29.138:42599/acc");
         msg.addReceiver(dest);
         msg.addReceiver(dest1);
-        msg.setContent("Hello my slaves!");
+        msg.setContent("whoami");
         send(msg);
     }
 }
