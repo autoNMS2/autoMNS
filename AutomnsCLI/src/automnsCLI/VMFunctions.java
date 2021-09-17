@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
@@ -51,16 +49,16 @@ public class VMFunctions {
 
 		System.out.println("VMs initialised, woo!");
 		
-		String joinToken = SSH(vms.get(0), privateKey, commands[1]);
-		
-		String regex = "\\b+docker\\gi";
-		
-		if(joinToken.matches(regex)) {
-			System.out.println(joinToken + "matches" + regex);
+		//add the first vm to a swarm and get the swarm token
+		String output = SSH(vms.get(0), privateKey, commands[1]);	
+		String joinToken = "sudo " + output.substring(142, 273);
+		//print for error checking purposes
+		System.out.println("Token: " + joinToken);
+		//add other vms to swarm
+		for (int j = 1; j < vms.size(); j++) {
+			SSH(vms.get(j), privateKey, joinToken);
 		}
-		else {
-			System.out.println("No matches");
-			}
+		
 	}
 	
 	public static String SSH(String ip, String filePath, String Command) throws IOException {
@@ -128,7 +126,7 @@ public class VMFunctions {
 			}
 			String output = outputBuffer.toString();
 			System.out.println("output: " + output);
-			System.out.println("error: " + errorBuffer.toString());
+			//System.out.println("error: " + errorBuffer.toString());
 
 			channel.disconnect();
 			session.disconnect();
