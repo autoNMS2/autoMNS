@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.MessageFormat;
 import java.util.*;
 
 import com.jcraft.jsch.Channel;
@@ -43,7 +44,12 @@ public class VMFunctions {
 				+ "            lsb-release -y\n sudo apt-get install docker.io -y\nsudo docker -v", 
 				"sudo docker swarm init --advertise-addr " + vms.get(0), 
 				"sudo apt-get install git -y\n sudo git clone https://github.com/autoNMS2/autoMNS.git",
-				"sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/all.yaml TeaStore"
+				"sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/all.yaml TeaStore",
+				"sudo apt update\r\n sudo apt install default-jre -y\r\n sudo apt install default-jdk -y\r\n",
+				"javac -classpath autoMNS/jade/lib/jade.jar -d classes autoMNS/jade/src/test0/send0.java\r\n "
+				+ MessageFormat.format("java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -host {0} -port 1099 -agents coordinator:test0.send0\r\n", vms.get(0)),
+				"javac -classpath autoMNS/jade/lib/jade.jar -d classes autoMNS/jade/src/test0/receive0.java\r\n "
+				+ "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -agents a1:test0.receive0\r\n"
 				};
 		
 		for (int j = 0; j < vms.size(); j++) {
@@ -65,9 +71,51 @@ public class VMFunctions {
 		for (int j = 0; j < vms.size(); j++) {
 			SSH(vms.get(j), privateKey, commands[2]);
 		}
+		//install java on vms
+		for (int j = 0; j < vms.size(); j++) {
+			SSH(vms.get(j), privateKey, commands[4]);
+		}
+		//initialise agents
+		for (int j = 1; j < vms.size(); j++) {
+			SSH(vms.get(j), privateKey, commands[6]);
+		}
+		//initilise coordinator
+		SSH(vms.get(0), privateKey, commands[5]);
+		
 		//deploy the application on the swarm
-		SSH(vms.get(0), privateKey, commands[3]);
-		System.out.println("Application container stack deployed");
+		//SSH(vms.get(0), privateKey, commands[3]);
+		//System.out.println("Application container stack deployed");
+	}
+	
+	public static void demoAgents() throws IOException {
+		Menus.clearScreen();
+		/*
+		Scanner input = new Scanner(System.in);
+		System.out.println("Welcome to AutoMNS\n" + "Please enter the number of VMs to demonstrate: ");
+
+		int y = input.nextInt();
+		List<String> vms = new ArrayList<>();
+
+		Scanner ipScanner = new Scanner(System.in);
+
+		for (int x = 0; x < y; x++) {
+			System.out.println("Welcome to AutoMNS\n" + "Please enter the ip of your VM" + (x + 1) + ": ");
+			vms.add(ipScanner.next());
+		}
+		*/
+		//String privateKey;
+		//System.out.println("Enter the file path of your private key: ");
+		//privateKey = input.next();
+		String jamesPrivateKey = "C:\\Users\\James\\Downloads\\test.ppk";
+		
+		//intialise the platform on the reciever agent
+		SSH("18.232.183.161", jamesPrivateKey, "javac -classpath autoMNS/jade/lib/jade.jar -d classes autoMNS/jade/src/test0/receive0.java");
+		SSH("18.232.183.161", jamesPrivateKey, "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -agents a1:test0.receive0");
+		
+		//initialise the sender agent and send a message
+		SSH("44.195.186.234", jamesPrivateKey, "javac -classpath autoMNS/jade/lib/jade.jar -d classes autoMNS/jade/src/test0/send0.java");
+		SSH("44.195.186.234", jamesPrivateKey, "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -host 172.31.29.138 -port 1099 -agents coordinator:test0.send0");
+		
 	}
 	
 	public static String SSH(String ip, String filePath, String Command) throws IOException {

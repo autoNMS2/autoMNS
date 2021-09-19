@@ -42,8 +42,8 @@ public class Menus {
 		
 		System.out.println("Welcome to AutoMNS\n"
 				+ "Please select an option:\n"
-				+ "1. Add VMs \n"
-				+ "2. Initialise VMs \n"
+				+ "1. Initialise VMs \n"
+				+ "2. Demonstrate Agents \n"
 				+ "3. List VMs \n" 
 				+ "0. Back");
 		int i = input.nextInt();
@@ -53,7 +53,7 @@ public class Menus {
 			VMFunctions.addVMs();
 			break;
 		case 2:
-			System.out.println("Initilising, please wait...");
+			VMFunctions.demoAgents();
 			break;
 		case 3:
 			System.out.println("VMs:");

@@ -7,5 +7,7 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="C:/Users/James/Downloads/jsch-0.1.55.jar"/>
+	<classpathentry kind="lib" path="C:/Users/James/Downloads/JADE-all-4.5.0/JADE-bin-4.5.0.zip"/>
+	<classpathentry kind="lib" path="C:/Users/James/Downloads/JADE-all-4.5.0/JADE-bin-4.5.0/jade/lib/jade.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
