@@ -11,25 +11,9 @@ public class receive0 extends Agent {
             public void action() {
                 //reads and output the received msg
                 ACLMessage msg = receive();
-
                 if (msg != null) {
-                    String content = msg.getContent();
                     System.out.println(" Message to " + myAgent.getLocalName()
-                            + " received. Message is : " + content);
-                    switch (content) {
-                        case "Deploy Agents":
-                            //msgContent = "Deploy Agents";
-                            System.out.println("Deploying Agents");
-                            break;
-                        case "Deploy Services":
-                            //msgContent = "Deploy Services";
-                            System.out.println("Deploying Services");
-                            break;
-                        case "Kill services":
-                            //msgContent = "Kill services";
-                            System.out.println("Killinggggg services");
-                            break;
-                    }
+                            + " received. Message is : " + msg.getContent());
 
                     //sends a reply to the sender
                     ACLMessage reply = msg.createReply();
