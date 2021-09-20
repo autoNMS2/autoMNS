@@ -5,10 +5,11 @@ import jade.core.AID;
 import jade.core.behaviours.*;
 import jade.lang.acl.*;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class send0 extends Agent {
-    public void menu (){
+    public void menu () throws IOException {
         System.out.println("select command: " +
                 "\n 1. Deploy Agents " +
                 "\n 2. Deploy Services " +
@@ -25,8 +26,11 @@ public class send0 extends Agent {
         String msgContent = null;
         switch (cmd) {
             case 1:
+                String PrivateKey = "autoMNS/jade/src/test0/test.pem";
+                VMFunctions.SSH("172.31.23.202", PrivateKey, "javac -classpath autoMNS/jade/lib/jade.jar -d classes autoMNS/jade/src/test0/receive0.java");
+                VMFunctions.SSH("172.31.23.202", PrivateKey, "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -agents a1:test0.receive0");
                 msgContent = "Deploy Agents";
-                System.out.println("Deploy Agents");
+                System.out.println("Deploy Agent 1");
                 break;
             case 2:
                 msgContent = "Deploy Services";
@@ -76,7 +80,11 @@ public class send0 extends Agent {
                     System.out.println("Message"+msg.getContent()
                             + " ( " + msg.getSender().getName()+ " )");
                 block();
-                menu();
+                try {
+                    menu();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

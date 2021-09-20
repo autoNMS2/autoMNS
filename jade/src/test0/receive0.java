@@ -19,7 +19,7 @@ public class receive0 extends Agent {
                     switch (content) {
                         case "Deploy Agents":
                             //msgContent = "Deploy Agents";
-                            System.out.println("Deploying Agents");
+                            System.out.println("Agent 1 Alive!");
                             break;
                         case "Deploy Services":
                             //msgContent = "Deploy Services";
