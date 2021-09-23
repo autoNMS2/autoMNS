@@ -27,8 +27,8 @@ public class send0 extends Agent {
         switch (cmd) {
             case 1:
                 String PrivateKey = "autoMNS/jade/src/test0/test.pem";
-                VMFunctions.SSH("172.31.23.202", PrivateKey, "javac -classpath autoMNS/jade/lib/jade.jar -d classes autoMNS/jade/src/test0/receive0.java");
-                VMFunctions.SSH("172.31.23.202", PrivateKey, "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -agents a1:test0.receive0");
+                VMFunctions.SSH("172.31.23.202", PrivateKey, "javac -classpath autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/receive0.java");
+                VMFunctions.SSH("172.31.23.202", PrivateKey, "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -agents a1:automnsCLI.receive0");
                 msgContent = "Deploy Agents";
                 System.out.println("Deploy Agent 1");
                 break;
