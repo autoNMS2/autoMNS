@@ -1,6 +1,5 @@
 package automnsCLI;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -12,60 +11,34 @@ public class Menus {
 		
 		System.out.println("Welcome to AutoMNS\n"
 				+ "Please select an option:\n"
-				+ "1. VM Options \n"
-				+ "2. Docker Options \n"
+				+ "1. Initialise VMs \n"
+				+ "2. Initialise Agents \n"
 				+ "3. User Options \n" 
 				+ "4. Open Application \n"
-				+ "5. Alistair Test Command \n"
 				+ "0. Exit Application");
 		int i = input.nextInt();
 		
 		switch(i) {
-			case 1:
-				VMOptions();
-				break;
-			case 2:
-				DockerOptions();
-				break;
-			case 3:
-				UserOptions();
-				break;
-			case 4:
-				LaunchApp();
-				break;
-			case 5:
-				ContainerFunctions.TestContainerAgent();
-				break;
-			case 0:
-				System.exit(0);
+		case 1:
+			VMOptions();
+			break;
+		case 2:
+			DockerOptions();
+			break;
+		case 3:
+			UserOptions();
+			break;
+		case 4:
+			LaunchApp();
+			break;
+		case 0:
+			System.exit(0);
 		}
 	}
 	
 	public static void VMOptions() throws IOException {
 		clearScreen();
-		Scanner input = new Scanner(System.in);
-		
-		System.out.println("Welcome to AutoMNS\n"
-				+ "Please select an option:\n"
-				+ "1. Initialise VMs \n"
-				+ "2. Demonstrate Agents \n"
-				+ "3. List VMs \n" 
-				+ "0. Back");
-		int i = input.nextInt();
-		
-		switch(i) {
-		case 1:
-			VMFunctions.addVMs();
-			break;
-		case 2:
-			VMFunctions.demoAgents();
-			break;
-		case 3:
-			System.out.println("VMs:");
-			break;
-		case 0:
-			MainMenu();
-		}
+		VMFunctions.addVMs();
 	}
 	
 	public static void DockerOptions() throws IOException {
