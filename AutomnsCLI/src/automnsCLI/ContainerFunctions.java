@@ -7,11 +7,6 @@ import jade.wrapper.AgentController;
 import jade.wrapper.StaleProxyException;
 
 import java.io.IOException;
-import java.net.Inet4Address;
-import java.net.InetAddress;
-import java.net.InterfaceAddress;
-import java.net.NetworkInterface;
-import java.util.Enumeration;
 
 public class ContainerFunctions {
 
@@ -25,32 +20,38 @@ public class ContainerFunctions {
 
     public static void TestContainerAgent() throws IOException {
         AgentContainer agentContainer = CreateContainer();
-        AgentController agent = CreateAgent(agentContainer, ProcessWatcher.class);
-
+        //AgentController agent =
+        CreateAgent(agentContainer, ServiceAgent.class, "Notepad");
+        // agent =
+        //  CreateAgent(agentContainer, ServiceAgent.class, "explorer");
     }
 
-    public static AgentController CreateAgent(AgentContainer agentContainer, Class agentType) {
+    public static AgentController CreateAgent(AgentContainer agentContainer, Class agentType, String runProcess) {
         try {
-            AgentController agentController = agentContainer.createNewAgent("a1", agentType.getName(), (Object[]) null);
+            Object[] agentParemeters = new Object[]{runProcess};
+
+            AgentController agentController = agentContainer.createNewAgent(agentType.getName() + runProcess, agentType.getName(), agentParemeters);
             agentController.start();
             return agentController;
-        } catch (StaleProxyException var9) {
-            var9.printStackTrace();
+        } catch (StaleProxyException exc) {
+            exc.printStackTrace();
             return null;
         }
     }
 
     public static AgentContainer CreateContainer() throws IOException {
 
-        String hostIP = GeneralFunctions.GetLocalIP();
+        String hostIP = GeneralFunctions.GetLocalIP();  //  might have trouble on vms, not sure what ip will work, this worked locally
         //  String hostIP = Inet4Address.getLocalHost().toString();
-        //  hostIP = "192.168.0.4";
+        //  hostIP = null;  // this works I guess
         System.out.println(hostIP);
         short port = 1099;
         String parameterIP = hostIP;
         String parameterPort = "7778";
         Runtime runtimeInstance = Runtime.instance();
         ProfileImpl containerProfile = new ProfileImpl(hostIP, port, "PlatformHost", true);
+
+        //  parameterIP ==  containerProfile.getProperties().get("host")
 
         containerProfile.setParameter("mtps", "jade.mtp.http.MessageTransportProtocol(http://" + parameterIP + ":" + parameterPort + "/acc)");
         return runtimeInstance.createMainContainer(containerProfile);

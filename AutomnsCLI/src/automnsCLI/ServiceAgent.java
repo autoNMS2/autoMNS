@@ -9,17 +9,18 @@ import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.lang.Process;
 
-public class ProcessWatcher extends Agent {
+public class ServiceAgent extends Agent {
 
     int cycles;
     Process watchedProcess;
-    String watcherWatcher;
-    String status;
-    String runProcess = "Notepad";
+    String coordinatorID;
+    String serviceStatus;
+    //  String runProcess = "Notepad";
 
     void StartProcess()
     {
-        status = "Starting";
+        String runProcess = getArguments()[0].toString();
+        serviceStatus = "Starting";
         try {
             //  String line;
             watchedProcess = Runtime.getRuntime().exec(runProcess);
@@ -38,15 +39,16 @@ public class ProcessWatcher extends Agent {
     void Message()
     {
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-        msg.addReceiver(new AID(watcherWatcher, AID.ISLOCALNAME));
-        msg.setContent("Process " + watchedProcess.info() +  "\n Status: " + status);
-        System.out.println(msg.getContent());
+        msg.addReceiver(new AID(coordinatorID, AID.ISLOCALNAME));
+        msg.setContent("Process " + watchedProcess.info() +  "\n Status: " + serviceStatus);
+        System.out.println("Message: " + msg.getContent());
     }
 
     String GetNewStatus()
     {
         if (watchedProcess != null) {
             if (watchedProcess.isAlive()) {
+                System.out.println(watchedProcess.toString() + " is alive");
                 return "Alive";
             }
             else return "Dead";
@@ -58,9 +60,9 @@ public class ProcessWatcher extends Agent {
 
     boolean StatusChange(String newStatus)
     {
-        if (status == null || status != newStatus)  // status change
+        if (serviceStatus == null || serviceStatus != newStatus)  // status change
         {
-            status = newStatus;
+            serviceStatus = newStatus;
             return true;
         }
         else return false;
@@ -69,20 +71,25 @@ public class ProcessWatcher extends Agent {
     protected void setup() {
         System.out.println("Agent Initiated " + this.getLocalName() + ", Fullname: [" + this.getName() + "]");
         //receives and output the reply from a1
-        watcherWatcher = this.getLocalName();   // this will be the coordinating agent
+        coordinatorID = this.getLocalName();   // this will be the coordinating agent
         StartProcess();
 
         addBehaviour(new CyclicBehaviour(this) {
             public void action() {
                 cycles++;
-                if (cycles > 10)
+                if (cycles % 10000 == 0)
                 {
-                    doDelete();
+                    System.out.println("Megacycle: " + cycles/1000);
                 }
-                System.out.println("Cycle: " + cycles);
+
                 String newStatus = GetNewStatus();
-                if (status == "Dead")
+                if (watchedProcess.isAlive() == false)//serviceStatus == "Dead")
                 {
+                    if (cycles > 100000 )
+                    {
+                        System.out.println(watchedProcess.toString());
+                        doDelete();
+                    }
                     StartProcess();
                 } else
                 if (StatusChange(newStatus))
