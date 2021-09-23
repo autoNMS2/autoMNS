@@ -55,7 +55,7 @@ public class VMFunctions {
 		System.out.println("VMs initialised, woo!");
 		
 		//add the first vm to a swarm and get the swarm token
-		String output = SSH(vms.get(0), privateKey, commands[1]);	
+		String output = SSH(vms.get(0), privateKey, commands[1]);
 		String joinToken = "sudo " + output.substring(142, 273);
 		//print for error checking purposes
 		System.out.println("Token: " + joinToken);

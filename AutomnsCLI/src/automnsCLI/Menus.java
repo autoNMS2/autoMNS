@@ -1,5 +1,6 @@
 package automnsCLI;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -15,24 +16,28 @@ public class Menus {
 				+ "2. Docker Options \n"
 				+ "3. User Options \n" 
 				+ "4. Open Application \n"
+				+ "5. Alistair Test Command \n"
 				+ "0. Exit Application");
 		int i = input.nextInt();
 		
 		switch(i) {
-		case 1:
-			VMOptions();
-			break;
-		case 2:
-			DockerOptions();
-			break;
-		case 3:
-			UserOptions();
-			break;
-		case 4:
-			LaunchApp();
-			break;
-		case 0:
-			System.exit(0);
+			case 1:
+				VMOptions();
+				break;
+			case 2:
+				DockerOptions();
+				break;
+			case 3:
+				UserOptions();
+				break;
+			case 4:
+				LaunchApp();
+				break;
+			case 5:
+				ContainerFunctions.TestContainerAgent();
+				break;
+			case 0:
+				System.exit(0);
 		}
 	}
 	
