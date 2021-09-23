@@ -16,7 +16,7 @@ public class receive0 extends Agent {
                             + " received. Message is : " + msg.getContent());
 
                     //detection
-
+                  
 
                     //sends a reply to the sender
                     ACLMessage reply = msg.createReply();
