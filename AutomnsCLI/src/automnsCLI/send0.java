@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class send0 extends Agent {
-    public void menu () throws IOException {
+    public void menu (String[] args) throws IOException {
         System.out.println("select command: " +
                 "\n 1. Deploy Agents " +
                 "\n 2. Deploy Services " +
@@ -23,16 +23,20 @@ public class send0 extends Agent {
                 "");
         Scanner scanner = new Scanner(System.in);
         int cmd = scanner.nextInt();
+	String[] ip = {"172.31.23.202","","","","","",""};
         String msgContent = null;
         switch (cmd) {
             case 1:
                 String PrivateKey = "jade/src/test0/test.pem";
                 String hostIp = "172.17.0.1";
-                VMFunctions.SSH("172.31.23.202", PrivateKey, "javac -classpath autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/receive0.java");
-                VMFunctions.SSH("172.31.23.202", PrivateKey, "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -host " + hostIp + " -port 1099 -agents main:automnsCLI.receive0");
-                msgContent = "Deploy Agents";
-                System.out.println("Deploy Agent 1");
-                break;
+		for(i=0;i<7;i++)
+		{
+                	VMFunctions.SSH("ip[i]", PrivateKey, "javac -classpath autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/receive0.java");
+                	VMFunctions.SSH("ip[i]", PrivateKey, "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -host " + hostIp + " -port 1099 -agents main:automnsCLI.receive0");
+                	msgContent = "Deploy Agents";
+                	System.out.println("Deploying Agent"+i);
+                	break;
+		}
             case 2:
                 msgContent = "Deploy Services";
                 System.out.println("Deploy Services");
@@ -65,6 +69,8 @@ public class send0 extends Agent {
                 msgContent = "Nuke Swarm";
                 System.out.println("Nuke Swarm");
                 break;
+            default:
+	        break;
         }
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
         msg.setContent(msgContent);
