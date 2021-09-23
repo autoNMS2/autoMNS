@@ -1,5 +1,6 @@
 package automnsCLI;
 
+import java.io.IOException;
 import jade.core.Agent;
 import jade.core.behaviours.*;
 import jade.lang.acl.*;
@@ -17,6 +18,15 @@ public class recommender_agent extends Agent {
                             + " received. Message is : " + content);
                     switch (content) {
                         case "Deploy Services":
+			    //refer autheticator_agent for output processing
+			    Runtime r = Runtime.getRuntime();
+                        	String cmd = "docker stack deploy --compose-file /autoMNS/Prototype/lib/Services/recommender.yaml Teastore ";
+                        	
+						try {
+							r.exec(cmd);
+						} catch (IOException e) {
+							e.printStackTrace();
+						} 
                             content = "Recommender service deployed";
                             break;
                     }

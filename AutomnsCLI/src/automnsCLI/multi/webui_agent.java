@@ -1,5 +1,6 @@
 package automnsCLI;
 
+import java.io.IOException;
 import jade.core.Agent;
 import jade.core.behaviours.*;
 import jade.lang.acl.*;
@@ -17,8 +18,19 @@ public class webui_agent extends Agent {
                             + " received. Message is : " + content);
                     switch (content) {
                         case "Deploy Services":
+		            //refer autheticator_agent for output processing
+			    Runtime r = Runtime.getRuntime();
+                        	String cmd = "docker stack deploy --compose-file /autoMNS/Prototype/lib/Services/webui.yaml TeaStore ";
+                        	
+						try {
+							r.exec(cmd);
+						} catch (IOException e) {
+							e.printStackTrace();
+						} 
                             content = "Webui service deployed";
                             break;
+			    default:
+			    break;
                     }
                     //sends a reply to the sender
                     ACLMessage reply = msg.createReply();

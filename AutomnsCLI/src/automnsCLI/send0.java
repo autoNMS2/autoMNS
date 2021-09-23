@@ -29,7 +29,7 @@ public class send0 extends Agent {
             case 1:
                 String PrivateKey = "jade/src/test0/test.pem";
                 String hostIp = "172.17.0.1";
-		for(i=0;i<7;i++)
+		for(int i=0;i<7;i++)
 		{
                 	VMFunctions.SSH("ip[i]", PrivateKey, "javac -classpath autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/receive0.java");
                 	VMFunctions.SSH("ip[i]", PrivateKey, "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -host " + hostIp + " -port 1099 -agents main:automnsCLI.receive0");
