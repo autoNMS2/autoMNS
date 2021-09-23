@@ -23,7 +23,8 @@ public class coordinator extends Agent {
                 "");
         Scanner scanner = new Scanner(System.in);
         int cmd = scanner.nextInt();
-
+	
+	 //add ip here
         String[] ip = {"172.31.23.202","","","","","",""};
 	String[] agent = {"authenticator_agent","db_agent","image_agent","persistence_agent","recommender_agent","registry_agent","webui_agent"};
         String msgContent = null;
