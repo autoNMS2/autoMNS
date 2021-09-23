@@ -15,22 +15,21 @@ public class ContainerFunctions {
     }
 
     public static void CreateRemoteAgent() {
-
     }
 
     public static void TestContainerAgent() throws IOException {
         AgentContainer agentContainer = CreateContainer();
-        //AgentController agent =
-        CreateAgent(agentContainer, ServiceAgent.class, "Notepad");
-        // agent =
-        //  CreateAgent(agentContainer, ServiceAgent.class, "explorer");
+        AgentController coordinator = CreateAgent(agentContainer, CoordinatorAgent.class, new Object[]{"Notepad", "Notepad"}, "0");
+
+        //AgentContainer agentContainer2 = CreateContainer();
+        //  AgentController agent2 = CreateAgent(agentContainer, ServiceAgent.class, new Object[]{"runProcess"}, "1");
     }
 
-    public static AgentController CreateAgent(AgentContainer agentContainer, Class agentType, String runProcess) {
+    public static AgentController CreateAgent(AgentContainer agentContainer, Class agentType, Object[] agentParameters, String index) {
         try {
-            Object[] agentParemeters = new Object[]{runProcess};
+            //  Object[] agentParemeters = new Object[]{runProcess};
 
-            AgentController agentController = agentContainer.createNewAgent(agentType.getName() + runProcess, agentType.getName(), agentParemeters);
+            AgentController agentController = agentContainer.createNewAgent(agentType.getName() + index, agentType.getName(), agentParameters);
             agentController.start();
             return agentController;
         } catch (StaleProxyException exc) {

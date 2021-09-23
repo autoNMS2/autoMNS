@@ -185,9 +185,8 @@ public class VMFunctions {
 			session.disconnect();
 			return output;
 		} catch (JSchException e) {
+			System.out.println(e.getCause());
 			throw new RuntimeException("Error during SSH command execution. Command: " + command);
 		}
-
 	}
-
 }
