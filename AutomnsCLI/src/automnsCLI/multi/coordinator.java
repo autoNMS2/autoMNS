@@ -33,8 +33,8 @@ public class coordinator extends Agent {
                 String hostIp = "172.17.0.1";
 		for(int i=0;i<7;i++)
 		{
-                	VMFunctions.SSH("ip[i]", PrivateKey, "javac -classpath autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/"+agent[i]+".java");
-                	VMFunctions.SSH("ip[i]", PrivateKey, "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -host " + hostIp + " -port 1099 -agents main:automnsCLI.receive0");
+                	VMFunctions.SSH(ip[i], PrivateKey, "javac -classpath autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/"+agent[i]+".java");
+                	VMFunctions.SSH(ip[i], PrivateKey, "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -host " + hostIp + " -port 1099 -agents main:automnsCLI."+agent[i]+"");
                 	msgContent = "Deploy Agents";
                 	System.out.println("Deploying Agent"+i);
 		}
