@@ -9,6 +9,13 @@ import java.io.IOException;
 public class authenticator_agent extends Agent {
     protected void setup() {
         // create behaviour for receive and send message to Sender
+                        Runtime r = Runtime.getRuntime();
+                      	String cmd = "docker stack deploy --compose-file /autoMNS/Prototype/lib/Services/auth.yaml TeaStore ";
+						try {
+							r.exec(cmd);
+						} catch (IOException e) {
+							e.printStackTrace();
+						} 
         addBehaviour(new CyclicBehaviour(this) {
             public void action() {
                 //reads and output the received msg

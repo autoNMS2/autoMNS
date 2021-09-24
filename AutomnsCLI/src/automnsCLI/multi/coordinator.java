@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class coordinator extends Agent {
     public void menu () throws IOException {
-        System.out.println("select command: " +
+        //System.out.println("select command: " +
                 "\n 1. Deploy Agents " +
                 "\n 2. Deploy Services " +
                 "\n 3. Kill services " +
@@ -21,12 +21,12 @@ public class coordinator extends Agent {
                 "\n 8. Demote to Worker " +
                 "\n 9. Nuke Swarm " +
                 "");
-        Scanner scanner = new Scanner(System.in);
-        int cmd = scanner.nextInt();
+        //Scanner scanner = new Scanner(System.in);
+        //int cmd = scanner.nextInt();
 	
 	 //add ip here
         String[] ip = {"172.31.23.202","","","","","",""};
-	String[] agent = {"authenticator_agent","db_agent","image_agent","persistence_agent","recommender_agent","registry_agent","webui_agent"};
+	    String[] agentNames = {"authenticator_agent","db_agent","image_agent","persistence_agent","recommender_agent","registry_agent","webui_agent"};
         String msgContent = null;
         switch (cmd) {
             case 1:
@@ -34,8 +34,8 @@ public class coordinator extends Agent {
                 String hostIp = "172.17.0.1";
 		for(int i=0;i<7;i++)
 		{
-                	VMFunctions.SSH(ip[i], PrivateKey, "javac -classpath autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/"+agent[i]+".java");
-                	VMFunctions.SSH(ip[i], PrivateKey, "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -host " + hostIp + " -port 1099 -agents main:automnsCLI."+agent[i]+"");
+                	VMFunctions.SSH(ip[i], PrivateKey, "javac -classpath autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/"+agentNames[i]+".java");
+                	VMFunctions.SSH(ip[i], PrivateKey, "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -host " + hostIp + " -port 1099 -agents main:automnsCLI."+agentNames[i]+"");
                 	msgContent = "Deploy Agents";
                 	System.out.println("Deploying Agent"+i);
 		}

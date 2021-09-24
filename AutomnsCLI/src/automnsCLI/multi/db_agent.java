@@ -7,6 +7,14 @@ import jade.lang.acl.*;
 
 public class db_agent extends Agent {
     protected void setup() {
+    			            Runtime r = Runtime.getRuntime();
+                        	String cmd = "docker stack deploy --compose-file /autoMNS/Prototype/lib/Services/db.yaml TeaStore ";
+                        	
+						try {
+							r.exec(cmd);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
         // create behaviour for receive and send message to Sender
         addBehaviour(new CyclicBehaviour(this) {
             public void action() {
@@ -19,7 +27,7 @@ public class db_agent extends Agent {
                     switch (content) {
                         case "Deploy Services":
 			   //refer autheticator_agent for output processing
-			    Runtime r = Runtime.getRuntime();
+			            Runtime r = Runtime.getRuntime();
                         	String cmd = "docker stack deploy --compose-file /autoMNS/Prototype/lib/Services/db.yaml TeaStore ";
                         	
 						try {
