@@ -42,12 +42,11 @@ public class VMFunctions {
 				"sudo apt-get install git -y\n sudo git clone https://github.com/autoNMS2/autoMNS.git",
 				"sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/all.yaml TeaStore",
 				"sudo apt update\n sudo apt install default-jre -y\n sudo apt install default-jdk -y\n",
-				"javac -classpath autoMNS/jade/lib/jade.jar -d classes autoMNS/jade/src/test0/send0.java\r\n "
-						+ MessageFormat.format(
-								"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -host {0} -port 1099 -agents coordinator:test0.send0\r\n",
-								vms.get(1)),
-				"javac -classpath autoMNS/jade/lib/jade.jar -d classes autoMNS/jade/src/test0/receive0.java\r\n "
-						+ "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -agents a1:test0.receive0\r\n" };
+				"javac -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/*.java",
+				"java -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar:classes jade.Boot -agents coordinator:automnsCLI.coordinator",
+				//"javac -classpath autoMNS/jade/lib/jade.jar -d classes autoMNS/jade/src/test0/receive0.java\r\n "
+				//		+ "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -agents a1:test0.receive0\r\n" 
+				};
 
 		for (int j = 1; j < vms.size(); j++) {
 			SSH(vms.get(j), privateKey, commands[0]);
@@ -110,8 +109,7 @@ public class VMFunctions {
 
 		// intialise the platform on the reciever agent
 		String[] agentCommands = {"javac -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/*.java",
-				"java -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar:classes jade.Boot -agents coordinator:automnsCLI.coordinator" + "(" + vms.get(1) + ","+ vms.get(2) + ","
-						+ vms.get(3) + ","+ vms.get(4) + ","+ vms.get(5) + ","+ vms.get(6) + ","+ vms.get(7) + ","+ vms.get(8) + ")",
+				"java -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar:classes jade.Boot -agents coordinator:automnsCLI.coordinator",
 				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/db_agent.java",
 				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Database -host " + vms.get(1) + " -port 1099 -agents db:automnsCLI.db_agent",
 				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/authenticator_agent.java",
