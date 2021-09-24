@@ -1,12 +1,15 @@
 package automnsCLI;
 
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Scanner;
 
 public class Menus {
 	
 	public static void MainMenu() throws IOException {
-		clearScreen();
 		Scanner input = new Scanner(System.in);
 		
 		System.out.println("Welcome to AutoMNS\n"
@@ -23,7 +26,7 @@ public class Menus {
 			VMOptions();
 			break;
 		case 2:
-			DockerOptions();
+			VMFunctions.initialiseAgents();
 			break;
 		case 3:
 			UserOptions();
@@ -37,44 +40,11 @@ public class Menus {
 	}
 	
 	public static void VMOptions() throws IOException {
-		clearScreen();
 		VMFunctions.addVMs();
 	}
 	
-	public static void DockerOptions() throws IOException {
-		clearScreen();
-		Scanner input = new Scanner(System.in);
-		
-		System.out.println("Welcome to AutoMNS\n"
-				+ "Please select an option:\n"
-				+ "1. Initialise Swarm \n"
-				+ "2. Add workers to Swarm \n"
-				+ "3. Promote worker to Manager \n" 
-				+ "4. Demote Manager to Worker \n"
-				+ "5. Remove Node \n"
-				+ "6. Inspect Node \n"
-				+ "7. View Node Tasks \n"
-				+ "8. Nuke Swarm \n"
-				+ "0. Back");
-		int i = input.nextInt();
-		
-		switch(i) {
-		case 1:
-			System.out.println("Adding VMs...");
-			break;
-		case 2:
-			System.out.println("Initilising, please wait...");
-			break;
-		case 3:
-			System.out.println("VMs:");
-			break;
-		case 0:
-			MainMenu();
-		}
-	}
 	
 	public static void UserOptions() throws IOException {
-		clearScreen();
 		Scanner input = new Scanner(System.in);
 		
 		System.out.println("Welcome to AutoMNS\n"
@@ -117,13 +87,17 @@ public class Menus {
 		}
 	}
 	
-	public static void LaunchApp() {
-		clearScreen();
+	public static void LaunchApp() throws IOException {
 		System.out.println("Launching App");
+		String URL = "https://google.com/";
+		openWebpage(URL);
+		MainMenu();
 	}
-	
-	public static void clearScreen() {  
-	    System.out.print("\033[H\033[2J");  
-	    System.out.flush();  
+	public static void openWebpage(String urlString) {
+	    try {
+	        Desktop.getDesktop().browse(new URL(urlString).toURI());
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 	}
 }

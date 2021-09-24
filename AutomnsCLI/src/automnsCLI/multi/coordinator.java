@@ -1,4 +1,4 @@
-package automnsCLI;
+package automnsCLI.multi;
 
 import jade.core.Agent;
 import jade.core.AID;
@@ -8,9 +8,11 @@ import jade.lang.acl.*;
 import java.io.IOException;
 import java.util.Scanner;
 
+import automnsCLI.VMFunctions;
+
 public class coordinator extends Agent {
     public void menu () throws IOException {
-        //System.out.println("select command: " +
+        System.out.println("select command: " +
                 "\n 1. Deploy Agents " +
                 "\n 2. Deploy Services " +
                 "\n 3. Kill services " +
@@ -21,21 +23,21 @@ public class coordinator extends Agent {
                 "\n 8. Demote to Worker " +
                 "\n 9. Nuke Swarm " +
                 "");
-        //Scanner scanner = new Scanner(System.in);
-        //int cmd = scanner.nextInt();
+        Scanner scanner = new Scanner(System.in);
+        int cmd = scanner.nextInt();
 	
 	 //add ip here
-        String[] ip = {"172.31.23.202","","","","","",""};
-	    String[] agentNames = {"authenticator_agent","db_agent","image_agent","persistence_agent","recommender_agent","registry_agent","webui_agent"};
+       // String[] ip = {"172.31.23.202","","","","","",""};
+	String[] agent = {"authenticator_agent","db_agent","image_agent","persistence_agent","recommender_agent","registry_agent","webui_agent"};
         String msgContent = null;
         switch (cmd) {
             case 1:
-                String PrivateKey = "jade/src/test0/test.pem";
+                String PrivateKey = "jade/src/test0/AWSKey.ppk";
                 String hostIp = "172.17.0.1";
 		for(int i=0;i<7;i++)
 		{
-                	VMFunctions.SSH(ip[i], PrivateKey, "javac -classpath autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/"+agentNames[i]+".java");
-                	VMFunctions.SSH(ip[i], PrivateKey, "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -host " + hostIp + " -port 1099 -agents main:automnsCLI."+agentNames[i]+"");
+                	//VMFunctions.SSH(ip[i], PrivateKey, "javac -classpath autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/"+agent[i]+".java");
+                	//VMFunctions.SSH(ip[i], PrivateKey, "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -host " + hostIp + " -port 1099 -agents main:automnsCLI."+agent[i]);
                 	msgContent = "Deploy Agents";
                 	System.out.println("Deploying Agent"+i);
 		}
@@ -85,7 +87,49 @@ public class coordinator extends Agent {
         msg.addReceiver(new AID("Webui", AID.ISLOCALNAME));
         send(msg);
     }
+    
     protected void setup() {
+        String privateKey = "jade/src/test0/AWSKey.ppk";
+        String[] ip = new String[getArguments().length];
+    	for (int i = 0; i < ip.length; i++) {
+    		ip[i] = getArguments()[i].toString();
+    		System.out.println(ip[i]);
+    	}
+    	String coordinatorPrivateIp = "172.31.31.191";
+    	String[] agentCommands = {"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/db_agent.java",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Database -host " + coordinatorPrivateIp + " -port 1099 -agents db:automnsCLI.db_agent",
+				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/authenticator_agent.java",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Authenticator -host " + coordinatorPrivateIp + " -port 1099 -agents Auth:automnsCLI.authenticator_agent",
+				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/image_agent.java",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Image -host " + coordinatorPrivateIp + " -port 1099 -agents Image:automnsCLI.image_agent",
+				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/persistence_agent.java",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Persistence -host " + coordinatorPrivateIp + " -port 1099 -agents Persistence:automnsCLI.persistence_agent",
+				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/recommender_agent.java",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Recommender -host " + coordinatorPrivateIp + " -port 1099 -agents Recommender:automnsCLI.recommender_agent",
+				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/registry_agent.java",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Registry -host " + coordinatorPrivateIp + " -port 1099 -agents Registry:automnsCLI.registry_agent",
+				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/webui_agent.java",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Webui -host " + coordinatorPrivateIp + " -port 1099 -agents Webui:automnsCLI.webui_agent"
+				};
+    	try {
+			VMFunctions.SSH(ip[1], privateKey, agentCommands[3]);
+	    	VMFunctions.SSH(ip[1], privateKey, agentCommands[4]);
+	    	VMFunctions.SSH(ip[2], privateKey, agentCommands[5]);
+	    	VMFunctions.SSH(ip[2], privateKey, agentCommands[6]);
+	    	VMFunctions.SSH(ip[3], privateKey, agentCommands[7]);
+	    	VMFunctions.SSH(ip[3], privateKey, agentCommands[8]);
+	    	VMFunctions.SSH(ip[4], privateKey, agentCommands[9]);
+	    	VMFunctions.SSH(ip[4], privateKey, agentCommands[10]);
+	    	VMFunctions.SSH(ip[5], privateKey, agentCommands[11]);
+	    	VMFunctions.SSH(ip[5], privateKey, agentCommands[12]);
+	    	VMFunctions.SSH(ip[6], privateKey, agentCommands[13]);
+	    	VMFunctions.SSH(ip[6], privateKey, agentCommands[14]);
+	    	VMFunctions.SSH(ip[7], privateKey, agentCommands[15]);
+	    	VMFunctions.SSH(ip[7], privateKey, agentCommands[16]);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
         //receives and output the reply from a1
         addBehaviour(new CyclicBehaviour(this) {
@@ -95,11 +139,13 @@ public class coordinator extends Agent {
                     System.out.println("Message"+msg.getContent()
                             + " ( " + msg.getSender().getName()+ " )");
                 block();
+                /*
                 try {
                     menu();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                */
             }
         });
     }
