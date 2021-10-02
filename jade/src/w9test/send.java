@@ -1,4 +1,4 @@
-package automnsCLI;
+package w9test;
 
 import jade.core.Agent;
 import jade.core.AID;

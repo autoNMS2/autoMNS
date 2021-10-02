@@ -1,4 +1,4 @@
-package test2;
+package w9test;
 
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
