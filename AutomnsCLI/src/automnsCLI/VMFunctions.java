@@ -13,8 +13,92 @@ import com.jcraft.jsch.*;
 
 public class VMFunctions {
 	
+	private static List<String> VMs;
+	
+	public static List<String> getVMS(){
+		return VMs;
+	}
+	
+	public static void setVMS(List<String> newVMS) {
+		VMFunctions.VMs = newVMS;
+	}
+	
+	public static final String[] Commands = {
+			"sudo apt-get update -y\n sudo apt-get install -y\r\n" + "apt-transport-https -y\r\n"
+			+ "ca-certificates -y\r\n" + "curl -y\r\n" + "gnupg -y\r\n"
+			+ "lsb-release -y\n sudo apt-get install docker.io -y\nsudo docker -v",
+			"sudo docker swarm init --advertise-addr ",
+			"sudo apt-get install git -y\n sudo git clone https://github.com/autoNMS2/autoMNS.git",
+			"sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/all.yaml TeaStore",
+			"sudo apt update\n sudo apt install default-jre -y\n sudo apt install default-jdk -y\n",
+			"javac -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/*.java",
+			"java -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar:classes jade.Boot -agents coordinator:automnsCLI.coordinator"
+	};
+	
 	public static void addVMs() throws IOException {
+		//create a list variable and read the user's ips from the file
 		List<String> vms = new ArrayList<>();
+		vms = getVmConfig();
+		//set the vms list
+		setVMS(vms);
+		//update vms
+		updateVMs();
+		// add the first vm to a swarm and get the swarm token
+		addVMsToSwarm();
+		// install git and pull repository on vms
+		gitSetup();
+		// install java on vms
+		javaSetup();
+		//wait for user input before returning to main menu
+        System.out.println("VMs initialised.\n" + "Press any key and then enter to return to main menu...");
+		String userInput;
+		Scanner input = new Scanner(System.in);
+		userInput = input.next();
+		Menus.MainMenu();
+		}
+	
+	public static void updateVMs() throws IOException {
+		//runs commands on each of the user's vms that updates them
+		List<String> localVMs = getVMS();
+		String privateKey = localVMs.get(0);
+		for (int j = 1; j < localVMs.size(); j++) {
+			SSH(localVMs.get(j), privateKey, Commands[0]);
+		}
+	}
+	
+	public static void addVMsToSwarm() throws IOException {
+		//makes the first vm in the list a swarm manager, then adds all other vms to swarm as workers
+		List<String> localVMs = getVMS();
+		String privateKey = localVMs.get(0);
+		// add the first vm to a swarm and get the swarm token
+		String output = SSH(localVMs.get(1), privateKey, Commands[1] + localVMs.get(1));
+		String joinToken = "sudo " + output.substring(142, 273);
+		// add other vms to swarm
+		for (int j = 2; j < localVMs.size(); j++) {
+			SSH(localVMs.get(j), privateKey, joinToken);
+		}
+	}
+	
+	public static void gitSetup() throws IOException {
+		//installs git on vms then pulls autoMNS repository to vms
+		List<String> localVMs = getVMS();
+		String privateKey = localVMs.get(0);
+		for (int j = 1; j < localVMs.size(); j++) {
+			SSH(localVMs.get(j), privateKey, Commands[2]);
+		}
+	}
+	
+	public static void javaSetup() throws IOException {
+		//installs jdk and jre on each vm
+		List<String> localVMs = getVMS();
+		String privateKey = localVMs.get(0);
+		for (int j = 1; j < localVMs.size(); j++) {
+			SSH(localVMs.get(j), privateKey, Commands[4]);
+		}
+	}
+	
+	public static List<String> getVmConfig(){
+		List<String> localVmsList = new ArrayList<>();
 		Scanner input = new Scanner(System.in);
 		System.out.println("Welcome to AutoMNS\n" + "Please enter the path of your VM config file: ");
 
@@ -23,67 +107,15 @@ public class VMFunctions {
 		      File myObj = new File(filePath);
 		      Scanner myReader = new Scanner(myObj);
 		      while (myReader.hasNextLine()) {
-		        vms.add(myReader.nextLine().replaceAll("\\s+",""));
+		    	  localVmsList.add(myReader.nextLine().replaceAll("\\s+",""));
 		      }
 		      myReader.close();
 		    } catch (FileNotFoundException e) {
 		      System.out.println("An error occurred.");
 		      e.printStackTrace();
 		    }
-		//first element in vms should always be private key path
-		System.out.println(vms.get(0));
-		String privateKey = vms.get(0);
-
-		String[] commands = {
-				"sudo apt-get update -y\n sudo apt-get install -y\r\n" + "apt-transport-https -y\r\n"
-						+ "ca-certificates -y\r\n" + "curl -y\r\n" + "gnupg -y\r\n"
-						+ "lsb-release -y\n sudo apt-get install docker.io -y\nsudo docker -v",
-				"sudo docker swarm init --advertise-addr " + vms.get(1),
-				"sudo apt-get install git -y\n sudo git clone https://github.com/autoNMS2/autoMNS.git",
-				"sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/all.yaml TeaStore",
-				"sudo apt update\n sudo apt install default-jre -y\n sudo apt install default-jdk -y\n",
-				"javac -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/*.java",
-				"java -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar:classes jade.Boot -agents coordinator:automnsCLI.coordinator",
-				//"javac -classpath autoMNS/jade/lib/jade.jar -d classes autoMNS/jade/src/test0/receive0.java\r\n "
-				//		+ "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -agents a1:test0.receive0\r\n" 
-				};
-
-		for (int j = 1; j < vms.size(); j++) {
-			SSH(vms.get(j), privateKey, commands[0]);
-		}
-
-		// add the first vm to a swarm and get the swarm token
-		String output = SSH(vms.get(1), privateKey, commands[1]);
-		String joinToken = "sudo " + output.substring(142, 273);
-		// print for error checking purposes
-		//System.out.println("Token: " + joinToken);
-		// add other vms to swarm
-		for (int j = 2; j < vms.size(); j++) {
-			SSH(vms.get(j), privateKey, joinToken);
-		}
-		// install git and pull repository on vms
-		for (int j = 1; j < vms.size(); j++) {
-			SSH(vms.get(j), privateKey, commands[2]);
-		}
-		// install java on vms
-		for (int j = 1; j < vms.size(); j++) {
-			SSH(vms.get(j), privateKey, commands[4]);
-		}
-		// initialise agents
-		for (int j = 2; j < vms.size(); j++) {
-		//	SSH(vms.get(j), privateKey, commands[6]);
-		}
-		// initilise coordinator
-		//SSH(vms.get(1), privateKey, commands[5]);
-
-		// deploy the application on the swarm
-		// SSH(vms.get(0), privateKey, commands[3]);
-		// System.out.println("Application container stack deployed");
-        System.out.println("VMs initialised.\n" + "Press enter to return to main menu...");
-		String userInput;
-		userInput = input.next();
-		Menus.MainMenu();
-		}
+		return localVmsList;	
+	}
 	
 
 	public static void initialiseAgents() throws IOException {		
@@ -127,22 +159,6 @@ public class VMFunctions {
 				};
 				SSH(vms.get(1), privateKey, agentCommands[0]);
 				SSH(vms.get(1), privateKey, agentCommands[1]);
-				/*
-				SSH(vms.get(2), privateKey, agentCommands[3]);
-				SSH(vms.get(2), privateKey, agentCommands[4]);
-				SSH(vms.get(3), privateKey, agentCommands[5]);
-				SSH(vms.get(3), privateKey, agentCommands[6]);
-				SSH(vms.get(4), privateKey, agentCommands[7]);
-				SSH(vms.get(4), privateKey, agentCommands[8]);
-				SSH(vms.get(5), privateKey, agentCommands[9]);
-				SSH(vms.get(5), privateKey, agentCommands[10]);
-				SSH(vms.get(6), privateKey, agentCommands[11]);
-				SSH(vms.get(6), privateKey, agentCommands[12]);
-				SSH(vms.get(7), privateKey, agentCommands[13]);
-				SSH(vms.get(7), privateKey, agentCommands[14]);
-				SSH(vms.get(8), privateKey, agentCommands[15]);
-				SSH(vms.get(8), privateKey, agentCommands[16]);
-				*/
 				System.out.println("Agents Deployed");
 				Menus.MainMenu();
 	}

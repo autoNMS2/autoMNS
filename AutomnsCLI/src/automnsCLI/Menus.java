@@ -23,7 +23,7 @@ public class Menus {
 		
 		switch(i) {
 		case 1:
-			VMOptions();
+			VMFunctions.addVMs();
 			break;
 		case 2:
 			VMFunctions.initialiseAgents();
@@ -37,10 +37,6 @@ public class Menus {
 		case 0:
 			System.exit(0);
 		}
-	}
-	
-	public static void VMOptions() throws IOException {
-		VMFunctions.addVMs();
 	}
 	
 	
