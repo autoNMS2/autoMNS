@@ -32,7 +32,7 @@ public class Menus {
 			UserOptions();
 			break;
 		case 4:
-			LaunchApp();
+			VMFunctions.launchApplication();
 			break;
 		case 0:
 			System.exit(0);
@@ -83,17 +83,5 @@ public class Menus {
 		}
 	}
 	
-	public static void LaunchApp() throws IOException {
-		System.out.println("Launching App");
-		String URL = "https://google.com/";
-		openWebpage(URL);
-		MainMenu();
-	}
-	public static void openWebpage(String urlString) {
-	    try {
-	        Desktop.getDesktop().browse(new URL(urlString).toURI());
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-	}
+
 }
