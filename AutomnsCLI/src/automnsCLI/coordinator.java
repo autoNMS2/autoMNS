@@ -89,7 +89,7 @@ public class coordinator extends Agent {
     }
     
     protected void setup() {
-        String privateKey = "jade/src/test0/test.pem";
+        String privateKey = "jade/src/test0/AWSKey.ppk";
     	String coordinatorPrivateIp = "172.31.91.4";
     	String[] agentCommands = {
     			"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/db_agent.java",
