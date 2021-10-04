@@ -8,7 +8,7 @@ public class image_agent extends Agent {
 	
     protected void setup() {
 	    Runtime r = Runtime.getRuntime();
-    	String cmd = "docker stack deploy --compose-file /autoMNS/Prototype/lib/Services/image.yaml TeaStore ";
+    	String cmd = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/image.yaml TeaStore ";
     	
 	try {
 		r.exec(cmd);

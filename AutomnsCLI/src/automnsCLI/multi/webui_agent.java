@@ -8,7 +8,7 @@ import jade.lang.acl.*;
 public class webui_agent extends Agent {
     protected void setup() {
 	    Runtime r = Runtime.getRuntime();
-    	String cmd = "docker stack deploy --compose-file /autoMNS/Prototype/lib/Services/webui.yaml TeaStore ";
+    	String cmd = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/webui.yaml TeaStore ";
     	
 	try {
 		r.exec(cmd);

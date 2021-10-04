@@ -8,7 +8,7 @@ import jade.lang.acl.*;
 public class recommender_agent extends Agent {
     protected void setup() {
 	    Runtime r = Runtime.getRuntime();
-    	String cmd = "docker stack deploy --compose-file /autoMNS/Prototype/lib/Services/recommender.yaml Teastore ";
+    	String cmd = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/recommender.yaml Teastore ";
     	
 	try {
 		r.exec(cmd);
