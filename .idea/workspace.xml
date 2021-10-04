@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="39de0ab9-f73c-4d61-a78d-915e5d49de9f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/authenticator_agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/authenticator_agent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/db_agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/db_agent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/image_agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/image_agent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/persistence_agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/persistence_agent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/recommender_agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/recommender_agent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/registry_agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/registry_agent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/webui_agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/webui_agent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/coordinator.java" beforeDir="false" afterPath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/coordinator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
