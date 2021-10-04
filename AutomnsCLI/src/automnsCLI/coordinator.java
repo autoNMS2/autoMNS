@@ -1,4 +1,4 @@
-package automnsCLI;
+package automnsCLI.multi;
 
 import jade.core.Agent;
 import jade.core.AID;
@@ -10,139 +10,49 @@ import java.util.Scanner;
 
 import automnsCLI.VMFunctions;
 
-public class coordinator extends Agent {
-	
-    public void menu () throws IOException {
-        System.out.println("select command: " +
-                "\n 1. Deploy Agents " +
-                "\n 2. Deploy Services " +
-                "\n 3. Kill services " +
-                "\n 4. List nodes " +
-                "\n 5. Service reports " +
-                "\n 6. Inspect Service " +
-                "\n 7. Promote to Manager " +
-                "\n 8. Demote to Worker " +
-                "\n 9. Nuke Swarm " +
-                "");
-        Scanner scanner = new Scanner(System.in);
-        int cmd = scanner.nextInt();
-        //add ip here
-        // String[] ip = {"172.31.23.202","","","","","",""};
-		String[] agent = {"authenticator_agent","db_agent","image_agent","persistence_agent","recommender_agent","registry_agent","webui_agent"};
-	    String msgContent = null;
-        switch (cmd) {
-            case 1:
-                String PrivateKey = "jade/src/test0/AWSKey.ppk";
-                String hostIp = "172.17.0.1";
-		for(int i=0;i<7;i++)
-		{
-                	//VMFunctions.SSH(ip[i], PrivateKey, "javac -classpath autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/"+agent[i]+".java");
-                	//VMFunctions.SSH(ip[i], PrivateKey, "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -host " + hostIp + " -port 1099 -agents main:automnsCLI."+agent[i]);
-                	msgContent = "Deploy Agents";
-                	System.out.println("Deploying Agent"+i);
-		}
-                	break;
-		
-            case 2:
-                msgContent = "Deploy Services";
-                System.out.println("Deploy Services");
-                break;
-            case 3:
-                msgContent = "Kill services";
-                System.out.println("Kill services");
-                break;
-            case 4:
-                msgContent = "List nodes ";
-                System.out.println("List nodes ");
-                break;
-            case 5:
-                msgContent = "Service reports";
-                System.out.println("Service reports");
-                break;
-            case 6:
-                msgContent = "Inspect Service";
-                System.out.println("Inspect Service");
-                break;
-            case 7:
-                msgContent = "Promote to Manager";
-                System.out.println("Promote to Manager");
-                break;
-            case 8:
-                msgContent = "Demote to Worker";
-                System.out.println("Demote to Worker");
-                break;
-            case 9:
-                msgContent = "Nuke Swarm";
-                System.out.println("Nuke Swarm");
-                break;
-        }
-        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-        msg.setContent(msgContent);
-        msg.addReceiver(new AID("db", AID.ISLOCALNAME));
-        msg.addReceiver(new AID("Auth", AID.ISLOCALNAME));
-        msg.addReceiver(new AID("Image", AID.ISLOCALNAME));
-        msg.addReceiver(new AID("Persistence", AID.ISLOCALNAME));
-        msg.addReceiver(new AID("Recommender", AID.ISLOCALNAME));
-        msg.addReceiver(new AID("Registry", AID.ISLOCALNAME));
-        msg.addReceiver(new AID("Webui", AID.ISLOCALNAME));
-        send(msg);
-    }
-    
-    protected void setup() {
-        String privateKey = "jade/src/test0/AWSKey.ppk";
-    	String coordinatorPrivateIp = "172.31.91.4";
-    	String[] agentCommands = {
-    			"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/db_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Database -host " + coordinatorPrivateIp + " -port 1099 -agents db:automnsCLI.db_agent",
+public class coordinator extends Agent
+{
+    protected void setup()
+    {
+        String privateKey = "autoMNS/jade/src/test0/test.pem";
+    	String coordinatorPrivateIp = "172.31.88.244";
+    	String[] agentCommands =
+                {"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/db_agent.java",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Database -host " + coordinatorPrivateIp + " -port 1099 -agents db:automnsCLI.multi.db_agent",
 				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/authenticator_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Authenticator -host " + coordinatorPrivateIp + " -port 1099 -agents Auth:automnsCLI.authenticator_agent",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Authenticator -host " + coordinatorPrivateIp + " -port 1099 -agents Auth:automnsCLI.multi.authenticator_agent",
 				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/image_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Image -host " + coordinatorPrivateIp + " -port 1099 -agents Image:automnsCLI.image_agent",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Image -host " + coordinatorPrivateIp + " -port 1099 -agents Image:automnsCLI.multi.image_agent",
 				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/persistence_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Persistence -host " + coordinatorPrivateIp + " -port 1099 -agents Persistence:automnsCLI.persistence_agent",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Persistence -host " + coordinatorPrivateIp + " -port 1099 -agents Persistence:automnsCLI.multi.persistence_agent",
 				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/recommender_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Recommender -host " + coordinatorPrivateIp + " -port 1099 -agents Recommender:automnsCLI.recommender_agent",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Recommender -host " + coordinatorPrivateIp + " -port 1099 -agents Recommender:automnsCLI.multi.recommender_agent",
 				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/registry_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Registry -host " + coordinatorPrivateIp + " -port 1099 -agents Registry:automnsCLI.registry_agent",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Registry -host " + coordinatorPrivateIp + " -port 1099 -agents Registry:automnsCLI.multi.registry_agent",
 				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/webui_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Webui -host " + coordinatorPrivateIp + " -port 1099 -agents Webui:automnsCLI.webui_agent"
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Webui -host " + coordinatorPrivateIp + " -port 1099 -agents Webui:automnsCLI.multi.webui_agent"
 				};
-    	try {
-			VMFunctions.SSH("18.212.33.93", privateKey, agentCommands[3]);
-	    	VMFunctions.SSH("18.212.33.93", privateKey, agentCommands[4]);
-	    	VMFunctions.SSH("100.24.61.196", privateKey, agentCommands[5]);
-	    	VMFunctions.SSH("100.24.61.196", privateKey, agentCommands[6]);
-	    	VMFunctions.SSH("35.174.170.233", privateKey, agentCommands[7]);
-	    	VMFunctions.SSH("35.174.170.233", privateKey, agentCommands[8]);
-	    	VMFunctions.SSH("3.91.133.214", privateKey, agentCommands[9]);
-	    	VMFunctions.SSH("3.91.133.214", privateKey, agentCommands[10]);
-	    	VMFunctions.SSH("3.93.15.251", privateKey, agentCommands[11]);
-	    	VMFunctions.SSH("3.93.15.251", privateKey, agentCommands[12]);
-	    	VMFunctions.SSH("54.146.232.149", privateKey, agentCommands[13]);
-	    	VMFunctions.SSH("54.146.232.149", privateKey, agentCommands[14]);
-	    	VMFunctions.SSH("35.173.126.45", privateKey, agentCommands[15]);
-	    	VMFunctions.SSH("35.173.126.45", privateKey, agentCommands[16]);
-		} catch (IOException e1) {
+    	try
+        {
+			VMFunctions.SSH("54.164.12.150", privateKey, agentCommands[3]);
+	    	VMFunctions.SSH("54.164.12.150", privateKey, agentCommands[4]);
+	    	VMFunctions.SSH("3.86.155.186", privateKey, agentCommands[5]);
+	    	VMFunctions.SSH("3.86.155.186", privateKey, agentCommands[6]);
+	    	VMFunctions.SSH("3.92.197.213", privateKey, agentCommands[7]);
+	    	VMFunctions.SSH("3.92.197.213", privateKey, agentCommands[8]);
+	    	VMFunctions.SSH("52.87.213.182", privateKey, agentCommands[9]);
+	    	VMFunctions.SSH("52.87.213.182", privateKey, agentCommands[10]);
+	    	VMFunctions.SSH("3.83.121.76", privateKey, agentCommands[11]);
+	    	VMFunctions.SSH("3.83.121.76", privateKey, agentCommands[12]);
+	    	VMFunctions.SSH("3.83.141.155", privateKey, agentCommands[13]);
+	    	VMFunctions.SSH("3.83.141.155", privateKey, agentCommands[14]);
+	    	VMFunctions.SSH("18.205.116.211", privateKey, agentCommands[15]);
+	    	VMFunctions.SSH("18.205.116.211", privateKey, agentCommands[16]);
+		}
+        catch (IOException e1)
+        {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-
-//        receives and output the reply from a1
-//        addBehaviour(new CyclicBehaviour(this) {
-//            public void action() {
-//                ACLMessage msg = receive();
-//                if (msg != null)
-//                    System.out.println("Message"+msg.getContent()
-//                            + " ( " + msg.getSender().getName()+ " )");
-//                block();
-//                /*
-//                try {
-//                    menu();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//                */
-//            }
-//        });
     }
 }
