@@ -129,7 +129,7 @@ public class VMFunctions {
 		//The following array contains the commands necessary to initialise the coordinator agent on the first vm provided by the user
 		String[] agentCommands = 
 			{ "javac -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/*.java",
-			"java -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar:classes jade.Boot -agents coordinator:automnsCLI.multi.coordinator"};
+			  "java -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar:classes jade.Boot -agents coordinator:automnsCLI.coordinator"};
 		//get the list of vms from the user, if the config file has not yet been input then the length will be 0 and the user will be asked to input
 		List<String> vms = getVMS();
 			if (vms.size() == 0) {

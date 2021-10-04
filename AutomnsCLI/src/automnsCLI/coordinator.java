@@ -90,38 +90,38 @@ public class coordinator extends Agent {
     
     protected void setup() {
         String privateKey = "jade/src/test0/test.pem";
-    	String coordinatorPrivateIp = "172.31.91.222";
+    	String coordinatorPrivateIp = "172.31.91.4";
     	String[] agentCommands = {
     			"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/db_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Database -host " + coordinatorPrivateIp + " -port 1098 -agents db:automnsCLI.db_agent",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Database -host " + coordinatorPrivateIp + " -port 1099 -agents db:automnsCLI.db_agent",
 				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/authenticator_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Authenticator -host " + coordinatorPrivateIp + " -port 1098 -agents Auth:automnsCLI.authenticator_agent",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Authenticator -host " + coordinatorPrivateIp + " -port 1099 -agents Auth:automnsCLI.authenticator_agent",
 				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/image_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Image -host " + coordinatorPrivateIp + " -port 1098 -agents Image:automnsCLI.image_agent",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Image -host " + coordinatorPrivateIp + " -port 1099 -agents Image:automnsCLI.image_agent",
 				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/persistence_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Persistence -host " + coordinatorPrivateIp + " -port 1098 -agents Persistence:automnsCLI.persistence_agent",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Persistence -host " + coordinatorPrivateIp + " -port 1099 -agents Persistence:automnsCLI.persistence_agent",
 				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/recommender_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Recommender -host " + coordinatorPrivateIp + " -port 1098 -agents Recommender:automnsCLI.recommender_agent",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Recommender -host " + coordinatorPrivateIp + " -port 1099 -agents Recommender:automnsCLI.recommender_agent",
 				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/registry_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Registry -host " + coordinatorPrivateIp + " -port 1098 -agents Registry:automnsCLI.registry_agent",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Registry -host " + coordinatorPrivateIp + " -port 1099 -agents Registry:automnsCLI.registry_agent",
 				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/webui_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Webui -host " + coordinatorPrivateIp + " -port 1098 -agents Webui:automnsCLI.webui_agent"
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Webui -host " + coordinatorPrivateIp + " -port 1099 -agents Webui:automnsCLI.webui_agent"
 				};
     	try {
-			VMFunctions.SSH("54.161.89.119", privateKey, agentCommands[3]);
-	    	VMFunctions.SSH("54.161.89.119", privateKey, agentCommands[4]);
-	    	VMFunctions.SSH("52.55.9.54", privateKey, agentCommands[5]);
-	    	VMFunctions.SSH("52.55.9.54", privateKey, agentCommands[6]);
-	    	VMFunctions.SSH("35.175.143.177", privateKey, agentCommands[7]);
-	    	VMFunctions.SSH("35.175.143.177", privateKey, agentCommands[8]);
-	    	VMFunctions.SSH("18.233.152.213", privateKey, agentCommands[9]);
-	    	VMFunctions.SSH("18.233.152.213", privateKey, agentCommands[10]);
-	    	VMFunctions.SSH("3.92.137.240", privateKey, agentCommands[11]);
-	    	VMFunctions.SSH("3.92.137.240", privateKey, agentCommands[12]);
-	    	VMFunctions.SSH("54.210.54.17", privateKey, agentCommands[13]);
-	    	VMFunctions.SSH("54.210.54.17", privateKey, agentCommands[14]);
-	    	VMFunctions.SSH("54.173.144.123", privateKey, agentCommands[15]);
-	    	VMFunctions.SSH("54.173.144.123", privateKey, agentCommands[16]);
+			VMFunctions.SSH("18.212.33.93", privateKey, agentCommands[3]);
+	    	VMFunctions.SSH("18.212.33.93", privateKey, agentCommands[4]);
+	    	VMFunctions.SSH("100.24.61.196", privateKey, agentCommands[5]);
+	    	VMFunctions.SSH("100.24.61.196", privateKey, agentCommands[6]);
+	    	VMFunctions.SSH("35.174.170.233", privateKey, agentCommands[7]);
+	    	VMFunctions.SSH("35.174.170.233", privateKey, agentCommands[8]);
+	    	VMFunctions.SSH("3.91.133.214", privateKey, agentCommands[9]);
+	    	VMFunctions.SSH("3.91.133.214", privateKey, agentCommands[10]);
+	    	VMFunctions.SSH("3.93.15.251", privateKey, agentCommands[11]);
+	    	VMFunctions.SSH("3.93.15.251", privateKey, agentCommands[12]);
+	    	VMFunctions.SSH("54.146.232.149", privateKey, agentCommands[13]);
+	    	VMFunctions.SSH("54.146.232.149", privateKey, agentCommands[14]);
+	    	VMFunctions.SSH("35.173.126.45", privateKey, agentCommands[15]);
+	    	VMFunctions.SSH("35.173.126.45", privateKey, agentCommands[16]);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
