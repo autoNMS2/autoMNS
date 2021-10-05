@@ -14,7 +14,7 @@ public class coordinator extends Agent
 		//Defining the path to the AWS key
         String privateKey = "autoMNS/jade/src/test0/test.pem";
 		//Defining the IP address of the main platform for other agents to join
-    	String coordinatorPrivateIp = "172.31.88.244";
+    	String coordinatorPrivateIp = "172.31.22.15";
 		//Compiling, running, and joining main platform command array (for each agent)
     	String[] agentCommands =
                 {"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/db_agent.java",
@@ -35,20 +35,20 @@ public class coordinator extends Agent
 		//Initializing SSH sessions to each VM, and executing the agent command array
     	try
         {
-			VMFunctions.SSH("54.164.12.150", privateKey, agentCommands[3]);
-	    	VMFunctions.SSH("54.164.12.150", privateKey, agentCommands[4]);
-	    	VMFunctions.SSH("3.86.155.186", privateKey, agentCommands[5]);
-	    	VMFunctions.SSH("3.86.155.186", privateKey, agentCommands[6]);
-	    	VMFunctions.SSH("3.92.197.213", privateKey, agentCommands[7]);
-	    	VMFunctions.SSH("3.92.197.213", privateKey, agentCommands[8]);
-	    	VMFunctions.SSH("52.87.213.182", privateKey, agentCommands[9]);
-	    	VMFunctions.SSH("52.87.213.182", privateKey, agentCommands[10]);
-	    	VMFunctions.SSH("3.83.121.76", privateKey, agentCommands[11]);
-	    	VMFunctions.SSH("3.83.121.76", privateKey, agentCommands[12]);
-	    	VMFunctions.SSH("3.83.141.155", privateKey, agentCommands[13]);
-	    	VMFunctions.SSH("3.83.141.155", privateKey, agentCommands[14]);
-	    	VMFunctions.SSH("18.205.116.211", privateKey, agentCommands[15]);
-	    	VMFunctions.SSH("18.205.116.211", privateKey, agentCommands[16]);
+			VMFunctions.SSH("54.237.66.183", privateKey, agentCommands[3]);
+	    	VMFunctions.SSH("54.237.66.183", privateKey, agentCommands[4]);
+	    	VMFunctions.SSH("3.80.22.61", privateKey, agentCommands[5]);
+	    	VMFunctions.SSH("3.80.22.61", privateKey, agentCommands[6]);
+	    	VMFunctions.SSH("107.21.154.157", privateKey, agentCommands[7]);
+	    	VMFunctions.SSH("107.21.154.157", privateKey, agentCommands[8]);
+	    	VMFunctions.SSH("52.201.244.70", privateKey, agentCommands[9]);
+	    	VMFunctions.SSH("52.201.244.70", privateKey, agentCommands[10]);
+	    	VMFunctions.SSH("54.147.209.136", privateKey, agentCommands[11]);
+	    	VMFunctions.SSH("54.147.209.136", privateKey, agentCommands[12]);
+	    	VMFunctions.SSH("54.159.0.133", privateKey, agentCommands[13]);
+	    	VMFunctions.SSH("54.159.0.133", privateKey, agentCommands[14]);
+	    	VMFunctions.SSH("3.87.107.66", privateKey, agentCommands[15]);
+	    	VMFunctions.SSH("3.87.107.66", privateKey, agentCommands[16]);
 		}
 		//Throw a failure in Input & Output operations
         catch (IOException e1)
