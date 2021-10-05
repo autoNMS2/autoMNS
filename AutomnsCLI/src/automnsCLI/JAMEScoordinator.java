@@ -2,7 +2,8 @@ package automnsCLI;
 
 import jade.core.Agent;
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.util.List;
 
 import automnsCLI.VMFunctions;
 
@@ -11,10 +12,16 @@ public class coordinator extends Agent
 	//overriding the agent setup
     protected void setup()
     {
+    	Object[] VMs = getArguments();
 		//Defining the path to the AWS key
-        String privateKey = "autoMNS/jade/src/test0/test.pem";
+        String privateKey = (String) VMs[0];
 		//Defining the IP address of the main platform for other agents to join
-    	String coordinatorPrivateIp = "172.31.22.15";
+    	String coordinatorPrivateIp = (String) VMs[1];
+    	List<String> workerVMs = new ArrayList<String>();
+    	for (int k = 2; k < VMs.length; k++) {
+    		workerVMs.add((String) VMs[k]);
+    	}
+    	
 		//Compiling, running, and joining main platform command array (for each agent)
     	String[] agentCommands =
                 {"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/db_agent.java",
@@ -35,20 +42,29 @@ public class coordinator extends Agent
 		//Initializing SSH sessions to each VM, and executing the agent command array
     	try
         {
-			VMFunctions.SSH("54.237.66.183", privateKey, agentCommands[3]);
-	    	VMFunctions.SSH("54.237.66.183", privateKey, agentCommands[4]);
-	    	VMFunctions.SSH("3.80.22.61", privateKey, agentCommands[5]);
-	    	VMFunctions.SSH("3.80.22.61", privateKey, agentCommands[6]);
-	    	VMFunctions.SSH("107.21.154.157", privateKey, agentCommands[7]);
-	    	VMFunctions.SSH("107.21.154.157", privateKey, agentCommands[8]);
-	    	VMFunctions.SSH("52.201.244.70", privateKey, agentCommands[9]);
-	    	VMFunctions.SSH("52.201.244.70", privateKey, agentCommands[10]);
-	    	VMFunctions.SSH("54.147.209.136", privateKey, agentCommands[11]);
-	    	VMFunctions.SSH("54.147.209.136", privateKey, agentCommands[12]);
-	    	VMFunctions.SSH("54.159.0.133", privateKey, agentCommands[13]);
-	    	VMFunctions.SSH("54.159.0.133", privateKey, agentCommands[14]);
-	    	VMFunctions.SSH("3.87.107.66", privateKey, agentCommands[15]);
-	    	VMFunctions.SSH("3.87.107.66", privateKey, agentCommands[16]);
+    		int commandCounter = 0;
+    		int workerCounter = 0;
+    		while(commandCounter < agentCommands.length){
+    			for(int m = 0; m < 2; m++) {
+    				VMFunctions.SSH(workerVMs.get(workerCounter), privateKey, agentCommands[commandCounter]);
+    				commandCounter ++;
+    			}
+    			workerCounter ++;
+    		} 		
+//			VMFunctions.SSH("54.164.12.150", privateKey, agentCommands[0]);
+//	    	VMFunctions.SSH("54.164.12.150", privateKey, agentCommands[1]);
+//	    	VMFunctions.SSH("3.86.155.186", privateKey, agentCommands[2]);
+//	    	VMFunctions.SSH("3.86.155.186", privateKey, agentCommands[3]);
+//	    	VMFunctions.SSH("3.92.197.213", privateKey, agentCommands[4]);
+//	    	VMFunctions.SSH("3.92.197.213", privateKey, agentCommands[5]);
+//	    	VMFunctions.SSH("52.87.213.182", privateKey, agentCommands[6]);
+//	    	VMFunctions.SSH("52.87.213.182", privateKey, agentCommands[7]);
+//	    	VMFunctions.SSH("3.83.121.76", privateKey, agentCommands[8]);
+//	    	VMFunctions.SSH("3.83.121.76", privateKey, agentCommands[9]);
+//	    	VMFunctions.SSH("3.83.141.155", privateKey, agentCommands[10]);
+//	    	VMFunctions.SSH("3.83.141.155", privateKey, agentCommands[11]);
+//	    	VMFunctions.SSH("18.205.116.211", privateKey, agentCommands[12]);
+//	    	VMFunctions.SSH("18.205.116.211", privateKey, agentCommands[13]);
 		}
 		//Throw a failure in Input & Output operations
         catch (IOException e1)
