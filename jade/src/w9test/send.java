@@ -14,7 +14,6 @@ public class send extends Agent {
                 if (msg != null)
                     System.out.println("Message"+msg.getContent()
                             + " ( " + msg.getSender().getName()+ " )");
-                doDelete();
                 block();
             }
             
