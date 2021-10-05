@@ -14,7 +14,7 @@ public class coordinator extends Agent
     {
     	Object[] VMs = getArguments();
 		//Defining the path to the AWS key
-        String privateKey = (String) VMs[0];
+        String privateKey = "autoMNS/jade/src/test0/AWSKey.ppk";
 		//Defining the IP address of the main platform for other agents to join
     	String coordinatorPrivateIp = (String) VMs[1];
     	List<String> workerVMs = new ArrayList<String>();
