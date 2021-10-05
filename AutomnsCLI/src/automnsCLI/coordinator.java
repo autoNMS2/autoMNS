@@ -42,20 +42,20 @@ public class coordinator extends Agent
 		//Initializing SSH sessions using public ip to each VM, and executing the agent command array
     	try
         {
-			VMFunctions.SSH("3.85.29.60", privateKey, agentCommands[3]);
-	    	VMFunctions.SSH("3.85.29.60", privateKey, agentCommands[4]);
-	    	VMFunctions.SSH("52.91.100.173", privateKey, agentCommands[5]);
-	    	VMFunctions.SSH("52.91.100.173", privateKey, agentCommands[6]);
-	    	VMFunctions.SSH("35.175.243.185", privateKey, agentCommands[7]);
-	    	VMFunctions.SSH("35.175.243.185", privateKey, agentCommands[8]);
-	    	VMFunctions.SSH("54.209.82.120", privateKey, agentCommands[9]);
-	    	VMFunctions.SSH("54.209.82.120", privateKey, agentCommands[10]);
-	    	VMFunctions.SSH("54.146.135.222", privateKey, agentCommands[11]);
-	    	VMFunctions.SSH("54.146.135.222", privateKey, agentCommands[12]);
-	    	VMFunctions.SSH("174.129.161.236", privateKey, agentCommands[13]);
-	    	VMFunctions.SSH("174.129.161.236", privateKey, agentCommands[14]);
-	    	VMFunctions.SSH("54.152.173.110", privateKey, agentCommands[15]);
-	    	VMFunctions.SSH("54.152.173.110", privateKey, agentCommands[16]);
+			VMFunctions.SSH("3.85.29.60", privateKey, agentCommands[0]);
+	    	VMFunctions.SSH("3.85.29.60", privateKey, agentCommands[1]);
+	    	VMFunctions.SSH("52.91.100.173", privateKey, agentCommands[2]);
+	    	VMFunctions.SSH("52.91.100.173", privateKey, agentCommands[3]);
+	    	VMFunctions.SSH("35.175.243.185", privateKey, agentCommands[4]);
+	    	VMFunctions.SSH("35.175.243.185", privateKey, agentCommands[5]);
+	    	VMFunctions.SSH("54.209.82.120", privateKey, agentCommands[6]);
+	    	VMFunctions.SSH("54.209.82.120", privateKey, agentCommands[7]);
+	    	VMFunctions.SSH("54.146.135.222", privateKey, agentCommands[8]);
+	    	VMFunctions.SSH("54.146.135.222", privateKey, agentCommands[9]);
+	    	VMFunctions.SSH("174.129.161.236", privateKey, agentCommands[10]);
+	    	VMFunctions.SSH("174.129.161.236", privateKey, agentCommands[11]);
+	    	VMFunctions.SSH("54.152.173.110", privateKey, agentCommands[12]);
+	    	VMFunctions.SSH("54.152.173.110", privateKey, agentCommands[13]);
 		}
 		//Throw a failure in Input & Output operations
         catch (IOException e1)
