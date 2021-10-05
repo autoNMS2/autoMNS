@@ -1,4 +1,4 @@
-package automnsCLI.multi;
+package automnsCLI;
 
 import jade.core.Agent;
 import java.io.IOException;
