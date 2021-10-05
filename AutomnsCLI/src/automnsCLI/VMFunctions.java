@@ -134,7 +134,7 @@ public class VMFunctions {
 		//The following array contains the commands necessary to initialise the coordinator agent on the first vm provided by the user
 		String[] agentCommands = 
 			{ "javac -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/*.java",
-			  "java -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar:classes jade.Boot -agents coordinator:automnsCLI.coordinator ("};	
+			  "java -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar:classes jade.Boot -agents coordinator:automnsCLI.JAMEScoordinator ("};	
 		//the following for loop adds the users vm ips as arguments on to the end of the java command
 		//this allows the coordinator agent to access these ip addresses
 		for (int i = 0; i < vms.size(); i++) {
