@@ -126,15 +126,28 @@ public class VMFunctions {
 	
 
 	public static void initialiseAgents() throws IOException {		
-		//The following array contains the commands necessary to initialise the coordinator agent on the first vm provided by the user
-		String[] agentCommands = 
-			{ "javac -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/*.java",
-			  "java -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar:classes jade.Boot -agents coordinator:automnsCLI.coordinator"};
 		//get the list of vms from the user, if the config file has not yet been input then the length will be 0 and the user will be asked to input
 		List<String> vms = getVMS();
 			if (vms.size() == 0) {
 				vms = getVmConfig();
 		}
+		//The following array contains the commands necessary to initialise the coordinator agent on the first vm provided by the user
+		String[] agentCommands = 
+			{ "javac -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/*.java",
+			  "java -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar:classes jade.Boot -agents coordinator:automnsCLI.coordinator ("};	
+		//the following for loop adds the users vm ips as arguments on to the end of the java command
+		//this allows the coordinator agent to access these ip addresses
+		for (int i = 0; i < vms.size(); i++) {
+			if (i != vms.size() - 1) {
+			agentCommands[1] += vms.get(i) + ",";
+			}
+			else {
+				agentCommands[1] += vms.get(i);
+			}
+		}	
+		//add a closing bracket to the end of the java command
+		agentCommands[1] += ")";
+
 		//first element in vms should always be private key path
 		String privateKey = vms.get(0);
 		// intialise the platform on the coordinator agent
