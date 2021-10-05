@@ -25,19 +25,19 @@ public class coordinator extends Agent
 		//Compiling, running, and joining main platform command array (for each agent)
     	String[] agentCommands =
                 {"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/db_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Database -host " + db_ip + " -port 1099 -agents db:automnsCLI.multi.db_agent",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + db_ip + " -port 1099 -agents db:automnsCLI.multi.db_agent",
 				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/authenticator_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Authenticator -host " + authenticator_ip + " -port 1099 -agents Auth:automnsCLI.multi.authenticator_agent",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + authenticator_ip + " -port 1099 -agents Auth:automnsCLI.multi.authenticator_agent",
 				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/image_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Image -host " + image_ip + " -port 1099 -agents Image:automnsCLI.multi.image_agent",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + image_ip + " -port 1099 -agents Image:automnsCLI.multi.image_agent",
 				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/persistence_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Persistence -host " + persistence_ip + " -port 1099 -agents Persistence:automnsCLI.multi.persistence_agent",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + persistence_ip + " -port 1099 -agents Persistence:automnsCLI.multi.persistence_agent",
 				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/recommender_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Recommender -host " + recommender_ip + " -port 1099 -agents Recommender:automnsCLI.multi.recommender_agent",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + recommender_ip + " -port 1099 -agents Recommender:automnsCLI.multi.recommender_agent",
 				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/registry_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Registry -host " + registry_ip + " -port 1099 -agents Registry:automnsCLI.multi.registry_agent",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + registry_ip + " -port 1099 -agents Registry:automnsCLI.multi.registry_agent",
 				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/webui_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Webui -host " + webui_ip + " -port 1099 -agents Webui:automnsCLI.multi.webui_agent"
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + webui_ip + " -port 1099 -agents Webui:automnsCLI.multi.webui_agent"
 				};
 		//Initializing SSH sessions using public ip to each VM, and executing the agent command array
     	try
