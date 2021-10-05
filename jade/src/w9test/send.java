@@ -21,8 +21,12 @@ public class send extends Agent {
         });
         // creates a msg and send to a specified agent (a1)
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-        msg.setContent(" Hi from Sender ");
-        msg.addReceiver(new AID("a1", AID.ISLOCALNAME));
+        //uses GUID with a1 name,platform name, and default port
+        AID dest = new AID("a1@172.31.19.134:1099/JADE", AID.ISGUID);
+        //uses MTP address of a1 platform and default port
+        dest.addAddresses("http://172.31.19.134:7778/acc");
+        msg.addReceiver(dest);
+        msg.setContent("Hi from Sender!");
         send(msg);
     }
 }
