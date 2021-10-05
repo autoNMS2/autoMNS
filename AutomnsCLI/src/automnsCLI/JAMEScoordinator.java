@@ -7,7 +7,7 @@ import java.util.List;
 
 import automnsCLI.VMFunctions;
 
-public class coordinator extends Agent
+public class JAMEScoordinator extends Agent
 {
 	//overriding the agent setup
     protected void setup()
