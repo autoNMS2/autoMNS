@@ -52,5 +52,15 @@ public class coordinator extends Agent
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+
+		Runtime r = Runtime.getRuntime();
+		String cmd = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/all.yaml TeaStore ";
+		try
+		{
+			r.exec(cmd);
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
     }
 }
