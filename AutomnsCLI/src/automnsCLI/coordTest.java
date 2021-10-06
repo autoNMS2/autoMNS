@@ -42,12 +42,6 @@ public class coordTest extends Agent
 				if (msg != null) {
 					System.out.println(" Message to " + myAgent.getLocalName()
 							+ " received. Message is : " + msg.getContent());
-
-					//sends a reply to the sender
-					ACLMessage reply = msg.createReply();
-					reply.setPerformative(ACLMessage.INFORM);
-					reply.setContent(" Hello reply from Receiver");
-					send(reply);
 				}
 				block();
 			}
