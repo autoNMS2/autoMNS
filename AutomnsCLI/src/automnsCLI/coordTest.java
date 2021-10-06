@@ -2,6 +2,9 @@ package automnsCLI;
 
 import jade.core.Agent;
 import java.io.IOException;
+import jade.core.Agent;
+import jade.core.behaviours.CyclicBehaviour;
+import jade.lang.acl.ACLMessage;
 
 
 import automnsCLI.VMFunctions;
@@ -32,5 +35,22 @@ public class coordTest extends Agent
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		addBehaviour(new CyclicBehaviour(this) {
+			public void action() {
+				//reads and output the received msg
+				ACLMessage msg = receive();
+				if (msg != null) {
+					System.out.println(" Message to " + myAgent.getLocalName()
+							+ " received. Message is : " + msg.getContent());
+
+					//sends a reply to the sender
+					ACLMessage reply = msg.createReply();
+					reply.setPerformative(ACLMessage.INFORM);
+					reply.setContent(" Hello reply from Receiver");
+					send(reply);
+				}
+				block();
+			}
+		});
     }
 }
