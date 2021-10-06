@@ -20,8 +20,8 @@ public class coordTest extends Agent
     	//String coordinatorPrivateIp = "172.31.84.180";
 		//Compiling, running, and joining main platform command array (for each agent)
     	String[] agentCommands =
-                {"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/send.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.24.218 -agents a1:automnsCLI.multi.send"
+                {"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/db_agent.java",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.24.218 -agents a1:automnsCLI.multi.db_agent"
 				};
 		//Initializing SSH sessions to each VM, and executing the agent command array
     	try
@@ -35,16 +35,5 @@ public class coordTest extends Agent
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		addBehaviour(new CyclicBehaviour(this) {
-			public void action() {
-				//reads and output the received msg
-				ACLMessage msg = receive();
-				if (msg != null) {
-					System.out.println(" Message to " + myAgent.getLocalName()
-							+ " received. Message is : " + msg.getContent());
-				}
-				block();
-			}
-		});
     }
 }
