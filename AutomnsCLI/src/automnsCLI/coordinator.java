@@ -40,8 +40,8 @@ public class coordinator extends Agent
         {
     		do{
     			
-			VMFunctions.SSH(ip[x], privateKey, agentCommands[y]);
-			VMFunctions.SSH(ip[x], privateKey, agentCommands[y+1]);
+			VMFunctions.noOutputSSH(ip[x], privateKey, agentCommands[y]);
+			VMFunctions.noOutputSSH(ip[x], privateKey, agentCommands[y+1]);
     	x++; y+=2;
 		}while(x<8);
         }
