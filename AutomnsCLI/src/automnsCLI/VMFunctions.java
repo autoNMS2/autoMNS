@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.*;
@@ -200,7 +202,10 @@ public class VMFunctions {
 			((ChannelShell) channel).setPtyType("vt102");
 			channel.setInputStream(System.in);
 			channel.setOutputStream(System.out);
+			OutputStream ops = channel.getOutputStream();
+			PrintStream ps = new PrintStream(ops, true);
 			channel.connect();
+			ps.println(cmd);
 		} catch (JSchException e) {
 			System.out.println(e.getCause());
 			throw new RuntimeException(e);
