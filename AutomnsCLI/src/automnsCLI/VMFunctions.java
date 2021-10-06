@@ -174,6 +174,76 @@ public class VMFunctions {
 	    }
 	}
 
+	// The following code can be used to ssh into a VM and create an interactive ssh shell
+	// You will need the IP address, a private key file, and a command to run
+	public static ChannelShell shellSSH(String ip, String filePath,String cmd) throws IOException {
+
+		String username = "ubuntu";
+		JSch jsch = new JSch();
+		Session session = null;
+		String host = ip;
+		String privateKeyPath = filePath;
+		Channel channel;
+		try {
+			jsch.addIdentity(privateKeyPath);
+			session = jsch.getSession(username, host, 22);
+			session.setConfig("PreferredAuthentications", "publickey,keyboard-interactive,password");
+			java.util.Properties config = new java.util.Properties();
+			config.put("StrictHostKeyChecking", "no");
+			session.setConfig(config);
+		} catch (JSchException e) {
+			throw new RuntimeException("Failed to create Jsch Session object.", e);
+		}
+		try {
+			session.connect(3000);
+			channel = session.openChannel("shell");
+			((ChannelShell) channel).setPtyType("vt102");
+			channel.setInputStream(System.in);
+			channel.setOutputStream(System.out);
+			channel.connect();
+		} catch (JSchException e) {
+			System.out.println(e.getCause());
+			throw new RuntimeException(e);
+		}
+		return (ChannelShell) channel;
+	}
+	
+	public static void noOutputSSH(String ip, String filePath, String Command) throws IOException {
+		// The following code can be used to ssh into a VM and run a command
+		// You will need the VM username, IP address, and a private key file
+
+		String username = "ubuntu";
+
+		JSch jsch = new JSch();
+		Session session = null;
+
+		String host = ip;
+		String privateKeyPath = filePath;
+		String command = Command;
+
+		try {
+			jsch.addIdentity(privateKeyPath);
+			session = jsch.getSession(username, host, 22);
+			session.setConfig("PreferredAuthentications", "publickey,keyboard-interactive,password");
+			java.util.Properties config = new java.util.Properties();
+			config.put("StrictHostKeyChecking", "no");
+			session.setConfig(config);
+		} catch (JSchException e) {
+			throw new RuntimeException("Failed to create Jsch Session object.", e);
+		}
+		try {
+			session.connect();
+			System.out.println("session connected.....");
+			Channel channel = session.openChannel("exec");
+			((ChannelExec) channel).setCommand(command);
+			((ChannelExec) channel).setPty(false);
+			channel.connect();
+		} catch (JSchException e) {
+			System.out.println(e.getCause());
+			throw new RuntimeException("Error during SSH command execution. Command: " + command);
+		}
+	}
+
 	public static String SSH(String ip, String filePath, String Command) throws IOException {
 		// The following code can be used to ssh into a VM and run a command
 		// You will need the VM username, IP address, and a private key file
