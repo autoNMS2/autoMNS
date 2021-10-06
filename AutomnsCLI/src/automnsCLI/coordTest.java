@@ -21,7 +21,7 @@ public class coordTest extends Agent
 		//Compiling, running, and joining main platform command array (for each agent)
     	String[] agentCommands =
                 {"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/db_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.24.218 -agents a1:automnsCLI.multi.db_agent"
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.24.218 -port 5000 -agents a1:automnsCLI.multi.db_agent"
 				};
 		//Initializing SSH sessions to each VM, and executing the agent command array
     	try
