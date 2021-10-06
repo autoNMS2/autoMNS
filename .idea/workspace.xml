@@ -2,8 +2,39 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="39de0ab9-f73c-4d61-a78d-915e5d49de9f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/coordinator.java" beforeDir="false" afterPath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/coordinator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APDescription.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/ContainerFunctions.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/CoordinatorAgent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/GeneralFunctions.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/Service.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/ServiceAgent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/receive0.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/sender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MTPs-Main-Container.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/automnsCLI/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/automnsCLI/Menus.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/automnsCLI/ProcessWatcher$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/automnsCLI/ProcessWatcher.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/automnsCLI/VMFunctions.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/autoMNS/automnsCLI/ContainerFunctions.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/autoMNS/automnsCLI/CoordinatorAgent$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/autoMNS/automnsCLI/CoordinatorAgent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/autoMNS/automnsCLI/GeneralFunctions.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/autoMNS/automnsCLI/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/autoMNS/automnsCLI/Menus.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/autoMNS/automnsCLI/Service.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/autoMNS/automnsCLI/ServiceAgent$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/autoMNS/automnsCLI/ServiceAgent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/autoMNS/automnsCLI/VMFunctions.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/autoMNS/automnsCLI/receive0$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/autoMNS/automnsCLI/receive0.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/autoMNS/automnsCLI/send0$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/autoMNS/automnsCLI/send0.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/autoMNS/automnsCLI/sender$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/autoMNS/automnsCLI/sender.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +60,7 @@
     </file-type-list>
   </component>
   <component name="ProjectId" id="1yOCc0Abbf7cIRQVo7HkWbByBU2" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
