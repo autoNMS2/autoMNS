@@ -6,6 +6,7 @@ import jade.core.behaviours.*;
 import jade.lang.acl.*;
 import java.io.IOException;
 import java.util.Scanner;
+import automnsCLI.VMFunctions;
 
 public class CoordMenu extends Agent {
     public void menu () throws IOException {
