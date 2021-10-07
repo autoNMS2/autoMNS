@@ -14,30 +14,33 @@ public class JAMEScoordinator extends Agent
     {
     	Object[] VMs = getArguments();
 		//Defining the path to the AWS key
-        String privateKey = "autoMNS/jade/src/test0/AWSKey.ppk";
+        String privateKey = (String) VMs[14];
 		//Defining the IP address of the main platform for other agents to join
-    	String coordinatorPrivateIp = (String) VMs[1];
-    	List<String> workerVMs = new ArrayList<String>();
-    	for (int k = 2; k < VMs.length; k++) {
-    		workerVMs.add((String) VMs[k]);
+    	List<String> workerVMsPrivate = new ArrayList<String>();
+    	for (int k = 0; k < 7; k++) {
+    		workerVMsPrivate.add((String) VMs[k]);
+    	}
+    	List<String> workerVMsPublic = new ArrayList<String>();
+    	for (int k = 7; k < VMs.length - 1; k++) {
+    		workerVMsPublic.add((String) VMs[k]);
     	}
     	
 		//Compiling, running, and joining main platform command array (for each agent)
     	String[] agentCommands =
                 {"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/db_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Database -host " + coordinatorPrivateIp + " -port 1099 -agents db:automnsCLI.multi.db_agent",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Database -host " + workerVMsPrivate.get(0) + " -port 1099 -agents db:automnsCLI.multi.db_agent",
 				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/authenticator_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Authenticator -host " + coordinatorPrivateIp + " -port 1099 -agents Auth:automnsCLI.multi.authenticator_agent",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Authenticator -host " + workerVMsPrivate.get(1) + " -port 1099 -agents Auth:automnsCLI.multi.authenticator_agent",
 				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/image_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Image -host " + coordinatorPrivateIp + " -port 1099 -agents Image:automnsCLI.multi.image_agent",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Image -host " + workerVMsPrivate.get(2) + " -port 1099 -agents Image:automnsCLI.multi.image_agent",
 				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/persistence_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Persistence -host " + coordinatorPrivateIp + " -port 1099 -agents Persistence:automnsCLI.multi.persistence_agent",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Persistence -host " + workerVMsPrivate.get(3) + " -port 1099 -agents Persistence:automnsCLI.multi.persistence_agent",
 				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/recommender_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Recommender -host " + coordinatorPrivateIp + " -port 1099 -agents Recommender:automnsCLI.multi.recommender_agent",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Recommender -host " + workerVMsPrivate.get(4) + " -port 1099 -agents Recommender:automnsCLI.multi.recommender_agent",
 				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/registry_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Registry -host " + coordinatorPrivateIp + " -port 1099 -agents Registry:automnsCLI.multi.registry_agent",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Registry -host " + workerVMsPrivate.get(5) + " -port 1099 -agents Registry:automnsCLI.multi.registry_agent",
 				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/webui_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Webui -host " + coordinatorPrivateIp + " -port 1099 -agents Webui:automnsCLI.multi.webui_agent"
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -container -container-name Webui -host " + workerVMsPrivate.get(6) + " -port 1099 -agents Webui:automnsCLI.multi.webui_agent"
 				};
 		//Initializing SSH sessions to each VM, and executing the agent command array
     	try
@@ -46,7 +49,7 @@ public class JAMEScoordinator extends Agent
     		int workerCounter = 0;
     		while(commandCounter < agentCommands.length){
     			for(int m = 0; m < 2; m++) {
-    				VMFunctions.SSH(workerVMs.get(workerCounter), privateKey, agentCommands[commandCounter]);
+    				VMFunctions.SSH(workerVMsPublic.get(workerCounter), privateKey, agentCommands[commandCounter]);
     				commandCounter ++;
     			}
     			workerCounter ++;

@@ -186,13 +186,13 @@ public class VMFunctions {
 		//The following array contains the commands necessary to initialise the coordinator agent on the first vm provided by the user
 		String[] agentCommands = 
 			{ "javac -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/*.java",
-			  "java -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar:classes jade.Boot -agents 'coordinator:automnsCLI.coordinator ("};	
+			  "java -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar:classes jade.Boot -host " + privateVms.get(0) + " -port 1099 -agents 'coordinator:automnsCLI.JAMEScoordinator("};	
 		//the following for loops adds the users public and private vm ips as arguments on to the end of the java command
 		//this allows the coordinator agent to access these ip addresses
-		for (int i = 0; i < privateVms.size(); i++) {
+		for (int i = 1; i < privateVms.size(); i++) {
 			agentCommands[1] += privateVms.get(i) + ",";
 		}	
-		for (int i = 0; i < publicVms.size(); i++) {
+		for (int i = 1; i < publicVms.size(); i++) {
 			agentCommands[1] += publicVms.get(i) + ",";
 		}	
 		//add a closing bracket to the end of the java command
@@ -203,7 +203,7 @@ public class VMFunctions {
 		// intialise the platform on the coordinator agent
 		// coordinator should deploy other agents from it's own code
 		SSH(publicVms.get(0), localPrivateKey, agentCommands[0]);
-		SSH(publicVms.get(0), localPrivateKey, agentCommands[1]);
+		shellSSH(publicVms.get(0), localPrivateKey, agentCommands[1]);
 		System.out.println("Agents Deployed");
 		Menus.MainMenu();
 	}
