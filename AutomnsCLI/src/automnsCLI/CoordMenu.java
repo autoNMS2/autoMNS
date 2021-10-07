@@ -17,9 +17,9 @@ public class CoordMenu extends Agent {
         //Compiling, running, and joining main platform command array (for each agent)
         String[] agentCommands =
                 {"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/db_agent.java",
-                        "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.86.85 -agents db:automnsCLI.multi.db_agent",
+                        "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.88.236 -agents db:automnsCLI.multi.db_agent",
                         "javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/authenticator_agent.java",
-                        "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.92.102 -agents Auth:automnsCLI.multi.authenticator_agent"
+                        "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.85.143 -agents Auth:automnsCLI.multi.authenticator_agent"
                 };
 
         System.out.println("select command: " +
@@ -36,7 +36,7 @@ public class CoordMenu extends Agent {
         {
             case 1:
                 //msgContent = "Deploy Agents";
-                String[] ip = {"3.88.165.202","172.31.92.122"};
+                String[] ip = {"54.211.149.7","54.234.172.183"};
                 int x = 0;
                 int y = 0;
                 int z = 1;
@@ -71,10 +71,10 @@ public class CoordMenu extends Agent {
             case 3:
                 msgContent = "Get Services Update";
                 ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-                AID dest = new AID("db@172.31.86.85:5000/JADE", AID.ISGUID);
-                AID dest1 = new AID("auth@172.31.92.122:5001/JADE", AID.ISGUID);
-                dest.addAddresses("http://172.31.86.85:7778/acc");
-                dest1.addAddresses("http://172.31.92.122:7778/acc");
+                AID dest = new AID("db@172.31.88.236:5000/JADE", AID.ISGUID);
+                AID dest1 = new AID("auth@172.31.85.143:5001/JADE", AID.ISGUID);
+                dest.addAddresses("http://172.31.88.236:7778/acc");
+                dest1.addAddresses("http://172.31.85.143:7778/acc");
                 msg.addReceiver(dest);
                 msg.addReceiver(dest1);
                 msg.setContent(msgContent);
