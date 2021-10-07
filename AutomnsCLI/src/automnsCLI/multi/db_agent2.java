@@ -8,7 +8,7 @@ import jade.lang.acl.*;
 import java.io.BufferedReader;
 import java.io.FileWriter;
 
-public class db_agent extends Agent
+public class db_agent2 extends Agent
 {
     protected void setup()
     {

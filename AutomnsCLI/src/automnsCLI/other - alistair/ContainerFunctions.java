@@ -10,6 +10,15 @@ import java.io.IOException;
 
 public class ContainerFunctions {
 
+    //  javac -cp C:\Users\Computer\Documents\GitHub\autoMNS\jade\lib\jade.jar -d classes C:\Users\Computer\Documents\GitHub\autoMNS\AutomnsCLI\src\automnsCLI\ServiceAgent.java
+    //  javac -cp autoMNS\jade\lib\jade.jar -d classes autoMNS\AutomnsCLI\src\automnsCLI\ServiceAgent.java
+    //	java -cp  autoMNS\jade\lib\jade.jar:classes jade.Boot -agents Service:automnsCLI.ServiceAgent
+
+
+    //  javac -cp C:\Users\Computer\Documents\GitHub\autoMNS\jade\lib\jade.jar -d classes C:\Users\Computer\Documents\GitHub\autoMNS\AutomnsCLI\src\automnsCLI\CoordinatorAgent.java
+
+    //	java -cp C:\Users\Computer\Documents\GitHub\autoMNS\jade\lib\jade.jar:classes jade.Boot -agents Coordinator:automnsCLI.CoordinatorAgent
+    //	java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -agents db:automnsCLI.CoordinatorAgent
     public static void CreateRemoteContainer() {
 
     }
@@ -19,9 +28,9 @@ public class ContainerFunctions {
 
     public static void TestContainerAgent() throws IOException {
         AgentContainer agentContainer = CreateContainer();
-        AgentController coordinator = CreateAgent(agentContainer, CoordinatorAgent.class, new Object[]{"Notepad", "Notepad"}, "0");
+        AgentController coordinator = CreateAgent(agentContainer, CoordinatorAgent.class, new Object[]{"docker compose -f C:\\Users\\Computer\\Documents\\GitHub\\autoMNS\\Prototype\\lib\\Services\\webui.yaml pull", "Notepad"}, "0");
 
-        //AgentContainer agentContainer2 = CreateContainer();
+        //  AgentContainer agentContainer2 = CreateContainer();
         //  AgentController agent2 = CreateAgent(agentContainer, ServiceAgent.class, new Object[]{"runProcess"}, "1");
     }
 

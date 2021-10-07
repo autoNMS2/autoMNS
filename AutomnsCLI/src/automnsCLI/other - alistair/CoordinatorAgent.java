@@ -26,7 +26,7 @@ public class CoordinatorAgent extends Agent {
     void CreateAgent(String service)
     {
         log += "Creating Agent to run " + service + "\n    ";
-        AgentController newAgent = ContainerFunctions.CreateAgent(getContainerController(), ServiceAgent.class, new Object[]{getLocalName(), service}, "" + index);
+        AgentController newAgent = ContainerFunctions.CreateAgent(getContainerController(), ServiceAgent.class, new Object[]{getLocalName(), service}, service + index);
         try {   // made me do this
             assert newAgent != null;
             serviceStatus.put(newAgent.getName(), "Created");

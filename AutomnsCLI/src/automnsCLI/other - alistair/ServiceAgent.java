@@ -4,6 +4,10 @@ import jade.core.Agent;
 import jade.core.AID;
 import jade.core.behaviours.*;
 import jade.lang.acl.*;
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryUsage;
+import java.lang.management.OperatingSystemMXBean;
+
 
 import java.lang.Process;
 
@@ -28,8 +32,13 @@ public class ServiceAgent extends Agent {
     //      this.send(request);
     //      this.get
     //  }
+    OperatingSystemMXBean bean;
 
     protected void setup() { // argument[0] is the coordinators id, argument[1] is the process to run
+
+        bean = (com.sun.management.OperatingSystemMXBean) ManagementFactory
+                .getOperatingSystemMXBean();
+
         String runProcess = getArguments()[1].toString();
         log = "Agent Initiated " + this.getLocalName() + ", Fullname: [" + this.getName() + "] Running: " + runProcess;
 
@@ -136,7 +145,7 @@ public class ServiceAgent extends Agent {
     void CheckEnd()
     {
         cycles++;
-        if (cycles > 100000 )
+        if (cycles > 10000000 )
         {
             End("Exceeded Cycle Maximum.");
         }
@@ -150,13 +159,54 @@ public class ServiceAgent extends Agent {
         doDelete();
     }
 
+    public long getProcessMemoryUsage()
+    {
+        MemoryUsage heapMemoryUsage = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage();
+        heapMemoryUsage.getUsed();
+
+        return heapMemoryUsage.getUsed();
+    }
+
+    public double getFreePhysicalMemorySize()
+    {
+        return ((com.sun.management.OperatingSystemMXBean) bean).getFreePhysicalMemorySize();
+    }
+
+    public double getProcessCpuLoad()
+    {
+            return ((com.sun.management.OperatingSystemMXBean) bean).getProcessCpuLoad();
+    }
+
+    public double getSystemCpuLoad()
+    {
+        return ((com.sun.management.OperatingSystemMXBean) bean).getSystemCpuLoad();
+    }
+
+    void PrintCost()
+    {
+        System.out.println("Process Memory: " + getProcessMemoryUsage()/1000000 + "mb");
+        System.out.println("Memory Free: " + (long)(getFreePhysicalMemorySize()/1000000) + "mb");
+
+        String processCpuString = (getProcessCpuLoad() + "");
+        int maxLength = Math.min(processCpuString.length(), 4);
+        processCpuString = (processCpuString.substring(2, maxLength) + "%");
+
+        System.out.println("ProcessCPU: " + processCpuString);
+
+        String systemCpuString = (getSystemCpuLoad() + "");
+        maxLength = Math.min(systemCpuString.length(), 4);
+        systemCpuString = (systemCpuString.substring(2, maxLength) + "%");
+
+        System.out.println("SystemCPU: " + systemCpuString);
+    }
+
     void PrintLog()
     {
         if (!log.equals(""))
         {
             System.out.println("Log From: " + getName() + "\n    " +  log + "End Log");    //  substring(0, log.length()-2)
             log = ""; // Reset log
+            PrintCost();
         }
     }
 }
-

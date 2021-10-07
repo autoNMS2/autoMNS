@@ -68,26 +68,26 @@ public class VMFunctions {
 			"javac -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/*.java",
 			"java -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar:classes jade.Boot -agents coordinator:automnsCLI.coordinator"
 	};
-	
+
 	//This function runs all the necessary commands on the virtual machine to bring them up
 	//to the working level we need them at to run the program
 	public static void addVMs() throws IOException {
 		//create a list variable and read the user's ips from the file
 			if (getVmConfig()) {
-			//update vms
-			updateVMs();
-			// add the first vm to a swarm and get the swarm token
-			addVMsToSwarm();
-			// install git and pull repository on vms
-			gitSetup();
-			// install java on vms
-			javaSetup();
-			//wait for user input before returning to main menu
-	        System.out.println("VMs initialised.\n" + "Press any key and then enter to return to main menu...");
-			String userInput;
-			Scanner input = new Scanner(System.in);
-			userInput = input.next();
-			Menus.MainMenu();
+				//update vms
+				updateVMs();
+				// add the first vm to a swarm and get the swarm token
+				addVMsToSwarm();
+				// install git and pull repository on vms
+				gitSetup();
+				// install java on vms
+				javaSetup();
+				//wait for user input before returning to main menu
+				System.out.println("VMs initialised.\n" + "Press any key and then enter to return to main menu...");
+				String userInput;
+				Scanner input = new Scanner(System.in);
+				userInput = input.next();
+				Menus.MainMenu();
 			}
 			else {
 				System.out.println("VM Config file incorrectly formatted");
@@ -191,10 +191,10 @@ public class VMFunctions {
 		//this allows the coordinator agent to access these ip addresses
 		for (int i = 1; i < privateVms.size(); i++) {
 			agentCommands[1] += privateVms.get(i) + ",";
-		}	
+		}
 		for (int i = 1; i < publicVms.size(); i++) {
 			agentCommands[1] += publicVms.get(i) + ",";
-		}	
+		}
 		//add a closing bracket to the end of the java command
 		agentCommands[1] += repoPrivateKey + ")'";
 

@@ -22,23 +22,25 @@ public class Menus {
 		int i = input.nextInt();
 		
 		switch(i) {
-		case 1:
-			VMFunctions.addVMs();
-			break;
-		case 2:
-			VMFunctions.initialiseAgents();
-			break;
-		case 3:
-			UserOptions();
-			break;
-		case 4:
-			VMFunctions.launchApplication();
-			break;
-		case 0:
-			System.exit(0);
+			case 1:
+				VMFunctions.addVMs();
+				break;
+			case 2:
+				VMFunctions.initialiseAgents();
+				break;
+			case 3:
+				UserOptions();
+				break;
+			case 4:
+				VMFunctions.launchApplication();
+				break;
+			case 5:
+				ContainerFunctions.TestContainerAgent();
+				break;
+			case 0:
+				System.exit(0);
 		}
 	}
-	
 	
 	public static void UserOptions() throws IOException {
 		Scanner input = new Scanner(System.in);
