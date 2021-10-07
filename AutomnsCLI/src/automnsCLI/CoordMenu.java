@@ -10,6 +10,18 @@ import automnsCLI.VMFunctions;
 
 public class CoordMenu extends Agent {
     public void menu () throws IOException {
+        //Defining the path to the AWS key
+        String privateKey = "autoMNS/jade/src/test0/test.pem";
+        //Defining the IP address of the main platform for other agents to join
+        //String coordinatorPrivateIp = "172.31.84.180";
+        //Compiling, running, and joining main platform command array (for each agent)
+        String[] agentCommands =
+                {"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/db_agent.java",
+                        "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.86.85 -agents db:automnsCLI.multi.db_agent",
+                        "javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/authenticator_agent.java",
+                        "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.92.102 -agents Auth:automnsCLI.multi.authenticator_agent"
+                };
+
         System.out.println("select command: " +
                 "\n 1. Deploy Agents " +
                 "\n 2. Deploy Services " +
@@ -73,17 +85,7 @@ public class CoordMenu extends Agent {
     }
 
     protected void setup(){
-        //Defining the path to the AWS key
-        String privateKey = "autoMNS/jade/src/test0/test.pem";
-        //Defining the IP address of the main platform for other agents to join
-        //String coordinatorPrivateIp = "172.31.84.180";
-        //Compiling, running, and joining main platform command array (for each agent)
-        String[] agentCommands =
-                {"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/db_agent.java",
-                        "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.86.85 -agents db:automnsCLI.multi.db_agent",
-                        "javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/authenticator_agent.java",
-                        "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.92.102 -agents Auth:automnsCLI.multi.authenticator_agent"
-                };
+
         addBehaviour(new CyclicBehaviour(this) {
             public void action() {
                 ACLMessage msg = receive();
