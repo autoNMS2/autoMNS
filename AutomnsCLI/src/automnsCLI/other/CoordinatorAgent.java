@@ -1,4 +1,4 @@
-package automnsCLI;
+package automnsCLI.other;
 
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;

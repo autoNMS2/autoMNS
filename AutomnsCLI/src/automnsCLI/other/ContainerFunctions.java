@@ -1,4 +1,4 @@
-package automnsCLI;
+package automnsCLI.other;
 
 import jade.core.ProfileImpl;
 import jade.core.Runtime;
@@ -26,9 +26,25 @@ public class ContainerFunctions {
     public static void CreateRemoteAgent() {
     }
 
+    public static String getComposeCommand(String serviceName) {
+        String command = "docker compose -f C:\\Users\\Computer\\Documents\\GitHub\\autoMNS\\Prototype\\lib\\Services\\";
+        command += serviceName + ".yaml up";
+        return command;
+    }
+
     public static void TestContainerAgent() throws IOException {
         AgentContainer agentContainer = CreateContainer();
-        AgentController coordinator = CreateAgent(agentContainer, CoordinatorAgent.class, new Object[]{"docker compose -f C:\\Users\\Computer\\Documents\\GitHub\\autoMNS\\Prototype\\lib\\Services\\webui.yaml pull", "Notepad"}, "0");
+        // "docker compose -f C:\\Users\\Computer\\Documents\\GitHub\\autoMNS\\Prototype\\lib\\Services\\db.yaml up"
+        Object[] services = new Object[]{
+                //  getComposeCommand("auth"),
+                //  getComposeCommand("db"),
+                //  getComposeCommand("image"),
+                //  getComposeCommand("persistence"),
+                //  getComposeCommand("recommender"),
+                getComposeCommand("registry"),
+                getComposeCommand("webui"),
+        };
+        AgentController coordinator = CreateAgent(agentContainer, CoordinatorAgent.class, services, "0");
 
         //  AgentContainer agentContainer2 = CreateContainer();
         //  AgentController agent2 = CreateAgent(agentContainer, ServiceAgent.class, new Object[]{"runProcess"}, "1");

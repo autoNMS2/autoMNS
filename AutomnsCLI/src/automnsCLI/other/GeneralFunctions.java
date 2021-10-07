@@ -1,4 +1,4 @@
-package automnsCLI;
+package automnsCLI.other;
 
 import java.io.IOException;
 import java.net.Inet4Address;

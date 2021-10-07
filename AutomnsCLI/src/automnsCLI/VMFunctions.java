@@ -99,6 +99,7 @@ public class VMFunctions {
 		List<String> localVMs = getVMPublicIps();
 		String privateKey = getLocalKeyFilePath();
 		for (int j = 0; j < localVMs.size(); j++) {
+			//	System.out.println(j + " " + privateKey + " " + vmCommands[0]);
 			SSH(localVMs.get(j), privateKey, vmCommands[0]);
 		}
 	}

@@ -1,4 +1,4 @@
-package automnsCLI;
+package automnsCLI.other;
 
 import jade.core.Agent;
 import jade.core.AID;
@@ -65,6 +65,11 @@ public class ServiceAgent extends Agent {
                 PrintLog();
             }
         });
+    }
+
+    public boolean IsAlive()
+    {
+        return true;
     }
 
     void StartProcess()
@@ -145,7 +150,7 @@ public class ServiceAgent extends Agent {
     void CheckEnd()
     {
         cycles++;
-        if (cycles > 10000000 )
+        if (cycles > 100000000 )
         {
             End("Exceeded Cycle Maximum.");
         }

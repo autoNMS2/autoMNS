@@ -30,23 +30,41 @@ public class JAMEScoordinator extends Agent
     	for (int k = 7; k < VMs.length - 1; k++) {
     		workerVMsPublic.add((String) VMs[k]);
     	}
-    	
+
+		//	String[] service = new String[]{
+		//			"db",
+		//			"auth",
+		//			"image",
+		//			"persistence",
+		//			"recommender",
+		//			"registry",
+		//			"webui",
+		//	};
+//
+		//	String[] agentCommands = new String[workerVMsPrivate.size()*2];
+//
+		//	for (int i = 0; i < agentCommands.length; i++)
+		//	{
+		//		agentCommands[i*2] = "javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/service_agent.java";
+		//		agentCommands[i*2+1] = "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(i) + " -agents 'service_agent:automnsCLI.multi.service_agent(" + service[i] + ")'";
+		//	}
+
 		//Compiling, running, and joining main platform command array (for each agent)
     	String[] agentCommands =
-                {"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/db_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -agents db:automnsCLI.multi.db_agent",
-				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/authenticator_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(1) + " -agents Auth:automnsCLI.multi.authenticator_agent",
-				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/image_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(2) + " -agents Image:automnsCLI.multi.image_agent",
-				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/persistence_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(3) + " -agents Persistence:automnsCLI.multi.persistence_agent",
-				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/recommender_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(4) + " -agents Recommender:automnsCLI.multi.recommender_agent",
-				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/registry_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(5) + " -agents Registry:automnsCLI.multi.registry_agent",
-				"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/webui_agent.java",
-				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(6) + " -agents Webui:automnsCLI.multi.webui_agent"
+                {"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/db.java",
+				"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -agents db:automnsCLI.multi.service_agent",
+					"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/authenticator_agent.java",
+					"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(1) + " -agents Auth:automnsCLI.multi.authenticator_agent",
+					"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/image_agent.java",
+					"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(2) + " -agents Image:automnsCLI.multi.image_agent",
+					"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/persistence_agent.java",
+					"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(3) + " -agents Persistence:automnsCLI.multi.persistence_agent",
+					"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/recommender_agent.java",
+					"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(4) + " -agents Recommender:automnsCLI.multi.recommender_agent",
+					"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/registry_agent.java",
+					"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(5) + " -agents Registry:automnsCLI.multi.registry_agent",
+					"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/webui_agent.java",
+					"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(6) + " -agents Webui:automnsCLI.multi.webui_agent"
 				};
 		//Initializing SSH sessions to each VM, and executing the agent command array
     	try

@@ -1,4 +1,4 @@
-package automnsCLI;
+package automnsCLI.other;
 
 public class Service {
 

@@ -6,6 +6,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Scanner;
+import automnsCLI.other.*;
 
 public class Menus {
 	
@@ -35,7 +36,7 @@ public class Menus {
 				VMFunctions.launchApplication();
 				break;
 			case 5:
-				ContainerFunctions.TestContainerAgent();
+				//ContainerFunctions.TestContainerAgent();
 				break;
 			case 0:
 				System.exit(0);

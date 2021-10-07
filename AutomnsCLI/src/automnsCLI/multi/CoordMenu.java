@@ -27,21 +27,21 @@ public class CoordMenu extends Agent {
                 int x = 0;
                 int y = 0;
                 int z = 1;
-                try
-                {
-                    do
-                    {
-                        VMFunctions.noOutputSSH(ip[x], privateKey, agentCommands[y]);
-                        VMFunctions.noOutputSSH(ip[x], privateKey, agentCommands[y+1]);
-                        x++; y+=2; z++;
-                    } while(z<8);
-                }
-                //Throw a failure in Input & Output operations
-                catch (IOException e1)
-                {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
+                //  try
+                //  {
+                //      do
+                //      {
+                //          VMFunctions.noOutputSSH(ip[x], privateKey, agentCommands[y]);
+                //          VMFunctions.noOutputSSH(ip[x], privateKey, agentCommands[y+1]);
+                //          x++; y+=2; z++;
+                //      } while(z<8);
+                //  }
+                //  //Throw a failure in Input & Output operations
+                //  catch (IOException e1)
+                //  {
+                //      // TODO Auto-generated catch block
+                //      e1.printStackTrace();
+                //  }
                 break;
             case 2:
                 //msgContent = "Deploy Services";
