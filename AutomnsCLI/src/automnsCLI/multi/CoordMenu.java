@@ -45,7 +45,6 @@ public class CoordMenu extends Agent {
                             + " ( " + msg.getSender().getName() + " )");
                 }
                 try {
-                    Thread.sleep(3000);
                     menu();
                 } catch (IOException e) {
                     e.printStackTrace();
