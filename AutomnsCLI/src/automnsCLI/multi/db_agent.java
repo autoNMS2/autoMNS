@@ -25,7 +25,6 @@ public class db_agent extends Agent
 						case "Deploy Agents":
 							//msgContent = "Deploy Services";
 							System.out.println("Deploying Agents");
-
 							break;
 						case "Deploy Services":
 							Runtime r = Runtime.getRuntime();

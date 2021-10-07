@@ -29,20 +29,21 @@ public class CoordMenu extends Agent {
         }
 
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-        AID dest = new AID("db@172.31.86.85:1099/JADE", AID.ISGUID);
+        AID dest = new AID("db@172.31.86.85:5000/JADE", AID.ISGUID);
         dest.addAddresses("http://172.31.86.85:7778/acc");
         msg.addReceiver(dest);
         msg.setContent(msgContent);
         send(msg);
     }
 
-    protected void setup() {
+    protected void setup(){
         addBehaviour(new CyclicBehaviour(this) {
             public void action() {
                 ACLMessage msg = receive();
-                if (msg != null)
-                    System.out.println("Message"+msg.getContent()
-                            + " ( " + msg.getSender().getName()+ " )");
+                if (msg != null) {
+                    System.out.println("Message" + msg.getContent()
+                            + " ( " + msg.getSender().getName() + " )");
+                }
                 try {
                     menu();
                 } catch (IOException e) {
