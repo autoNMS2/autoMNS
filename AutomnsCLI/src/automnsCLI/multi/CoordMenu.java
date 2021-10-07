@@ -40,14 +40,15 @@ public class CoordMenu extends Agent {
         addBehaviour(new CyclicBehaviour(this) {
             public void action() {
                 ACLMessage msg = receive();
-                if (msg != null)
+                if (msg != null) {
                     System.out.println("Message" + msg.getContent()
                             + " ( " + msg.getSender().getName() + " )");
-            }
-            try {
-                menu();
-            } catch (IOException e) {
-                e.printStackTrace();
+                }
+                try {
+                    menu();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
