@@ -71,7 +71,7 @@ public class CoordMenu extends Agent {
             case 3:
                 msgContent = "Get Services Update";
                 ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-                AID dest = new AID("db@172.31.88.236:5004/JADE", AID.ISGUID);
+                AID dest = new AID("db@172.31.88.236:1009/JADE", AID.ISGUID);
                 //AID dest1 = new AID("auth@172.31.85.143:5001/JADE", AID.ISGUID);
                 dest.addAddresses("http://172.31.88.236:7778/acc");
                 //dest1.addAddresses("http://172.31.85.143:7778/acc");
