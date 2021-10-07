@@ -47,7 +47,7 @@ public class CoordMenu extends Agent {
                         VMFunctions.noOutputSSH(ip[x], privateKey, agentCommands[y]);
                         VMFunctions.noOutputSSH(ip[x], privateKey, agentCommands[y+1]);
                         x++; y+=2; z++;
-                    } while(z<8);
+                    } while(z<3);
                 }
                 //Throw a failure in Input & Output operations
                 catch (IOException e1)
