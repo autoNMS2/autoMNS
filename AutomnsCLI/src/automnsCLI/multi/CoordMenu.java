@@ -23,7 +23,7 @@ public class CoordMenu extends Agent {
         {
             case 1:
                 //msgContent = "Deploy Agents";
-                String[] ip = {"18.212.74.131","35.171.161.216","35.174.111.173","3.83.106.197","18.233.166.97","3.83.193.82","3.87.208.125" };
+                String[] ip = {"3.88.165.202","3.93.17.199"};
                 int x = 0;
                 int y = 0;
                 int z = 1;
@@ -62,7 +62,7 @@ public class CoordMenu extends Agent {
 
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
         AID dest = new AID("db@172.31.86.85:5000/JADE", AID.ISGUID);
-        AID dest1 = new AID("a2@172.31.92.102:5001/JADE", AID.ISGUID);
+        AID dest1 = new AID("@172.31.92.102:5001/JADE", AID.ISGUID);
         dest.addAddresses("http://172.31.86.85:7778/acc");
         dest1.addAddresses("http://172.31.92.102:7778/acc");
         msg.addReceiver(dest);
@@ -79,19 +79,9 @@ public class CoordMenu extends Agent {
         //Compiling, running, and joining main platform command array (for each agent)
         String[] agentCommands =
                 {"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/db_agent.java",
-                        "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.94.231 -agents db:automnsCLI.multi.db_agent",
+                        "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.86.85 -agents db:automnsCLI.multi.db_agent",
                         "javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/authenticator_agent.java",
-                        "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.85.80 -agents Auth:automnsCLI.multi.authenticator_agent",
-                        "javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/image_agent.java",
-                        "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.83.130 -agents Image:automnsCLI.multi.image_agent",
-                        "javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/persistence_agent.java",
-                        "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.83.157 -agents Persistence:automnsCLI.multi.persistence_agent",
-                        "javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/recommender_agent.java",
-                        "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.82.207 -agents Recommender:automnsCLI.multi.recommender_agent",
-                        "javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/registry_agent.java",
-                        "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.85.39 -agents Registry:automnsCLI.multi.registry_agent",
-                        "javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/webui_agent.java",
-                        "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.95.28 -agents Webui:automnsCLI.multi.webui_agent"
+                        "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.92.102 -agents Auth:automnsCLI.multi.authenticator_agent"
                 };
         addBehaviour(new CyclicBehaviour(this) {
             public void action() {
