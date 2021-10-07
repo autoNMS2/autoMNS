@@ -29,7 +29,7 @@ public class CoordMenu extends Agent {
         }
 
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-        AID dest = new AID("db@172.31.86.85:1099/JADE", AID.ISGUID);
+        AID dest = new AID("db@172.31.86.85:5000/JADE", AID.ISGUID);
         dest.addAddresses("http://172.31.86.85:7778/acc");
         msg.addReceiver(dest);
         msg.setContent(msgContent);
@@ -44,6 +44,7 @@ public class CoordMenu extends Agent {
                     System.out.println("Message"+msg.getContent()
                             + " ( " + msg.getSender().getName()+ " )");
                 try {
+                    wait(1000);
                     menu();
                 } catch (IOException e) {
                     e.printStackTrace();
