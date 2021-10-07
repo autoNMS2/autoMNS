@@ -46,10 +46,10 @@ public class CoordMenu extends Agent {
             case 2:
                 //msgContent = "Deploy Services";
                 Runtime r = Runtime.getRuntime();
-                String cmd = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/all.yaml TeaStore ";
+                String cmd1 = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/all.yaml TeaStore ";
                 try
                 {
-                    r.exec(cmd);
+                    r.exec(cmd1);
                 } catch (IOException e)
                 {
                     e.printStackTrace();
