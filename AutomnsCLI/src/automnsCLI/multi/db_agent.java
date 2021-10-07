@@ -42,7 +42,7 @@ public class db_agent extends Agent
 								String s = null;
 								while ((s = stdInput.readLine()) != null) {
 									System.out.println(s);
-									FileWriter log=new FileWriter("log.txt");
+									FileWriter log=new FileWriter("autoMNS/log.txt");
 									log.write(s);
 									System.out.println("Writing successful");
 									//close the file
@@ -53,6 +53,15 @@ public class db_agent extends Agent
 								System.out.println("Here is the standard error of the command (if any):\n");
 								while ((s = stdError.readLine()) != null) {
 									System.out.println(s);
+								}
+							} catch (IOException e)
+							{
+								e.printStackTrace();
+							}
+	                                                	Runtime r = Runtime.getRuntime();
+							String cmd = "cd autoMNS -y\n sudo git push -y";
+							try {
+								r.exec(cmd);
 								}
 							} catch (IOException e)
 							{
