@@ -19,7 +19,7 @@ public class CoordMenu extends Agent {
                 {"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/db_agent.java",
                         "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.88.236 -port 5000 -agents db:automnsCLI.multi.db_agent",
                         "javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/authenticator_agent.java",
-                        "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.85.143 -port 5001 -agents Auth:automnsCLI.multi.authenticator_agent"
+                        "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.85.143 -port 5001 -agents auth:automnsCLI.multi.authenticator_agent"
                 };
 
         System.out.println("select command: " +
@@ -72,11 +72,11 @@ public class CoordMenu extends Agent {
                 msgContent = "Get Services Update";
                 ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
                 AID dest = new AID("db@172.31.88.236:5000/JADE", AID.ISGUID);
-                AID dest1 = new AID("auth@172.31.85.143:5001/JADE", AID.ISGUID);
+                //AID dest1 = new AID("auth@172.31.85.143:5001/JADE", AID.ISGUID);
                 dest.addAddresses("http://172.31.88.236:7778/acc");
-                dest1.addAddresses("http://172.31.85.143:7778/acc");
+                //dest1.addAddresses("http://172.31.85.143:7778/acc");
                 msg.addReceiver(dest);
-                msg.addReceiver(dest1);
+               // msg.addReceiver(dest1);
                 msg.setContent(msgContent);
                 send(msg);
                 break;
