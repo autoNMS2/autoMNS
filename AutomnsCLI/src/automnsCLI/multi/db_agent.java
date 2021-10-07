@@ -61,7 +61,7 @@ public class db_agent extends Agent
 								e.printStackTrace();
 							}
 	                                                	Runtime r1 = Runtime.getRuntime();
-							String cmd1 = "cd autoMNS -y\n sudo git push -y";
+							String cmd1 = "cd autoMNS/\n sudo git commit -m "db agent Update" log.txt\n sudo git push -u origin master ";
 							try {
 								r1.exec(cmd1);
 								}
