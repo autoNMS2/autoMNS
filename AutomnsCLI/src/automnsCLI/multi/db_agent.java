@@ -26,7 +26,7 @@ public class db_agent extends Agent
 							//msgContent = "Deploy Services";
 							System.out.println("Deploying Agents");
 							break;
-						case "Deploy Services":
+						case "Get Services Update":
 							Runtime r = Runtime.getRuntime();
 							String cmd = "docker ps";
 							try {
@@ -58,17 +58,17 @@ public class db_agent extends Agent
 							{
 								e.printStackTrace();
 							}
+							//sends a reply to the sender
+							ACLMessage reply = msg.createReply();
+							reply.setPerformative(ACLMessage.INFORM);
+							reply.setContent("Log file updated");
+							send(reply);
 							break;
 						case "Kill services":
 							//msgContent = "Kill services";
 							System.out.println("Killinggggg services");
 							break;
 					}
-					//sends a reply to the sender
-					ACLMessage reply = msg.createReply();
-					reply.setPerformative(ACLMessage.INFORM);
-					reply.setContent("Hello back");
-					send(reply);
 				}
 			}
 		});
