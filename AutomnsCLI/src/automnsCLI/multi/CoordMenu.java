@@ -36,7 +36,7 @@ public class CoordMenu extends Agent {
         send(msg);
     }
 
-    protected void setup() throws InterruptedException{
+    protected void setup(){
         addBehaviour(new CyclicBehaviour(this) {
             public void action() {
                 ACLMessage msg = receive();
