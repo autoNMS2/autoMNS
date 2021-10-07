@@ -75,7 +75,7 @@ public class CoordMenu extends Agent {
 
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
         AID dest = new AID("db@172.31.86.85:5000/JADE", AID.ISGUID);
-        AID dest1 = new AID("@172.31.92.102:5001/JADE", AID.ISGUID);
+        AID dest1 = new AID("auth@172.31.92.102:5001/JADE", AID.ISGUID);
         dest.addAddresses("http://172.31.86.85:7778/acc");
         dest1.addAddresses("http://172.31.92.102:7778/acc");
         msg.addReceiver(dest);
