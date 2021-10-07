@@ -139,7 +139,7 @@ public class JAMEScoordinator extends Agent
             		int workerCounter = 0;
             		while(commandCounter < agentCommands.length){
             			for(int m = 0; m < 2; m++) {
-            				VMFunctions.shellSSH(workerVMsPublic.get(workerCounter), privateKey, agentCommands[commandCounter]);
+            				VMFunctions.noOutputSSH(workerVMsPublic.get(workerCounter), privateKey, agentCommands[commandCounter]);
             				commandCounter ++;
             			}
             			workerCounter ++;
