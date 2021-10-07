@@ -70,18 +70,17 @@ public class CoordMenu extends Agent {
                 break;
             case 3:
                 msgContent = "Get Services Update";
+                ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+                AID dest = new AID("db@172.31.86.85:5000/JADE", AID.ISGUID);
+                AID dest1 = new AID("auth@172.31.92.122:5001/JADE", AID.ISGUID);
+                dest.addAddresses("http://172.31.86.85:7778/acc");
+                dest1.addAddresses("http://172.31.92.122:7778/acc");
+                msg.addReceiver(dest);
+                msg.addReceiver(dest1);
+                msg.setContent(msgContent);
+                send(msg);
                 break;
         }
-
-        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-        AID dest = new AID("db@172.31.86.85:5000/JADE", AID.ISGUID);
-        AID dest1 = new AID("auth@172.31.92.122:5001/JADE", AID.ISGUID);
-        dest.addAddresses("http://172.31.86.85:7778/acc");
-        dest1.addAddresses("http://172.31.92.122:7778/acc");
-        msg.addReceiver(dest);
-        msg.addReceiver(dest1);
-        msg.setContent(msgContent);
-        send(msg);
     }
 
     protected void setup(){
