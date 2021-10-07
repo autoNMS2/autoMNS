@@ -1,5 +1,7 @@
 package automnsCLI.multi;
 
+
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import jade.core.Agent;
@@ -58,12 +60,12 @@ public class db_agent extends Agent
 							{
 								e.printStackTrace();
 							}
-	                                                	Runtime r = Runtime.getRuntime();
-							String cmd = "cd autoMNS -y\n sudo git push -y";
+	                                                	Runtime r1 = Runtime.getRuntime();
+							String cmd1 = "cd autoMNS -y\n sudo git push -y";
 							try {
-								r.exec(cmd);
+								r1.exec(cmd1);
 								}
-							} catch (IOException e)
+							 catch (IOException e)
 							{
 								e.printStackTrace();
 							}
