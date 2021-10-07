@@ -50,7 +50,11 @@ public class CoordMenu extends Agent {
                 else {
                     System.out.println("Message"+msg.getContent()
                             + " ( " + msg.getSender().getName()+ " )");
-                    menu();
+                    try {
+                        menu();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
