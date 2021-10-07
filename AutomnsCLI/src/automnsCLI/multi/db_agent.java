@@ -25,11 +25,6 @@ public class db_agent extends Agent
 						case "Deploy Agents":
 							//msgContent = "Deploy Services";
 							System.out.println("Deploying Agents");
-//sends a reply to the sender
-							ACLMessage reply = msg.createReply();
-							reply.setPerformative(ACLMessage.INFORM);
-							reply.setContent("Hello back");
-							send(reply);
 							break;
 						case "Deploy Services":
 							Runtime r = Runtime.getRuntime();
@@ -69,7 +64,11 @@ public class db_agent extends Agent
 							System.out.println("Killinggggg services");
 							break;
 					}
-
+					//sends a reply to the sender
+					ACLMessage reply = msg.createReply();
+					reply.setPerformative(ACLMessage.INFORM);
+					reply.setContent("Hello back");
+					send(reply);
 				}
 			}
 		});
