@@ -17,9 +17,9 @@ public class CoordMenu extends Agent {
         //Compiling, running, and joining main platform command array (for each agent)
         String[] agentCommands =
                 {"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/db_agent.java",
-                        "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.88.236 -agents db:automnsCLI.multi.db_agent",
+                        "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.88.236 -port 5000 -agents db:automnsCLI.multi.db_agent",
                         "javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/authenticator_agent.java",
-                        "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.85.143 -agents Auth:automnsCLI.multi.authenticator_agent"
+                        "java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.85.143 -port 5001 -agents Auth:automnsCLI.multi.authenticator_agent"
                 };
 
         System.out.println("select command: " +
