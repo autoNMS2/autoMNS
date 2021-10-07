@@ -36,7 +36,7 @@ public class CoordMenu extends Agent {
         {
             case 1:
                 //msgContent = "Deploy Agents";
-                String[] ip = {"3.88.165.202","3.93.17.199"};
+                String[] ip = {"3.88.165.202","172.31.92.122"};
                 int x = 0;
                 int y = 0;
                 int z = 1;
@@ -75,9 +75,9 @@ public class CoordMenu extends Agent {
 
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
         AID dest = new AID("db@172.31.86.85:5000/JADE", AID.ISGUID);
-        AID dest1 = new AID("auth@172.31.92.102:5001/JADE", AID.ISGUID);
+        AID dest1 = new AID("auth@172.31.92.122:5001/JADE", AID.ISGUID);
         dest.addAddresses("http://172.31.86.85:7778/acc");
-        dest1.addAddresses("http://172.31.92.102:7778/acc");
+        dest1.addAddresses("http://172.31.92.122:7778/acc");
         msg.addReceiver(dest);
         msg.addReceiver(dest1);
         msg.setContent(msgContent);
