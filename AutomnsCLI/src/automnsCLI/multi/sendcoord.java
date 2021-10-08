@@ -83,11 +83,6 @@ public class sendcoord extends Agent {
 				}catch (InterruptedException e) {
 				}
 				while (checkmsg());
-//				ACLMessage msg = receive();
-//				if (msg != null) {
-//					System.out.println("Message" + msg.getContent()
-//							+ " ( " + msg.getSender().getName() + " )");
-//				}
 				try {
 					menu();
 				} catch (IOException e) {
