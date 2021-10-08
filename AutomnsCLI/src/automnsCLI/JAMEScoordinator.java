@@ -126,8 +126,8 @@ public class JAMEScoordinator extends Agent
 
         		ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
         		//
-        		AID dest = new AID("db@" + workerVMsPrivate.get(0) +":5001/JADE", AID.ISGUID);
-        		dest.addAddresses("http://" + workerVMsPrivate.get(0) +":7778/acc");
+        		AID dest = new AID("db@172.31.81.121:5001/JADE", AID.ISGUID);
+        		dest.addAddresses("http://172.31.81.121:7778/acc");
         		msg.addReceiver(dest);
         		//
         		AID dest1 = new AID("auth@" + workerVMsPrivate.get(1) +":5002/JADE", AID.ISGUID);
