@@ -26,7 +26,7 @@ public class sendcoord extends Agent {
 		System.out.println("select command: " +
 				"\n 1. Get Update " +
 				"\n 2. Deploy Agents " +
-				"\n 3. Deploy Services "
+				"\n 3. Deploy Services " +
 				"");
 
 		String privateKey = "autoMNS/jade/src/test0/test.pem";
