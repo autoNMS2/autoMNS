@@ -80,7 +80,7 @@ public class sendcoord extends Agent {
 			public void action() {
 				try {
 					TimeUnit.SECONDS.sleep(1);
-				}catch (interuptedException e) {
+				}catch (InterruptedException e) {
 				}
 				while (checkmsg());
 //				ACLMessage msg = receive();
