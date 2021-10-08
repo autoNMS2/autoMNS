@@ -43,7 +43,7 @@ public class sendcoord extends Agent {
 		msg.addReceiver(dest2);
 		//
 		AID dest3 = new AID("pers@172.31.89.126:5004/JADE", AID.ISGUID);
-		dest3.addAddresses("http://1172.31.89.126:7778/acc");
+		dest3.addAddresses("http://172.31.89.126:7778/acc");
 		msg.addReceiver(dest3);
 		//
 		AID dest4 = new AID("recom@172.31.82.46:5005/JADE", AID.ISGUID);
@@ -70,11 +70,11 @@ public class sendcoord extends Agent {
 					System.out.println("Message" + msg.getContent()
 							+ " ( " + msg.getSender().getName() + " )");
 				}
-				try {
-					menu();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+//				try {
+//					menu();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
 			}
 		});
 	}
