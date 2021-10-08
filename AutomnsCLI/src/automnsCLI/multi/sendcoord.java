@@ -61,25 +61,30 @@ public class sendcoord extends Agent {
 		msg.setContent(msgContent);
 		send(msg);
 	}
+	public boolean checkmsg(){
+		ACLMessage msg = receive();
+		if (msg != null) {
 
+			System.out.println("Message" + msg.getContent()
+					+ " ( " + msg.getSender().getName() + " )");
+			return true;
+		}
+		return false;
+	}
 	protected void setup() {
-						try {
+		addBehaviour(new CyclicBehaviour(this) {
+			public void action() {
+				while checkmsg();
+//				ACLMessage msg = receive();
+//				if (msg != null) {
+//					System.out.println("Message" + msg.getContent()
+//							+ " ( " + msg.getSender().getName() + " )");
+//				}
+				try {
 					menu();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-		addBehaviour(new CyclicBehaviour(this) {
-			public void action() {
-				ACLMessage msg = receive();
-				if (msg != null) {
-					System.out.println("Message" + msg.getContent()
-							+ " ( " + msg.getSender().getName() + " )");
-				}
-//				try {
-//					menu();
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//				}
 			}
 		});
 	}
