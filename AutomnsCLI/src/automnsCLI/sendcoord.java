@@ -32,19 +32,19 @@ public class sendcoord extends Agent {
 		String privateKey = "autoMNS/jade/src/test0/test.pem";
 		String[] agentCommands =
 				{"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/receive0.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.83.213 -port 5001 -agents db:automnsCLI.receive0",
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.89.48 -port 5001 -agents db:automnsCLI.receive0",
 						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/receive0.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.94.8 -port 5002 -agents auth:automnsCLI.receive0",
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.84.108 -port 5002 -agents auth:automnsCLI.receive0",
 						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/receive0.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.82.12 -port 5003 -agents image:automnsCLI.receive0",
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.81.124 -port 5003 -agents image:automnsCLI.receive0",
 						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/receive0.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.89.126 -port 5004 -agents pers:automnsCLI.receive0",
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.80.184 -port 5004 -agents pers:automnsCLI.receive0",
 						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/receive0.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.82.46 -port 5005 -agents recom:automnsCLI.receive0",
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.80.38 -port 5005 -agents recom:automnsCLI.receive0",
 						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/receive0.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.80.110 -port 5006 -agents reg:automnsCLI.receive0",
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.81.175 -port 5006 -agents reg:automnsCLI.receive0",
 						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/receive0.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.24.6 -port 5007 -agents webui:automnsCLI.receive0"
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.94.221 -port 5007 -agents webui:automnsCLI.receive0"
 				};
 
 		Scanner scanner = new Scanner(System.in);
@@ -57,32 +57,32 @@ public class sendcoord extends Agent {
 				msgContent = "Deploy Agents";
 				ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
 				//
-				AID dest = new AID("db@172.31.83.213:5001/JADE", AID.ISGUID);
-				dest.addAddresses("http://172.31.83.213:7778/acc");
+				AID dest = new AID("db@172.31.89.48:5001/JADE", AID.ISGUID);
+				dest.addAddresses("http://172.31.89.48:7778/acc");
 				msg.addReceiver(dest);
 				//
-				AID dest1 = new AID("auth@172.31.94.8:5002/JADE", AID.ISGUID);
-				dest1.addAddresses("http://172.31.94.8:7778/acc");
+				AID dest1 = new AID("auth@172.31.84.108:5002/JADE", AID.ISGUID);
+				dest1.addAddresses("http://172.31.84.108:7778/acc");
 				msg.addReceiver(dest1);
 				//
-				AID dest2 = new AID("image@172.31.82.12:5003/JADE", AID.ISGUID);
-				dest2.addAddresses("http://172.31.82.12:7778/acc");
+				AID dest2 = new AID("image@172.31.81.124:5003/JADE", AID.ISGUID);
+				dest2.addAddresses("http://172.31.81.124:7778/acc");
 				msg.addReceiver(dest2);
 				//
-				AID dest3 = new AID("pers@172.31.89.126:5004/JADE", AID.ISGUID);
-				dest3.addAddresses("http://172.31.89.126:7778/acc");
+				AID dest3 = new AID("pers@172.31.80.184:5004/JADE", AID.ISGUID);
+				dest3.addAddresses("http://172.31.80.184:7778/acc");
 				msg.addReceiver(dest3);
 				//
-				AID dest4 = new AID("recom@172.31.82.46:5005/JADE", AID.ISGUID);
-				dest4.addAddresses("http://172.31.82.46:7778/acc");
+				AID dest4 = new AID("recom@172.31.80.38:5005/JADE", AID.ISGUID);
+				dest4.addAddresses("http://172.31.80.38:7778/acc");
 				msg.addReceiver(dest4);
 				//
-				AID dest5 = new AID("reg@172.31.80.110:5006/JADE", AID.ISGUID);
-				dest5.addAddresses("http://172.31.80.110:7778/acc");
+				AID dest5 = new AID("reg@172.31.81.175:5006/JADE", AID.ISGUID);
+				dest5.addAddresses("http://172.31.81.175:7778/acc");
 				msg.addReceiver(dest5);
 				//
-				AID dest6 = new AID("webui@172.31.24.6:5007/JADE", AID.ISGUID);
-				dest6.addAddresses("http://172.31.24.6:7778/acc");
+				AID dest6 = new AID("webui@172.31.94.221:5007/JADE", AID.ISGUID);
+				dest6.addAddresses("http://172.31.94.221:7778/acc");
 				msg.addReceiver(dest6);
 				//
 				msg.setContent(msgContent);
@@ -90,7 +90,7 @@ public class sendcoord extends Agent {
 				break;
 			case 2:
 				//msgContent = "Deploy Agents";
-				String[] ip = {"34.227.13.150","54.158.196.4","3.84.54.191","3.85.159.166","18.212.184.1","3.83.204.155","54.87.218.111"};
+				String[] ip = {"52.87.203.147","18.208.149.42","18.212.166.86","18.204.196.102","54.146.141.84","34.238.176.2","100.24.20.48"};
 				int x = 0;
 				int y = 0;
 				int z = 1;
