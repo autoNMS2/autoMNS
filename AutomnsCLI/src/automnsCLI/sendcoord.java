@@ -89,17 +89,19 @@ public class sendcoord extends Agent {
 				send(msg);
 				break;
 			case 2:
+				//msgContent = "Deploy Agents";
+				String[] ip = {"34.227.13.150","54.158.196.4","3.84.54.191","3.85.159.166","18.212.184.1","3.83.204.155","54.87.218.111"};
+				int x = 0;
+				int y = 0;
+				int z = 1;
 				try
 				{
-					int commandCounter = 0;
-					int workerCounter = 0;
-					while(commandCounter < agentCommands.length){
-						for(int m = 0; m < 2; m++) {
-							VMFunctions.noOutputSSH(workerVMsPublic.get(workerCounter), privateKey, agentCommands[commandCounter]);
-							commandCounter ++;
-						}
-						workerCounter ++;
-					}
+					do
+					{
+						VMFunctions.noOutputSSH(ip[x], privateKey, agentCommands[y]);
+						VMFunctions.noOutputSSH(ip[x], privateKey, agentCommands[y+1]);
+						x++; y+=2; z++;
+					} while(z<3);
 				}
 				//Throw a failure in Input & Output operations
 				catch (IOException e1)
