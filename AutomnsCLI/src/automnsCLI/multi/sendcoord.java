@@ -63,6 +63,11 @@ public class sendcoord extends Agent {
 	}
 
 	protected void setup() {
+						try {
+					menu();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 		addBehaviour(new CyclicBehaviour(this) {
 			public void action() {
 				ACLMessage msg = receive();
