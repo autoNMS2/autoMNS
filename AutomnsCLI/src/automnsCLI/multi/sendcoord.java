@@ -7,7 +7,7 @@ import jade.lang.acl.*;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class CoordMenu extends Agent {
+public class sendcoord extends Agent {
 	public void menu () throws IOException {
 		System.out.println("select command: " +
 				"\n 1. Deploy Agents " +
