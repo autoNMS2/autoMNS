@@ -34,7 +34,7 @@ public class receive0 extends Agent {
                     //sends a reply to the sender
                     ACLMessage reply = msg.createReply();
                     reply.setPerformative(ACLMessage.INFORM);
-                    reply.setContent(" Hello reply from Receiver");
+                    reply.setContent(" Hello reply from " + myAgent.getLocalName());
                     send(reply);
                 }
                 block();
