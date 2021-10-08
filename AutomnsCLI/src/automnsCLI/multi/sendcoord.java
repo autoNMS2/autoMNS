@@ -6,6 +6,7 @@ import jade.core.behaviours.*;
 import jade.lang.acl.*;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class sendcoord extends Agent {
 	public void menu () throws IOException {
@@ -61,19 +62,23 @@ public class sendcoord extends Agent {
 		msg.setContent(msgContent);
 		send(msg);
 	}
-	public boolean checkmsg(){
+	public boolean checkmsg() {
+
 		ACLMessage msg = receive();
 		if (msg != null) {
 
 			System.out.println("Message" + msg.getContent()
 					+ " ( " + msg.getSender().getName() + " )");
+
 			return true;
 		}
 		return false;
 	}
 	protected void setup() {
 		addBehaviour(new CyclicBehaviour(this) {
+
 			public void action() {
+				TimeUnit.SECONDS.sleep(1);
 				while (checkmsg());
 //				ACLMessage msg = receive();
 //				if (msg != null) {
