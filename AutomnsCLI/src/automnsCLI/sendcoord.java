@@ -58,31 +58,31 @@ public class sendcoord extends Agent {
 				ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
 				//
 				AID dest = new AID("db@172.31.89.48:6001/JADE", AID.ISGUID);
-				dest.addAddresses("http://172.31.89.48:33827/acc");
+				dest.addAddresses("http://172.31.89.48:40885/acc");
 				msg.addReceiver(dest);
 				//
 				AID dest1 = new AID("auth@172.31.84.108:6002/JADE", AID.ISGUID);
-				dest1.addAddresses("http://172.31.84.108:46859/acc");
+				dest1.addAddresses("http://172.31.84.108:45519/acc");
 				msg.addReceiver(dest1);
 				//
 				AID dest2 = new AID("image@172.31.81.124:6003/JADE", AID.ISGUID);
-				dest2.addAddresses("http://172.31.81.124:43279/acc");
+				dest2.addAddresses("http://172.31.81.124:33303/acc");
 				msg.addReceiver(dest2);
 				//
 				AID dest3 = new AID("pers@172.31.80.184:6004/JADE", AID.ISGUID);
-				dest3.addAddresses("http://172.31.80.184:43425/acc");
+				dest3.addAddresses("http://172.31.80.184:40791/acc");
 				msg.addReceiver(dest3);
 				//
 				AID dest4 = new AID("recom@172.31.80.38:6005/JADE", AID.ISGUID);
-				dest4.addAddresses("http://172.31.80.38:45287/acc");
+				dest4.addAddresses("http://172.31.80.38:45975/acc");
 				msg.addReceiver(dest4);
 				//
 				AID dest5 = new AID("reg@172.31.81.175:6006/JADE", AID.ISGUID);
-				dest5.addAddresses("http://172.31.81.175:38235/acc");
+				dest5.addAddresses("http://172.31.81.175:39159/acc");
 				msg.addReceiver(dest5);
 				//
 				AID dest6 = new AID("webui@172.31.94.221:6007/JADE", AID.ISGUID);
-				dest6.addAddresses("http://172.31.94.221:45377/acc");
+				dest6.addAddresses("http://172.31.94.221:37167/acc");
 				msg.addReceiver(dest6);
 				//
 				msg.setContent(msgContent);
