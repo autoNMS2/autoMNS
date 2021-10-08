@@ -74,7 +74,7 @@ public class sendcoord extends Agent {
 	protected void setup() {
 		addBehaviour(new CyclicBehaviour(this) {
 			public void action() {
-				while checkmsg();
+				while (checkmsg());
 //				ACLMessage msg = receive();
 //				if (msg != null) {
 //					System.out.println("Message" + msg.getContent()
