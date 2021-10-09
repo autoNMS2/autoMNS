@@ -32,7 +32,8 @@ public class sendcoord extends Agent {
 		String privateKey = "autoMNS/jade/src/test0/test.pem";
 		String[] agentCommands =
 				{"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/receive0.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.28.122 -port 1099 -local-host 172.31.16.27 -local-port 5000 -container Database:automnsCLI.multi.receive0"};
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.28.122 -port 1099 -local-host 172.31.16.27 -local-port 5000 -container Database:automnsCLI.receive0"
+				};
 //			{"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/receive0.java",
 //					"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.28.122 -port 1099 -local-host 172.31.16.27 -local-port 5000 -container Database:automnsCLI.multi.receive0",
 //					"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/receive0.java",
