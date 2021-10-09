@@ -87,7 +87,7 @@ public class sendcoord extends Agent {
 						VMFunctions.noOutputSSH(ip[x], privateKey, agentCommands[y]);
 						VMFunctions.noOutputSSH(ip[x], privateKey, agentCommands[y+1]);
 						x++; y+=2; z++;
-					} while(y<8);
+					} while(y<7);
 				}
 				//Throw a failure in Input & Output operations
 				catch (IOException e1)
