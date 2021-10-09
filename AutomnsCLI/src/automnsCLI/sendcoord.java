@@ -66,8 +66,8 @@ public class sendcoord extends Agent {
 				send(msg);
 				break;
 			case 2:
-				String[] ip = {"3.80.113.155"};
-				//String[] ip = {"3.80.113.155","54.147.29.37","54.235.236.254","18.212.96.141","34.207.80.67","34.224.68.95","34.230.29.173"};
+				//String[] ip = {"3.80.113.155"};
+				String[] ip = {"3.80.113.155","54.147.29.37","54.235.236.254","18.212.96.141","34.207.80.67","34.224.68.95","34.230.29.173"};
 				int x = 0;
 				int y = 0;
 				int z = 1;
@@ -78,7 +78,7 @@ public class sendcoord extends Agent {
 						VMFunctions.noOutputSSH(ip[x], privateKey, agentCommands[y]);
 						VMFunctions.noOutputSSH(ip[x], privateKey, agentCommands[y+1]);
 						x++; y+=2; z++;
-					} while(z<2);
+					} while(z<8);
 				}
 				//Throw a failure in Input & Output operations
 				catch (IOException e1)
