@@ -17,7 +17,7 @@ public class receive0 extends Agent {
                         case "Deploy Agents":
                             ACLMessage reply = msg.createReply();
                             reply.setPerformative(ACLMessage.INFORM);
-                            reply.setContent("Agent " + myAgent.getLocalName() + " is alive!");
+                            reply.setContent("\n" + myAgent.getLocalName() + " Agent is alive!");
                             send(reply);
                             break;
                         case "Deploy Services":

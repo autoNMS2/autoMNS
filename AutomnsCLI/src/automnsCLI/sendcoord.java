@@ -31,23 +31,20 @@ public class sendcoord extends Agent {
 
 		String privateKey = "autoMNS/jade/src/test0/test.pem";
 		String[] agentCommands =
-				{"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/receive0.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.28.122 -port 1099 -local-host 172.31.16.27 -local-port 5000 -container Database:automnsCLI.receive0"
-				};
-//			{"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/receive0.java",
-//					"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.28.122 -port 1099 -local-host 172.31.16.27 -local-port 5000 -container Database:automnsCLI.multi.receive0",
-//					"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/receive0.java",
-//					"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.28.122 -port 1099 -local-host 172.31.21.119 -local-port 5001 -container Authenticator:automnsCLI.multi.receive0",
-//					"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/receive0.java",
-//					"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.28.122 -port 1099 -local-host 172.31.21.120 -local-port 5002 -container Image:automnsCLI.multi.receive0",
-//					"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/receive0.java",
-//					"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.28.122 -port 1099 -local-host 172.31.24.157 -local-port 5003 -container Persistence:automnsCLI.multi.receive0",
-//					"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/receive0.java",
-//					"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.28.122 -port 1099 -local-host 172.31.27.194 -local-port 5004 -container Recommender:automnsCLI.multi.receive0",
-//					"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/receive0.java",
-//					"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.28.122 -port 1099 -local-host 172.31.16.180 -local-port 5005 -container Registry:automnsCLI.multi.receive0",
-//					"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/receive0.java",
-//					"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.28.122 -port 1099 -local-host 172.31.21.33 -local-port 5006 -container Webui:automnsCLI.multi.receive0"};
+			{"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/receive0.java",
+					"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.28.122 -port 1099 -local-host 172.31.16.27 -local-port 5000 -container Database:automnsCLI.receive0",
+					"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/receive0.java",
+					"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.28.122 -port 1099 -local-host 172.31.21.119 -local-port 5001 -container Authenticator:automnsCLI.receive0",
+					"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/receive0.java",
+					"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.28.122 -port 1099 -local-host 172.31.21.120 -local-port 5002 -container Image:automnsCLI.receive0",
+					"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/receive0.java",
+					"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.28.122 -port 1099 -local-host 172.31.24.157 -local-port 5003 -container Persistence:automnsCLI.receive0",
+					"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/receive0.java",
+					"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.28.122 -port 1099 -local-host 172.31.27.194 -local-port 5004 -container Recommender:automnsCLI.receive0",
+					"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/receive0.java",
+					"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.28.122 -port 1099 -local-host 172.31.16.180 -local-port 5005 -container Registry:automnsCLI.receive0",
+					"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/receive0.java",
+					"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.28.122 -port 1099 -local-host 172.31.21.33 -local-port 5006 -container Webui:automnsCLI.receive0"};
 
 		Scanner scanner = new Scanner(System.in);
 		int cmd = scanner.nextInt();
@@ -60,12 +57,12 @@ public class sendcoord extends Agent {
 				ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
 				msg.setContent(msgContent);
 				msg.addReceiver(new AID("Database", AID.ISLOCALNAME));
-//				msg.addReceiver(new AID("Authenticator", AID.ISLOCALNAME));
-//				msg.addReceiver(new AID("Image", AID.ISLOCALNAME));
-//				msg.addReceiver(new AID("Persistence", AID.ISLOCALNAME));
-//				msg.addReceiver(new AID("Recommender", AID.ISLOCALNAME));
-//				msg.addReceiver(new AID("Registry", AID.ISLOCALNAME));
-//				msg.addReceiver(new AID("Webui", AID.ISLOCALNAME));
+				msg.addReceiver(new AID("Authenticator", AID.ISLOCALNAME));
+				msg.addReceiver(new AID("Image", AID.ISLOCALNAME));
+				msg.addReceiver(new AID("Persistence", AID.ISLOCALNAME));
+				msg.addReceiver(new AID("Recommender", AID.ISLOCALNAME));
+				msg.addReceiver(new AID("Registry", AID.ISLOCALNAME));
+				msg.addReceiver(new AID("Webui", AID.ISLOCALNAME));
 				send(msg);
 				break;
 			case 2:
