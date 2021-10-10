@@ -89,16 +89,16 @@ public class sendcoord extends Agent {
 				break;
 			case 3:
 				msgContent = "Deploy Services";
-				ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-				msg.setContent(msgContent);
-				msg.addReceiver(new AID("Database", AID.ISLOCALNAME));
-				msg.addReceiver(new AID("Authenticator", AID.ISLOCALNAME));
-				msg.addReceiver(new AID("Image", AID.ISLOCALNAME));
-				msg.addReceiver(new AID("Persistence", AID.ISLOCALNAME));
-				msg.addReceiver(new AID("Recommender", AID.ISLOCALNAME));
-				msg.addReceiver(new AID("Registry", AID.ISLOCALNAME));
-				msg.addReceiver(new AID("Webui", AID.ISLOCALNAME));
-				send(msg);
+				ACLMessage msg2 = new ACLMessage(ACLMessage.INFORM);
+				msg2.setContent(msgContent);
+				msg2.addReceiver(new AID("Database", AID.ISLOCALNAME));
+				msg2.addReceiver(new AID("Authenticator", AID.ISLOCALNAME));
+				msg2.addReceiver(new AID("Image", AID.ISLOCALNAME));
+				msg2.addReceiver(new AID("Persistence", AID.ISLOCALNAME));
+				msg2.addReceiver(new AID("Recommender", AID.ISLOCALNAME));
+				msg2.addReceiver(new AID("Registry", AID.ISLOCALNAME));
+				msg2.addReceiver(new AID("Webui", AID.ISLOCALNAME));
+				send(msg2);
 				break;
 		}
 	}
