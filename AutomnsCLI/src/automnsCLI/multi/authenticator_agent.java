@@ -40,13 +40,13 @@ public class authenticator_agent extends Agent {
                                 String s = null;
                                 while ((s = stdInput.readLine()) != null) {
                                     System.out.println(s);
-                                    FileWriter log=new FileWriter("autoMNS/log.txt");
-                                    log.write(s);
+                                    //FileWriter log=new FileWriter("autoMNS/log.txt");
+                                    //log.write(s);
                                     System.out.println("Writing successful");
                                     //close the file
-                                    log.close();
+                                    //log.close();
                                 }
-                                System.out.println(s);
+
 
                                 // Read any errors from the attempted command
                                 System.out.println("Here is the standard error of the command (if any):\n");
