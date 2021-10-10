@@ -12,8 +12,8 @@ public class recommender_agent extends Agent {
                 ACLMessage msg = receive();
                 if (msg != null) {
                     String content = msg.getContent();
-                    System.out.println(" Message to " + myAgent.getLocalName()
-                            + " received message is : " + content);
+                    System.out.println(" New Message: " + content
+                            + " from: (" + msg.getSender().getName() + ")");
                     switch (content) {
                         case "Check":
                             ACLMessage reply = msg.createReply();
@@ -30,10 +30,10 @@ public class recommender_agent extends Agent {
                             catch (IOException e) {
                                 e.printStackTrace();
                             }
-                            ACLMessage reply = msg.createReply();
-                            reply.setPerformative(ACLMessage.INFORM);
-                            reply.setContent("\n" + myAgent.getLocalName() + " service deployed");
-                            send(reply);
+                            ACLMessage reply2= msg.createReply();
+                            reply2.setPerformative(ACLMessage.INFORM);
+                            reply2.setContent("\n" + myAgent.getLocalName() + " service deployed");
+                            send(reply2);
                             break;
                         case "Kill services":
                             System.out.println("Killinggggg services");
