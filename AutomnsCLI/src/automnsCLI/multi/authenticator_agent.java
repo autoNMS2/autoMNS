@@ -38,10 +38,9 @@ public class authenticator_agent extends Agent {
                                 // Read the output from the command
                                 System.out.println("Here is the standard output of the command:\n");
                                 String s = null;
-                                FileWriter log=new FileWriter("autoMNS/log.txt");
                                 while ((s = stdInput.readLine()) != null) {
                                     System.out.println(s);
-
+                                    FileWriter log=new FileWriter("autoMNS/log.txt");
                                     log.write(s);
                                     System.out.println("Writing successful");
                                     //close the file
