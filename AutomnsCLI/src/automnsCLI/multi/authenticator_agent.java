@@ -39,12 +39,10 @@ public class authenticator_agent extends Agent {
                                 System.out.println("Here is the standard output of the command:\n");
                                 String s = null;
                                 while ((s = stdInput.readLine()) != null) {
-                                    System.out.println(s);
-                                    //FileWriter log=new FileWriter("autoMNS/log.txt");
-                                    //log.write(s);
-                                    System.out.println("Writing successful");
-                                    //close the file
-                                    //log.close();
+                                    ACLMessage reply2 = msg.createReply();
+                                    reply2.setPerformative(ACLMessage.INFORM);
+                                    reply2.setContent("\n" + s);
+                                    send(reply2);
                                 }
 
 
