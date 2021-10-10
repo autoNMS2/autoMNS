@@ -44,8 +44,6 @@ public class authenticator_agent extends Agent {
                                     reply2.setContent("\n" + s);
                                     send(reply2);
                                 }
-
-
                                 // Read any errors from the attempted command
                                 System.out.println("Here is the standard error of the command (if any):\n");
                                 while ((s = stdError.readLine()) != null) {
