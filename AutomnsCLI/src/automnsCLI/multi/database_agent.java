@@ -15,7 +15,7 @@ public class database_agent extends Agent {
                     System.out.println(" Message to " + myAgent.getLocalName()
                             + " received message is : " + content);
                     switch (content) {
-                        case "Deploy Agents":
+                        case "Check":
                             ACLMessage reply = msg.createReply();
                             reply.setPerformative(ACLMessage.INFORM);
                             reply.setContent("\n" + myAgent.getLocalName() + " Agent is alive!");
@@ -30,6 +30,10 @@ public class database_agent extends Agent {
                             catch (IOException e) {
                                 e.printStackTrace();
                             }
+                            ACLMessage reply = msg.createReply();
+                            reply.setPerformative(ACLMessage.INFORM);
+                            reply.setContent("\n" + myAgent.getLocalName() + " service deployed");
+                            send(reply);
                             break;
                         case "Kill services":
                             System.out.println("Killinggggg services");

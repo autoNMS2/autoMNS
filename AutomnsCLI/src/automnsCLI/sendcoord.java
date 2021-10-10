@@ -24,7 +24,7 @@ public class sendcoord extends Agent {
 	public void menu () throws IOException {
 
 		System.out.println("select command: " +
-				"\n 1. Get Update " +
+				"\n 1. Check Agents Status " +
 				"\n 2. Deploy Agents " +
 				"\n 3. Deploy Services " +
 				"");
@@ -54,7 +54,7 @@ public class sendcoord extends Agent {
 		switch (cmd)
 		{
 			case 1:
-				msgContent = "Deploy Agents";
+				msgContent = "Check";
 				ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
 				msg.setContent(msgContent);
 				msg.addReceiver(new AID("Database", AID.ISLOCALNAME));
@@ -88,15 +88,17 @@ public class sendcoord extends Agent {
 				}
 				break;
 			case 3:
-				Runtime r = Runtime.getRuntime();
-				String cmd1 = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/all.yaml TeaStore ";
-				try
-				{
-					r.exec(cmd1);
-				} catch (IOException e)
-				{
-					e.printStackTrace();
-				}
+				msgContent = "Deploy Services";
+				ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+				msg.setContent(msgContent);
+				msg.addReceiver(new AID("Database", AID.ISLOCALNAME));
+				msg.addReceiver(new AID("Authenticator", AID.ISLOCALNAME));
+				msg.addReceiver(new AID("Image", AID.ISLOCALNAME));
+				msg.addReceiver(new AID("Persistence", AID.ISLOCALNAME));
+				msg.addReceiver(new AID("Recommender", AID.ISLOCALNAME));
+				msg.addReceiver(new AID("Registry", AID.ISLOCALNAME));
+				msg.addReceiver(new AID("Webui", AID.ISLOCALNAME));
+				send(msg);
 				break;
 		}
 	}
