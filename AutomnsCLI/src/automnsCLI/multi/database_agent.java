@@ -3,8 +3,9 @@ package automnsCLI;
 import jade.core.Agent;
 import jade.core.behaviours.*;
 import jade.lang.acl.*;
+import java.io.IOException;
 
-public class receive0 extends Agent {
+public class database_agent extends Agent {
     protected void setup() {
         addBehaviour(new CyclicBehaviour(this) {
             public void action() {
@@ -12,7 +13,7 @@ public class receive0 extends Agent {
                 if (msg != null) {
                     String content = msg.getContent();
                     System.out.println(" Message to " + myAgent.getLocalName()
-                            + " received. Message is : " + content);
+                            + " received message is : " + content);
                     switch (content) {
                         case "Deploy Agents":
                             ACLMessage reply = msg.createReply();
@@ -21,11 +22,16 @@ public class receive0 extends Agent {
                             send(reply);
                             break;
                         case "Deploy Services":
-                            //msgContent = "Deploy Services";
-                            System.out.println("Deploying Services");
+                            Runtime r = Runtime.getRuntime();
+                            String cmd = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/db.yaml Database";
+                            try {
+                                r.exec(cmd);
+                            }
+                            catch (IOException e) {
+                                e.printStackTrace();
+                            }
                             break;
                         case "Kill services":
-                            //msgContent = "Kill services";
                             System.out.println("Killinggggg services");
                             break;
                     }
