@@ -88,17 +88,14 @@ public class sendcoord extends Agent {
 				}
 				break;
 			case 3:
-				msgContent = "Deploy Services";
-				ACLMessage msg2 = new ACLMessage(ACLMessage.INFORM);
-				msg2.setContent(msgContent);
-				msg2.addReceiver(new AID("Database", AID.ISLOCALNAME));
-				msg2.addReceiver(new AID("Authenticator", AID.ISLOCALNAME));
-				msg2.addReceiver(new AID("Image", AID.ISLOCALNAME));
-				msg2.addReceiver(new AID("Persistence", AID.ISLOCALNAME));
-				msg2.addReceiver(new AID("Recommender", AID.ISLOCALNAME));
-				msg2.addReceiver(new AID("Registry", AID.ISLOCALNAME));
-				msg2.addReceiver(new AID("Webui", AID.ISLOCALNAME));
-				send(msg2);
+				Runtime r = Runtime.getRuntime();
+				String deploy = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/all.yaml TeaStore";
+				try {
+					r.exec(deploy);
+				}
+				catch (IOException e) {
+					e.printStackTrace();
+				}
 				break;
 		}
 	}
