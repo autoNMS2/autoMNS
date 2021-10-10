@@ -26,7 +26,7 @@ public class authenticator_agent extends Agent {
                             break;
                         case "Service Update":
                             Runtime r = Runtime.getRuntime();
-                            String cmd = "docker ps";
+                            String cmd = "sudo docker ps";
                             try {
                                 Process proc = r.exec(cmd);
                                 BufferedReader stdInput = new BufferedReader(new
