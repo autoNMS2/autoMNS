@@ -27,6 +27,7 @@ public class sendcoord extends Agent {
 				"\n 1. Check Agents Status " +
 				"\n 2. Deploy Agents " +
 				"\n 3. Deploy Services " +
+				"\n 4. Get Services update" +
 				"");
 
 		String privateKey = "autoMNS/jade/src/test0/test.pem";
@@ -96,6 +97,19 @@ public class sendcoord extends Agent {
 				catch (IOException e) {
 					e.printStackTrace();
 				}
+				break;
+			case 4:
+				msgContent = "Service Update";
+				ACLMessage msg2 = new ACLMessage(ACLMessage.INFORM);
+				msg2.setContent(msgContent);
+//				msg.addReceiver(new AID("Database", AID.ISLOCALNAME));
+				msg2.addReceiver(new AID("Authenticator", AID.ISLOCALNAME));
+//				msg.addReceiver(new AID("Image", AID.ISLOCALNAME));
+//				msg.addReceiver(new AID("Persistence", AID.ISLOCALNAME));
+//				msg.addReceiver(new AID("Recommender", AID.ISLOCALNAME));
+//				msg.addReceiver(new AID("Registry", AID.ISLOCALNAME));
+//				msg.addReceiver(new AID("Webui", AID.ISLOCALNAME));
+				send(msg2);
 				break;
 		}
 	}
