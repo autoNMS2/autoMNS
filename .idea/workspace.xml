@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="39de0ab9-f73c-4d61-a78d-915e5d49de9f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/authenticator_agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/authenticator_agent.java" afterDir="false" />
-    </list>
+    <list default="true" id="39de0ab9-f73c-4d61-a78d-915e5d49de9f" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,6 +32,10 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="true" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/Desktop clean number 55/JadeAutomns/JCraft/jsch-0.1.55.jar" />
