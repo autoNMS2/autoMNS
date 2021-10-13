@@ -63,10 +63,12 @@ public class sendcoord extends Agent {
 
 		switch (cmd)
 		{
-			//swarm nodes summary 
+			//swarm nodes summary
 			case 1:
+				System.out.println("\n *Swarm Nodes Summary* \n");
 				Runtime r = Runtime.getRuntime();
 				String nodecmd = "sudo docker node ls";
+
 				try {
 					Process proc = r.exec(nodecmd);
 					BufferedReader stdInput = new BufferedReader(new
@@ -77,7 +79,7 @@ public class sendcoord extends Agent {
 					// Read the output from the command
 					String s = null;
 					while ((s = stdInput.readLine()) != null) {
-						System.out.println("\n *Swarm Nodes Summary* \n"+s);
+						System.out.println(s);
 					}
 					// Read any errors from the attempted command
 					while ((s = stdError.readLine()) != null) {
