@@ -109,15 +109,35 @@ public class VMFunctions {
 	}
 
 	public static void addVMsToSwarm() throws IOException {
-		//makes the first vm in the list a swarm manager, then adds all other vms to swarm as workers
-		List<String> localVMs = getVMPublicIps();
-		String privateKey = getLocalKeyFilePath();
+		// makes the first vm in the list a swarm manager, then adds all other vms to swarm as workers
 		// add the first vm to a swarm and get the swarm token
-		String output = SSH(localVMs.get(0), privateKey, vmCommands[1] + localVMs.get(0), true);
-		String joinToken = "sudo " + output.substring(142, 273);
-		// add other vms to swarm
-		for (int j = 1; j < localVMs.size(); j++) {
-			SSH(localVMs.get(j), privateKey, joinToken, true);
+		String joinToken = getJoinToken(); //	SSH(localVMs.get(0), privateKey, vmCommands[1] + localVMs.get(0), true);
+
+		if (!getJoinToken().equals(""))
+		{
+			// if a join token is returned continue initialising the swarm, otherwise the swarm should already be initialised so skip
+			joinSwarmWithToken(joinToken);
+		}
+		// for (int j = 1; j < localVMs.size(); j++) {
+		// SSH(localVMs.get(j), privateKey, joinToken, true);
+	}
+
+	public static String getJoinToken() throws IOException
+	{
+		//	also adds first vm to swarm
+		String output = SSH(getVMPublicIps().get(0), getLocalKeyFilePath(), vmCommands[1] + getVMPublicIps().get(0), true);
+
+		if (output.length() > 273) {    // only try to add nodes if the token is returned, ie the swarm isn't already initialised
+			// add other vms to swarm
+			return "sudo " + output.substring(142, 273);
+		}
+		else return "";
+	}
+
+	public static void joinSwarmWithToken(String joinToken) throws IOException
+	{
+		for (int j = 1; j < getVMPublicIps().size(); j++) {
+			SSH(getVMPublicIps().get(j), getLocalKeyFilePath(), joinToken, true);
 		}
 	}
 
