@@ -26,7 +26,7 @@ import automnsCLI.VMFunctions;
 public class sendcoord extends Agent {
 	public void menu () throws IOException {
 
-		System.out.println("\n Select Option: " +
+		System.out.print("\n Automns Agent Platform Menu " +
 				"\n 1. List Swarm Nodes" +
 				"\n 2. Deploy Agents " +
 				"\n 3. Agents Status " +
@@ -37,7 +37,7 @@ public class sendcoord extends Agent {
 				"\n 8. Deploy a Service" +
 				"\n 9. Remove all Services" +
 				"\n 10. Shutdown & Erase Docker" +
-				"\n");
+				"\n Enter Option Number: ");
 
 		String privateKey = "autoMNS/jade/src/test0/test.pem";
 		String[] agentCommands =
