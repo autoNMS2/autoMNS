@@ -61,11 +61,11 @@ public class VMFunctions {
 	public static final String[] vmCommands = {
 			"sudo apt-get update -y\n sudo apt-get install -y\r\n" + "apt-transport-https -y\r\n"
 					+ "ca-certificates -y\r\n" + "curl -y\r\n" + "gnupg -y\r\n"
-					+ "lsb-release -y\n sudo apt-get install docker.io -y\nsudo docker -v",
-			"sudo docker swarm init --advertise-addr ",
-			"sudo apt-get install git -y\n sudo git clone https://github.com/autoNMS2/autoMNS.git",
-			"sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/all.yaml TeaStore",
-			"sudo apt update\n sudo apt install default-jre -y\n sudo apt install default-jdk -y\n",
+					+ "lsb-release -y\n sudo apt-get install docker.io -y\nsudo docker -v",				// 0
+			"sudo docker swarm init --advertise-addr ",													// 1
+			"sudo apt-get install git -y\n sudo git clone https://github.com/autoNMS2/autoMNS.git",		// 2
+			"sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/all.yaml TeaStore",	// 3
+			"sudo apt update\n sudo apt install default-jre -y\n sudo apt install default-jdk -y\n",	// 4
 			"javac -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/*.java",
 			"java -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar:classes jade.Boot -agents coordinator:automnsCLI.coordinator"
 	};
@@ -75,7 +75,15 @@ public class VMFunctions {
 	public static int addVMs() throws IOException {
 		//create a list variable and read the user's ips from the file
 		if (getVmConfig(inputVMConfigPath())) {
-			applyVMConfig();
+			//update vms
+			updateVMs();
+			// add the first vm to a swarm and get the swarm token
+			addVMsToSwarm();
+			// install git and pull repository on vms
+			gitSetup();
+			// install java on vms
+			javaSetup();
+
 			//wait for user input before returning to main menu
 			System.out.println("VMs initialised.\n" + "Press any key and then enter to return to main menu...");
 			String userInput;
@@ -87,37 +95,53 @@ public class VMFunctions {
 		return 1;
 	}
 
-	public static void applyVMConfig() throws IOException {
-		//update vms
-		updateVMs();
-		// add the first vm to a swarm and get the swarm token
-		addVMsToSwarm();
-		// install git and pull repository on vms
-		gitSetup();
-		// install java on vms
-		javaSetup();
+	public static boolean checkDirectoryExists(String ip, String directory) throws IOException
+	{
+		String command = "find . -iname " + directory;
+		String output = SSH(ip, getLocalKeyFilePath(), command, false);
+		//	System.out.println("output.contains(" + directory +"): " + output.contains(directory));
+		return output.contains(directory);
 	}
+
+//	public static boolean checkDockerInstalled(String ip) throws IOException {
+//
+//		String command = "find . -iname faggot";
+//		String output = SSH(ip, getLocalKeyFilePath(), command, true);
+//		System.out.println("checkDockerInstalled: \n" + output);
+//		return output.contains("docker");
+//	}
 
 	public static void updateVMs() throws IOException {
 		//runs commands on each of the user's vms that updates them
-		List<String> localVMs = getVMPublicIps();
-		String privateKey = getLocalKeyFilePath();
-		for (int j = 0; j < localVMs.size(); j++) {
-			//	System.out.println(j + " " + privateKey + " " + vmCommands[0]);
-			SSH(localVMs.get(j), privateKey, vmCommands[0], true);
+
+//		"sudo apt-get update -y\n sudo apt-get install -y\r\n" + "apt-transport-https -y\r\n"
+//				+ "ca-certificates -y\r\n" + "curl -y\r\n" + "gnupg -y\r\n"
+//				+ "lsb-release -y\n sudo apt-get install docker.io -y\nsudo docker -v",
+		for (int j = 0; j < getVMPublicIps().size(); j++) {
+			if (!checkDirectoryExists(getVMPublicIps().get(j), "docker"))
+			{
+				System.out.println("docker not detected, installing...");
+				SSH(getVMPublicIps().get(j), getLocalKeyFilePath(), vmCommands[0], true);
+			}
+			else {
+				System.out.println("VM already has docker installed.");
+			}
 		}
 	}
 
-	public static void addVMsToSwarm() throws IOException {
+	public static boolean addVMsToSwarm() throws IOException {
 		// makes the first vm in the list a swarm manager, then adds all other vms to swarm as workers
 		// add the first vm to a swarm and get the swarm token
 		String joinToken = getJoinToken(); //	SSH(localVMs.get(0), privateKey, vmCommands[1] + localVMs.get(0), true);
 
-		if (!getJoinToken().equals(""))
+		if (!joinToken.equals(""))
 		{
 			// if a join token is returned continue initialising the swarm, otherwise the swarm should already be initialised so skip
 			joinSwarmWithToken(joinToken);
+			return true;	// created a new swarm
 		}
+		else return false;	// did not create a swarm, does not tell you why though
+
 		// for (int j = 1; j < localVMs.size(); j++) {
 		// SSH(localVMs.get(j), privateKey, joinToken, true);
 	}
@@ -125,13 +149,33 @@ public class VMFunctions {
 	public static String getJoinToken() throws IOException
 	{
 		//	also adds first vm to swarm
-		String output = SSH(getVMPublicIps().get(0), getLocalKeyFilePath(), vmCommands[1] + getVMPublicIps().get(0), true);
+		//	vmCommands[1]
+		SSH(getVMPublicIps().get(0), getLocalKeyFilePath(), vmCommands[1] + getVMPublicIps().get(0), true);
 
-		if (output.length() > 273) {    // only try to add nodes if the token is returned, ie the swarm isn't already initialised
+		String command = "sudo docker swarm join-token worker";
+		String output = SSH(getVMPublicIps().get(0), getLocalKeyFilePath(), command, false);
+
+		output = parseJoinToken(output);
+
+		if (output.contains("docker swarm join")) {    // only try to add nodes if the token is returned
 			// add other vms to swarm
-			return "sudo " + output.substring(142, 273);
+			return output;
 		}
 		else return "";
+	}
+
+	public static String parseJoinToken(String output)
+	{
+		String[] splitOutput = output.split("\n");
+
+		for (int i = 0; i < splitOutput.length; i++)
+		{
+			if (splitOutput[i].contains("docker swarm join"))	// search for correct line
+			{
+				return "sudo" + output.split("\n")[i];
+			}
+		}
+		return "";
 	}
 
 	public static void joinSwarmWithToken(String joinToken) throws IOException
@@ -143,10 +187,14 @@ public class VMFunctions {
 
 	public static void gitSetup() throws IOException {
 		//installs git on vms then pulls autoMNS repository to vms
-		List<String> localVMs = getVMPublicIps();
-		String privateKey = getLocalKeyFilePath();
-		for (int j = 0; j < localVMs.size(); j++) {
-			SSH(localVMs.get(j), privateKey, vmCommands[2], true);
+		for (int j = 0; j < getVMPublicIps().size(); j++) {
+			if (!checkDirectoryExists(getVMPublicIps().get(j), "autoMNS")) {
+				System.out.println("autoMNS repository not detected, installing...");
+				SSH(getVMPublicIps().get(j), getLocalKeyFilePath(), vmCommands[2], true);
+			} else {
+				System.out.println("VM already has repository installed.");
+			}
+			//"sudo apt-get install git -y\n sudo git clone https://github.com/autoNMS2/autoMNS.git"
 		}
 	}
 
@@ -206,38 +254,44 @@ public class VMFunctions {
 		setVMPublicIps(localPublicVmsList);
 	}
 
-	public static int initialiseAgents() throws IOException {
-		//get the list of vms from the user, if the config file has not yet been input then the length will be 0 and the user will be asked to input
-		List<String> publicVms = getVMPublicIps();
-		if (publicVms == null) {
+	public static void checkVMConfig()
+	{
+		if (getVMPublicIps() == null) {
 			getVmConfig(inputVMConfigPath());
-			//	applyVMConfig();
-			publicVms = getVMPublicIps();
+			//	applyVMConfig();	pretty sure this isn't meant to be here but I made some changes and now I'm not sure
 		}
-		List<String> privateVms = getVMPrivateIps();
-		String repoPrivateKey = getRepoKeyFilePath();
+	}
 
+	public static String[] getCoordinatorParameters()
+	{
 		//The following array contains the commands necessary to initialise the coordinator agent on the first vm provided by the user
 		String[] agentCommands =
-				{"javac -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/*.java",
-						"java -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar:classes jade.Boot -host " + privateVms.get(0) + " -port 1099 -agents 'coordinator:automnsCLI.JAMEScoordinator("};
+			{"javac -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/*.java",
+					"java -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar:classes jade.Boot -host " + getVMPrivateIps().get(0) + " -port 1099 -agents 'coordinator:automnsCLI.JAMEScoordinator("};
 		//the following for loops adds the users public and private vm ips as arguments on to the end of the java command
 		//this allows the coordinator agent to access these ip addresses
-		for (int i = 1; i < privateVms.size(); i++) {
-			agentCommands[1] += privateVms.get(i) + ",";
+		for (int i = 1; i < getVMPrivateIps().size(); i++) {
+			agentCommands[1] += getVMPrivateIps().get(i) + ",";
 		}
-		for (int i = 1; i < publicVms.size(); i++) {
-			agentCommands[1] += publicVms.get(i) + ",";
+		for (int i = 1; i < getVMPublicIps().size(); i++) {
+			agentCommands[1] += getVMPublicIps().get(i) + ",";
 		}
 		//add a closing bracket to the end of the java command
-		agentCommands[1] += repoPrivateKey + ")'";
+		agentCommands[1] += getRepoKeyFilePath() + ")'";
+		return agentCommands;
+	}
 
-		//get the local ssh key file path to ssh into coordinator
-		String localPrivateKey = getLocalKeyFilePath();
-		// intialise the platform on the coordinator agent
+	public static int initialiseAgents() throws IOException {
+		//get the list of vms from the user, if the config file has not yet been input then the length will be 0 and the user will be asked to input
+
+		checkVMConfig();
+
+		String[] agentCommands = getCoordinatorParameters();
+
+		// initialise the platform on the coordinator agent
 		// coordinator should deploy other agents from it's own code
-		SSH(publicVms.get(0), localPrivateKey, agentCommands[0], true);
-		shellSSH(publicVms.get(0), localPrivateKey, agentCommands[1]);
+		SSH(getVMPublicIps().get(0), getLocalKeyFilePath(), agentCommands[0], true);
+		shellSSH(getVMPublicIps().get(0), getLocalKeyFilePath(), agentCommands[1]);
 		System.out.println("Agents Deployed");
 		//	Menus.MainMenu();
 		return 2;
@@ -260,12 +314,12 @@ public class VMFunctions {
 		}
 	}
 
-	public static void noOutputSSH(String host, String privateKeyPath, String command) throws IOException {
+	public static boolean noOutputSSH(String host, String privateKeyPath, String command) throws IOException {
 		// The following code can be used to ssh into a VM and run a command
 		// You will need the VM username, IP address, and a private key file
 
 		Session session = getSSHSession(host, privateKeyPath);
-		runSSHCommand(session, command);
+		return (runSSHCommand(session, command).isConnected());
 	}
 
 
@@ -349,7 +403,7 @@ public class VMFunctions {
 	{
 		try {
 			session.connect();
-			System.out.println("session connected.....");
+			System.out.println(session.getHost() + " session connected.....");
 			Channel channel = session.openChannel("exec");
 			((ChannelExec) channel).setCommand(command);
 			((ChannelExec) channel).setPty(false);
