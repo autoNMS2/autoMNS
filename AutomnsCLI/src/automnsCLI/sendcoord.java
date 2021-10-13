@@ -39,7 +39,6 @@ public class sendcoord extends Agent {
 
 		Scanner scanner = new Scanner(System.in);
 		int cmd = scanner.nextInt();
-		String msgContent = null;
 
 		String privateKey = "autoMNS/jade/src/test0/test.pem";
 		String[] agentCommands =
@@ -66,7 +65,6 @@ public class sendcoord extends Agent {
 				System.out.println("\n *Swarm Nodes Summary* \n");
 				Runtime r = Runtime.getRuntime();
 				String nodecmd = "sudo docker node ls";
-
 				try {
 					Process proc = r.exec(nodecmd);
 					BufferedReader stdInput = new BufferedReader(new
@@ -139,7 +137,6 @@ public class sendcoord extends Agent {
 						"\n Enter Option Number: ");
 				int cmd3 = scanner.nextInt();
 				Runtime r1 = Runtime.getRuntime();
-
 				switch (cmd3){
 					case 1:
 						String deploy_all = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/all.yaml TeaStore";
@@ -253,6 +250,7 @@ public class sendcoord extends Agent {
 				break;
 			//Agent Service Status
 			case 6:
+				System.out.println("\n *Agents Services Status Summary* \n");
 				ACLMessage msg2 = new ACLMessage(ACLMessage.INFORM);
 				msg2.setContent("Service Update");
 				msg2.addReceiver(new AID("Worker1", AID.ISLOCALNAME));
@@ -264,6 +262,7 @@ public class sendcoord extends Agent {
 				msg2.addReceiver(new AID("Worker7", AID.ISLOCALNAME));
 				send(msg2);
 				break;
+			//Service Removal
 			case 7:
 				System.out.print("\n *Automns Agents Service Removal Menu* " +
 						"\n 1. Remove Authenticator Service" +
