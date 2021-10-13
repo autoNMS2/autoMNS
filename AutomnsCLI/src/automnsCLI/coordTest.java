@@ -26,8 +26,8 @@ public class coordTest extends Agent
 		//Initializing SSH sessions to each VM, and executing the agent command array
     	try
         {
-			VMFunctions.SSH("50.19.17.234", privateKey, agentCommands[0]);
-			VMFunctions.SSH("50.19.17.234", privateKey, agentCommands[1]);
+			VMFunctions.SSH("50.19.17.234", privateKey, agentCommands[0], true);
+			VMFunctions.SSH("50.19.17.234", privateKey, agentCommands[1], true);
 		}
 		//Throw a failure in Input & Output operations
         catch (IOException e1)

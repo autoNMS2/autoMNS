@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Menus {
 	
-	public static void MainMenu() throws IOException {
+	public static int MainMenu() throws IOException {
 		Scanner input = new Scanner(System.in);
 		
 		System.out.println("Welcome to AutoMNS\n"
@@ -21,29 +21,26 @@ public class Menus {
 				+ "4. Open Application \n"
 				+ "0. Exit Application");
 		int i = input.nextInt();
-		
-		switch(i) {
-			case 1:
-				VMFunctions.addVMs();
-				break;
-			case 2:
-				VMFunctions.initialiseAgents();
-				break;
-			case 3:
-				UserOptions();
-				break;
-			case 4:
-				VMFunctions.launchApplication();
-				break;
-			case 5:
-				//ContainerFunctions.TestContainerAgent();
-				break;
-			case 0:
-				System.exit(0);
-		}
+		return MenuChoice(i);
 	}
-	
-	public static void UserOptions() throws IOException {
+
+	public static int MenuChoice(int i) throws IOException {
+		switch (i) {
+			case 1:
+				return VMFunctions.addVMs();
+			case 2:
+				return VMFunctions.initialiseAgents();
+			case 3:
+				return UserOptions();
+			case 4:
+				return VMFunctions.launchApplication();
+			case 0:
+				return 0;
+		}
+		return i;
+	}
+
+	public static int UserOptions() throws IOException {
 		Scanner input = new Scanner(System.in);
 		
 		System.out.println("Welcome to AutoMNS\n"
@@ -84,6 +81,7 @@ public class Menus {
 		case 0:
 			MainMenu();
 		}
+		return 3;
 	}
 	
 
