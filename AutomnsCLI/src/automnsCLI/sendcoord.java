@@ -18,17 +18,26 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
+import java.io.FileWriter;
 import automnsCLI.VMFunctions;
 
 public class sendcoord extends Agent {
 	public void menu () throws IOException {
 
 		System.out.println("\n Select Option: " +
-				"\n 1. Check Agents Status " +
+				"\n 1. List Swarm Nodes" +
 				"\n 2. Deploy Agents " +
-				"\n 3. Deploy Services " +
-				"\n 4. Get Services update" +
-				"");
+				"\n 3. Agents Status " +
+				"\n 4. Deploy Services " +
+				"\n 5. Services Status" +
+				"\n 6. Agents Services Status" +
+				"\n 7. Remove a Service" +
+				"\n 8. Deploy a Service" +
+				"\n 9. Remove all Services" +
+				"\n 10. Shutdown & Erase Docker" +
+				"\n");
 
 		String privateKey = "autoMNS/jade/src/test0/test.pem";
 		String[] agentCommands =
@@ -55,6 +64,32 @@ public class sendcoord extends Agent {
 		switch (cmd)
 		{
 			case 1:
+				Runtime r = Runtime.getRuntime();
+				String nodecmd = "sudo docker node ls";
+				try {
+					Process proc = r.exec(nodecmd);
+					BufferedReader stdInput = new BufferedReader(new
+							InputStreamReader(proc.getInputStream()));
+					BufferedReader stdError = new BufferedReader(new
+							InputStreamReader(proc.getErrorStream()));
+
+					// Read the output from the command
+					System.out.println("Here is the standard output of the command:\n");
+					String s = null;
+					while ((s = stdInput.readLine()) != null) {
+						System.out.println(s);
+					}
+					// Read any errors from the attempted command
+					System.out.println("Here is the standard error of the command (if any):\n");
+					while ((s = stdError.readLine()) != null) {
+						System.out.println(s);
+					}
+				} catch (IOException e)
+				{
+					e.printStackTrace();
+				}
+				break;
+			case 2:
 				msgContent = "Check";
 				ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
 				msg.setContent(msgContent);
@@ -67,7 +102,7 @@ public class sendcoord extends Agent {
 				msg.addReceiver(new AID("Webui", AID.ISLOCALNAME));
 				send(msg);
 				break;
-			case 2:
+			case 3:
 				String[] ip = {"3.86.106.64","3.80.152.2","3.90.15.18","52.202.217.96","3.88.133.117","54.172.145.46","3.92.50.138"};
 				int x = 0;
 				int y = 0;
@@ -88,17 +123,17 @@ public class sendcoord extends Agent {
 					e1.printStackTrace();
 				}
 				break;
-			case 3:
-				Runtime r = Runtime.getRuntime();
+			case 4:
+				Runtime r1 = Runtime.getRuntime();
 				String deploy = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/all.yaml TeaStore";
 				try {
-					r.exec(deploy);
+					r1.exec(deploy);
 				}
 				catch (IOException e) {
 					e.printStackTrace();
 				}
 				break;
-			case 4:
+			case 5:
 				msgContent = "Service Update";
 				ACLMessage msg2 = new ACLMessage(ACLMessage.INFORM);
 				msg2.setContent(msgContent);
