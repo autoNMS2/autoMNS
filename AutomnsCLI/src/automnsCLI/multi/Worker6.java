@@ -5,7 +5,7 @@ import jade.core.behaviours.*;
 import jade.lang.acl.*;
 import java.io.IOException;
 
-public class image_agent extends Agent {
+public class Worker6 extends Agent {
     protected void setup() {
         addBehaviour(new CyclicBehaviour(this) {
             public void action() {
@@ -23,7 +23,7 @@ public class image_agent extends Agent {
                             break;
                         case "Deploy Services":
                             Runtime r = Runtime.getRuntime();
-                            String cmd = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/image.yaml Image";
+                            String cmd = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/registry.yaml Registry";
                             try {
                                 r.exec(cmd);
                             }

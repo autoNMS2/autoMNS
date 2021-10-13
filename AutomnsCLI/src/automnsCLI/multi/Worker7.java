@@ -5,7 +5,7 @@ import jade.core.behaviours.*;
 import jade.lang.acl.*;
 import java.io.IOException;
 
-public class webui_agent extends Agent {
+public class Worker7 extends Agent {
     protected void setup() {
         addBehaviour(new CyclicBehaviour(this) {
             public void action() {

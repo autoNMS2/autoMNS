@@ -5,7 +5,7 @@ import jade.core.behaviours.*;
 import jade.lang.acl.*;
 import java.io.IOException;
 
-public class persistence_agent extends Agent {
+public class Worker4 extends Agent {
     protected void setup() {
         addBehaviour(new CyclicBehaviour(this) {
             public void action() {

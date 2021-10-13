@@ -5,7 +5,7 @@ import jade.core.behaviours.*;
 import jade.lang.acl.*;
 import java.io.IOException;
 
-public class registry_agent extends Agent {
+public class Worker5 extends Agent {
     protected void setup() {
         addBehaviour(new CyclicBehaviour(this) {
             public void action() {
@@ -23,14 +23,14 @@ public class registry_agent extends Agent {
                             break;
                         case "Deploy Services":
                             Runtime r = Runtime.getRuntime();
-                            String cmd = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/registry.yaml Registry";
+                            String cmd = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/recommender.yaml Recommender";
                             try {
                                 r.exec(cmd);
                             }
                             catch (IOException e) {
                                 e.printStackTrace();
                             }
-                            ACLMessage reply2 = msg.createReply();
+                            ACLMessage reply2= msg.createReply();
                             reply2.setPerformative(ACLMessage.INFORM);
                             reply2.setContent("\n" + myAgent.getLocalName() + " service deployed");
                             send(reply2);

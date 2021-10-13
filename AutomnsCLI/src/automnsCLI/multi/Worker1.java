@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.io.FileWriter;
 
-public class authenticator_agent extends Agent {
+public class Worker1 extends Agent {
     protected void setup() {
         addBehaviour(new CyclicBehaviour(this) {
             public void action() {
