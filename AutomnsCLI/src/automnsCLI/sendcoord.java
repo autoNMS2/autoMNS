@@ -90,20 +90,8 @@ public class sendcoord extends Agent {
 					e.printStackTrace();
 				}
 				break;
+			//deploy agents
 			case 2:
-				msgContent = "Check";
-				ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-				msg.setContent(msgContent);
-				msg.addReceiver(new AID("Database", AID.ISLOCALNAME));
-				msg.addReceiver(new AID("Authenticator", AID.ISLOCALNAME));
-				msg.addReceiver(new AID("Image", AID.ISLOCALNAME));
-				msg.addReceiver(new AID("Persistence", AID.ISLOCALNAME));
-				msg.addReceiver(new AID("Recommender", AID.ISLOCALNAME));
-				msg.addReceiver(new AID("Registry", AID.ISLOCALNAME));
-				msg.addReceiver(new AID("Webui", AID.ISLOCALNAME));
-				send(msg);
-				break;
-			case 3:
 				String[] ip = {"3.86.106.64","3.80.152.2","3.90.15.18","52.202.217.96","3.88.133.117","54.172.145.46","3.92.50.138"};
 				int x = 0;
 				int y = 0;
@@ -124,6 +112,22 @@ public class sendcoord extends Agent {
 					e1.printStackTrace();
 				}
 				break;
+			//Agents Status
+			case 3:
+				System.out.println("\n *Agents Status* \n");
+				msgContent = "Check";
+				ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+				msg.setContent(msgContent);
+				msg.addReceiver(new AID("Database", AID.ISLOCALNAME));
+				msg.addReceiver(new AID("Authenticator", AID.ISLOCALNAME));
+				msg.addReceiver(new AID("Image", AID.ISLOCALNAME));
+				msg.addReceiver(new AID("Persistence", AID.ISLOCALNAME));
+				msg.addReceiver(new AID("Recommender", AID.ISLOCALNAME));
+				msg.addReceiver(new AID("Registry", AID.ISLOCALNAME));
+				msg.addReceiver(new AID("Webui", AID.ISLOCALNAME));
+				send(msg);
+				break;
+			//Deploy Services
 			case 4:
 				Runtime r1 = Runtime.getRuntime();
 				String deploy = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/all.yaml TeaStore";
@@ -134,7 +138,34 @@ public class sendcoord extends Agent {
 					e.printStackTrace();
 				}
 				break;
+			//Services Status
 			case 5:
+				System.out.println("\n *Services Summary* \n");
+				Runtime r2 = Runtime.getRuntime();
+				String servicecmd = "sudo docker service ls";
+
+				try {
+					Process proc = r2.exec(servicecmd);
+					BufferedReader stdInput = new BufferedReader(new
+							InputStreamReader(proc.getInputStream()));
+					BufferedReader stdError = new BufferedReader(new
+							InputStreamReader(proc.getErrorStream()));
+
+					// Read the output from the command
+					String s = null;
+					while ((s = stdInput.readLine()) != null) {
+						System.out.println(s);
+					}
+					// Read any errors from the attempted command
+					while ((s = stdError.readLine()) != null) {
+						System.out.println(s);
+					}
+				} catch (IOException e)
+				{
+					e.printStackTrace();
+				}
+				break;
+			case 6:
 				msgContent = "Service Update";
 				ACLMessage msg2 = new ACLMessage(ACLMessage.INFORM);
 				msg2.setContent(msgContent);
