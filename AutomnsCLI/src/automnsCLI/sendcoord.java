@@ -43,20 +43,20 @@ public class sendcoord extends Agent {
 
 		String privateKey = "autoMNS/jade/src/test0/test.pem";
 		String[] agentCommands =
-				{"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/database_agent.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.80.125 -port 1099 -local-host 172.31.95.147 -local-port 5000 -container Database:automnsCLI.database_agent",
-						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/authenticator_agent.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.80.125 -port 1099 -local-host 172.31.95.128 -local-port 5001 -container Authenticator:automnsCLI.authenticator_agent",
-						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/image_agent.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.80.125 -port 1099 -local-host 172.31.81.122 -local-port 5002 -container Image:automnsCLI.image_agent",
-						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/persistence_agent.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.80.125 -port 1099 -local-host 172.31.86.26 -local-port 5003 -container Persistence:automnsCLI.persistence_agent",
-						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/recommender_agent.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.80.125 -port 1099 -local-host 172.31.84.201 -local-port 5004 -container Recommender:automnsCLI.recommender_agent",
-						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/registry_agent.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.80.125 -port 1099 -local-host 172.31.86.40 -local-port 5005 -container Registry:automnsCLI.registry_agent",
-						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/webui_agent.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.80.125 -port 1099 -local-host 172.31.80.175 -local-port 5006 -container Webui:automnsCLI.webui_agent"
+				{"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker1.java",
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.80.125 -port 1099 -local-host 172.31.95.147 -local-port 5000 -container Worker1:automnsCLI.Worker1",
+						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker2.java",
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.80.125 -port 1099 -local-host 172.31.95.128 -local-port 5001 -container Worker2:automnsCLI.Worker2",
+						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker3.java",
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.80.125 -port 1099 -local-host 172.31.81.122 -local-port 5002 -container Worker3:automnsCLI.Worker3",
+						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker4.java",
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.80.125 -port 1099 -local-host 172.31.86.26 -local-port 5003 -container Worker4:automnsCLI.Worker4",
+						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker5.java",
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.80.125 -port 1099 -local-host 172.31.84.201 -local-port 5004 -container Worker5:automnsCLI.Worker5",
+						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker6.java",
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.80.125 -port 1099 -local-host 172.31.86.40 -local-port 5005 -container Worker6:automnsCLI.Worker6",
+						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker7.java",
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.80.125 -port 1099 -local-host 172.31.80.175 -local-port 5006 -container Worker7:automnsCLI.Worker7"
 				};
 
 		switch (cmd)
@@ -113,16 +113,15 @@ public class sendcoord extends Agent {
 			//Agents Status
 			case 3:
 				System.out.println("\n *Agents Status* \n");
-				msgContent = "Check";
 				ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-				msg.setContent(msgContent);
-				msg.addReceiver(new AID("Database", AID.ISLOCALNAME));
-				msg.addReceiver(new AID("Authenticator", AID.ISLOCALNAME));
-				msg.addReceiver(new AID("Image", AID.ISLOCALNAME));
-				msg.addReceiver(new AID("Persistence", AID.ISLOCALNAME));
-				msg.addReceiver(new AID("Recommender", AID.ISLOCALNAME));
-				msg.addReceiver(new AID("Registry", AID.ISLOCALNAME));
-				msg.addReceiver(new AID("Webui", AID.ISLOCALNAME));
+				msg.setContent("Check");
+				msg.addReceiver(new AID("Worker1", AID.ISLOCALNAME));
+				msg.addReceiver(new AID("Worker2", AID.ISLOCALNAME));
+				msg.addReceiver(new AID("Worker3", AID.ISLOCALNAME));
+				msg.addReceiver(new AID("Worker4", AID.ISLOCALNAME));
+				msg.addReceiver(new AID("Worker5", AID.ISLOCALNAME));
+				msg.addReceiver(new AID("Worker6", AID.ISLOCALNAME));
+				msg.addReceiver(new AID("Worker7", AID.ISLOCALNAME));
 				send(msg);
 				break;
 			//Deploy Services
@@ -254,20 +253,19 @@ public class sendcoord extends Agent {
 				break;
 			//Agent Service Status
 			case 6:
-				msgContent = "Service Update";
 				ACLMessage msg2 = new ACLMessage(ACLMessage.INFORM);
-				msg2.setContent(msgContent);
-//				msg.addReceiver(new AID("Database", AID.ISLOCALNAME));
-				msg2.addReceiver(new AID("Authenticator", AID.ISLOCALNAME));
-//				msg.addReceiver(new AID("Image", AID.ISLOCALNAME));
-//				msg.addReceiver(new AID("Persistence", AID.ISLOCALNAME));
-//				msg.addReceiver(new AID("Recommender", AID.ISLOCALNAME));
-//				msg.addReceiver(new AID("Registry", AID.ISLOCALNAME));
-//				msg.addReceiver(new AID("Webui", AID.ISLOCALNAME));
+				msg2.setContent("Service Update");
+				msg2.addReceiver(new AID("Worker1", AID.ISLOCALNAME));
+				msg2.addReceiver(new AID("Worker2", AID.ISLOCALNAME));
+				msg2.addReceiver(new AID("Worker3", AID.ISLOCALNAME));
+				msg2.addReceiver(new AID("Worker4", AID.ISLOCALNAME));
+			    msg2.addReceiver(new AID("Worker5", AID.ISLOCALNAME));
+				msg2.addReceiver(new AID("Worker6", AID.ISLOCALNAME));
+				msg2.addReceiver(new AID("Worker7", AID.ISLOCALNAME));
 				send(msg2);
 				break;
 			case 7:
-				System.out.print("\n *Automns Agent Service Removal Menu* " +
+				System.out.print("\n *Automns Agents Service Removal Menu* " +
 						"\n 1. Remove Authenticator Service" +
 						"\n 2. Remove Database Service " +
 						"\n 3. Remove Image Service " +
@@ -356,6 +354,43 @@ public class sendcoord extends Agent {
 						try {
 							r7.exec(rm_all);
 							System.out.println("All Services Removed");
+						}
+						catch (IOException e) {
+							e.printStackTrace();
+						}
+						break;
+					case 0:
+						break;
+				}
+				break;
+			case 8:
+				//workers leave swarm and delete images
+				//manager leave swarm and delete images
+				System.out.print("\n *Automns Swarm Shutdown Menu* " +
+						"\n 1. Remove Swarm Workers & Erase Docker Images" +
+						"\n 2. Remove Swarm Manager & Erase Docker Images" +
+						"\n 0. Return" +
+						"\n Enter Option Number: ");
+				int cmd8 = scanner.nextInt();
+				Runtime r8 = Runtime.getRuntime();
+				switch (cmd8){
+					case 1:
+						ACLMessage msg8 = new ACLMessage(ACLMessage.INFORM);
+						msg8.setContent("Shutdown");
+						msg8.addReceiver(new AID("Worker1", AID.ISLOCALNAME));
+						msg8.addReceiver(new AID("Worker2", AID.ISLOCALNAME));
+						msg8.addReceiver(new AID("Worker3", AID.ISLOCALNAME));
+						msg8.addReceiver(new AID("Worker4", AID.ISLOCALNAME));
+						msg8.addReceiver(new AID("Worker5", AID.ISLOCALNAME));
+						msg8.addReceiver(new AID("Worker6", AID.ISLOCALNAME));
+						msg8.addReceiver(new AID("Worker7", AID.ISLOCALNAME));
+						send(msg8);
+						break;
+					case 2:
+						String leave = "sudo docker swarm leave -f && sudo docker rmi $(sudo docker images -q)";
+						try {
+							r8.exec(leave);
+							System.out.println("Manager Node Left Swarm & Docker Images Deleted");
 						}
 						catch (IOException e) {
 							e.printStackTrace();
