@@ -3,13 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="39de0ab9-f73c-4d61-a78d-915e5d49de9f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/Worker1.java" beforeDir="false" afterPath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/Worker1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/Worker2.java" beforeDir="false" afterPath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/Worker2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/Worker3.java" beforeDir="false" afterPath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/Worker3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/Worker4.java" beforeDir="false" afterPath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/Worker4.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/Worker5.java" beforeDir="false" afterPath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/Worker5.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/Worker6.java" beforeDir="false" afterPath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/Worker6.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/Worker7.java" beforeDir="false" afterPath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/multi/Worker7.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/sendcoord.java" beforeDir="false" afterPath="$PROJECT_DIR$/AutomnsCLI/src/automnsCLI/sendcoord.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

@@ -405,8 +405,7 @@ public class sendcoord extends Agent {
 
 		ACLMessage msg = receive();
 		if (msg != null) {
-			System.out.println("\n New Message: " + msg.getContent()
-					+ " from ( " + msg.getSender().getName() + " )");
+			System.out.println("\n" + msg.getContent());
 			return true;
 		}
 		return false;
