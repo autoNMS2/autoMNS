@@ -26,7 +26,7 @@ import automnsCLI.VMFunctions;
 public class sendcoord extends Agent {
 	public void menu () throws IOException {
 
-		System.out.print("\n Automns Agent Platform Menu " +
+		System.out.print("\n *Automns Agent Platform Menu* " +
 				"\n 1. List Swarm Nodes" +
 				"\n 2. Deploy Agents " +
 				"\n 3. Agents Status " +
@@ -63,6 +63,7 @@ public class sendcoord extends Agent {
 
 		switch (cmd)
 		{
+			//swarm nodes summary 
 			case 1:
 				Runtime r = Runtime.getRuntime();
 				String nodecmd = "sudo docker node ls";
@@ -76,7 +77,7 @@ public class sendcoord extends Agent {
 					// Read the output from the command
 					String s = null;
 					while ((s = stdInput.readLine()) != null) {
-						System.out.println(s);
+						System.out.println("\n *Swarm Nodes Summary* \n"+s);
 					}
 					// Read any errors from the attempted command
 					while ((s = stdError.readLine()) != null) {
