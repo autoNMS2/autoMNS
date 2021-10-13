@@ -120,7 +120,7 @@ public class VMFunctions {
 		for (int j = 0; j < getVMPublicIps().size(); j++) {
 			if (!checkDirectoryExists(getVMPublicIps().get(j), "docker"))
 			{
-				System.out.println("docker not detected, installing...");
+				System.out.println("No docker installation detected, installing...");
 				SSH(getVMPublicIps().get(j), getLocalKeyFilePath(), vmCommands[0], true);
 			}
 			else {
@@ -189,7 +189,7 @@ public class VMFunctions {
 		//installs git on vms then pulls autoMNS repository to vms
 		for (int j = 0; j < getVMPublicIps().size(); j++) {
 			if (!checkDirectoryExists(getVMPublicIps().get(j), "autoMNS")) {
-				System.out.println("autoMNS repository not detected, installing...");
+				System.out.println("autoMNS repository was not detected, installing...");
 				SSH(getVMPublicIps().get(j), getLocalKeyFilePath(), vmCommands[2], true);
 			} else {
 				System.out.println("VM already has repository installed.");
@@ -278,6 +278,7 @@ public class VMFunctions {
 		}
 		//add a closing bracket to the end of the java command
 		agentCommands[1] += getRepoKeyFilePath() + ")'";
+
 		return agentCommands;
 	}
 
@@ -298,9 +299,10 @@ public class VMFunctions {
 	}
 
 	public static int launchApplication() throws IOException {
-		List<String> vms = getVMPublicIps();
+		checkVMConfig();
+
 		System.out.println("Launching App");
-		String URL = "https://" + vms.get(1) + "/8080";
+		String URL = "https://" + getVMPublicIps().get(1) + "/8080";
 		openWebpage(URL);
 		return 4;
 		//	Menus.MainMenu();
