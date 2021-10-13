@@ -136,6 +136,7 @@ public class sendcoord extends Agent {
 						"\n 6. Deploy Recommender Service" +
 						"\n 7. Deploy Registry Service" +
 						"\n 8. Deploy WebUi Service" +
+						"\n 0. Return" +
 						"\n Enter Option Number: ");
 				int cmd3 = scanner.nextInt();
 				Runtime r1 = Runtime.getRuntime();
@@ -152,7 +153,7 @@ public class sendcoord extends Agent {
 						}
 						break;
 					case 2:
-						String deploy_auth = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/all.yaml TeaStore";
+						String deploy_auth = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/auth.yaml TeaStore";
 						try {
 							r1.exec(deploy_auth);
 							System.out.println("Authenticator Service Deployed");
@@ -162,64 +163,66 @@ public class sendcoord extends Agent {
 						}
 						break;
 					case 3:
-						String deploy_all = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/all.yaml TeaStore";
+						String deploy_db = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/db.yaml TeaStore";
 						try {
-							r1.exec(deploy_all);
-							System.out.println("All Services Deployed/Updated");
+							r1.exec(deploy_db);
+							System.out.println("Database Service Deployed");
 						}
 						catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
 					case 4:
-						String deploy_all = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/all.yaml TeaStore";
+						String deploy_image = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/image.yaml TeaStore";
 						try {
-							r1.exec(deploy_all);
-							System.out.println("All Services Deployed/Updated");
+							r1.exec(deploy_image);
+							System.out.println("Image Service Deployed");
 						}
 						catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
 					case 5:
-						String deploy_all = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/all.yaml TeaStore";
+						String deploy_pers = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/persistence.yaml TeaStore";
 						try {
-							r1.exec(deploy_all);
-							System.out.println("All Services Deployed/Updated");
+							r1.exec(deploy_pers);
+							System.out.println("Persistence Service Deployed");
 						}
 						catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
 					case 6:
-						String deploy_all = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/all.yaml TeaStore";
+						String deploy_rec = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/recommender.yaml TeaStore";
 						try {
-							r1.exec(deploy_all);
-							System.out.println("All Services Deployed/Updated");
+							r1.exec(deploy_rec);
+							System.out.println("Recommender Service Deployed");
 						}
 						catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
 					case 7:
-						String deploy_all = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/all.yaml TeaStore";
+						String deploy_reg = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/registry.yaml TeaStore";
 						try {
-							r1.exec(deploy_all);
-							System.out.println("All Services Deployed/Updated");
+							r1.exec(deploy_reg);
+							System.out.println("Registry Service Deployed");
 						}
 						catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
 					case 8:
-						String deploy_all = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/all.yaml TeaStore";
+						String deploy_web = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/webui.yaml TeaStore";
 						try {
-							r1.exec(deploy_all);
-							System.out.println("All Services Deployed/Updated");
+							r1.exec(deploy_web);
+							System.out.println("WebUi Service Deployed");
 						}
 						catch (IOException e) {
 							e.printStackTrace();
 						}
+						break;
+					case 0:
 						break;
 				}
 				break;
@@ -273,6 +276,7 @@ public class sendcoord extends Agent {
 						"\n 6. Remove Registry Service" +
 						"\n 7. Remove WebUi Service" +
 						"\n 8. Remove all Services" +
+						"\n 0. Return" +
 						"\n Enter Option Number: ");
 				int cmd2 = scanner.nextInt();
 				Runtime r7 = Runtime.getRuntime();
@@ -356,6 +360,8 @@ public class sendcoord extends Agent {
 						catch (IOException e) {
 							e.printStackTrace();
 						}
+						break;
+					case 0:
 						break;
 				}
 				break;
