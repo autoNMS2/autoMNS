@@ -39,6 +39,10 @@ public class sendcoord extends Agent {
 				"\n 10. Shutdown & Erase Docker" +
 				"\n Enter Option Number: ");
 
+		Scanner scanner = new Scanner(System.in);
+		int cmd = scanner.nextInt();
+		String msgContent = null;
+
 		String privateKey = "autoMNS/jade/src/test0/test.pem";
 		String[] agentCommands =
 				{"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/database_agent.java",
@@ -56,10 +60,6 @@ public class sendcoord extends Agent {
 						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/webui_agent.java",
 						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.80.125 -port 1099 -local-host 172.31.80.175 -local-port 5006 -container Webui:automnsCLI.webui_agent"
 				};
-
-		Scanner scanner = new Scanner(System.in);
-		int cmd = scanner.nextInt();
-		String msgContent = null;
 
 		switch (cmd)
 		{
@@ -140,10 +140,9 @@ public class sendcoord extends Agent {
 				break;
 			//Services Status
 			case 5:
-				System.out.println("\n *Services Summary* \n");
+				System.out.println("\n *Services Status Summary* \n");
 				Runtime r2 = Runtime.getRuntime();
 				String servicecmd = "sudo docker service ls";
-
 				try {
 					Process proc = r2.exec(servicecmd);
 					BufferedReader stdInput = new BufferedReader(new
@@ -165,6 +164,7 @@ public class sendcoord extends Agent {
 					e.printStackTrace();
 				}
 				break;
+			//Agent Service Status
 			case 6:
 				msgContent = "Service Update";
 				ACLMessage msg2 = new ACLMessage(ACLMessage.INFORM);
@@ -178,6 +178,101 @@ public class sendcoord extends Agent {
 //				msg.addReceiver(new AID("Webui", AID.ISLOCALNAME));
 				send(msg2);
 				break;
+			case 7:
+				System.out.print("\n *Automns Agent Service Menu* " +
+						"\n 1. Remove Authenticator Service" +
+						"\n 2. Remove Database Service " +
+						"\n 3. Remove Image Service " +
+						"\n 4. Remove Persistence Service " +
+						"\n 5. Remove Recommender Service" +
+						"\n 6. Remove Registry Service" +
+						"\n 7. Remove WebUi Service" +
+						"\n 8. Remove all Services" +
+						"\n Enter Option Number: ");
+				int cmd2 = scanner.nextInt();
+				Runtime r7 = Runtime.getRuntime();
+				switch (cmd2){
+					case 1:
+						String rm_auth = "sudo docker service rm TeaStore_auth";
+						try {
+							r7.exec(rm_auth);
+							System.out.println("Authenticator Service Removed");
+						}
+						catch (IOException e) {
+							e.printStackTrace();
+						}
+						break;
+					case 2:
+						String rm_db = "sudo docker service rm TeaStore_db";
+						try {
+							r7.exec(rm_db);
+							System.out.print("Database Service Removed");
+						}
+						catch (IOException e) {
+							e.printStackTrace();
+						}
+						break;
+					case 3:
+						String rm_Image = "sudo docker service rm TeaStore_image";
+						try {
+							r7.exec(rm_Image);
+							System.out.print("Image Service Removed");
+						}
+						catch (IOException e) {
+							e.printStackTrace();
+						}
+						break;
+					case 4:
+						String rm_pers = "sudo docker service rm TeaStore_persistence";
+						try {
+							r7.exec(rm_pers);
+							System.out.print("Persistence Service Removed");
+						}
+						catch (IOException e) {
+							e.printStackTrace();
+						}
+						break;
+					case 5:
+						String rm_recom = "sudo docker service rm TeaStore_recommender";
+						try {
+							r7.exec(rm_recom);
+							System.out.print("Recommender Service Removed");
+						}
+						catch (IOException e) {
+							e.printStackTrace();
+						}
+						break;
+					case 6:
+						String rm_reg = "sudo docker service rm TeaStore_registry";
+						try {
+							r7.exec(rm_reg);
+							System.out.print("Registry Service Removed");
+						}
+						catch (IOException e) {
+							e.printStackTrace();
+						}
+						break;
+					case 7:
+						String rm_web = "sudo docker service rm TeaStore_webui";
+						try {
+							r7.exec(rm_web);
+							System.out.print("WebUi Service Removed");
+						}
+						catch (IOException e) {
+							e.printStackTrace();
+						}
+						break;
+					case 8:
+						String rm_all = "sudo docker stack rm TeaStore";
+						try {
+							r7.exec(rm_all);
+							System.out.print("All Services Removed");
+						}
+						catch (IOException e) {
+							e.printStackTrace();
+						}
+						break;
+				}
 		}
 	}
 	public boolean checkmsg() {
