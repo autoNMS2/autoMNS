@@ -43,19 +43,19 @@ public class sendcoord extends Agent {
 		String privateKey = "autoMNS/jade/src/test0/test.pem";
 		String[] agentCommands =
 				{"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker1.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.87.239 -port 1099 -local-host 172.31.90.156 -local-port 5000 -container Worker1:automnsCLI.Worker1",
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.18.29 -port 1099 -local-host 172.31.19.79 -local-port 5000 -container Worker1:automnsCLI.Worker1",
 						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker2.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.87.239 -port 1099 -local-host 172.31.80.205 -local-port 5001 -container Worker2:automnsCLI.Worker2",
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.18.29 -port 1099 -local-host 172.31.22.193 -local-port 5001 -container Worker2:automnsCLI.Worker2",
 						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker3.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.87.239 -port 1099 -local-host 172.31.81.133 -local-port 5002 -container Worker3:automnsCLI.Worker3",
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.18.29 -port 1099 -local-host 172.31.17.147 -local-port 5002 -container Worker3:automnsCLI.Worker3",
 						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker4.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.87.239 -port 1099 -local-host 172.31.85.12 -local-port 5003 -container Worker4:automnsCLI.Worker4",
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.18.29 -port 1099 -local-host 172.31.28.138 -local-port 5003 -container Worker4:automnsCLI.Worker4",
 						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker5.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.87.239 -port 1099 -local-host 172.31.91.96 -local-port 5004 -container Worker5:automnsCLI.Worker5",
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.18.29 -port 1099 -local-host 172.31.24.44 -local-port 5004 -container Worker5:automnsCLI.Worker5",
 						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker6.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.87.239 -port 1099 -local-host 172.31.86.181 -local-port 5005 -container Worker6:automnsCLI.Worker6",
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.18.29 -port 1099 -local-host 172.31.29.4 -local-port 5005 -container Worker6:automnsCLI.Worker6",
 						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker7.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.87.239 -port 1099 -local-host 172.31.89.45 -local-port 5006 -container Worker7:automnsCLI.Worker7"
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.18.29 -port 1099 -local-host 172.31.28.168 -local-port 5006 -container Worker7:automnsCLI.Worker7"
 				};
 
 		switch (cmd)
@@ -89,7 +89,7 @@ public class sendcoord extends Agent {
 			//deploy agents
 			case 2:
 				System.out.println("\n Deploying The Agents.. \n");
-				String[] ip = {"3.95.161.48","54.166.38.203","34.205.157.113","54.204.235.13","54.152.98.164","3.92.229.146","54.173.209.199"};
+				String[] ip = {"54.147.226.221","18.208.193.208","35.172.184.22","54.234.246.176","54.227.11.71","54.234.150.233","107.20.3.79"};
 				int x = 0;
 				int y = 0;
 				int z = 1;
