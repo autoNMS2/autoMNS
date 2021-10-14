@@ -26,6 +26,21 @@ import automnsCLI.VMFunctions;
 public class sendcoord extends Agent {
 	public void menu () throws IOException {
 
+        //Defining the path to the AWS key
+    	Object[] VMs = getArguments();
+		//Defining the path to the AWS key
+        String privateKey = (String) VMs[16];
+        System.out.println(privateKey);
+		//Defining the IP address of the main platform for other agents to join
+    	List<String> workerVMsPrivate = new ArrayList<String>();
+    	for (int k = 0; k < 8; k++) {
+    		workerVMsPrivate.add((String) VMs[k]);
+    	}
+    	List<String> workerVMsPublic = new ArrayList<String>();
+    	for (int k = 8; k < VMs.length - 1; k++) {
+    		workerVMsPublic.add((String) VMs[k]);
+    	}
+		
 		System.out.print("\n *Automns Agent Platform Menu* " +
 				"\n 1. List Swarm Nodes" +
 				"\n 2. Deploy Agents " +
@@ -40,22 +55,22 @@ public class sendcoord extends Agent {
 		Scanner scanner = new Scanner(System.in);
 		int cmd = scanner.nextInt();
 
-		String privateKey = "autoMNS/jade/src/test0/test.pem";
+		//String privateKey = "autoMNS/jade/src/test0/test.pem";
 		String[] agentCommands =
 				{"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker1.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.18.29 -port 1099 -local-host 172.31.19.79 -local-port 5000 -container Worker1:automnsCLI.Worker1",
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -local-host " + workerVMsPrivate.get(1) + " -local-port 5000 -container Worker1:automnsCLI.Worker1",
 						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker2.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.18.29 -port 1099 -local-host 172.31.22.193 -local-port 5001 -container Worker2:automnsCLI.Worker2",
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -local-host " + workerVMsPrivate.get(2) + " -local-port 5001 -container Worker2:automnsCLI.Worker2",
 						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker3.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.18.29 -port 1099 -local-host 172.31.17.147 -local-port 5002 -container Worker3:automnsCLI.Worker3",
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -local-host " + workerVMsPrivate.get(3) + " -local-port 5002 -container Worker3:automnsCLI.Worker3",
 						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker4.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.18.29 -port 1099 -local-host 172.31.28.138 -local-port 5003 -container Worker4:automnsCLI.Worker4",
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -local-host " + workerVMsPrivate.get(4) + " -local-port 5003 -container Worker4:automnsCLI.Worker4",
 						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker5.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.18.29 -port 1099 -local-host 172.31.24.44 -local-port 5004 -container Worker5:automnsCLI.Worker5",
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -local-host " + workerVMsPrivate.get(5) + " -local-port 5004 -container Worker5:automnsCLI.Worker5",
 						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker6.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.18.29 -port 1099 -local-host 172.31.29.4 -local-port 5005 -container Worker6:automnsCLI.Worker6",
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -local-host " + workerVMsPrivate.get(6) + " -local-port 5005 -container Worker6:automnsCLI.Worker6",
 						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker7.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.18.29 -port 1099 -local-host 172.31.28.168 -local-port 5006 -container Worker7:automnsCLI.Worker7"
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -local-host " + workerVMsPrivate.get(7) + " -local-port 5006 -container Worker7:automnsCLI.Worker7"
 				};
 
 		switch (cmd)
@@ -89,19 +104,31 @@ public class sendcoord extends Agent {
 			//deploy agents
 			case 2:
 				System.out.println("\n Deploying The Agents.. \n");
-				String[] ip = {"54.147.226.221","18.208.193.208","35.172.184.22","54.234.246.176","54.227.11.71","54.234.150.233","107.20.3.79"};
-				int x = 0;
-				int y = 0;
-				int z = 1;
+//				String[] ip = {"54.147.226.221","18.208.193.208","35.172.184.22","54.234.246.176","54.227.11.71","54.234.150.233","107.20.3.79"};
+//				int x = 0;
+//				int y = 0;
+//				int z = 1;
+//				try
+//				{
+//					do
+//					{
+//						VMFunctions.noOutputSSH(ip[x], privateKey, agentCommands[y]);
+//						VMFunctions.noOutputSSH(ip[x], privateKey, agentCommands[y+1]);
+//						x++; y+=2; z++;
+//					} while(z<8);
+//				}
 				try
-				{
-					do
-					{
-						VMFunctions.noOutputSSH(ip[x], privateKey, agentCommands[y]);
-						VMFunctions.noOutputSSH(ip[x], privateKey, agentCommands[y+1]);
-						x++; y+=2; z++;
-					} while(z<8);
-				}
+                {
+            		int commandCounter = 0;
+            		int workerCounter = 0;
+            		while(commandCounter < agentCommands.length){
+            			for(int m = 0; m < 2; m++) {
+            				VMFunctions.noOutputSSH(workerVMsPublic.get(workerCounter), privateKey, agentCommands[commandCounter]);
+            				commandCounter ++;
+            			}
+            			workerCounter ++;
+            		} 		
+        		}
 				//Throw a failure in Input & Output operations
 				catch (IOException e1)
 				{
