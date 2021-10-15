@@ -37,7 +37,7 @@ public class Worker1 extends Agent {
                                         InputStreamReader(proc.getInputStream()));
                                 BufferedReader stdError = new BufferedReader(new
                                         InputStreamReader(proc.getErrorStream()));
-                                Scanner scan = new Scanner(stdInput);
+                                Scanner scan = new Scanner(stdInput.readLine());
                                 while (scan.hasNextLine()){
                                     ps = ps.concat(scan.nextLine() + "\n");
                                 }
