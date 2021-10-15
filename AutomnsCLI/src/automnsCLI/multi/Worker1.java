@@ -39,7 +39,6 @@ public class Worker1 extends Agent {
                                FileWriter fw = new FileWriter(log);
                                PrintWriter pw = new PrintWriter(fw);
                                pw.println("working");
-                                }
                             } catch (IOException e)
                             {
                                 e.printStackTrace();
