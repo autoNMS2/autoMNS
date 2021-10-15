@@ -50,10 +50,11 @@ public class Worker1 extends Agent {
                                while (scan.hasNextLine()){
                                    logContent = logContent.concat(scan.nextLine() + "\n");
                                }
-                                ACLMessage reply2 = msg.createReply();
-                                reply2.setPerformative(ACLMessage.INFORM);
-                                reply2.setContent("\n" + myAgent.getLocalName() + "\n" + logContent);
-                                send(reply2);
+                                System.out.println(logContent);
+//                                ACLMessage reply2 = msg.createReply();
+//                                reply2.setPerformative(ACLMessage.INFORM);
+//                                reply2.setContent("\n" + myAgent.getLocalName() + "\n" + logContent);
+//                                send(reply2);
                             } catch (IOException e)
                             {
                                 e.printStackTrace();
