@@ -31,7 +31,7 @@ public class Worker1 extends Agent {
                         case "Service Update":
 
                             String cmd = "sudo docker ps";
-                            String s;
+                            String s = null;
                             try {
                                 Process proc = r.exec(cmd);
                                 BufferedReader stdInput = new BufferedReader(new
