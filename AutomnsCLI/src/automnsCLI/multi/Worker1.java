@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.io.FileWriter;
+import java.util.Arrays;
 
 public class Worker1 extends Agent {
     protected void setup() {
@@ -30,18 +31,15 @@ public class Worker1 extends Agent {
                         case "Service Update":
 
                             String cmd = "sudo docker ps";
-                            String[] ps;
-                            int i;
+                            String s;
                             try {
                                 Process proc = r.exec(cmd);
                                 BufferedReader stdInput = new BufferedReader(new
                                         InputStreamReader(proc.getInputStream()));
-                                BufferedReader stdError = new BufferedReader(new
-                                        InputStreamReader(proc.getErrorStream()));
 
-                                // Read the output from the command
-                                while ((ps = stdInput.readLine()) != null) {
-                                    i++;
+                                while ((s = stdInput.readLine()) != null) {
+                                    String[] ps = line.split("\\s");
+                                    s = Arrays.toString(ps);
                                 }
                                 // Read any errors from the attempted command
                                 while ((s = stdError.readLine()) != null) {
@@ -53,7 +51,7 @@ public class Worker1 extends Agent {
                             }
                             ACLMessage reply2 = msg.createReply();
                             reply2.setPerformative(ACLMessage.INFORM);
-                            reply2.setContent("\n" + myAgent.getLocalName() + "\n" + ps[i]);
+                            reply2.setContent("\n" + myAgent.getLocalName() + "\n" + s);
                             send(reply2);
                             break;
                         //worker leave swarm and delete images
