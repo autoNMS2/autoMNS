@@ -52,15 +52,16 @@ public class Worker1 extends Agent {
                                    logContent = logContent.concat(scan.nextLine() + "\n");
                                }
                                 //System.out.println(logContent);
+                                ACLMessage reply2 = msg.createReply();
+                                reply2.setPerformative(ACLMessage.INFORM);
+                                reply2.setContent(logContent);
+                                send(reply2);
 
                             } catch (IOException e)
                             {
                                 e.printStackTrace();
                             }
-                            ACLMessage reply2 = msg.createReply();
-                            reply2.setPerformative(ACLMessage.INFORM);
-                            reply2.setContent(logContent);
-                            send(reply2);
+
                             break;
                         //worker leave swarm and delete images
                         case "Shutdown":
