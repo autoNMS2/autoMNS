@@ -33,7 +33,7 @@ public class Worker1 extends Agent {
                             String cmd = "sudo docker ps";
 
                             try {
-                                Sring s = null;
+                                String s = null;
                                 Process proc = r.exec(cmd);
                                 BufferedReader stdInput = new BufferedReader(new
                                         InputStreamReader(proc.getInputStream()));
