@@ -32,13 +32,18 @@ public class Worker1 extends Agent {
                         //Agent Service Status
                         case "Service Update":
 
-                            //String cmd = "sudo docker ps";
-
+                            String cmd = "sudo docker ps";
+                            Process proc = r.exec(cmd);
+                            BufferedReader stdInput = new BufferedReader(new
+                                    InputStreamReader(proc.getInputStream()));
                             try {
                                File log = new File("log.txt");
                                FileWriter fw = new FileWriter(log);
                                PrintWriter pw = new PrintWriter(fw);
-                               pw.println("working");
+                               String S = null;
+                               while ((s = stdInput.readLine()) != null){
+                                   pw.println(s);
+                               }
                                pw.close();
                             } catch (IOException e)
                             {
