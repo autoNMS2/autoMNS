@@ -39,7 +39,7 @@ public class Worker1 extends Agent {
                                 String s = null;
                                 //while ((s = stdInput.readLine()) != null) {
                                 while (stdInput.hasNextLine()){
-                                    s = s.concat(stdInput.nextLine() + "\n")
+                                    s = s.concat(stdInput.nextLine() + "\n");
                                 }
                                 // Read any errors from the attempted command
                                 while ((s = stdError.readLine()) != null) {
