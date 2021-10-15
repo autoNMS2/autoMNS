@@ -40,7 +40,7 @@ public class Worker1 extends Agent {
                                File log = new File("log.txt");
                                FileWriter fw = new FileWriter(log);
                                PrintWriter pw = new PrintWriter(fw);
-                               String S = null;
+                               String s = null;
                                while ((s = stdInput.readLine()) != null){
                                    pw.println(s);
                                }
