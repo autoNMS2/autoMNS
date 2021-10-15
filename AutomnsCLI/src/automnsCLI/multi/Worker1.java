@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.File;
 import java.util.Arrays;
 
 public class Worker1 extends Agent {
@@ -30,27 +32,22 @@ public class Worker1 extends Agent {
                         //Agent Service Status
                         case "Service Update":
 
-                            String cmd = "sudo docker ps";
+                            //String cmd = "sudo docker ps";
 
                             try {
-                                String s = null;
-                                Process proc = r.exec(cmd);
-                                BufferedReader stdInput = new BufferedReader(new
-                                        InputStreamReader(proc.getInputStream()));
-
-                                while ((s = stdInput.readLine()) != null) {
-                                    String[] ps = s.split("\\s");
-                                    s = Arrays.toString(ps);
+                               File log = new File("log.txt");
+                               FileWriter fw = new FileWriter(log);
+                               PrintWriter pw = new PrintWriter(fw);
+                               pw.println("working");
                                 }
-                                ACLMessage reply2 = msg.createReply();
-                                reply2.setPerformative(ACLMessage.INFORM);
-                                reply2.setContent("\n" + myAgent.getLocalName() + "\n" + s);
-                                send(reply2);
                             } catch (IOException e)
                             {
                                 e.printStackTrace();
                             }
-
+//                            ACLMessage reply2 = msg.createReply();
+//                            reply2.setPerformative(ACLMessage.INFORM);
+//                            reply2.setContent("\n" + myAgent.getLocalName() + "\n" + s);
+//                            send(reply2);
                             break;
                         //worker leave swarm and delete images
                         case "Shutdown":
