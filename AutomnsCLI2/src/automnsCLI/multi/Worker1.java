@@ -66,9 +66,11 @@ public class Worker1 extends Agent {
                         //worker leave swarm and delete images
                         case "Shutdown":
                             Runtime r2 = Runtime.getRuntime();
-                            String leave = "sudo docker swarm leave && sudo docker rmi $(sudo docker images -q)";
+                            String leave = "sudo docker swarm leave";
+                            String erase = "sudo docker rmi $(sudo docker images -q)";
                             try {
                                 r2.exec(leave);
+                                r2.exec(erase);
                             }
                             catch (IOException e) {
                                 e.printStackTrace();
