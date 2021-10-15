@@ -35,19 +35,11 @@ public class Worker1 extends Agent {
                                         InputStreamReader(proc.getInputStream()));
                                 BufferedReader stdError = new BufferedReader(new
                                         InputStreamReader(proc.getErrorStream()));
-
                                 // Read the output from the command
                                 String s = null;
-                                while ((s = stdInput.readLine()) != null) {
-                                    //System.out.println(s);
-                                    String ps;
-                                    ps = s;
-                                    if ((s = stdInput.readLine()) == null){
-                                        ACLMessage reply2 = msg.createReply();
-                                        reply2.setPerformative(ACLMessage.INFORM);
-                                        reply2.setContent("\n" + myAgent.getLocalName() + "\n" + ps);
-                                        send(reply2);
-                                    }
+                                //while ((s = stdInput.readLine()) != null) {
+                                while (stdInput.hasNextLine()){
+                                    s = s.concat(stdInput.nextLine() + "\n")
                                 }
                                 // Read any errors from the attempted command
                                 while ((s = stdError.readLine()) != null) {
@@ -57,6 +49,10 @@ public class Worker1 extends Agent {
                             {
                                 e.printStackTrace();
                             }
+                            ACLMessage reply2 = msg.createReply();
+                            reply2.setPerformative(ACLMessage.INFORM);
+                            reply2.setContent("\n" + myAgent.getLocalName() + "\n" + s);
+                            send(reply2);
                             break;
                         //worker leave swarm and delete images
                         case "Shutdown":
