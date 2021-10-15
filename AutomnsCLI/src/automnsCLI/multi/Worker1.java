@@ -28,7 +28,6 @@ public class Worker1 extends Agent {
                             break;
                         //Agent Service Status
                         case "Service Update":
-
                             String cmd = "sudo docker ps";
                             try {
                                 Process proc = r.exec(cmd);
@@ -40,10 +39,13 @@ public class Worker1 extends Agent {
                                 // Read the output from the command
                                 String s = null;
                                 while ((s = stdInput.readLine()) != null) {
-                                    ACLMessage reply2 = msg.createReply();
-                                    reply2.setPerformative(ACLMessage.INFORM);
-                                    reply2.setContent("\n" + myAgent.getLocalName() + "\n" + s);
-                                    send(reply2);
+                                    s++;
+                                    if ((s = stdInput.readLine()) == null){
+                                        ACLMessage reply2 = msg.createReply();
+                                        reply2.setPerformative(ACLMessage.INFORM);
+                                        reply2.setContent("\n" + myAgent.getLocalName() + "\n" + s);
+                                        send(reply2);
+                                    }
                                 }
                                 // Read any errors from the attempted command
                                 while ((s = stdError.readLine()) != null) {
