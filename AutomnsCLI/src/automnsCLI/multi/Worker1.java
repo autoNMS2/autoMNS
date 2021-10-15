@@ -38,12 +38,8 @@ public class Worker1 extends Agent {
                                         InputStreamReader(proc.getInputStream()));
 
                                 while ((s = stdInput.readLine()) != null) {
-                                    String[] ps = line.split("\\s");
+                                    String[] ps = s.split("\\s");
                                     s = Arrays.toString(ps);
-                                }
-                                // Read any errors from the attempted command
-                                while ((s = stdError.readLine()) != null) {
-                                    System.out.println(s);
                                 }
                             } catch (IOException e)
                             {
