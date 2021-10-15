@@ -20,7 +20,7 @@ public class Worker1 extends Agent {
                     String content = msg.getContent();
                     System.out.println(" New Message: " + content
                             + " from: (" + msg.getSender().getName() + ")");
-                    Runtime r = Runtime.getRuntime();
+
                     switch (content) {
                         //Agent status
                         case "Check":
@@ -31,6 +31,7 @@ public class Worker1 extends Agent {
                             break;
                         //Agent Service Status
                         case "Service Update":
+                            Runtime r = Runtime.getRuntime();
                             String cmd = "sudo docker ps";
                             String logContent = "";
                             try {
@@ -64,9 +65,10 @@ public class Worker1 extends Agent {
                             break;
                         //worker leave swarm and delete images
                         case "Shutdown":
+                            Runtime r2 = Runtime.getRuntime();
                             String leave = "sudo docker swarm leave && sudo docker rmi $(sudo docker images -q)";
                             try {
-                                r.exec(leave);
+                                r2.exec(leave);
                             }
                             catch (IOException e) {
                                 e.printStackTrace();
