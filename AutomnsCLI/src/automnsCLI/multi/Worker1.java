@@ -31,12 +31,12 @@ public class Worker1 extends Agent {
                             break;
                         //Agent Service Status
                         case "Service Update":
-
+                            Runtime r = Runtime.getRuntime();
                             String cmd = "sudo docker ps";
-                            Process proc = r.exec(cmd);
-                            BufferedReader stdInput = new BufferedReader(new
-                                    InputStreamReader(proc.getInputStream()));
                             try {
+                                Process proc = r.exec(cmd);
+                                BufferedReader stdInput = new BufferedReader(new
+                                        InputStreamReader(proc.getInputStream()));
                                File log = new File("log.txt");
                                FileWriter fw = new FileWriter(log);
                                PrintWriter pw = new PrintWriter(fw);
