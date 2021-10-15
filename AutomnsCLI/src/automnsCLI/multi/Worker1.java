@@ -35,18 +35,24 @@ public class Worker1 extends Agent {
                                 Process proc = r.exec(cmd);
                                 BufferedReader stdInput = new BufferedReader(new
                                         InputStreamReader(proc.getInputStream()));
+
                                 BufferedReader stdError = new BufferedReader(new
                                         InputStreamReader(proc.getErrorStream()));
-                                //Scanner scan = new Scanner(stdInput.readLine());
-//                                while (scan.hasNextLine()){
-//                                    ps = ps.concat(scan.nextLine() + "\n");
-//                                }
+
                                 // Read the output from the command
+                                System.out.println("Here is the standard output of the command:\n");
                                 String s = null;
                                 while ((s = stdInput.readLine()) != null) {
-                                    ps = s.concat(s + "\n");
+                                    System.out.println(s);
+                                    FileWriter log=new FileWriter("autoMNS/log.txt");
+                                    log.write(s);
+                                    System.out.println("Writing successful");
+                                    //close the file
+                                    log.close();
                                 }
+
                                 // Read any errors from the attempted command
+                                System.out.println("Here is the standard error of the command (if any):\n");
                                 while ((s = stdError.readLine()) != null) {
                                     System.out.println(s);
                                 }
@@ -54,10 +60,6 @@ public class Worker1 extends Agent {
                             {
                                 e.printStackTrace();
                             }
-                            ACLMessage reply2 = msg.createReply();
-                            reply2.setPerformative(ACLMessage.INFORM);
-                            reply2.setContent("\n" + myAgent.getLocalName() + "\n" + ps);
-                            send(reply2);
                             break;
                         //worker leave swarm and delete images
                         case "Shutdown":
