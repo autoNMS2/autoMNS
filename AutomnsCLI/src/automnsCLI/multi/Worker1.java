@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.File;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Worker1 extends Agent {
     protected void setup() {
@@ -44,14 +45,20 @@ public class Worker1 extends Agent {
                                    pw.println(s);
                                }
                                pw.close();
+
+                               Scanner scan = new Scanner(log);
+                               String logContent = null;
+                               while (scan.hasNextLine()){
+                                   logContent = logContent.concat(scan.nextLine() + "\n");
+                               }
+                                ACLMessage reply2 = msg.createReply();
+                                reply2.setPerformative(ACLMessage.INFORM);
+                                reply2.setContent("\n" + myAgent.getLocalName() + "\n" + logContent);
+                                send(reply2);
                             } catch (IOException e)
                             {
                                 e.printStackTrace();
                             }
-//                            ACLMessage reply2 = msg.createReply();
-//                            reply2.setPerformative(ACLMessage.INFORM);
-//                            reply2.setContent("\n" + myAgent.getLocalName() + "\n" + s);
-//                            send(reply2);
                             break;
                         //worker leave swarm and delete images
                         case "Shutdown":
