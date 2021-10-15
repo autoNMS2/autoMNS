@@ -31,7 +31,6 @@ public class Worker1 extends Agent {
                             break;
                         //Agent Service Status
                         case "Service Update":
-                            Runtime r = Runtime.getRuntime();
                             String cmd = "sudo docker ps";
                             try {
                                 Process proc = r.exec(cmd);
