@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.io.FileWriter;
+import java.util.Scanner;
 
 public class Worker1 extends Agent {
     protected void setup() {
@@ -36,15 +37,19 @@ public class Worker1 extends Agent {
                                         InputStreamReader(proc.getInputStream()));
                                 BufferedReader stdError = new BufferedReader(new
                                         InputStreamReader(proc.getErrorStream()));
+                                Scanner scan = new Scanner(stdInput);
+                                while (scan.hasNextLine()){
+                                    ps = ps.concat(scan.nextLine() + "\n");
+                                }
                                 // Read the output from the command
-                                String s = null;
-                                while ((s = stdInput.readLine()) != null) {
-                                    ps = ps.concat(stdInput.nextLine() + "\n");
-                                }
-                                // Read any errors from the attempted command
-                                while ((s = stdError.readLine()) != null) {
-                                    System.out.println(s);
-                                }
+                                //String s = null;
+//                                while ((s = stdInput.readLine()) != null) {
+//                                    ps = ps.concat(stdInput.nextLine() + "\n");
+//                                }
+//                                // Read any errors from the attempted command
+//                                while ((s = stdError.readLine()) != null) {
+//                                    System.out.println(s);
+//                                }
                             } catch (IOException e)
                             {
                                 e.printStackTrace();
