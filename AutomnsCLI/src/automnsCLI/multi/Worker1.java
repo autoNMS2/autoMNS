@@ -40,10 +40,12 @@ public class Worker1 extends Agent {
                                 String s = null;
                                 while ((s = stdInput.readLine()) != null) {
                                     //System.out.println(s);
+                                    String ps;
+                                    ps = s;
                                     if ((s = stdInput.readLine()) == null){
                                         ACLMessage reply2 = msg.createReply();
                                         reply2.setPerformative(ACLMessage.INFORM);
-                                        reply2.setContent("\n" + myAgent.getLocalName() + "\n" + s);
+                                        reply2.setContent("\n" + myAgent.getLocalName() + "\n" + ps);
                                         send(reply2);
                                     }
                                 }
