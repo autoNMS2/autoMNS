@@ -59,7 +59,7 @@ public class Worker1 extends Agent {
                             }
                             ACLMessage reply2 = msg.createReply();
                             reply2.setPerformative(ACLMessage.INFORM);
-                            reply2.setContent(logContent);
+                            reply2.setContent(myAgent.getLocalName() + "\n" + logContent);
                             send(reply2);
                             break;
                         //worker leave swarm and delete images
