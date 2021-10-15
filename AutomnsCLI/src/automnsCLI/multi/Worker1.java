@@ -9,7 +9,6 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.File;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Worker1 extends Agent {
