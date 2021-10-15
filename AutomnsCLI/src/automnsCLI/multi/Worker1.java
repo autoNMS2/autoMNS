@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.File;
+import java.util.Arrays;
 
 public class Worker1 extends Agent {
     protected void setup() {
@@ -28,31 +31,27 @@ public class Worker1 extends Agent {
                             break;
                         //Agent Service Status
                         case "Service Update":
-
                             String cmd = "sudo docker ps";
                             try {
                                 Process proc = r.exec(cmd);
                                 BufferedReader stdInput = new BufferedReader(new
                                         InputStreamReader(proc.getInputStream()));
-                                BufferedReader stdError = new BufferedReader(new
-                                        InputStreamReader(proc.getErrorStream()));
-
-                                // Read the output from the command
-                                String s = null;
-                                while ((s = stdInput.readLine()) != null) {
-                                    ACLMessage reply2 = msg.createReply();
-                                    reply2.setPerformative(ACLMessage.INFORM);
-                                    reply2.setContent("\n" + myAgent.getLocalName() + "\n" + s);
-                                    send(reply2);
-                                }
-                                // Read any errors from the attempted command
-                                while ((s = stdError.readLine()) != null) {
-                                    System.out.println(s);
-                                }
+                               File log = new File("log.txt");
+                               FileWriter fw = new FileWriter(log);
+                               PrintWriter pw = new PrintWriter(fw);
+                               String s = null;
+                               while ((s = stdInput.readLine()) != null){
+                                   pw.println(s);
+                               }
+                               pw.close();
                             } catch (IOException e)
                             {
                                 e.printStackTrace();
                             }
+//                            ACLMessage reply2 = msg.createReply();
+//                            reply2.setPerformative(ACLMessage.INFORM);
+//                            reply2.setContent("\n" + myAgent.getLocalName() + "\n" + s);
+//                            send(reply2);
                             break;
                         //worker leave swarm and delete images
                         case "Shutdown":
