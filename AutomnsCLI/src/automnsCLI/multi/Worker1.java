@@ -44,7 +44,7 @@ public class Worker1 extends Agent {
                                 String s = null;
                                 while ((s = stdInput.readLine()) != null) {
                                     System.out.println(s);
-                                    FileWriter log=new FileWriter("autoMNS/log.txt");
+                                    FileWriter log=new FileWriter("log.txt");
                                     log.write(s);
                                     System.out.println("Writing successful");
                                     //close the file
