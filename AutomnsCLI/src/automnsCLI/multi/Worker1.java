@@ -30,6 +30,8 @@ public class Worker1 extends Agent {
                         case "Service Update":
 
                             String cmd = "sudo docker ps";
+                            String[] ps;
+                            int i;
                             try {
                                 Process proc = r.exec(cmd);
                                 BufferedReader stdInput = new BufferedReader(new
@@ -38,12 +40,8 @@ public class Worker1 extends Agent {
                                         InputStreamReader(proc.getErrorStream()));
 
                                 // Read the output from the command
-                                String s = null;
-                                while ((s = stdInput.readLine()) != null) {
-                                    ACLMessage reply2 = msg.createReply();
-                                    reply2.setPerformative(ACLMessage.INFORM);
-                                    reply2.setContent("\n" + myAgent.getLocalName() + "\n" + s);
-                                    send(reply2);
+                                while ((ps = stdInput.readLine()) != null) {
+                                    i++;
                                 }
                                 // Read any errors from the attempted command
                                 while ((s = stdError.readLine()) != null) {
@@ -53,6 +51,10 @@ public class Worker1 extends Agent {
                             {
                                 e.printStackTrace();
                             }
+                            ACLMessage reply2 = msg.createReply();
+                            reply2.setPerformative(ACLMessage.INFORM);
+                            reply2.setContent("\n" + myAgent.getLocalName() + "\n" + ps[i]);
+                            send(reply2);
                             break;
                         //worker leave swarm and delete images
                         case "Shutdown":
