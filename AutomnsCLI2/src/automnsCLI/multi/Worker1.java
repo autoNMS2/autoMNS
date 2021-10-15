@@ -46,7 +46,7 @@ public class Worker1 extends Agent {
                                pw.close();
 
                                Scanner scan = new Scanner(log);
-                               String logContent = null;
+                               String logContent = "";
                                while (scan.hasNextLine()){
                                    logContent = logContent.concat(scan.nextLine() + "\n");
                                }
