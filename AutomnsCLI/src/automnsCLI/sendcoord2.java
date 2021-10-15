@@ -152,7 +152,8 @@ public class sendcoord2 extends Agent {
 						}
 						break;
 					case 2:
-						String deploy_auth = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/auth.yaml TeaStore";
+						//String deploy_auth = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/auth.yaml TeaStore";
+						String deploy_auth = "sudo docker service create --name TeaStore_auth descartesresearch/teastore-auth";
 						try {
 							r1.exec(deploy_auth);
 							System.out.println("Authenticator Service Deployed");
@@ -162,7 +163,8 @@ public class sendcoord2 extends Agent {
 						}
 						break;
 					case 3:
-						String deploy_db = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/db.yaml TeaStore";
+						//String deploy_db = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/db.yaml TeaStore";
+						String deploy_db = "sudo docker service create --name TeaStore_db --publish published=3306,target=3306 descartesresearch/teastore-db";
 						try {
 							r1.exec(deploy_db);
 							System.out.println("Database Service Deployed");
@@ -172,7 +174,8 @@ public class sendcoord2 extends Agent {
 						}
 						break;
 					case 4:
-						String deploy_image = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/image.yaml TeaStore";
+						//String deploy_image = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/image.yaml TeaStore";
+						String deploy_image = "sudo docker service create --name TeaStore_image descartesresearch/teastore-image";
 						try {
 							r1.exec(deploy_image);
 							System.out.println("Image Service Deployed");
@@ -182,7 +185,8 @@ public class sendcoord2 extends Agent {
 						}
 						break;
 					case 5:
-						String deploy_pers = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/persistence.yaml TeaStore";
+						//String deploy_pers = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/persistence.yaml TeaStore";
+						String deploy_pers = "sudo docker service create --name TeaStore_persistence descartesresearch/teastore-persistence";
 						try {
 							r1.exec(deploy_pers);
 							System.out.println("Persistence Service Deployed");
@@ -192,7 +196,8 @@ public class sendcoord2 extends Agent {
 						}
 						break;
 					case 6:
-						String deploy_rec = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/recommender.yaml TeaStore";
+						//String deploy_rec = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/recommender.yaml TeaStore";
+						String deploy_rec = "sudo docker service create --name TeaStore_recommender descartesresearch/teastore-recommender";
 						try {
 							r1.exec(deploy_rec);
 							System.out.println("Recommender Service Deployed");
@@ -202,7 +207,8 @@ public class sendcoord2 extends Agent {
 						}
 						break;
 					case 7:
-						String deploy_reg = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/registry.yaml TeaStore";
+						//String deploy_reg = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/registry.yaml TeaStore";
+						String deploy_reg = "sudo docker service create --name TeaStore_registry descartesresearch/teastore-registry";
 						try {
 							r1.exec(deploy_reg);
 							System.out.println("Registry Service Deployed");
@@ -212,7 +218,8 @@ public class sendcoord2 extends Agent {
 						}
 						break;
 					case 8:
-						String deploy_web = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/webui.yaml TeaStore";
+						//String deploy_web = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/webui.yaml TeaStore";
+						String deploy_web = "sudo docker service create --name TeaStore_webui --publish published=8080,target=8080 descartesresearch/teastore-webui";
 						try {
 							r1.exec(deploy_web);
 							System.out.println("WebUi Service Deployed");
