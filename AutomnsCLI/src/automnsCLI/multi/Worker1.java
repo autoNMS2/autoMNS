@@ -39,7 +39,8 @@ public class Worker1 extends Agent {
                                 // Read the output from the command
                                 String s = null;
                                 while ((s = stdInput.readLine()) != null) {
-                                    s++;
+                                    System.out.println("reading next line");
+                                    //s++;
 //                                    if ((s = stdInput.readLine()) == null){
 //                                        ACLMessage reply2 = msg.createReply();
 //                                        reply2.setPerformative(ACLMessage.INFORM);
