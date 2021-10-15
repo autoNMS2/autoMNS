@@ -12,5 +12,6 @@
     <orderEntry type="library" name="example" level="project" />
     <orderEntry type="library" name="jsch-0.1.55" level="project" />
     <orderEntry type="library" name="junit:junit:4.13.2" level="project" />
+    <orderEntry type="library" name="commons-io-2.5" level="project" />
   </component>
 </module>

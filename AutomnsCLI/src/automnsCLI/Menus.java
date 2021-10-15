@@ -34,6 +34,8 @@ public class Menus {
 				return UserOptions();
 			case 4:
 				return VMFunctions.launchApplication();
+			case 5:
+				return VMFunctions.initialiseAgentsLocal();
 			case 0:
 				return 0;
 		}

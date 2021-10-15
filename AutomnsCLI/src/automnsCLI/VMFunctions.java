@@ -2,6 +2,8 @@ package automnsCLI;
 import java.awt.Desktop;
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.net.Inet4Address;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,6 +14,7 @@ import java.io.PrintStream;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.*;
+import org.apache.commons.io.IOUtils;
 
 import com.jcraft.jsch.*;
 
@@ -74,6 +77,7 @@ public class VMFunctions {
 	//to the working level we need them at to run the program
 	public static int addVMs() throws IOException {
 		//create a list variable and read the user's ips from the file
+		System.out.println("Initialising Virtual Machines");
 		if (getVmConfig(inputVMConfigPath())) {
 			//update vms
 			updateVMs();
@@ -219,9 +223,7 @@ public class VMFunctions {
 
 	public static boolean getVmConfig(String filePath) {
 		List<String> ipConfigList = new ArrayList<>();
-		//Scanner input = new Scanner(System.in);
-		//System.out.println("Welcome to AutoMNS\n" + "Please enter the path of your VM config file: ");
-		//	String filePath = input.nextLine();
+
 		try {
 			File myObj = new File(filePath);
 			Scanner myReader = new Scanner(myObj);
@@ -262,32 +264,82 @@ public class VMFunctions {
 		}
 	}
 
-	public static String[] getCoordinatorParameters()
+	public static String[] getCoordinatorCompilationCommand()
 	{
 		//The following array contains the commands necessary to initialise the coordinator agent on the first vm provided by the user
 		String[] agentCommands =
-			{"javac -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/*.java",
-					"java -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar:classes jade.Boot -host " + getVMPrivateIps().get(0) + " -port 1099 -agents 'coordinator:automnsCLI.JAMEScoordinator("};
+				{"javac -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/*.java",
+						"java -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar:classes jade.Boot -host " + getVMPrivateIps().get(0) + " -port 1099 -agents 'coordinator:automnsCLI.JAMEScoordinator("};
 		//the following for loops adds the users public and private vm ips as arguments on to the end of the java command
 		//this allows the coordinator agent to access these ip addresses
-		for (int i = 1; i < getVMPrivateIps().size(); i++) {
-			agentCommands[1] += getVMPrivateIps().get(i) + ",";
-		}
-		for (int i = 1; i < getVMPublicIps().size(); i++) {
-			agentCommands[1] += getVMPublicIps().get(i) + ",";
-		}
-		//add a closing bracket to the end of the java command
-		agentCommands[1] += getRepoKeyFilePath() + ")'";
+
+		agentCommands[1] += getCoordinatorParameters();
+
+		agentCommands[1] += ")'";
 
 		return agentCommands;
 	}
 
-	public static int initialiseAgents() throws IOException {
-		//get the list of vms from the user, if the config file has not yet been input then the length will be 0 and the user will be asked to input
+	public static String getCoordinatorParameters()
+	{
+		String parameters = "";
+		for (int i = 1; i < getVMPrivateIps().size(); i++) {
+			parameters += getVMPrivateIps().get(i) + ",";
+		}
+		for (int i = 1; i < getVMPublicIps().size(); i++) {
+			parameters += getVMPublicIps().get(i) + ",";
+		}
+		//add a closing bracket to the end of the java command
+		parameters+= getRepoKeyFilePath();
+		return parameters;
+	}
 
+	public static int initialiseAgentsLocal() throws IOException {
+		//get the list of vms from the user, if the config file has not yet been input then the length will be 0 and the user will be asked to input
 		checkVMConfig();
 
-		String[] agentCommands = getCoordinatorParameters();
+		String ip = Inet4Address.getLocalHost().toString();
+
+		String[] agentCommands =
+				{"javac -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/*.java",
+						"java -cp autoMNS/jade/lib/jade.jar:autoMNS/jade/lib/jsch-0.1.55.jar:classes jade.Boot -host "
+								+ ip + " -port 1099 -agents 'coordinator:automnsCLI.JAMEScoordinator(" + ip + "," + ip + "," + getRepoKeyFilePath() + ")'"};
+
+		// initialise the platform on the coordinator agent
+		// coordinator should deploy other agents from it's own code
+
+		//msgContent = "Deploy Services";
+		Runtime r = Runtime.getRuntime();
+		try {
+			r.exec(agentCommands[0]);
+			Process process = r.exec(agentCommands[1]);
+			InputStream inputStream = process.getInputStream();
+			InputStream errorStream = process.getErrorStream();
+
+			Thread.sleep(5000);
+
+			String result = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+			String errors = IOUtils.toString(errorStream, StandardCharsets.UTF_8);
+
+			System.out.println("Output: " + result);
+			System.out.println("Error: " + errors);
+
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+		}
+		//	SSH(ip, getLocalKeyFilePath(), agentCommands[0], true);
+		//	shellSSH(ip, getLocalKeyFilePath(), agentCommands[1]);
+		System.out.println("Agents Deployed Locally");
+		//	Menus.MainMenu();
+		return 2;
+	}
+
+	public static int initialiseAgents() throws IOException {
+		//get the list of vms from the user, if the config file has not yet been input then the length will be 0 and the user will be asked to input
+		System.out.println("Initialising Agents");
+		checkVMConfig();
+
+		String[] agentCommands = getCoordinatorCompilationCommand();
 
 		// initialise the platform on the coordinator agent
 		// coordinator should deploy other agents from it's own code
@@ -299,9 +351,9 @@ public class VMFunctions {
 	}
 
 	public static int launchApplication() throws IOException {
+		System.out.println("Launching App");
 		checkVMConfig();
 
-		System.out.println("Launching App");
 		String URL = "https://" + getVMPublicIps().get(1) + "/8080";
 		openWebpage(URL);
 		return 4;
@@ -323,7 +375,6 @@ public class VMFunctions {
 		Session session = getSSHSession(host, privateKeyPath);
 		return (runSSHCommand(session, command).isConnected());
 	}
-
 
 	public static String SSH(String host, String privateKeyPath, String command, boolean print) throws IOException {
 		// The following code can be used to ssh into a VM and run a command
