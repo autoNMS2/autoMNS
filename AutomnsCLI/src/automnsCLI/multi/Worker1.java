@@ -44,7 +44,7 @@ public class Worker1 extends Agent {
                                 // Read the output from the command
                                 String s = null;
                                 while ((s = stdInput.readLine()) != null) {
-                                    ps = ps.concat(s + "\n");
+                                    ps = s;
                                 }
                                 // Read any errors from the attempted command
                                 while ((s = stdError.readLine()) != null) {
