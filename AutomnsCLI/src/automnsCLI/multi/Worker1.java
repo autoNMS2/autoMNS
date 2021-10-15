@@ -31,8 +31,9 @@ public class Worker1 extends Agent {
                         case "Service Update":
 
                             String cmd = "sudo docker ps";
-                            String s = null;
+
                             try {
+                                Sring s = null;
                                 Process proc = r.exec(cmd);
                                 BufferedReader stdInput = new BufferedReader(new
                                         InputStreamReader(proc.getInputStream()));
@@ -41,14 +42,15 @@ public class Worker1 extends Agent {
                                     String[] ps = s.split("\\s");
                                     s = Arrays.toString(ps);
                                 }
+                                ACLMessage reply2 = msg.createReply();
+                                reply2.setPerformative(ACLMessage.INFORM);
+                                reply2.setContent("\n" + myAgent.getLocalName() + "\n" + s);
+                                send(reply2);
                             } catch (IOException e)
                             {
                                 e.printStackTrace();
                             }
-                            ACLMessage reply2 = msg.createReply();
-                            reply2.setPerformative(ACLMessage.INFORM);
-                            reply2.setContent("\n" + myAgent.getLocalName() + "\n" + s);
-                            send(reply2);
+
                             break;
                         //worker leave swarm and delete images
                         case "Shutdown":
