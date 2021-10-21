@@ -437,7 +437,7 @@ public class sendcoord2 extends Agent {
 				"╚██████╗╚██████╔╝╚██████╔╝██║  ██║██████╔╝██║██║ ╚████║██║  ██║   ██║   ╚██████╔╝██║  ██║\n" +
 				" ╚═════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝\n" +
 				"                                                                                         \n" +
-				"                                  >Press Enter to Start<                                 " ;
+				"                                  >Press Enter to Start<";
 		try {
 			TimeUnit.SECONDS.sleep(1);
 			for (int i=0; i<header.length(); i++){
