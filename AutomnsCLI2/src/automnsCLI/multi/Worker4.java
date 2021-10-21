@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 import java.io.File;
 import java.util.Scanner;
 //Start of Agent program
-public class Worker1 extends Agent
+public class Worker4 extends Agent
 {
     //overriding the agent setup function
     protected void setup()
