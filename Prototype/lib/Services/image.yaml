@@ -1,9 +1,0 @@
-version: '3.8'
-services:
-  image:
-    image: descartesresearch/teastore-image
-    expose:
-      - "8080"
-    environment:
-      HOST_NAME: "image"
-      REGISTRY_HOST: "registry"

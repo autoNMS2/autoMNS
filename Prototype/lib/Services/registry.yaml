@@ -1,6 +1,0 @@
-version: '3.8'
-services:
-  registry:
-    image: descartesresearch/teastore-registry
-    expose:
-      - "8080"
