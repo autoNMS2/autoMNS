@@ -101,21 +101,21 @@ public class coordinator extends Agent {
 			//deploy agents
 			case 2:
 				System.out.println("\nDeploying The Agents.. \n");
-//				try
-//				{
-//					int commandCounter = 0;
-//					int workerCounter = 0;
-//					while(commandCounter < agentCommands.length){
-//						for(int m = 0; m < 2; m++) {
-//							VMFunctions.noOutputSSH(workerVMsPublic.get(workerCounter), privateKey, agentCommands[commandCounter]);
-//							commandCounter ++;
-//						}
-//						workerCounter ++;
-//					}
-//				}catch (IOException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
+				try
+				{
+					int commandCounter = 0;
+					int workerCounter = 0;
+					while(commandCounter < agentCommands.length){
+						for(int m = 0; m < 2; m++) {
+							//VMFunctions.noOutputSSH(workerVMsPublic.get(workerCounter), privateKey, agentCommands[commandCounter]);
+							commandCounter ++;
+						}
+						workerCounter ++;
+					}
+				}catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				break;
 			//Agents Status
 			case 3:
