@@ -433,7 +433,7 @@ public class sendcoord2 extends Agent {
 				try {
 					TimeUnit.SECONDS.sleep(2);
 					menu();
-				} catch (IOException e) {
+				} catch (InterruptedException e IOException e) {
 					e.printStackTrace();
 				}
 			}
