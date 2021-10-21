@@ -26,7 +26,7 @@ import automnsCLI.VMFunctions;
 public class sendcoord2 extends Agent {
 	public void menu () throws IOException {
 
-		System.out.print("/|\Platform Main Menu/|\ " +
+		System.out.print("<|> Platform Main Menu <|>" +
 				"\n 1. Swarm Nodes" +
 				"\n 2. Deploy Worker Agents " +
 				"\n 3. Check Worker Agents State " +
