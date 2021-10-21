@@ -437,7 +437,8 @@ public class sendcoord2 extends Agent {
 				"╚██████╗╚██████╔╝╚██████╔╝██║  ██║██████╔╝██║██║ ╚████║██║  ██║   ██║   ╚██████╔╝██║  ██║\n" +
 				" ╚═════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝\n" +
 				"                                                                                         \n" +
-				"     							   Press Enter to Start  								  \n";
+				"                                    Press Enter to Start                                 \n" ;
+
 		for (int i=0; i<header.length(); i++){
 			System.out.print(header.charAt(i));
 		}
