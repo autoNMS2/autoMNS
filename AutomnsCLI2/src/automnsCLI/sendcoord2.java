@@ -440,7 +440,7 @@ public class sendcoord2 extends Agent {
 		for (int i=0; i<header.length(); i++){
 			System.out.print(header.charAt(i));
 		}
-		System.out.println(Press Enter to Start);
+		System.out.println("Press Enter to Start\n");
 		addBehaviour(new CyclicBehaviour(this) {
 			public void action() {
 				try {
