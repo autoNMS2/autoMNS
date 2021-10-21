@@ -26,20 +26,20 @@ import automnsCLI.VMFunctions;
 public class coordinator extends Agent {
 	public void menu () throws IOException {
 
-		//Defining the path to the AWS key
-		Object[] VMs = getArguments();
-		//Defining the path to the AWS key
-		String privateKey = (String) VMs[VMs.length - 1];
-		System.out.println(privateKey);
-		//Defining the IP address of the main platform for other agents to join
-		List<String> workerVMsPrivate = new ArrayList<String>();
-		for (int k = 0; k < 7; k++) {
-			workerVMsPrivate.add((String) VMs[k]);
-		}
-		List<String> workerVMsPublic = new ArrayList<String>();
-		for (int k = 7; k < VMs.length - 1; k++) {
-			workerVMsPublic.add((String) VMs[k]);
-		}
+//		//Defining the path to the AWS key
+//		Object[] VMs = getArguments();
+//		//Defining the path to the AWS key
+//		String privateKey = (String) VMs[VMs.length - 1];
+//		System.out.println(privateKey);
+//		//Defining the IP address of the main platform for other agents to join
+//		List<String> workerVMsPrivate = new ArrayList<String>();
+//		for (int k = 0; k < 7; k++) {
+//			workerVMsPrivate.add((String) VMs[k]);
+//		}
+//		List<String> workerVMsPublic = new ArrayList<String>();
+//		for (int k = 7; k < VMs.length - 1; k++) {
+//			workerVMsPublic.add((String) VMs[k]);
+//		}
 
 		System.out.print("\n<<<<<<<<Platfrom Main Menu>>>>>>>" +
 				"\n|1| Swarm Nodes" +
@@ -54,7 +54,7 @@ public class coordinator extends Agent {
 
 		Scanner scanner = new Scanner(System.in);
 		int cmd = scanner.nextInt();
-
+		String privateKey = "autoMNS/jade/src/test0/test.pem";
 		String[] agentCommands = {"javac -cp AutoMNS/lib/jade.jar -d classes AutoMNS/automnsCLI/workers/Worker1.java",
 				"java -cp AutoMNS/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -container Worker1:automnsCLI.Worker1",
 				"javac -cp AutoMNS/lib/jade.jar -d classes AutoMNS/automnsCLI/workers/Worker2.java",
