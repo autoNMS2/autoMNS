@@ -29,11 +29,11 @@ public class sendcoord2 extends Agent {
 		System.out.print("\n *Automns Agent Platform Menu* " +
 				"\n 1. List Swarm Nodes" +
 				"\n 2. Deploy Agents " +
-				"\n 3. Agents Status " +
+				"\n 3. Agents State " +
 				"\n 4. Deploy/Update Services" +
 				"\n 5. Services Status" +
 				"\n 6. Agents Services Status" +
-				"\n 7. Remove Services" +
+				"\n 7. Remove Service/s" +
 				"\n 8. Shutdown & Erase Environment" +
 				"\n Enter Option Number: ");
 

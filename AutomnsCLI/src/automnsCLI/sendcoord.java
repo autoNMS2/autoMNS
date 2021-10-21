@@ -23,6 +23,7 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import automnsCLI.VMFunctions;
 
+
 public class sendcoord extends Agent {
 	public void menu () throws IOException {
 
