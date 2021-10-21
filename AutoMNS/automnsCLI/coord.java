@@ -54,7 +54,7 @@ public class coord extends Agent {
 		Scanner scanner = new Scanner(System.in);
 		int cmd = scanner.nextInt();
 
-		String privateKey = "autoMNS/jade/src/test0/test.pem";
+		//String privateKey = "autoMNS/jade/src/test0/test.pem";
 		String[] agentCommands =
 				{"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI2/src/automnsCLI/multi/Worker1.java",
 						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.90.214 -port 1099 -container Worker1:automnsCLI.Worker1"
