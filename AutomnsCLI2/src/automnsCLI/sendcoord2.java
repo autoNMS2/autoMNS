@@ -43,7 +43,7 @@ public class sendcoord2 extends Agent {
 		String privateKey = "autoMNS/jade/src/test0/test.pem";
 		String[] agentCommands =
 				{"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker1.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.31.151 -port 1099 -container Worker1:automnsCLI.Worker1"
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.31.151 -port 1099 -local-port 5000 -container Worker1:automnsCLI.Worker1"
 //						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker2.java",
 //						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.87.239 -port 1099 -local-host 172.31.80.205 -local-port 5001 -container Worker2:automnsCLI.Worker2",
 //						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker3.java",
@@ -62,7 +62,7 @@ public class sendcoord2 extends Agent {
 		{
 			//swarm nodes summary
 			case 1:
-				System.out.println("\nSwarm Nodes Summary: \n");
+				System.out.println("\nSwarm Nodes Summary:");
 				Runtime r = Runtime.getRuntime();
 				String nodecmd = "sudo docker node ls";
 				try {
@@ -109,7 +109,6 @@ public class sendcoord2 extends Agent {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				System.out.println("\n Agents Deployed \n");
 				break;
 			//Agents Status
 			case 3:
