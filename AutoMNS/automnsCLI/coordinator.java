@@ -54,7 +54,7 @@ public class coordinator extends Agent {
 
 		Scanner scanner = new Scanner(System.in);
 		int cmd = scanner.nextInt();
-		String privateKey = "autoMNS/jade/src/test0/test.pem";
+		//String privateKey = "autoMNS/jade/src/test0/test.pem";
 		String[] agentCommands = {
 				"javac -cp autoMNS/AutoMNS/lib/jade.jar -d classes autoMNS/AutoMNS/automnsCLI/workers/Worker1.java",
 				"java -cp autoMNS/AutoMNS/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -container Worker1:automnsCLI.Worker1",
