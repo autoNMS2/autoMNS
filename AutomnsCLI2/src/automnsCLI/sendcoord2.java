@@ -26,7 +26,7 @@ import automnsCLI.VMFunctions;
 public class sendcoord2 extends Agent {
 	public void menu () throws IOException {
 
-		System.out.print("||[(Main Menu)]||" +
+		System.out.print("\n ||[(Main Menu)]||" +
 				"\n |1| Swarm Nodes" +
 				"\n |2| Deploy Worker Agents " +
 				"\n |3| Check Worker Agents State " +
@@ -75,7 +75,7 @@ public class sendcoord2 extends Agent {
 					// Read the output from the command
 					String s = null;
 					while ((s = stdInput.readLine()) != null) {
-						System.out.println(s);
+						System.out.println(s+"\n");
 					}
 					// Read any errors from the attempted command
 					while ((s = stdError.readLine()) != null) {
@@ -415,7 +415,7 @@ public class sendcoord2 extends Agent {
 
 		ACLMessage msg = receive();
 		if (msg != null) {
-			System.out.println("\nNew Message From: (" + msg.getSender().getName() + ") \n" + msg.getContent());
+			System.out.println("\nNew Message From: (" + msg.getSender().getName() + ") \n" + msg.getContent()+"\n");
 
 			return true;
 		}
@@ -444,7 +444,7 @@ public class sendcoord2 extends Agent {
 				System.out.print(header.charAt(i));
 			}
 			Scanner enter = new Scanner(System.in);
-			System.out.println("");
+			System.out.print("");
 			enter.nextLine();
 		}catch (InterruptedException e) {
 		}
