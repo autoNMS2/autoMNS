@@ -18,11 +18,11 @@ public class Worker1 extends Agent {
                 ACLMessage msg = receive();
                 if (msg != null) {
                     String content = msg.getContent();
-                    System.out.println("\n New Message From: ( " + msg.getSender().getName() + " ) \n" + msg.getContent());
+                    System.out.println("\nNew Message From: (" + msg.getSender().getName() + ") \n" + msg.getContent());
 
                     switch (content) {
                         //Agent status
-                        case "Check":
+                        case "State Check":
                             ACLMessage reply = msg.createReply();
                             reply.setPerformative(ACLMessage.INFORM);
                             reply.setContent("I'm Alive! :)");

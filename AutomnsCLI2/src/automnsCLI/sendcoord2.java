@@ -115,7 +115,7 @@ public class sendcoord2 extends Agent {
 			case 3:
 				System.out.println("\n *Agents Status* \n");
 				ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-				msg.setContent("Check");
+				msg.setContent("State Check");
 				msg.addReceiver(new AID("Worker1", AID.ISLOCALNAME));
 //				msg.addReceiver(new AID("Worker2", AID.ISLOCALNAME));
 //				msg.addReceiver(new AID("Worker3", AID.ISLOCALNAME));
@@ -415,7 +415,7 @@ public class sendcoord2 extends Agent {
 
 		ACLMessage msg = receive();
 		if (msg != null) {
-			System.out.println("\n New Message From: ( " + msg.getSender().getName() + " ) \n" + msg.getContent());
+			System.out.println("\nNew Message From: (" + msg.getSender().getName() + ") \n" + msg.getContent());
 
 			return true;
 		}
@@ -431,6 +431,7 @@ public class sendcoord2 extends Agent {
 				}
 				while (checkmsg());
 				try {
+					TimeUnit.SECONDS.sleep(2);
 					menu();
 				} catch (IOException e) {
 					e.printStackTrace();
