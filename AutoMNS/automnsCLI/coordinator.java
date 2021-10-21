@@ -105,13 +105,13 @@ public class coordinator extends Agent {
 				{
 					int commandCounter = 0;
 					int workerCounter = 0;
-//					while(commandCounter < agentCommands.length){
-//						for(int m = 0; m < 2; m++) {
-//							VMFunctions.noOutputSSH(workerVMsPublic.get(workerCounter), privateKey, agentCommands[commandCounter]);
-//							commandCounter ++;
-//						}
-//						workerCounter ++;
-//					}
+					while(commandCounter < agentCommands.length){
+						for(int m = 0; m < 2; m++) {
+							//VMFunctions.noOutputSSH(workerVMsPublic.get(workerCounter), privateKey, agentCommands[commandCounter]);
+							//commandCounter ++;
+						}
+						//workerCounter ++;
+					}
 				}catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
