@@ -43,13 +43,8 @@ public class SSHTests {
         VMFunctions.getVmConfig("C:\\Users\\Computer\\Documents\\GitHub\\autoMNS\\Prototype\\vmsinfo.txt");
         command = "echo hello"; // nice easy command to test
         privateKey = "C:\\Users\\Computer\\Documents\\GitHub\\autoMNS\\automnskey.pem";
-        vmip = VMFunctions.getVMPublicIps().get(0);
+        vmip = "3.144.84.191";//VMFunctions.getVMPublicIps().get(0);
     }
-
-    // Test individual modules of ssh connections
-    @Test public void testSSHInvalidIP() throws IOException { //  test if the command is correctly run and returned
-        assertThrows( RuntimeException.class, () -> {VMFunctions.SSH("invalid", privateKey, command, false);} );
-    }   // invalid key, invalid command
 
     // getSSHSession
     @Test public void testGetSSHSession() { //  tests if a session with the correct host is created
@@ -58,23 +53,13 @@ public class SSHTests {
     }   // test other characteristics to determine if session is valid
 
     // runSSHCommand
-    @Test public void testRunSSHCommand() { // returns a channel whose connection is tested
+    @Test public void testRunSSHCommandIsConnected() { // returns a channel whose connection is tested
         session = VMFunctions.getSSHSession(vmip, privateKey);
         assertTrue(VMFunctions.runSSHCommand(session, command).isConnected());
     }
     @Test public void testRunSSHCommandInvalidIP() { // incorrect connection should throw an exception
         session = VMFunctions.getSSHSession("invalid", privateKey);
         assertThrows( RuntimeException.class, () -> {VMFunctions.runSSHCommand(session, command);} );
-    }
-
-    // runShellCommand
-    @Test public void testRunShellCommand() throws IOException { // returns if a shell channel is connected
-        session = VMFunctions.getSSHSession(vmip, privateKey);
-        assertTrue(VMFunctions.runShellCommand(session, command).isConnected());
-    }
-    @Test public void testRunShellCommandInvalidIP() throws IOException { // returns if a shell channel is connected
-        session = VMFunctions.getSSHSession("invalid", privateKey);
-        assertThrows( RuntimeException.class, () -> {VMFunctions.runShellCommand(session, command);} );
     }
 
     // getSSHOutput
@@ -91,12 +76,26 @@ public class SSHTests {
         assertThrows( RuntimeException.class, () -> {VMFunctions.getSSHOutput(channel, session, false);} );
     }
 
+    // runShellCommand
+    @Test public void testRunShellCommand() throws IOException { // returns if a shell channel is connected
+        session = VMFunctions.getSSHSession(vmip, privateKey);
+        assertTrue(VMFunctions.runShellCommand(session, command).isConnected());
+    }
+    @Test public void testRunShellCommandInvalidIP() throws IOException { // returns if a shell channel is connected
+        session = VMFunctions.getSSHSession("invalid", privateKey);
+        assertThrows( RuntimeException.class, () -> {VMFunctions.runShellCommand(session, command);} );
+    }
+
     // test integrated methods that use above modules
     // SSH
     @Test public void testSSH() throws IOException { // command run correctly should return an output
         command = "echo hello"; // output should just be hello (with a new line)
         assertEquals("hello\n", VMFunctions.SSH(vmip, privateKey, command, false));
     }
+    // Test individual modules of ssh connections
+    @Test public void testSSHInvalidIP() throws IOException { //  test if the command is correctly run and returned
+        assertThrows( RuntimeException.class, () -> {VMFunctions.SSH("invalid", privateKey, command, false);} );
+    }   // invalid key, invalid command
 
     // noOutputSSH
     // shellSSH

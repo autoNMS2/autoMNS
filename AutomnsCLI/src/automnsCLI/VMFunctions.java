@@ -395,23 +395,6 @@ public class VMFunctions {
 
 		Session session = getSSHSession(host, privateKeyPath);
 		return runShellCommand(session, command);
-//		String username = "ubuntu";
-//		JSch jsch = new JSch();
-//		Session session = null;
-//		String host = ip;
-//		String privateKeyPath = filePath;
-//		Channel channel;
-//		try {
-//			jsch.addIdentity(privateKeyPath);
-//			session = jsch.getSession(username, host, 22);
-//			session.setConfig("PreferredAuthentications", "publickey,keyboard-interactive,password");
-//			java.util.Properties config = new java.util.Properties();
-//			config.put("StrictHostKeyChecking", "no");
-//			session.setConfig(config);
-//		} catch (JSchException e) {
-//			throw new RuntimeException("Failed to create Jsch Session object.", e);
-//		}
-
 	}
 
 	public static ChannelShell runShellCommand(Session session, String command) throws IOException
