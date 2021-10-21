@@ -26,7 +26,7 @@ import automnsCLI.VMFunctions;
 public class sendcoord2 extends Agent {
 	public void menu () throws IOException {
 
-		System.out.print("\n||[(Main Menu)]||" +
+		System.out.print("\n<<<<<<<Platfrom Main Menu>>>>>>>>" +
 				"\n|1| Swarm Nodes" +
 				"\n|2| Deploy Worker Agents " +
 				"\n|3| Check Worker Agents State " +
@@ -34,7 +34,7 @@ public class sendcoord2 extends Agent {
 				"\n|5| Check Available Services" +
 				"\n|6| Check Worker Agents Services" +
 				"\n|7| Remove Service/s" +
-				"\n|8| Shutdown Swarm & Erase Environment" +
+				"\n|8| Shutdown Swarm & Erase Images" +
 				"\nEnter Option Number: ");
 
 		Scanner scanner = new Scanner(System.in);
@@ -112,7 +112,7 @@ public class sendcoord2 extends Agent {
 				break;
 			//Agents Status
 			case 3:
-				System.out.println("\n *Worker Agents State*");
+				System.out.println("\nWorker Agents State:");
 				ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
 				msg.setContent("State Check");
 				msg.addReceiver(new AID("Worker1", AID.ISLOCALNAME));
@@ -414,7 +414,7 @@ public class sendcoord2 extends Agent {
 
 		ACLMessage msg = receive();
 		if (msg != null) {
-			System.out.println("\nNew Message From: (" + msg.getSender().getName() + ") \n" + msg.getContent()+"\n");
+			System.out.println("\nNew Message From: (" + msg.getSender().getName() + ") \n" + msg.getContent());
 
 			return true;
 		}
