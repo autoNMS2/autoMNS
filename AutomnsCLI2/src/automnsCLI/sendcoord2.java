@@ -438,7 +438,7 @@ public class sendcoord2 extends Agent {
 				" ╚═════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝\n" +
 				"      ";
 		for (int i=0; i<header.length(); i++){
-			System.out.print(header.charAt(i));
+			System.out.println(header.charAt(i));
 		}
 		System.out.print("Press Enter to Start\n");
 		addBehaviour(new CyclicBehaviour(this) {
