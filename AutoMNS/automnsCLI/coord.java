@@ -25,6 +25,20 @@ import automnsCLI.VMFunctions;
 
 public class coord extends Agent {
 	public void menu () throws IOException {
+		//Defining the path to the AWS key
+		Object[] VMs = getArguments();
+		//Defining the path to the AWS key
+		String privateKey = (String) VMs[VMs.length - 1];
+		System.out.println(privateKey);
+		//Defining the IP address of the main platform for other agents to join
+		List<String> workerVMsPrivate = new ArrayList<String>();
+		for (int k = 0; k < 7; k++) {
+			workerVMsPrivate.add((String) VMs[k]);
+		}
+		List<String> workerVMsPublic = new ArrayList<String>();
+		for (int k = 7; k < VMs.length - 1; k++) {
+			workerVMsPublic.add((String) VMs[k]);
+		}
 
 		System.out.print("\n<<<<<<<<Platfrom Main Menu>>>>>>>" +
 				"\n|1| Swarm Nodes" +
