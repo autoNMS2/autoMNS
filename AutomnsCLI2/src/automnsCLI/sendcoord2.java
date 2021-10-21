@@ -444,9 +444,8 @@ public class sendcoord2 extends Agent {
 				System.out.print(header.charAt(i));
 			}
 			Scanner enter = new Scanner(System.in);
-			System.out.print("");
-			enter.next();
-
+			System.out.println("");
+			enter.nextLine();
 		}catch (InterruptedException e) {
 		}
 
