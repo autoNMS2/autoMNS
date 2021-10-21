@@ -54,8 +54,8 @@ public class coordinator extends Agent {
 
 		Scanner scanner = new Scanner(System.in);
 		int cmd = scanner.nextInt();
-		String privateKey = "autoMNS/jade/src/test0/test.pem";
-		String[] agentCommands = {"javac -cp AutoMNS/lib/jade.jar -d classes AutoMNS/automnsCLI/workers/Worker1.java"
+//		String privateKey = "autoMNS/jade/src/test0/test.pem";
+//		String[] agentCommands = {"javac -cp AutoMNS/lib/jade.jar -d classes AutoMNS/automnsCLI/workers/Worker1.java"
 //				"java -cp AutoMNS/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -container Worker1:automnsCLI.Worker1",
 //				"javac -cp AutoMNS/lib/jade.jar -d classes AutoMNS/automnsCLI/workers/Worker2.java",
 //				"java -cp AutoMNS/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -local-host " + workerVMsPrivate.get(1) + " -local-port 5001 -container Worker2:automnsCLI.Worker2",
@@ -69,7 +69,7 @@ public class coordinator extends Agent {
 //				"java -cp AutoMNS/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -local-host " + workerVMsPrivate.get(5) + " -local-port 5005 -container Worker6:automnsCLI.Worker6",
 //				"javac -cp AutoMNS/lib/jade.jar -d classes AutoMNS/automnsCLI/workers/Worker7.java",
 //				"java -cp AutoMNS/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -local-host " + workerVMsPrivate.get(6) + " -local-port 5006 -container Worker7:automnsCLI.Worker7"
-				};
+//				};
 
 		switch (cmd)
 		{
@@ -101,21 +101,21 @@ public class coordinator extends Agent {
 			//deploy agents
 			case 2:
 				System.out.println("\nDeploying The Agents.. \n");
-				try
-				{
-					int commandCounter = 0;
-					int workerCounter = 0;
-					while(commandCounter < agentCommands.length){
-						for(int m = 0; m < 2; m++) {
-							//VMFunctions.noOutputSSH(workerVMsPublic.get(workerCounter), privateKey, agentCommands[commandCounter]);
-							commandCounter ++;
-						}
-						workerCounter ++;
-					}
-				}catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+//				try
+//				{
+//					int commandCounter = 0;
+//					int workerCounter = 0;
+//					while(commandCounter < agentCommands.length){
+//						for(int m = 0; m < 2; m++) {
+//							VMFunctions.noOutputSSH(workerVMsPublic.get(workerCounter), privateKey, agentCommands[commandCounter]);
+//							commandCounter ++;
+//						}
+//						workerCounter ++;
+//					}
+//				}catch (IOException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
 				break;
 			//Agents Status
 			case 3:
