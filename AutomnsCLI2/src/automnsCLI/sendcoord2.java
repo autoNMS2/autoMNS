@@ -26,16 +26,16 @@ import automnsCLI.VMFunctions;
 public class sendcoord2 extends Agent {
 	public void menu () throws IOException {
 
-		System.out.print("\n ||[(Main Menu)]||" +
-				"\n |1| Swarm Nodes" +
-				"\n |2| Deploy Worker Agents " +
-				"\n |3| Check Worker Agents State " +
-				"\n |4| Deploy/Update Services" +
-				"\n |5| Check Available Services" +
-				"\n |6| Check Worker Agents Services" +
-				"\n |7| Remove Service/s" +
-				"\n |8| Shutdown Swarm & Erase Environment" +
-				"\n Enter Option Number: ");
+		System.out.print("\n||[(Main Menu)]||" +
+				"\n|1| Swarm Nodes" +
+				"\n|2| Deploy Worker Agents " +
+				"\n|3| Check Worker Agents State " +
+				"\n|4| Deploy/Update Services" +
+				"\n|5| Check Available Services" +
+				"\n|6| Check Worker Agents Services" +
+				"\n|7| Remove Service/s" +
+				"\n|8| Shutdown Swarm & Erase Environment" +
+				"\nEnter Option Number: ");
 
 		Scanner scanner = new Scanner(System.in);
 		int cmd = scanner.nextInt();
@@ -43,7 +43,7 @@ public class sendcoord2 extends Agent {
 		String privateKey = "autoMNS/jade/src/test0/test.pem";
 		String[] agentCommands =
 				{"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker1.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.21.250 -port 1099 -container Worker1:automnsCLI.Worker1"
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.31.151 -port 1099 -container Worker1:automnsCLI.Worker1"
 //						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker2.java",
 //						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.87.239 -port 1099 -local-host 172.31.80.205 -local-port 5001 -container Worker2:automnsCLI.Worker2",
 //						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker3.java",
@@ -62,7 +62,7 @@ public class sendcoord2 extends Agent {
 		{
 			//swarm nodes summary
 			case 1:
-				System.out.println("\n *Swarm Nodes Summary* \n");
+				System.out.println("\nSwarm Nodes Summary: \n");
 				Runtime r = Runtime.getRuntime();
 				String nodecmd = "sudo docker node ls";
 				try {
@@ -75,7 +75,7 @@ public class sendcoord2 extends Agent {
 					// Read the output from the command
 					String s = null;
 					while ((s = stdInput.readLine()) != null) {
-						System.out.println(s+"\n");
+						System.out.println(s);
 					}
 					// Read any errors from the attempted command
 					while ((s = stdError.readLine()) != null) {
@@ -88,8 +88,8 @@ public class sendcoord2 extends Agent {
 				break;
 			//deploy agents
 			case 2:
-				System.out.println("\n Deploying The Agents.. \n");
-				String[] ip = {"54.221.34.90"};
+				System.out.println("\nDeploying The Agents.. \n");
+				String[] ip = {"34.207.109.180"};
 				//String[] ip = {"3.95.161.48","54.166.38.203","34.205.157.113","54.204.235.13","54.152.98.164","3.92.229.146","54.173.209.199"};
 				int x = 0;
 				int y = 0;
