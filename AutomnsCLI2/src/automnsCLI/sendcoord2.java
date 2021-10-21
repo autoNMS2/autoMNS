@@ -27,14 +27,14 @@ public class sendcoord2 extends Agent {
 	public void menu () throws IOException {
 
 		System.out.print("\n *Automns Agent Platform Menu* " +
-				"\n 1. List Swarm Nodes" +
-				"\n 2. Deploy Agents " +
-				"\n 3. Agents State " +
+				"\n 1. Swarm Nodes" +
+				"\n 2. Deploy Worker Agents " +
+				"\n 3. Check Worker Agents State " +
 				"\n 4. Deploy/Update Services" +
-				"\n 5. Services Status" +
-				"\n 6. Agents Services Status" +
+				"\n 5. Check Available Services" +
+				"\n 6. Check Worker Agents Services" +
 				"\n 7. Remove Service/s" +
-				"\n 8. Shutdown & Erase Environment" +
+				"\n 8. Shutdown Swarm & Erase Environment" +
 				"\n Enter Option Number: ");
 
 		Scanner scanner = new Scanner(System.in);
@@ -43,7 +43,7 @@ public class sendcoord2 extends Agent {
 		String privateKey = "autoMNS/jade/src/test0/test.pem";
 		String[] agentCommands =
 				{"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker1.java",
-						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.21.250 -port 1099 -local-host 172.31.28.171 -local-port 5000 -container Worker1:automnsCLI.Worker1"
+						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.21.250 -port 1099 -container Worker1:automnsCLI.Worker1"
 //						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker2.java",
 //						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.87.239 -port 1099 -local-host 172.31.80.205 -local-port 5001 -container Worker2:automnsCLI.Worker2",
 //						"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI/src/automnsCLI/multi/Worker3.java",
@@ -415,7 +415,8 @@ public class sendcoord2 extends Agent {
 
 		ACLMessage msg = receive();
 		if (msg != null) {
-			System.out.println(msg.getContent());
+			System.out.println("\n New Message From: ( " + msg.getSender().getName() + " ) \n" + msg.getContent());
+
 			return true;
 		}
 		return false;

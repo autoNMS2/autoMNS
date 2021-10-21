@@ -18,15 +18,14 @@ public class Worker1 extends Agent {
                 ACLMessage msg = receive();
                 if (msg != null) {
                     String content = msg.getContent();
-                    System.out.println(" New Message: " + content
-                            + " from: (" + msg.getSender().getName() + ")");
+                    System.out.println("\n New Message From: ( " + msg.getSender().getName() + " ) \n" + msg.getContent());
 
                     switch (content) {
                         //Agent status
                         case "Check":
                             ACLMessage reply = msg.createReply();
                             reply.setPerformative(ACLMessage.INFORM);
-                            reply.setContent("\n" + myAgent.getLocalName() + " Agent is alive!");
+                            reply.setContent("I'm Alive! :)");
                             send(reply);
                             break;
                         //Agent Service Status
@@ -60,7 +59,7 @@ public class Worker1 extends Agent {
                             }
                             ACLMessage reply2 = msg.createReply();
                             reply2.setPerformative(ACLMessage.INFORM);
-                            reply2.setContent(myAgent.getLocalName() + "\n" + logContent);
+                            reply2.setContent(logContent);
                             send(reply2);
                             break;
                         //worker leave swarm and delete images
@@ -77,7 +76,7 @@ public class Worker1 extends Agent {
                             }
                             ACLMessage reply4 = msg.createReply();
                             reply4.setPerformative(ACLMessage.INFORM);
-                            reply4.setContent("\n" + myAgent.getLocalName() + "Worker Node Left Swarm & Docker Images Deleted");
+                            reply4.setContent("My node left Swarm & Docker images deleted");
                             send(reply4);
                             break;
                     }
