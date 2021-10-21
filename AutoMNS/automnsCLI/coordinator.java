@@ -25,6 +25,7 @@ import automnsCLI.VMFunctions;
 
 public class coordinator extends Agent {
 	public void menu () throws IOException {
+
 		//Defining the path to the AWS key
 		Object[] VMs = getArguments();
 		//Defining the path to the AWS key
@@ -54,9 +55,7 @@ public class coordinator extends Agent {
 		Scanner scanner = new Scanner(System.in);
 		int cmd = scanner.nextInt();
 
-		String[] agentCommands =
-				{
-				"javac -cp AutoMNS/lib/jade.jar -d classes AutoMNS/automnsCLI/workers/Worker1.java",
+		String[] agentCommands = {"javac -cp AutoMNS/lib/jade.jar -d classes AutoMNS/automnsCLI/workers/Worker1.java",
 				"java -cp AutoMNS/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -container Worker1:automnsCLI.Worker1",
 				"javac -cp AutoMNS/lib/jade.jar -d classes AutoMNS/automnsCLI/workers/Worker2.java",
 				"java -cp AutoMNS/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -local-host " + workerVMsPrivate.get(1) + " -local-port 5001 -container Worker2:automnsCLI.Worker2",
@@ -95,8 +94,7 @@ public class coordinator extends Agent {
 					while ((s = stdError.readLine()) != null) {
 						System.out.println(s);
 					}
-				} catch (IOException e)
-				{
+				} catch (IOException e) {
 					e.printStackTrace();
 				}
 				break;
@@ -114,10 +112,7 @@ public class coordinator extends Agent {
 						}
 						workerCounter ++;
 					}
-				}
-				//Throw a failure in Input & Output operations
-				catch (IOException e1)
-				{
+				}catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
@@ -157,8 +152,7 @@ public class coordinator extends Agent {
 						try {
 							r1.exec(deploy_all);
 							System.out.println("\nAll Services Deployed/Updated");
-						}
-						catch (IOException e) {
+						} catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
@@ -167,8 +161,7 @@ public class coordinator extends Agent {
 						try {
 							r1.exec(deploy_auth);
 							System.out.println("\nAuthenticator Service Deployed");
-						}
-						catch (IOException e) {
+						} catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
@@ -177,8 +170,7 @@ public class coordinator extends Agent {
 						try {
 							r1.exec(deploy_db);
 							System.out.println("\nDatabase Service Deployed");
-						}
-						catch (IOException e) {
+						} catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
@@ -187,8 +179,7 @@ public class coordinator extends Agent {
 						try {
 							r1.exec(deploy_image);
 							System.out.println("\nImage Service Deployed");
-						}
-						catch (IOException e) {
+						} catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
@@ -197,8 +188,7 @@ public class coordinator extends Agent {
 						try {
 							r1.exec(deploy_pers);
 							System.out.println("\nPersistence Service Deployed");
-						}
-						catch (IOException e) {
+						} catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
@@ -207,8 +197,7 @@ public class coordinator extends Agent {
 						try {
 							r1.exec(deploy_rec);
 							System.out.println("\nRecommender Service Deployed");
-						}
-						catch (IOException e) {
+						} catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
@@ -217,8 +206,7 @@ public class coordinator extends Agent {
 						try {
 							r1.exec(deploy_reg);
 							System.out.println("\nRegistry Service Deployed");
-						}
-						catch (IOException e) {
+						} catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
@@ -227,8 +215,7 @@ public class coordinator extends Agent {
 						try {
 							r1.exec(deploy_web);
 							System.out.println("\nWebUi Service Deployed");
-						}
-						catch (IOException e) {
+						} catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
@@ -257,8 +244,7 @@ public class coordinator extends Agent {
 					while ((s = stdError.readLine()) != null) {
 						System.out.println(s);
 					}
-				} catch (IOException e)
-				{
+				} catch (IOException e) {
 					e.printStackTrace();
 				}
 				break;
@@ -301,7 +287,6 @@ public class coordinator extends Agent {
 				String rm_reg = "sudo docker service rm TeaStore_registry";
 				String rm_web = "sudo docker service rm TeaStore_webui";
 				switch (cmd2){
-
 					case 1:
 						try {
 							r7.exec(rm_auth);
@@ -313,8 +298,7 @@ public class coordinator extends Agent {
 							r7.exec(rm_web);
 							r7.exec(rm_all);
 							System.out.println("\nAll Services Removed");
-						}
-						catch (IOException e) {
+						} catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
@@ -322,8 +306,7 @@ public class coordinator extends Agent {
 						try {
 							r7.exec(rm_auth);
 							System.out.println("\nAuthenticator Service Removed");
-						}
-						catch (IOException e) {
+						} catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
@@ -331,8 +314,7 @@ public class coordinator extends Agent {
 						try {
 							r7.exec(rm_db);
 							System.out.println("\nDatabase Service Removed");
-						}
-						catch (IOException e) {
+						} catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
@@ -340,8 +322,7 @@ public class coordinator extends Agent {
 						try {
 							r7.exec(rm_Image);
 							System.out.println("\nImage Service Removed");
-						}
-						catch (IOException e) {
+						} catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
@@ -349,8 +330,7 @@ public class coordinator extends Agent {
 						try {
 							r7.exec(rm_pers);
 							System.out.println("\nPersistence Service Removed");
-						}
-						catch (IOException e) {
+						} catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
@@ -358,8 +338,7 @@ public class coordinator extends Agent {
 						try {
 							r7.exec(rm_recom);
 							System.out.println("\nRecommender Service Removed");
-						}
-						catch (IOException e) {
+						} catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
@@ -367,8 +346,7 @@ public class coordinator extends Agent {
 						try {
 							r7.exec(rm_reg);
 							System.out.println("\nRegistry Service Removed");
-						}
-						catch (IOException e) {
+						} catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
@@ -376,8 +354,7 @@ public class coordinator extends Agent {
 						try {
 							r7.exec(rm_web);
 							System.out.println("\nWebUi Service Removed");
-						}
-						catch (IOException e) {
+						} catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
@@ -415,8 +392,7 @@ public class coordinator extends Agent {
 							r8.exec(leave);
 							r8.exec(Erase);
 							System.out.println("\nManager Node Left Swarm & Service/s Images Deleted");
-						}
-						catch (IOException e) {
+						} catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;

@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="39de0ab9-f73c-4d61-a78d-915e5d49de9f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutoMNS/automnsCLI/VMFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/AutoMNS/automnsCLI/VMFunctions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AutoMNS/automnsCLI/coordinator.java" beforeDir="false" afterPath="$PROJECT_DIR$/AutoMNS/automnsCLI/coordinator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AutoMNS/lib/keys/test.pem" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
