@@ -23,23 +23,8 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import automnsCLI.VMFunctions;
 
-public class sendcoord2 extends Agent {
+public class coord extends Agent {
 	public void menu () throws IOException {
-
-		//Defining the path to the AWS key
-		Object[] VMs = getArguments();
-		//Defining the path to the AWS key
-		String privateKey = (String) VMs[VMs.length - 1];
-		System.out.println(privateKey);
-		//Defining the IP address of the main platform for other agents to join
-		List<String> workerVMsPrivate = new ArrayList<String>();
-		for (int k = 0; k < 7; k++) {
-			workerVMsPrivate.add((String) VMs[k]);
-		}
-		List<String> workerVMsPublic = new ArrayList<String>();
-		for (int k = 7; k < VMs.length - 1; k++) {
-			workerVMsPublic.add((String) VMs[k]);
-		}
 
 		System.out.print("\n<<<<<<<<Platfrom Main Menu>>>>>>>" +
 				"\n|1| Swarm Nodes" +
@@ -55,7 +40,7 @@ public class sendcoord2 extends Agent {
 		Scanner scanner = new Scanner(System.in);
 		int cmd = scanner.nextInt();
 
-
+		String privateKey = "autoMNS/jade/src/test0/test.pem";
 		String[] agentCommands =
 				{"javac -cp autoMNS/jade/lib/jade.jar -d classes autoMNS/AutomnsCLI2/src/automnsCLI/multi/Worker1.java",
 						"java -cp autoMNS/jade/lib/jade.jar:classes jade.Boot -host 172.31.90.214 -port 1099 -container Worker1:automnsCLI.Worker1"
@@ -104,19 +89,23 @@ public class sendcoord2 extends Agent {
 			//deploy agents
 			case 2:
 				System.out.println("\nDeploying The Agents.. \n");
-
+				String[] ip = {"52.70.59.110"};
+				//String[] ip = {"3.95.161.48","54.166.38.203","34.205.157.113","54.204.235.13","54.152.98.164","3.92.229.146","54.173.209.199"};
+				int x = 0;
+				int y = 0;
+				int z = 1;
 				try
 				{
-					int commandCounter = 0;
-					int workerCounter = 0;
-					while(commandCounter < agentCommands.length){
-						for(int m = 0; m < 2; m++) {
-							VMFunctions.noOutputSSH(workerVMsPublic.get(workerCounter), privateKey, agentCommands[commandCounter]);
-							commandCounter ++;
-						}
-						workerCounter ++;
-					}
-				} catch (IOException e1) {
+					do
+					{
+						VMFunctions.noOutputSSH(ip[x], privateKey, agentCommands[y]);
+						VMFunctions.noOutputSSH(ip[x], privateKey, agentCommands[y+1]);
+						x++; y+=2; z++;
+					} while(z<2);
+				}
+				//Throw a failure in Input & Output operations
+				catch (IOException e1)
+				{
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
