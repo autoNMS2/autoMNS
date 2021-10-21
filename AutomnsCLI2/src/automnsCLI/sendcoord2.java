@@ -438,10 +438,18 @@ public class sendcoord2 extends Agent {
 				" ╚═════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝\n" +
 				"                                                                                         \n" +
 				"                                  >Press Enter to Start<                                 \n" ;
+		try {
+			TimeUnit.SECONDS.sleep(1);
+			for (int i=0; i<header.length(); i++){
+				System.out.print(header.charAt(i));
+			}
+			Scanner enter = new Scanner(System.in);
+			System.out.print("");
+			enter.next();
 
-		for (int i=0; i<header.length(); i++){
-			System.out.print(header.charAt(i));
+		}catch (InterruptedException e) {
 		}
+
 		addBehaviour(new CyclicBehaviour(this) {
 			public void action() {
 				try {
