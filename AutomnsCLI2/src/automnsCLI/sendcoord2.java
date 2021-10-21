@@ -436,11 +436,11 @@ public class sendcoord2 extends Agent {
 				"██║     ██║   ██║██║   ██║██╔══██╗██║  ██║██║██║╚██╗██║██╔══██║   ██║   ██║   ██║██╔══██╗\n" +
 				"╚██████╗╚██████╔╝╚██████╔╝██║  ██║██████╔╝██║██║ ╚████║██║  ██║   ██║   ╚██████╔╝██║  ██║\n" +
 				" ╚═════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝\n" +
-				"											";
+				"										   ";
 		for (int i=0; i<header.length(); i++){
 			System.out.print(header.charAt(i));
 		}
-		System.out.println("Press Enter to Start\n");
+		System.out.print("Press Enter to Start\n");
 		addBehaviour(new CyclicBehaviour(this) {
 			public void action() {
 				try {
