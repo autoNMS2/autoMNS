@@ -26,7 +26,7 @@ import automnsCLI.VMFunctions;
 public class sendcoord2 extends Agent {
 	public void menu () throws IOException {
 
-		System.out.print("\n<<<<<<<<Platfrom Main Menu>>>>>>>>" +
+		System.out.print("\n<<<<<<<<Platfrom Main Menu>>>>>>>" +
 				"\n|1| Swarm Nodes" +
 				"\n|2| Deploy Worker Agents " +
 				"\n|3| Check Worker Agents State " +
@@ -376,7 +376,7 @@ public class sendcoord2 extends Agent {
 			case 8:
 				//workers leave swarm and delete images
 				//manager leave swarm and delete images
-				System.out.print("\n<<<<<<<<<<Automns Swarm Shutdown Menu>>>>>>>>>>" +
+				System.out.print("\n<<<<<<<<<<Automns Swarm Shutdown Menu>>>>>>>>>" +
 						"\n|1| Remove Swarm Workers & Erase Docker Images" +
 						"\n|2| Remove Swarm Manager & Erase Docker Images" +
 						"\n|0| Return" +
