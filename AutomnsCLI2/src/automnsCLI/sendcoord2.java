@@ -26,7 +26,7 @@ import automnsCLI.VMFunctions;
 public class sendcoord2 extends Agent {
 	public void menu () throws IOException {
 
-		System.out.print("\n<<<<<<<Platfrom Main Menu>>>>>>>>" +
+		System.out.print("\n<<<<<<<<Platfrom Main Menu>>>>>>>>" +
 				"\n|1| Swarm Nodes" +
 				"\n|2| Deploy Worker Agents " +
 				"\n|3| Check Worker Agents State " +
@@ -35,7 +35,7 @@ public class sendcoord2 extends Agent {
 				"\n|6| Check Worker Agents Services" +
 				"\n|7| Remove Service/s" +
 				"\n|8| Shutdown Swarm & Erase Images" +
-				"\nEnter Option Number: ");
+				"\nEnter Option Number >> ");
 
 		Scanner scanner = new Scanner(System.in);
 		int cmd = scanner.nextInt();
@@ -62,7 +62,7 @@ public class sendcoord2 extends Agent {
 		{
 			//swarm nodes summary
 			case 1:
-				System.out.println("\nSwarm Nodes Summary:");
+				System.out.println("\nSwarm Nodes Summary:\n");
 				Runtime r = Runtime.getRuntime();
 				String nodecmd = "sudo docker node ls";
 				try {
@@ -126,17 +126,17 @@ public class sendcoord2 extends Agent {
 				break;
 			//Deploy Services
 			case 4:
-				System.out.print("\n *Automns Agent Service Deployment Menu* " +
-						"\n 1. Deploy/Update all Services" +
-						"\n 2. Deploy Authenticator Service" +
-						"\n 3. Deploy Database Service " +
-						"\n 4. Deploy Image Service " +
-						"\n 5. Deploy Persistence Service " +
-						"\n 6. Deploy Recommender Service" +
-						"\n 7. Deploy Registry Service" +
-						"\n 8. Deploy WebUi Service" +
-						"\n 0. Return" +
-						"\n Enter Option Number: ");
+				System.out.print("\n<<<<<Service Deployment Menu>>>>" +
+						"\n|1| Deploy/Update all Services" +
+						"\n|2| Deploy Authenticator Service" +
+						"\n|3| Deploy Database Service " +
+						"\n|4| Deploy Image Service " +
+						"\n|5| Deploy Persistence Service " +
+						"\n|6| Deploy Recommender Service" +
+						"\n|7| Deploy Registry Service" +
+						"\n|8| Deploy WebUi Service" +
+						"\n|0| Return" +
+						"\nEnter Option Number >> ");
 				int cmd3 = scanner.nextInt();
 				Runtime r1 = Runtime.getRuntime();
 				switch (cmd3){
@@ -144,84 +144,77 @@ public class sendcoord2 extends Agent {
 						String deploy_all = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/all.yaml TeaStore";
 						try {
 							r1.exec(deploy_all);
-							System.out.println("All Services Deployed/Updated");
+							System.out.println("\nAll Services Deployed/Updated");
 						}
 						catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
 					case 2:
-						//String deploy_auth = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/auth.yaml TeaStore";
 						String deploy_auth = "sudo docker service create --name TeaStore_auth descartesresearch/teastore-auth";
 						try {
 							r1.exec(deploy_auth);
-							System.out.println("Authenticator Service Deployed");
+							System.out.println("\nAuthenticator Service Deployed");
 						}
 						catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
 					case 3:
-						//String deploy_db = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/db.yaml TeaStore";
 						String deploy_db = "sudo docker service create --name TeaStore_db --publish published=3306,target=3306 descartesresearch/teastore-db";
 						try {
 							r1.exec(deploy_db);
-							System.out.println("Database Service Deployed");
+							System.out.println("\nDatabase Service Deployed");
 						}
 						catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
 					case 4:
-						//String deploy_image = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/image.yaml TeaStore";
 						String deploy_image = "sudo docker service create --name TeaStore_image descartesresearch/teastore-image";
 						try {
 							r1.exec(deploy_image);
-							System.out.println("Image Service Deployed");
+							System.out.println("\nImage Service Deployed");
 						}
 						catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
 					case 5:
-						//String deploy_pers = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/persistence.yaml TeaStore";
 						String deploy_pers = "sudo docker service create --name TeaStore_persistence descartesresearch/teastore-persistence";
 						try {
 							r1.exec(deploy_pers);
-							System.out.println("Persistence Service Deployed");
+							System.out.println("\nPersistence Service Deployed");
 						}
 						catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
 					case 6:
-						//String deploy_rec = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/recommender.yaml TeaStore";
 						String deploy_rec = "sudo docker service create --name TeaStore_recommender descartesresearch/teastore-recommender";
 						try {
 							r1.exec(deploy_rec);
-							System.out.println("Recommender Service Deployed");
+							System.out.println("\nRecommender Service Deployed");
 						}
 						catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
 					case 7:
-						//String deploy_reg = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/registry.yaml TeaStore";
 						String deploy_reg = "sudo docker service create --name TeaStore_registry descartesresearch/teastore-registry";
 						try {
 							r1.exec(deploy_reg);
-							System.out.println("Registry Service Deployed");
+							System.out.println("\nRegistry Service Deployed");
 						}
 						catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
 					case 8:
-						//String deploy_web = "sudo docker stack deploy --compose-file autoMNS/Prototype/lib/Services/webui.yaml TeaStore";
 						String deploy_web = "sudo docker service create --name TeaStore_webui --publish published=8080,target=8080 descartesresearch/teastore-webui";
 						try {
 							r1.exec(deploy_web);
-							System.out.println("WebUi Service Deployed");
+							System.out.println("\nWebUi Service Deployed");
 						}
 						catch (IOException e) {
 							e.printStackTrace();
@@ -233,7 +226,7 @@ public class sendcoord2 extends Agent {
 				break;
 			//Services Status
 			case 5:
-				System.out.println("\n *Services Status Summary* \n");
+				System.out.println("\nServices Status Summary: \n");
 				Runtime r2 = Runtime.getRuntime();
 				String servicecmd = "sudo docker service ls";
 				try {
@@ -259,7 +252,7 @@ public class sendcoord2 extends Agent {
 				break;
 			//Agent Service Status
 			case 6:
-				System.out.println("\n *Agents Services Status Summary* \n");
+				System.out.println("\nAgents Services Status Summary:");
 				ACLMessage msg2 = new ACLMessage(ACLMessage.INFORM);
 				msg2.setContent("Service Update");
 				msg2.addReceiver(new AID("Worker1", AID.ISLOCALNAME));
@@ -273,95 +266,104 @@ public class sendcoord2 extends Agent {
 				break;
 			//Service Removal
 			case 7:
-				System.out.print("\n *Automns Agents Service Removal Menu* " +
-						"\n 1. Remove Authenticator Service" +
-						"\n 2. Remove Database Service " +
-						"\n 3. Remove Image Service " +
-						"\n 4. Remove Persistence Service " +
-						"\n 5. Remove Recommender Service" +
-						"\n 6. Remove Registry Service" +
-						"\n 7. Remove WebUi Service" +
-						"\n 8. Remove all Services" +
-						"\n 0. Return" +
-						"\n Enter Option Number: ");
+				System.out.print(
+						"\n<<<<<<Service Removal Menu>>>>>>" +
+						"\n|1| Remove all Services" +
+						"\n|2| Remove Authenticator Service" +
+						"\n|3| Remove Database Service " +
+						"\n|4| Remove Image Service " +
+						"\n|5| Remove Persistence Service " +
+						"\n|6| Remove Recommender Service" +
+						"\n|7| Remove Registry Service" +
+						"\n|8| Remove WebUi Service" +
+						"\n|0| Return" +
+						"\n Enter Option Number >> ");
 				int cmd2 = scanner.nextInt();
 				Runtime r7 = Runtime.getRuntime();
+				String rm_all = "sudo docker stack rm TeaStore";
+				String rm_auth = "sudo docker service rm TeaStore_auth";
+				String rm_db = "sudo docker service rm TeaStore_db";
+				String rm_Image = "sudo docker service rm TeaStore_image";
+				String rm_pers = "sudo docker service rm TeaStore_persistence";
+				String rm_recom = "sudo docker service rm TeaStore_recommender";
+				String rm_reg = "sudo docker service rm TeaStore_registry";
+				String rm_web = "sudo docker service rm TeaStore_webui";
 				switch (cmd2){
+
 					case 1:
-						String rm_auth = "sudo docker service rm TeaStore_auth";
 						try {
 							r7.exec(rm_auth);
-							System.out.println("Authenticator Service Removed");
+							r7.exec(rm_db);
+							r7.exec(rm_Image);
+							r7.exec(rm_pers);
+							r7.exec(rm_recom);
+							r7.exec(rm_reg);
+							r7.exec(rm_web);
+							r7.exec(rm_all);
+							System.out.println("\nAll Services Removed");
 						}
 						catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
 					case 2:
-						String rm_db = "sudo docker service rm TeaStore_db";
 						try {
-							r7.exec(rm_db);
-							System.out.println("Database Service Removed");
+							r7.exec(rm_auth);
+							System.out.println("\nAuthenticator Service Removed");
 						}
 						catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
 					case 3:
-						String rm_Image = "sudo docker service rm TeaStore_image";
 						try {
-							r7.exec(rm_Image);
-							System.out.println("Image Service Removed");
+							r7.exec(rm_db);
+							System.out.println("\nDatabase Service Removed");
 						}
 						catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
 					case 4:
-						String rm_pers = "sudo docker service rm TeaStore_persistence";
 						try {
-							r7.exec(rm_pers);
-							System.out.println("Persistence Service Removed");
+							r7.exec(rm_Image);
+							System.out.println("\nImage Service Removed");
 						}
 						catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
 					case 5:
-						String rm_recom = "sudo docker service rm TeaStore_recommender";
 						try {
-							r7.exec(rm_recom);
-							System.out.println("Recommender Service Removed");
+							r7.exec(rm_pers);
+							System.out.println("\nPersistence Service Removed");
 						}
 						catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
 					case 6:
-						String rm_reg = "sudo docker service rm TeaStore_registry";
 						try {
-							r7.exec(rm_reg);
-							System.out.println("Registry Service Removed");
+							r7.exec(rm_recom);
+							System.out.println("\nRecommender Service Removed");
 						}
 						catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
 					case 7:
-						String rm_web = "sudo docker service rm TeaStore_webui";
 						try {
-							r7.exec(rm_web);
-							System.out.println("WebUi Service Removed");
+							r7.exec(rm_reg);
+							System.out.println("\nRegistry Service Removed");
 						}
 						catch (IOException e) {
 							e.printStackTrace();
 						}
 						break;
 					case 8:
-						String rm_all = "sudo docker stack rm TeaStore";
 						try {
-							r7.exec(rm_all);
-							System.out.println("All Services Removed");
+							r7.exec(rm_web);
+							System.out.println("\nWebUi Service Removed");
 						}
 						catch (IOException e) {
 							e.printStackTrace();
@@ -374,11 +376,11 @@ public class sendcoord2 extends Agent {
 			case 8:
 				//workers leave swarm and delete images
 				//manager leave swarm and delete images
-				System.out.print("\n *Automns Swarm Shutdown Menu* " +
-						"\n 1. Remove Swarm Workers & Erase Docker Images" +
-						"\n 2. Remove Swarm Manager & Erase Docker Images" +
-						"\n 0. Return" +
-						"\n Enter Option Number: ");
+				System.out.print("\n<<<<<<<<<<Automns Swarm Shutdown Menu>>>>>>>>>>" +
+						"\n|1| Remove Swarm Workers & Erase Docker Images" +
+						"\n|2| Remove Swarm Manager & Erase Docker Images" +
+						"\n|0| Return" +
+						"\nEnter Option Number >> ");
 				int cmd8 = scanner.nextInt();
 				Runtime r8 = Runtime.getRuntime();
 				switch (cmd8){
@@ -395,10 +397,12 @@ public class sendcoord2 extends Agent {
 						send(msg8);
 						break;
 					case 2:
-						String leave = "sudo docker swarm leave -f && sudo docker rmi $(sudo docker images -q)";
+						String leave = "sudo docker swarm leave -f";
+						String Erase = "sudo docker rmi $(sudo docker images -q)";
 						try {
 							r8.exec(leave);
-							System.out.println("Manager Node Left Swarm & Docker Images Deleted");
+							r8.exec(Erase);
+							System.out.println("\nManager Node Left Swarm & Service/s Images Deleted");
 						}
 						catch (IOException e) {
 							e.printStackTrace();
