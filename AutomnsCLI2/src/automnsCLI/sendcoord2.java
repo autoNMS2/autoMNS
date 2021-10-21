@@ -26,15 +26,15 @@ import automnsCLI.VMFunctions;
 public class sendcoord2 extends Agent {
 	public void menu () throws IOException {
 
-		System.out.print("<|> Platform Main Menu <|>" +
-				"\n 1. Swarm Nodes" +
-				"\n 2. Deploy Worker Agents " +
-				"\n 3. Check Worker Agents State " +
-				"\n 4. Deploy/Update Services" +
-				"\n 5. Check Available Services" +
-				"\n 6. Check Worker Agents Services" +
-				"\n 7. Remove Service/s" +
-				"\n 8. Shutdown Swarm & Erase Environment" +
+		System.out.print("||[(Main Menu)]||" +
+				"\n |1| Swarm Nodes" +
+				"\n |2| Deploy Worker Agents " +
+				"\n |3| Check Worker Agents State " +
+				"\n |4| Deploy/Update Services" +
+				"\n |5| Check Available Services" +
+				"\n |6| Check Worker Agents Services" +
+				"\n |7| Remove Service/s" +
+				"\n |8| Shutdown Swarm & Erase Environment" +
 				"\n Enter Option Number: ");
 
 		Scanner scanner = new Scanner(System.in);
