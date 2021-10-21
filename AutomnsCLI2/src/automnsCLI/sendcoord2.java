@@ -431,9 +431,12 @@ public class sendcoord2 extends Agent {
 				}
 				while (checkmsg());
 				try {
-					TimeUnit.SECONDS.sleep(2);
+					try {
+						TimeUnit.SECONDS.sleep(2);
+					}catch (InterruptedException e) {
+					}
 					menu();
-				} catch (InterruptedException e IOException e) {
+				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
