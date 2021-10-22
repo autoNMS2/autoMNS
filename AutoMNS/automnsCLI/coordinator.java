@@ -30,7 +30,7 @@ public class coordinator extends Agent {
 		Object[] VMs = getArguments();
 		//Defining the path to the AWS key
 		String privateKey = (String) VMs[VMs.length-1];
-		System.out.println(privateKey);
+	
 		//Defining the IP address of the main platform for other agents to join
 		List<String> workerVMsPrivate = new ArrayList<String>();
 		for (int k = 0; k < 7; k++) {
@@ -39,9 +39,6 @@ public class coordinator extends Agent {
 		List<String> workerVMsPublic = new ArrayList<String>();
 		for (int k = 7; k < VMs.length - 1; k++) {
 			workerVMsPublic.add(((String) VMs[k]).trim());
-		}
-		for (int l = 0; l<workerVMsPrivate.size();l++) {
-			System.out.println(workerVMsPrivate.get(l));
 		}
 		
 		System.out.print("\n<<<<<<<<Platfrom Main Menu>>>>>>>" +
@@ -119,16 +116,7 @@ public class coordinator extends Agent {
 					VMFunctions.noOutputSSH(workerVMsPublic.get(5), privateKey, agentCommands[11]);
 					VMFunctions.noOutputSSH(workerVMsPublic.get(6), privateKey, agentCommands[12]);
 					VMFunctions.noOutputSSH(workerVMsPublic.get(6), privateKey, agentCommands[13]);
-					
-//					int commandCounter = 0;
-//					int workerCounter = 0;
-//					while(commandCounter < agentCommands.length){
-//						for(int m = 0; m < 2; m++) {
-//							VMFunctions.noOutputSSH(workerVMsPublic.get(workerCounter), privateKey, agentCommands[commandCounter]);
-//							commandCounter ++;
-//						}
-//						workerCounter ++;
-//					}
+
 				}catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
