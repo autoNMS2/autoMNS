@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="lib/jade.jar"/>
 	<classpathentry kind="lib" path="lib/jsch-0.1.55.jar"/>
 	<classpathentry kind="lib" path="lib/junit-4.13.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/James/Desktop/ComputerScience/SwinSem1_21/SEPA/autoMNS/AutoMNS/lib/ascii-table-1.1.0.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
