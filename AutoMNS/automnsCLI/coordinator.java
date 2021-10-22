@@ -40,7 +40,10 @@ public class coordinator extends Agent {
 		for (int k = 7; k < VMs.length - 1; k++) {
 			workerVMsPublic.add((String) VMs[k]);
 		}
-
+		for (int l = 0; l<workerVMsPrivate.size();l++) {
+			System.out.println(workerVMsPrivate.get(l));
+		}
+		
 		System.out.print("\n<<<<<<<<Platfrom Main Menu>>>>>>>" +
 				"\n|1| Swarm Nodes" +
 				"\n|2| Deploy Worker Agents " +
