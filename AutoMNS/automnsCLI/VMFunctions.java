@@ -270,10 +270,10 @@ public class VMFunctions {
 	public static String getCoordinatorParameters()
 	{
 		String parameters = "";
-		for (int i = 1; i < getVMPrivateIps().size(); i++) {
+		for (int i = 0; i < getVMPrivateIps().size(); i++) {
 			parameters += getVMPrivateIps().get(i) + ",";
 		}
-		for (int i = 1; i < getVMPublicIps().size(); i++) {
+		for (int i = 0; i < getVMPublicIps().size(); i++) {
 			parameters += getVMPublicIps().get(i) + ",";
 		}
 		//add a closing bracket to the end of the java command
