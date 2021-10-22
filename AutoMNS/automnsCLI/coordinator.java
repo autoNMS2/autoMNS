@@ -34,11 +34,11 @@ public class coordinator extends Agent {
 		//Defining the IP address of the main platform for other agents to join
 		List<String> workerVMsPrivate = new ArrayList<String>();
 		for (int k = 0; k < 7; k++) {
-			workerVMsPrivate.add((String) VMs[k]);
+			workerVMsPrivate.add(((String) VMs[k]).trim());
 		}
 		List<String> workerVMsPublic = new ArrayList<String>();
 		for (int k = 7; k < VMs.length - 1; k++) {
-			workerVMsPublic.add((String) VMs[k]);
+			workerVMsPublic.add(((String) VMs[k]).trim());
 		}
 		for (int l = 0; l<workerVMsPrivate.size();l++) {
 			System.out.println(workerVMsPrivate.get(l));
