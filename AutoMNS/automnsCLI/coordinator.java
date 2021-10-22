@@ -29,7 +29,7 @@ public class coordinator extends Agent {
 		//Defining the path to the AWS key
 		Object[] VMs = getArguments();
 		//Defining the path to the AWS key
-		String privateKey = (String) VMs[13];
+		String privateKey = (String) VMs[VMs.length-1];
 		System.out.println(privateKey);
 		//Defining the IP address of the main platform for other agents to join
 		List<String> workerVMsPrivate = new ArrayList<String>();
