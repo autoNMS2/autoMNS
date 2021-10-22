@@ -88,14 +88,14 @@ public class VMFunctions {
 			// install java on vms
 			javaSetup();
 			//wait for user input before returning to main menu
-//			System.out.println("VMs initialised.\n" + "Press any key and then enter to return to main menu...");
-//			String userInput;
-//			Scanner input = new Scanner(System.in);
-//			userInput = input.next();
-			Scanner enter = new Scanner(System.in);
-			System.out.print("VMs initialised \nPress Enter to Continue..");
-			//pause until user press enter
-			enter.nextLine();
+			System.out.println("VMs initialised.\n" + "Press any key and then enter to return to main menu...");
+			String userInput;
+			Scanner input = new Scanner(System.in);
+			userInput = input.next();
+//			Scanner enter = new Scanner(System.in);
+//			System.out.print("VMs initialised \nPress Enter to Continue..");
+//			//pause until user press enter
+//			enter.nextLine();
 			Menus.MainMenu();
 		} else {
 			System.out.println("VM Config file incorrectly formatted");

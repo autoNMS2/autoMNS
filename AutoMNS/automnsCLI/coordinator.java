@@ -29,7 +29,7 @@ public class coordinator extends Agent {
 		//Defining the path to the AWS key
 		Object[] VMs = getArguments();
 		//Defining the path to the AWS key
-		String privateKey = (String) VMs[VMs.length - 1];
+		String privateKey = (String) VMs[14];
 		System.out.println(privateKey);
 		//Defining the IP address of the main platform for other agents to join
 		List<String> workerVMsPrivate = new ArrayList<String>();
@@ -54,23 +54,21 @@ public class coordinator extends Agent {
 
 		Scanner scanner = new Scanner(System.in);
 		int cmd = scanner.nextInt();
-		//String privateKey = "autoMNS/jade/src/test0/test.pem";
-		String[] agentCommands = {
-				"javac -cp autoMNS/AutoMNS/lib/jade.jar -d classes autoMNS/AutoMNS/automnsCLI/workers/Worker1.java",
-				"java -cp autoMNS/AutoMNS/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -container Worker1:automnsCLI.Worker1",
+		
+		String[] agentCommands = {"javac -cp autoMNS/AutoMNS/lib/jade.jar -d classes autoMNS/AutoMNS/automnsCLI/workers/Worker1.java",
+				"java -cp autoMNS/AutoMNS/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -container Worker1:automnsCLI.workers.Worker1",
 				"javac -cp autoMNS/AutoMNS/lib/jade.jar -d classes autoMNS/AutoMNS/automnsCLI/workers/Worker2.java",
-				"java -cp autoMNS/AutoMNS/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -local-host " + workerVMsPrivate.get(1) + " -local-port 5001 -container Worker2:automnsCLI.Worker2",
+				"java -cp autoMNS/AutoMNS/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -local-host " + workerVMsPrivate.get(1) + " -local-port 5001 -container Worker2:automnsCLI.workers.Worker2",
 				"javac -cp autoMNS/AutoMNS/lib/jade.jar -d classes autoMNS/AutoMNS/automnsCLI/workers/Worker3.java",
-				"java -cp autoMNS/AutoMNS/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -local-host " + workerVMsPrivate.get(2) + " -local-port 5002 -container Worker3:automnsCLI.Worker3",
+				"java -cp autoMNS/AutoMNS/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -local-host " + workerVMsPrivate.get(2) + " -local-port 5002 -container Worker3:automnsCLI.workers.Worker3",
 				"javac -cp autoMNS/AutoMNS/lib/jade.jar -d classes autoMNS/AutoMNS/automnsCLI/workers/Worker4.java",
-				"java -cp autoMNS/AutoMNS/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -local-host " + workerVMsPrivate.get(3) + " -local-port 5003 -container Worker4:automnsCLI.Worker4",
+				"java -cp autoMNS/AutoMNS/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -local-host " + workerVMsPrivate.get(3) + " -local-port 5003 -container Worker4:automnsCLI.workers.Worker4",
 				"javac -cp autoMNS/AutoMNS/lib/jade.jar -d classes autoMNS/AutoMNS/automnsCLI/workers/Worker5.java",
-				"java -cp autoMNS/AutoMNS/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -local-host " + workerVMsPrivate.get(4) + " -local-port 5004 -container Worker5:automnsCLI.Worker5",
+				"java -cp autoMNS/AutoMNS/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -local-host " + workerVMsPrivate.get(4) + " -local-port 5004 -container Worker5:automnsCLI.workers.Worker5",
 				"javac -cp autoMNS/AutoMNS/lib/jade.jar -d classes autoMNS/AutoMNS/automnsCLI/workers/Worker6.java",
-				"java -cp autoMNS/AutoMNS/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -local-host " + workerVMsPrivate.get(5) + " -local-port 5005 -container Worker6:automnsCLI.Worker6",
+				"java -cp autoMNS/AutoMNS/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -local-host " + workerVMsPrivate.get(5) + " -local-port 5005 -container Worker6:automnsCLI.workers.Worker6",
 				"javac -cp autoMNS/AutoMNS/lib/jade.jar -d classes autoMNS/AutoMNS/automnsCLI/workers/Worker7.java",
-				"java -cp autoMNS/AutoMNS/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -local-host " + workerVMsPrivate.get(6) + " -local-port 5006 -container Worker7:automnsCLI.Worker7"
-				};
+				"java -cp autoMNS/AutoMNS/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -local-host " + workerVMsPrivate.get(6) + " -local-port 5006 -container Worker7:automnsCLI.workers.Worker7"};
 
 		switch (cmd)
 		{
