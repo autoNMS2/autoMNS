@@ -149,7 +149,7 @@ public class coordinator extends Agent {
 				Runtime r1 = Runtime.getRuntime();
 				switch (cmd3){
 					case 1:
-						String deploy_all = "sudo docker stack deploy --compose-file AutoMNS/Services/all.yaml TeaStore";
+						String deploy_all = "sudo docker stack deploy --compose-file autoMNS/AutoMNS/Services/all.yaml TeaStore";
 						try {
 							r1.exec(deploy_all);
 							System.out.println("\nAll Services Deployed/Updated");
