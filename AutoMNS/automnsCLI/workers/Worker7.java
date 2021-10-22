@@ -1,4 +1,4 @@
-package automnsCLI;
+package automnsCLI.workers;
 
 import jade.core.Agent;
 import jade.core.behaviours.*;
