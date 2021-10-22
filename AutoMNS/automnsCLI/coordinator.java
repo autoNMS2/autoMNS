@@ -102,15 +102,30 @@ public class coordinator extends Agent {
 				System.out.println("\nDeploying The Agents.. \n");
 				try
 				{
-					int commandCounter = 0;
-					int workerCounter = 0;
-					while(commandCounter < agentCommands.length){
-						for(int m = 0; m < 2; m++) {
-							VMFunctions.noOutputSSH(workerVMsPublic.get(workerCounter), privateKey, agentCommands[commandCounter]);
-							commandCounter ++;
-						}
-						workerCounter ++;
-					}
+					VMFunctions.noOutputSSH(workerVMsPublic.get(0), privateKey, agentCommands[0]);
+					VMFunctions.noOutputSSH(workerVMsPublic.get(0), privateKey, agentCommands[1]);
+					VMFunctions.noOutputSSH(workerVMsPublic.get(1), privateKey, agentCommands[2]);
+					VMFunctions.noOutputSSH(workerVMsPublic.get(1), privateKey, agentCommands[3]);
+					VMFunctions.noOutputSSH(workerVMsPublic.get(2), privateKey, agentCommands[4]);
+					VMFunctions.noOutputSSH(workerVMsPublic.get(2), privateKey, agentCommands[5]);
+					VMFunctions.noOutputSSH(workerVMsPublic.get(3), privateKey, agentCommands[6]);
+					VMFunctions.noOutputSSH(workerVMsPublic.get(3), privateKey, agentCommands[7]);
+					VMFunctions.noOutputSSH(workerVMsPublic.get(4), privateKey, agentCommands[8]);
+					VMFunctions.noOutputSSH(workerVMsPublic.get(4), privateKey, agentCommands[9]);
+					VMFunctions.noOutputSSH(workerVMsPublic.get(5), privateKey, agentCommands[10]);
+					VMFunctions.noOutputSSH(workerVMsPublic.get(5), privateKey, agentCommands[11]);
+					VMFunctions.noOutputSSH(workerVMsPublic.get(6), privateKey, agentCommands[12]);
+					VMFunctions.noOutputSSH(workerVMsPublic.get(6), privateKey, agentCommands[13]);
+					
+//					int commandCounter = 0;
+//					int workerCounter = 0;
+//					while(commandCounter < agentCommands.length){
+//						for(int m = 0; m < 2; m++) {
+//							VMFunctions.noOutputSSH(workerVMsPublic.get(workerCounter), privateKey, agentCommands[commandCounter]);
+//							commandCounter ++;
+//						}
+//						workerCounter ++;
+//					}
 				}catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
