@@ -56,7 +56,7 @@ public class coordinator extends Agent {
 		int cmd = scanner.nextInt();
 		
 		String[] agentCommands = {"javac -cp autoMNS/AutoMNS/lib/jade.jar -d classes autoMNS/AutoMNS/automnsCLI/workers/Worker1.java",
-				"java -cp autoMNS/AutoMNS/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -container Worker1:automnsCLI.Worker1",
+				"java -cp autoMNS/AutoMNS/lib/jade.jar:classes jade.Boot -container Worker1:automnsCLI.Worker1",
 				"javac -cp autoMNS/AutoMNS/lib/jade.jar -d classes autoMNS/AutoMNS/automnsCLI/workers/Worker2.java",
 				"java -cp autoMNS/AutoMNS/lib/jade.jar:classes jade.Boot -host " + workerVMsPrivate.get(0) + " -port 1099 -local-host " + workerVMsPrivate.get(1) + " -local-port 5001 -container Worker2:automnsCLI.Worker2",
 				"javac -cp autoMNS/AutoMNS/lib/jade.jar -d classes autoMNS/AutoMNS/automnsCLI/workers/Worker3.java",
